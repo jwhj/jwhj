@@ -49,6 +49,39 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj1017ti-jie.html">bzoj1017题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2017-05-12T00:00:00+02:00" pubdate>Fri 12 May 2017</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p>让f[i][j][k]代表只考虑以i为根的子树，i至少造j个，花费不超过k的最大收益。</p>
+<p>转移的时候需要枚举每一棵子树分到多少金币，直接暴力枚举肯定是不可以的，观察一下会发现，这个子问题其实就是一个类似背包问题的的东西，可以让g[i][j]代表前i棵子树，花费不超过j的最大收益，然后DP。</p>
+<p>细节还是比较多的……需要仔细调一下。</p>
+<p>似乎还需要想办法卡一下常数才能AC。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#define ele int</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxn 55</span>
+<span class="cp">#define maxm 2010</span>
+<span class="cp">#define maxl 110</span>
+<span class="k">const</span> <span class="n">ele</span> <span class="n">INF ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj1017ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj2589spojcot2ti-jie.html">bzoj2589&&spojcot2题解</a>
       </h1>
     <p class="meta">
@@ -316,46 +349,6 @@
     <a rel="full-article" href="/bzoj3438ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj1066ti-jie.html">bzoj1066题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2017-03-01T00:00:00+01:00" pubdate>Wed 01 March 2017</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<p>用网络流来做。</p>
-<p>每个石柱拆成两个点，设为a，b，这两个点之间连一条容量为石柱高的边。</p>
-<p>源点向每个有蜥蜴的石柱的a点连一条容量为1的边。</p>
-<p>每个可以跳出去的石柱的b点向汇点连一条容量为INF的边。</p>
-<p>石柱x能跳到石柱y，则在x的b点与y的a点间连一条容量为INF的边。</p>
-<p>这个网络的最大流即为能跳出去的蜥蜴数量的最大值。</p>
-<p>一开始RE+WA了几回，错误大概是：</p>
-<ul>
-<li>忘了拆点之后点的数量要乘2,数组开得不够大</li>
-<li>把<code>i*c+j</code>写成<code>i*r+j</code></li>
-<li>判断能不能跳出的时候不等式带不带等号弄错</li>
-</ul>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
-<span class="cp">#define ele int</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="cp">#define maxn 810</span>
-<span class="cp">#define INF 1000000000</span>
-<span class="k">struct</span> <span class="n">edge ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj1066ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index2.html">&larr; Older</a>
 
@@ -365,6 +358,9 @@
   <section>
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
+      <li class="post">
+          <a href="/bzoj1017ti-jie.html">bzoj1017题解</a>
+      </li>
       <li class="post">
           <a href="/bzoj2589spojcot2ti-jie.html">bzoj2589&&spojcot2题解</a>
       </li>
@@ -376,9 +372,6 @@
       </li>
       <li class="post">
           <a href="/bzoj4802ti-jie.html">bzoj4802题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj3157ti-jie.html">bzoj3157题解</a>
       </li>
     </ul>
   </section>
