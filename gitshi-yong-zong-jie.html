@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>git使用总结 &mdash; 蒟蒻的博客</title>
+  <meta name="author" content="iamplm">
+
+
+
+
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link href="/favicon.png" rel="icon">
+
+  <link href="/theme/css/main.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+
+  <link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="/">蒟蒻的博客</a></h1>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+</ul>
+
+
+<ul class="main-navigation">
+      <li><a href="/pages/about-me.html">About me</a></li>
+      <li><a href="/pages/orz.html">Orz!</a></li>
+      <li class="active">
+        <a href="/category/posts.html">Posts</a>
+      </li>
+  <li><a href="/tags.html">Tags</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">git使用总结</h1>
+    <p class="meta">
+<time datetime="2016-08-13T00:00:00+02:00" pubdate>Sat 13 August 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=18649447&auto=0&height=66"></iframe>
+
+<p>自从去北欧旅游以后A了题都不写题解了……写点东西拯救一下。</p>
+<h2>git是什么</h2>
+<p>自己去看<a href="https://en.wikipedia.org/wiki/Git_(software)">wiki</a>。</p>
+<p>需要提一下，git与github是两个不同的东西，你可以认为github是一个支持git的网站，当然这样的网站还有很多，如<a href="http://coding.net">coding</a>，<a href="http://bitbucket.org">bitbucket</a>。</p>
+<h2>安装git</h2>
+<p>Windows</p>
+<div class="highlight"><pre><span></span>我早忘了，自己上网查一下吧……很容易搜到的。
+</pre></div>
+
+
+<p>Ubuntu</p>
+<div class="highlight"><pre><span></span>sudo apt-get install git
+</pre></div>
+
+
+<p>Arch</p>
+<div class="highlight"><pre><span></span>sudo pacman -S git
+</pre></div>
+
+
+<h2>使用git</h2>
+<h3>创建软件仓库</h3>
+<p>自己在网页端建吧……</p>
+<h3>把git仓库下载到本地</h3>
+<p>网页端项目页上应该有一个clone的按钮，可以得到项目的https地址，如<code>https://github.com/jwhj/jwhj.git</code>。执行下面的命令。</p>
+<div class="highlight"><pre><span></span>git clone https://github.com/jwhj/jwhj.git
+</pre></div>
+
+
+<p>一个项目可能有多个分支，按照上面的命令，会下载master分支。如果要指定一个分支，如<code>gh-pages</code>，可以使用-b选项。</p>
+<div class="highlight"><pre><span></span>git clone -b gh-pages https://github.com/jwhj/jwhj.git
+</pre></div>
+
+
+<h3>上传本地的项目</h3>
+<p>如果是第一次使用，需要说清楚你是谁：</p>
+<div class="highlight"><pre><span></span>git config --global user.email <span class="s2">&quot;your email&quot;</span>
+git config --global user.name <span class="s2">&quot;your name&quot;</span>
+</pre></div>
+
+
+<p>首先你的项目得是clone下来的……</p>
+<p>假设你没有删除项目中的什么文件。</p>
+<p>进入项目的文件夹，执行：</p>
+<div class="highlight"><pre><span></span>git add ./*
+git commit -m <span class="s1">&#39;此次提交的备注，不能为空，想不到的话可以随便写点东西&#39;</span>
+git push
+</pre></div>
+
+
+<h2>讲个好玩的东西</h2>
+<p>刚刚说了有些东西要在网页端操作，可如果我用linux，而且没装图形界面，只用tty的话，该怎么办呢？</p>
+<div class="highlight"><pre><span></span>sudo pacman -S w3m
+w3m github.com
+</pre></div>
+
+
+<p>看看效果吧。</p></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">
+        iamplm
+    </span>
+  </span>
+<time datetime="2016-08-13T00:00:00+02:00" pubdate>Sat 13 August 2016</time>  <span class="categories">
+    <a class='category' href='/category/posts.html'>posts</a>
+  </span>
+  <span class="categories">
+    <a class="category" href="/tag/stuffs.html">stuffs</a>,    <a class="category" href="/tag/git.html">git</a>  </span>
+</p><div class="sharing">
+</div>    </footer>
+  </article>
+
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="/bzoj2589spojcot2ti-jie.html">bzoj2589&&spojcot2题解</a>
+      </li>
+      <li class="post">
+          <a href="/bzoj1011ti-jie.html">bzoj1011题解</a>
+      </li>
+      <li class="post">
+          <a href="/bzoj3876ti-jie.html">bzoj3876题解</a>
+      </li>
+      <li class="post">
+          <a href="/bzoj4802ti-jie.html">bzoj4802题解</a>
+      </li>
+      <li class="post">
+          <a href="/bzoj3157ti-jie.html">bzoj3157题解</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+      
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="/category/posts.html">posts</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+    <a href="/tag/dan-diao-zhan-dui-lie.html">单调栈/队列</a>,    <a href="/tag/dong-tai-kai-dian.html">动态开点</a>,    <a href="/tag/pei-dui-dui.html">配对堆</a>,    <a href="/tag/trie.html">trie</a>,    <a href="/tag/luan-gao.html">乱搞</a>,    <a href="/tag/fft.html">FFT</a>,    <a href="/tag/bing-cha-ji.html">并查集</a>,    <a href="/tag/exgcd.html">exgcd</a>,    <a href="/tag/ji-suan-ji-he.html">计算几何</a>,    <a href="/tag/fen-ceng-tu.html">分层图</a>,    <a href="/tag/dijkstra.html">dijkstra</a>,    <a href="/tag/poj.html">poj</a>,    <a href="/tag/du-jiao-shai.html">杜教筛</a>,    <a href="/tag/stuffs.html">stuffs</a>,    <a href="/tag/shu-fen-zhi.html">树分治</a>,    <a href="/tag/xian-xing-gui-hua.html">线性规划</a>,    <a href="/tag/huffman.html">huffman</a>,    <a href="/tag/er-fen.html">二分</a>,    <a href="/tag/zhi-yu-xian-duan-shu-fen-lie-he-bing.html">值域线段树分裂合并</a>,    <a href="/tag/git.html">git</a>,    <a href="/tag/kuai-zhuang-shu.html">块状树</a>,    <a href="/tag/gua-hao-xu-lie.html">括号序列</a>,    <a href="/tag/noip.html">noip</a>,    <a href="/tag/luogu.html">luogu</a>,    <a href="/tag/manacher.html">manacher</a>,    <a href="/tag/hou-zhui-shu-ju-jie-gou.html">后缀数据结构</a>,    <a href="/tag/wang-luo-liu.html">网络流</a>,    <a href="/tag/shu-xue.html">数学</a>,    <a href="/tag/codeforces.html">codeforces</a>,    <a href="/tag/tu-lun.html">图论</a>,    <a href="/tag/tong-ji.html">统计</a>,    <a href="/tag/ju-zhen.html">矩阵</a>,    <a href="/tag/treap.html">treap</a>,    <a href="/tag/shu-shang-mo-dui.html">树上莫队</a>,    <a href="/tag/ti-jie.html">题解</a>,    <a href="/tag/san-fen.html">三分</a>,    <a href="/tag/zheng-ti-er-fen.html">整体二分</a>,    <a href="/tag/kmp.html">kmp</a>,    <a href="/tag/kdshu.html">KD树</a>,    <a href="/tag/zhi-huan-qun.html">置换群</a>,    <a href="/tag/you-xian-dui-lie.html">优先队列</a>,    <a href="/tag/xie-lu-you-hua.html">斜率优化</a>,    <a href="/tag/mo-dui.html">莫队</a>,    <a href="/tag/hash.html">hash</a>,    <a href="/tag/xian-duan-shu.html">线段树</a>,    <a href="/tag/shu-pou.html">树剖</a>,    <a href="/tag/tan-xin.html">贪心</a>,    <a href="/tag/shu-zhuang-shu-zu.html">树状数组</a>,    <a href="/tag/miller_rabin.html">miller_rabin</a>,    <a href="/tag/pollard_rho.html">pollard_rho</a>,    <a href="/tag/spoj.html">spoj</a>,    <a href="/tag/zi-fu-chuan.html">字符串</a>,    <a href="/tag/bitset.html">bitset</a>,    <a href="/tag/zhuang-tai-ya-suo.html">状态压缩</a>,    <a href="/tag/uoj.html">uoj</a>,    <a href="/tag/zhu-xi-shu.html">主席树</a>,    <a href="/tag/dian-fen-shu.html">点分树</a>,    <a href="/tag/dp.html">DP</a>,    <a href="/tag/bzoj.html">bzoj</a>,    <a href="/tag/a.html">A*</a>,    <a href="/tag/hdu.html">hdu</a>,    <a href="/tag/shu-wei-dp.html">数位dp</a>,    <a href="/tag/cot.html">COT</a>,    <a href="/tag/yuan-gen.html">原根</a>,    <a href="/tag/ou-la-xu-lie.html">欧拉序列</a>,    <a href="/tag/kuai-zhuang-lian-biao.html">块状链表</a>,    <a href="/tag/qi-fa-shi-he-bing.html">启发式合并</a>,    <a href="/tag/er-fen-tu.html">二分图</a>,    <a href="/tag/stbiao.html">st表</a>,    <a href="/tag/spfa.html">spfa</a>,    <a href="/tag/bo-yi-lun.html">博弈论</a>,    <a href="/tag/zu-he.html">组合</a>,    <a href="/tag/mobius.html">mobius</a>,    <a href="/tag/ping-mian-tu.html">平面图</a>,    <a href="/tag/fen-kuai.html">分块</a>,    <a href="/tag/fen-kuai-sou-suo-fa.html">分块搜索法</a>,    <a href="/tag/tu-bao.html">凸包</a>,    <a href="/tag/gao-si-xiao-yuan.html">高斯消元</a>,    <a href="/tag/bsgs.html">BSGS</a>  </section>
+
+
+    <section>
+        <h1>Social</h1>
+        <ul>
+            <li><a href="#" target="_blank">You can add links in your config file</a></li>
+            <li><a href="#" target="_blank">Another social link</a></li>
+        </ul>
+    </section>
+    <section>
+        <h1>Blogroll</h1>
+        <ul>
+            <li><a href="http://getpelican.com/" target="_blank">Pelican</a></li>
+            <li><a href="http://python.org/" target="_blank">Python.org</a></li>
+            <li><a href="http://jinja.pocoo.org/" target="_blank">Jinja2</a></li>
+            <li><a href="#" target="_blank">You can modify those links in your config file</a></li>
+        </ul>
+    </section>
+
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+    Copyright &copy;  2016&ndash;2017  iamplm &mdash;
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+  <script src="/theme/js/modernizr-2.0.js"></script>
+  <script src="/theme/js/ender.js"></script>
+  <script src="/theme/js/octopress.js" type="text/javascript"></script>
+</body>
+</html>

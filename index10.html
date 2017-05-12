@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>蒟蒻的博客</title>
+  <meta name="author" content="iamplm">
+
+
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link href="/favicon.png" rel="icon">
+
+  <link href="/theme/css/main.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+
+  <link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="/">蒟蒻的博客</a></h1>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+</ul>
+
+
+<ul class="main-navigation">
+      <li><a href="/pages/about-me.html">About me</a></li>
+      <li><a href="/pages/orz.html">Orz!</a></li>
+      <li >
+        <a href="/category/posts.html">Posts</a>
+      </li>
+  <li><a href="/tags.html">Tags</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div class="blog-index">
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="/bzoj1087ti-jie.html">bzoj1087题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-06-29T00:00:00+02:00" pubdate>Wed 29 June 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=18548991&auto=0&height=66"></iframe>
+
+<h2>bzoj100题留念。</h2>
+<p>直接状压dp就可以了，不过第一次写状压dp压力还是挺大的。</p>
+<p>假设相邻两行的状态为s,s2，可以用位运算来判断是否有跨行的攻击：</p>
+<div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">s</span><span class="o">&amp;</span><span class="n">s2</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="p">((</span><span class="n">s</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">)</span><span class="o">&amp;</span><span class="n">s2</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="p">((</span><span class="n">s</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">)</span><span class="o">&amp;</span><span class="n">s2</span><span class="p">))</span>
+</pre></div>
+
+
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#define ele long long</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxn 19</span>
+<span class="cp">#define maxs 530</span>
+<span class="n">ele</span> <span class="n">n</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">f</span><span class="p">[</span><span class="n">maxn</span><span class="p">][</span><span class="n">maxn</span><span class="o">*</span><span class="n">maxn</span><span class="p">][</span><span class="n">maxs</span><span class="p">];</span>
+<span class="n">ele</span> <span class="nf">solve</span><span class="p">(</span><span class="n">ele</span> <span class="n">i ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj1087ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="/bzoj3289ti-jie.html">bzoj3289题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-06-26T00:00:00+02:00" pubdate>Sun 26 June 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=346576&auto=0&height=66"></iframe>
+
+<p>先把文件的大小离散化，再用一个树状数组来存储当前询问区间中每个数出现的次数，就可以用莫队算法来做了。</p>
+<p>时间复杂度是$O(n\sqrt n\log n)$。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cmath&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#define ele long long</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxn 50010</span>
+<span class="n">ele</span> <span class="n">B</span><span class="p">;</span>
+<span class="k">struct</span> <span class="n">query</span>
+<span class="p">{</span>
+    <span class="n">ele</span> <span class="n">l</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">id</span><span class="p">;</span>
+    <span class="kr">inline</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">&lt;</span><span class="p">(</span><span class="n">query</span> <span class="n">b</span><span class="p">)</span><span class="k">const</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">l ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj3289ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="/bzoj2431ti-jie.html">bzoj2431题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-06-20T00:00:00+02:00" pubdate>Mon 20 June 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=28838174&auto=0&height=66"></iframe>
+
+<p>中考结束后第一题。话说突然间初中就毕业了，感觉还没反应过来。</p>
+<p>让f[i][j]代表1~i的排列中逆序对为j的有多少个。</p>
+<p>考虑1~i-1的一个排列P，有j'个逆序对，那么加入一个i，最多可增加i-1个逆序对，最少可增加0个。所以加入i以后的排列的逆序对个数为j'~j'+i-1。</p>
+<p>所以$f[i][j]=\sum_{k\le j\le k+i-1} f[i-1][k]$。</p>
+<p>直接计算这个dp方程是$O(n^3)$的，不过可以维护每个f[i]的前缀和，把转移的时间优化到$O(1)$，此时算法复杂度为$O ...</p></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj2431ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="/bzoj2242ti-jie.html">bzoj2242题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-06-10T00:00:00+02:00" pubdate>Fri 10 June 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=25714082&auto=0&height=66"></iframe>
+
+<p>做道数学题给明天高联初赛求RP。</p>
+<p>第一问用快速幂，第二问用拓展欧几里得，第三问用BSGS。</p>
+<p>注意一大堆特判。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cmath&gt;</span><span class="cp"></span>
+<span class="cp">#define ele long long</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define R 100007</span>
+<span class="k">struct</span> <span class="n">HASH</span>
+<span class="p">{</span>
+    <span class="k">const</span> <span class="n">ele</span> <span class="n">null</span><span class="p">;</span>
+    <span class="n">HASH</span><span class="p">()</span><span class="o">:</span><span class="n">null</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">){}</span>
+    <span class="kr">inline</span> <span class="kt">void</span> <span class="n">clear</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">R</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+            <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">null</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kr">inline</span> <span class="n">ele ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj2242ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="/bzoj2435ti-jie.html">bzoj2435题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-06-08T00:00:00+02:00" pubdate>Wed 08 June 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=167837&auto=0&height=66"></iframe>
+
+<p>理论上来讲dfs一下就好了，然而我写的dfs一直RE，换成bfs就过了，大概是爆栈了吧。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;queue&gt;</span><span class="cp"></span>
+<span class="cp">#define ele long long</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxn 1000010</span>
+<span class="k">struct</span> <span class="n">edge</span>
+<span class="p">{</span>
+    <span class="n">ele</span> <span class="n">v</span><span class="p">,</span><span class="n">w</span><span class="p">;</span>
+    <span class="n">edge</span> <span class="o">*</span><span class="n">nxt</span><span class="p">;</span>
+<span class="p">}</span><span class="n">pool</span><span class="p">[</span><span class="n">maxn</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">];</span>
+<span class="n">ele</span> <span class="n">n</span><span class="p">,</span><span class="n">ecnt</span><span class="p">,</span><span class="n">scnt</span><span class="p">,</span><span class="n">f</span><span class="p">[</span><span class="n">maxn</span><span class="p">],</span><span class="n">f1</span><span class="p">[</span><span class="n">maxn</span><span class="p">],</span><span class="n">size</span><span class="p">[</span><span class="n">maxn</span><span class="p">],</span><span class="n">seq</span><span class="p">[</span><span class="n">maxn</span><span class="p">];</span>
+<span class="n">edge</span> <span class="o">*</span><span class="n">h ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj2435ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="/bzoj2440ti-jie.html">bzoj2440题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-06-07T00:00:00+02:00" pubdate>Tue 07 June 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=3950015&auto=0&height=66"></iframe>
+
+<p>先吐槽一下题意，所有的整数都是$1^2$的倍数。</p>
+<p>然而这题显然是不算$1^2$的。所以一个数不被讨厌当且仅当它没有平方因子。</p>
+<p>可以二分答案x，统计1~x中有多少个数无平方因子，然后调整二分的左右端点。</p>
+<p>这就留下来两个问题：如何统计、如何确定二分上界。</p>
+<p>统计的话可以用容斥，1~x中无平方因子的数的个数为：$$\sum_{i=1}^{\sqrt{n}}\mu(i)\lfloor\frac{x}{i^2}\rfloor$$</p>
+<p>至于为什么使劲想一想就明白了吧。</p>
+<p>如何确定二分上界呢？先让上界是1，用上面的方法检查一下，如果发现1~1中无平方因子的数不到k，就把上界乘2，反复进行这个操作即可。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj2440ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="/bzoj3994ti-jie.html">bzoj3994题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-06-06T00:00:00+02:00" pubdate>Mon 06 June 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=357279&auto=0&height=66"></iframe>
+
+<p>首先有一条神奇的式子：$$d(nm)=\sum_{i|n}\sum_{j|m}[gcd(i,j)=1]$$</p>
+<p>为什么呢？考虑使用归纳法。如果$gcd(n,m)=1$，那么上面那个式子显然是成立的。否则取一个质数$p$使得$p|n$且$p|m$，让$n=n'\times p^{k1}$，$m=m'\times p^{k2}$，就有$d(nm)=(k1+k2 ...</p></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj3994ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="/bzoj3884ti-jie.html">bzoj3884题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-06-05T00:00:00+02:00" pubdate>Sun 05 June 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=27533158&auto=0&height=66"></iframe>
+
+<p>神犇们的题解里面都说：</p>
+<blockquote>
+<p>不要被无穷个2吓到了</p>
+</blockquote>
+<p>反正我是被吓到了。</p>
+<p>为了叙述方便，我们让$u=2^{2^{2\ldots}}$，那么因为2有无穷个，所以$u=2^u$。</p>
+<p>设$p=2^k\times q$，这里$q$为奇数。</p>
+<p>那么有$$u\mod p=2^u\mod p=2^k(2^{u-k}\mod q)$$</p>
+<p>这里$q$是奇数，与2互质，所以有$$2^{u-k ...</p></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj3884ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="/bzoj1061ti-jie.html">bzoj1061题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-06-03T00:00:00+02:00" pubdate>Fri 03 June 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=28590262&auto=0&height=66"></iframe>
+
+<p>正解是网络流，然而我智商下线不会建图，所以就写了线性规划。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cmath&gt;</span><span class="cp"></span>
+<span class="cp">#define ele int</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxn 1010</span>
+<span class="cp">#define maxm 10010</span>
+<span class="cp">#define eps 1e-7</span>
+<span class="cp">#define inf 1e19</span>
+<span class="k">namespace</span> <span class="n">LP</span>
+<span class="p">{</span>
+    <span class="kt">double</span> <span class="n">a</span><span class="p">[</span><span class="n">maxm</span><span class="p">][</span><span class="n">maxn</span><span class="p">],</span><span class="n">b</span><span class="p">[</span><span class="n">maxm</span><span class="p">],</span><span class="n">c</span><span class="p">[</span><span class="n">maxn</span><span class="p">],</span><span class="n">v</span><span class="p">;</span>
+    <span class="n">ele</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">;</span>
+    <span class="kr">inline</span> <span class="kt">void</span> <span class="nf">pivot ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj1061ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="/bzoj3112ti-jie.html">bzoj3112题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-06-03T00:00:00+02:00" pubdate>Fri 03 June 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=28798452&auto=0&height=66"></iframe>
+
+<p>线性规划，先弄成对偶型，然后直接上单纯形算法就可以了。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cmath&gt;</span><span class="cp"></span>
+<span class="cp">#define ele int</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxn 1010</span>
+<span class="cp">#define maxm 10010</span>
+<span class="cp">#define eps 1e-7</span>
+<span class="cp">#define inf 1e10</span>
+<span class="k">namespace</span> <span class="n">LP</span>
+<span class="p">{</span>
+    <span class="n">ele</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">;</span>
+    <span class="kt">double</span> <span class="n">a</span><span class="p">[</span><span class="n">maxn</span><span class="p">][</span><span class="n">maxm</span><span class="p">],</span><span class="n">b</span><span class="p">[</span><span class="n">maxn</span><span class="p">],</span><span class="n">c</span><span class="p">[</span><span class="n">maxm</span><span class="p">],</span><span class="n">v</span><span class="p">;</span>
+    <span class="kr">inline ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj3112ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+<div class="pagination">
+    <a class="prev" href="/index11.html">&larr; Older</a>
+
+    <a class="next" href="/index9.html">Newer &rarr;</a>
+  <br />
+</div></div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="/bzoj2589spojcot2ti-jie.html">bzoj2589&&spojcot2题解</a>
+      </li>
+      <li class="post">
+          <a href="/bzoj1011ti-jie.html">bzoj1011题解</a>
+      </li>
+      <li class="post">
+          <a href="/bzoj3876ti-jie.html">bzoj3876题解</a>
+      </li>
+      <li class="post">
+          <a href="/bzoj4802ti-jie.html">bzoj4802题解</a>
+      </li>
+      <li class="post">
+          <a href="/bzoj3157ti-jie.html">bzoj3157题解</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+      
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="/category/posts.html">posts</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+    <a href="/tag/dan-diao-zhan-dui-lie.html">单调栈/队列</a>,    <a href="/tag/dong-tai-kai-dian.html">动态开点</a>,    <a href="/tag/pei-dui-dui.html">配对堆</a>,    <a href="/tag/trie.html">trie</a>,    <a href="/tag/luan-gao.html">乱搞</a>,    <a href="/tag/fft.html">FFT</a>,    <a href="/tag/bing-cha-ji.html">并查集</a>,    <a href="/tag/exgcd.html">exgcd</a>,    <a href="/tag/ji-suan-ji-he.html">计算几何</a>,    <a href="/tag/fen-ceng-tu.html">分层图</a>,    <a href="/tag/dijkstra.html">dijkstra</a>,    <a href="/tag/poj.html">poj</a>,    <a href="/tag/du-jiao-shai.html">杜教筛</a>,    <a href="/tag/stuffs.html">stuffs</a>,    <a href="/tag/shu-fen-zhi.html">树分治</a>,    <a href="/tag/xian-xing-gui-hua.html">线性规划</a>,    <a href="/tag/huffman.html">huffman</a>,    <a href="/tag/er-fen.html">二分</a>,    <a href="/tag/zhi-yu-xian-duan-shu-fen-lie-he-bing.html">值域线段树分裂合并</a>,    <a href="/tag/git.html">git</a>,    <a href="/tag/kuai-zhuang-shu.html">块状树</a>,    <a href="/tag/gua-hao-xu-lie.html">括号序列</a>,    <a href="/tag/noip.html">noip</a>,    <a href="/tag/luogu.html">luogu</a>,    <a href="/tag/manacher.html">manacher</a>,    <a href="/tag/hou-zhui-shu-ju-jie-gou.html">后缀数据结构</a>,    <a href="/tag/wang-luo-liu.html">网络流</a>,    <a href="/tag/shu-xue.html">数学</a>,    <a href="/tag/codeforces.html">codeforces</a>,    <a href="/tag/tu-lun.html">图论</a>,    <a href="/tag/tong-ji.html">统计</a>,    <a href="/tag/ju-zhen.html">矩阵</a>,    <a href="/tag/treap.html">treap</a>,    <a href="/tag/shu-shang-mo-dui.html">树上莫队</a>,    <a href="/tag/ti-jie.html">题解</a>,    <a href="/tag/san-fen.html">三分</a>,    <a href="/tag/zheng-ti-er-fen.html">整体二分</a>,    <a href="/tag/kmp.html">kmp</a>,    <a href="/tag/kdshu.html">KD树</a>,    <a href="/tag/zhi-huan-qun.html">置换群</a>,    <a href="/tag/you-xian-dui-lie.html">优先队列</a>,    <a href="/tag/xie-lu-you-hua.html">斜率优化</a>,    <a href="/tag/mo-dui.html">莫队</a>,    <a href="/tag/hash.html">hash</a>,    <a href="/tag/xian-duan-shu.html">线段树</a>,    <a href="/tag/shu-pou.html">树剖</a>,    <a href="/tag/tan-xin.html">贪心</a>,    <a href="/tag/shu-zhuang-shu-zu.html">树状数组</a>,    <a href="/tag/miller_rabin.html">miller_rabin</a>,    <a href="/tag/pollard_rho.html">pollard_rho</a>,    <a href="/tag/spoj.html">spoj</a>,    <a href="/tag/zi-fu-chuan.html">字符串</a>,    <a href="/tag/bitset.html">bitset</a>,    <a href="/tag/zhuang-tai-ya-suo.html">状态压缩</a>,    <a href="/tag/uoj.html">uoj</a>,    <a href="/tag/zhu-xi-shu.html">主席树</a>,    <a href="/tag/dian-fen-shu.html">点分树</a>,    <a href="/tag/dp.html">DP</a>,    <a href="/tag/bzoj.html">bzoj</a>,    <a href="/tag/a.html">A*</a>,    <a href="/tag/hdu.html">hdu</a>,    <a href="/tag/shu-wei-dp.html">数位dp</a>,    <a href="/tag/cot.html">COT</a>,    <a href="/tag/yuan-gen.html">原根</a>,    <a href="/tag/ou-la-xu-lie.html">欧拉序列</a>,    <a href="/tag/kuai-zhuang-lian-biao.html">块状链表</a>,    <a href="/tag/qi-fa-shi-he-bing.html">启发式合并</a>,    <a href="/tag/er-fen-tu.html">二分图</a>,    <a href="/tag/stbiao.html">st表</a>,    <a href="/tag/spfa.html">spfa</a>,    <a href="/tag/bo-yi-lun.html">博弈论</a>,    <a href="/tag/zu-he.html">组合</a>,    <a href="/tag/mobius.html">mobius</a>,    <a href="/tag/ping-mian-tu.html">平面图</a>,    <a href="/tag/fen-kuai.html">分块</a>,    <a href="/tag/fen-kuai-sou-suo-fa.html">分块搜索法</a>,    <a href="/tag/tu-bao.html">凸包</a>,    <a href="/tag/gao-si-xiao-yuan.html">高斯消元</a>,    <a href="/tag/bsgs.html">BSGS</a>  </section>
+
+
+    <section>
+        <h1>Social</h1>
+        <ul>
+            <li><a href="#" target="_blank">You can add links in your config file</a></li>
+            <li><a href="#" target="_blank">Another social link</a></li>
+        </ul>
+    </section>
+    <section>
+        <h1>Blogroll</h1>
+        <ul>
+            <li><a href="http://getpelican.com/" target="_blank">Pelican</a></li>
+            <li><a href="http://python.org/" target="_blank">Python.org</a></li>
+            <li><a href="http://jinja.pocoo.org/" target="_blank">Jinja2</a></li>
+            <li><a href="#" target="_blank">You can modify those links in your config file</a></li>
+        </ul>
+    </section>
+
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+    Copyright &copy;  2016&ndash;2017  iamplm &mdash;
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+  <script src="/theme/js/modernizr-2.0.js"></script>
+  <script src="/theme/js/ender.js"></script>
+  <script src="/theme/js/octopress.js" type="text/javascript"></script>
+</body>
+</html>

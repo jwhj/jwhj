@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>蒟蒻的博客</title>
+  <meta name="author" content="iamplm">
+
+
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link href="/favicon.png" rel="icon">
+
+  <link href="/theme/css/main.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+
+  <link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="/">蒟蒻的博客</a></h1>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+</ul>
+
+
+<ul class="main-navigation">
+      <li><a href="/pages/about-me.html">About me</a></li>
+      <li><a href="/pages/orz.html">Orz!</a></li>
+      <li >
+        <a href="/category/posts.html">Posts</a>
+      </li>
+  <li><a href="/tags.html">Tags</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div class="blog-index">
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="/bzoj4066ti-jie.html">bzoj4066题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-09-01T00:00:00+02:00" pubdate>Thu 01 September 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=26289183&auto=0&height=66"></iframe>
+
+<p>直接用KD树就能做了。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#define ele int</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxm 200010</span>
+<span class="cp">#define alpha 0.7</span>
+<span class="cp">#define dc(x) (x)^=lastans</span>
+<span class="k">struct</span> <span class="n">node</span>
+<span class="p">{</span>
+    <span class="n">ele</span> <span class="n">c</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">mn</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">mx</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">x</span><span class="p">,</span><span class="n">s</span><span class="p">,</span><span class="n">sum</span><span class="p">;</span>
+    <span class="n">node</span> <span class="o">*</span><span class="n">l</span><span class="p">,</span><span class="o">*</span><span class="n">r</span><span class="p">;</span>
+<span class="p">}</span><span class="n">pool</span><span class="p">[</span><span class="n">maxm</span><span class="p">];</span>
+<span class="n">ele</span> <span class="n">n ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj4066ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="/bzoj3329ti-jie.html">bzoj3329题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-08-27T00:00:00+02:00" pubdate>Sat 27 August 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=64886&auto=0&height=66"></iframe>
+
+<p>考虑到异或的逆运算还是异或，原式可以变形成$x\oplus 2x=3x$。</p>
+<p>另一方面，显然有$x+2x=3x$，也就是说，$x$与$2x$相加的时候没有进位。</p>
+<p>所以$x$的二进制表示中没有连续的1。</p>
+<p>第一问数位dp，第二问数位dp+矩阵快速幂。</p>
+<p>开数组的时候不小心开成了18调了好久……要开成$\log_2 n$，而不是$\lg n$……</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#define ele long long</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxlogn ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj3329ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="/bzoj4653noi2016-qu-jian-ti-jie.html">bzoj4653(noi2016 区间)题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-08-27T00:00:00+02:00" pubdate>Sat 27 August 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=346073&auto=0&height=66"></iframe>
+
+<p>对于若干个区间，如果其中有一个点被覆盖至少m次，那么一定能从这些区间中选出m个，满足题意。</p>
+<p>于是我就开始想扫瞄线，想了好久没想出来……最后只好看题解。</p>
+<p>先把区间按长度排序，用两个指针l，r表示当前选出的最短和最长的区间。</p>
+<p>用一个线段树维护每个点被l，r间的这些区间覆盖了多少次。</p>
+<p>每次将r右移，并尝试将l右移，使l指向的区间尽可能长。用r指向的区间长度-l指向的区间长度来更新答案。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#define ele int</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxn 500010</span>
+<span class="cp">#define INF 1000000001</span>
+<span class="k">struct</span> <span class="n">node</span>
+<span class="p">{</span>
+    <span class="n">ele</span> <span class="n">add</span><span class="p">,</span><span class="n">max</span><span class="p">;</span>
+    <span class="n">node</span> <span class="o">*</span><span class="n">l</span><span class="p">,</span><span class="o">*</span><span class="n">r</span><span class="p">;</span>
+<span class="p">}</span><span class="n">pool</span><span class="p">[</span><span class="n">maxn ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj4653noi2016-qu-jian-ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="/bzoj2653ti-jie.html">bzoj2653题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-08-26T00:00:00+02:00" pubdate>Fri 26 August 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=27571290&auto=0&height=66"></iframe>
+
+<p>军训完第一道OI题。</p>
+<p>感觉方法挺难想的……不过看了题解马上就懂了。</p>
+<p>对于一个数x，置数列中所有比x小的数为-1，所有等于x的数为0，所有大于x的数为1。取$l \in [a,b]$,$r \in [c,d]$，区间[l,r]的和最大为k。如果k&gt;=0，那么答案&gt;=x,否则答案小于x。</p>
+<p>于是就可以二分了。</p>
+<p>但是有一个问题：如何把数列中的数改为-1,0和1？</p>
+<p>考虑使用主席树，一开始所有数为1，把原数列中的数从小到大排序，每次加入一个数，就把前面的那个数改为-1或0。当原数列中最后一个x被插入时，数列中所有比x小的数为-1，所有等于x的数为0，所有大于x的数为1。</p>
+<p>最大区间和的维护是一个简单的线段树问题。</p>
+<p>代码（写得好丑啊）：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj2653ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="/bzoj36733674ti-jie.html">bzoj3673&3674题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-08-13T00:00:00+02:00" pubdate>Sat 13 August 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=346085&auto=0&height=66"></iframe>
+
+<p>并查集的实现基于数组，如果可以把数组可持久化的话，问题就解决了。</p>
+<p>可以建立一棵线段树当数组用，线段树是很容易可持久化的。这样复杂度多处一个$O(\log n)$。当然可持久化数组可以做到$O(\log\log n)$，不过我不会。</p>
+<p>3674代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#define ele int</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxn 200010</span>
+<span class="k">struct</span> <span class="n">node</span>
+<span class="p">{</span>
+    <span class="n">ele</span> <span class="n">f</span><span class="p">;</span>
+    <span class="n">node</span> <span class="o">*</span><span class="n">l</span><span class="p">,</span><span class="o">*</span><span class="n">r</span><span class="p">;</span>
+<span class="p">}</span><span class="n">pool</span><span class="p">[</span><span class="n">maxn</span><span class="o">&lt;&lt;</span><span class="mi">6</span><span class="p">];</span>
+<span class="n">ele</span> <span class="n">ncnt</span><span class="p">;</span>
+<span class="n">node</span> <span class="o">*</span><span class="nf">build ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj36733674ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="/gitshi-yong-zong-jie.html">git使用总结</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-08-13T00:00:00+02:00" pubdate>Sat 13 August 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=18649447&auto=0&height=66"></iframe>
+
+<p>自从去北欧旅游以后A了题都不写题解了……写点东西拯救一下。</p>
+<h2>git是什么</h2>
+<p>自己去看<a href="https://en.wikipedia.org/wiki/Git_(software)">wiki</a>。</p>
+<p>需要提一下，git与github是两个不同的东西，你可以认为github是一个支持git的网站，当然这样的网站还有很多，如<a href="http://coding.net">coding</a>，<a href="http://bitbucket.org">bitbucket</a>。</p>
+<h2>安装git</h2>
+<p>Windows</p>
+<div class="highlight"><pre><span></span>我早忘了，自己上网查一下吧……很容易搜到的。
+</pre></div>
+
+
+<p>Ubuntu</p>
+<div class="highlight"><pre><span></span>sudo apt-get install git
+</pre></div>
+
+
+<p>Arch</p>
+<div class="highlight"><pre><span></span>sudo pacman -S git
+</pre></div>
+
+
+<h2>使用git</h2>
+<h3>创建软件仓库</h3>
+<p>自己在网页端建吧……</p>
+<h3>把git仓库下载到本地</h3>
+<p>网页端项目页上应该有一个clone的按钮，可以得到项目的https地址，如<code>https://github.com/jwhj/jwhj.git</code>。执行下面的命令。</p>
+<div class="highlight"><pre><span></span>git clone https://github ...</pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/gitshi-yong-zong-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="/bzoj2875ti-jie.html">bzoj2875题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-07-09T00:00:00+02:00" pubdate>Sat 09 July 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=18550042&auto=0&height=66"></iframe>
+
+<p>为什么题目不说清楚线性伪随机的生成公式……</p>
+<p>$$X_{i+1}=(aX_i+c) \mod m$$</p>
+<p>所以用矩阵快速幂就可以做了。</p>
+<p>还有一个坑点，就是longlong乘longlong模longlong。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#define ele long long</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">struct</span> <span class="n">MAT</span>
+<span class="p">{</span>
+    <span class="n">ele</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">a</span><span class="p">[</span><span class="mi">10</span><span class="p">][</span><span class="mi">10</span><span class="p">];</span>
+<span class="p">};</span>
+<span class="n">ele</span> <span class="n">m</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">x0</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">g</span><span class="p">;</span>
+<span class="n">MAT</span> <span class="n">ans</span><span class="p">,</span><span class="n">C</span><span class="p">;</span>
+<span class="kr">inline</span> <span class="n">ele</span> <span class="nf">mul</span><span class="p">(</span><span class="n">ele ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj2875ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="/bzoj2326ti-jie.html">bzoj2326题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-07-05T00:00:00+02:00" pubdate>Tue 05 July 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=407677659&auto=0&height=66"></iframe>
+
+<p>记$f_i=Concatenate(1..i)$。</p>
+<p>如果i是k位数，就有$f_i=10^kf_{i-1}+i$，利用这个，就可以在$O(n)$的时间内求出答案了。</p>
+<p>然而这么做还是慢。注意到
+$$
+\begin{bmatrix}
+f_i\\
+i\\
+1
+\end{bmatrix}=
+\begin{bmatrix}
+10^k &amp; 1 &amp; 1\\
+0 &amp; 1 &amp; 1\\
+0 &amp; 0 &amp; 1
+\end{bmatrix}
+\begin{bmatrix}
+f_{i-1}\\
+i-1 ...</p></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj2326ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="/bzoj3333ti-jie.html">bzoj3333题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-07-03T00:00:00+02:00" pubdate>Sun 03 July 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=5120885&auto=0&height=66"></iframe>
+
+<p>注意到这样一个性质：</p>
+<blockquote>
+<p>每次选定一个位置P后，减少的逆序对数量就是p~n中满足要求的人原来构成的逆序对——而且当操作完成之后，这些人将永远不会产生逆序对了。</p>
+</blockquote>
+<p>于是可以先求出以i开头的逆序对fi以及开始时的逆序对总数，对于一个询问p，选出p~n中所有使hj&lt;=hp的j，在答案中减去fj，最后把j这个人删掉。</p>
+<p>为了找出所有使hj&lt;=hp的j，维护一个线段树，每次查询p~n中hj最小的位置j，答案中减去fj之后，把hj置为无穷，相当于把这个人删掉。重复此操作直到身高不超过hp的人都被删掉为止。</p>
+<p>细节还是有点多的。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#define ele long long</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define INF 1000000001</span>
+<span class="cp">#define maxn 500010</span>
+<span class="k">const</span> <span class="n">ele ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj3333ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="/bzoj2141ti-jie.html">bzoj2141题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-07-02T00:00:00+02:00" pubdate>Sat 02 July 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=347230&auto=0&height=66"></iframe>
+
+<p>感觉数据好小啊……考虑使用分块，每块里面排好序。</p>
+<p>交换hi和hj的时候，只有i,j之间的数会对答案造成影响。具体来讲，对于每个$p \in(i,j)$，如果$hp \gt hi$，答案+1，如果$h_p \lt h_i$，答案-1。对于$h_j$有类似的讨论。每个块排了序，两边的块暴力计算，中间的二分。</p>
+<p>如果块的大小为$O(\sqrt n)$，那么每次的复杂度是$O(\sqrt n\log n)$的，但是注意到，对于每次询问，修改要花$O(\sqrt ...</p></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj2141ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+<div class="pagination">
+    <a class="prev" href="/index10.html">&larr; Older</a>
+
+    <a class="next" href="/index8.html">Newer &rarr;</a>
+  <br />
+</div></div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="/bzoj2589spojcot2ti-jie.html">bzoj2589&&spojcot2题解</a>
+      </li>
+      <li class="post">
+          <a href="/bzoj1011ti-jie.html">bzoj1011题解</a>
+      </li>
+      <li class="post">
+          <a href="/bzoj3876ti-jie.html">bzoj3876题解</a>
+      </li>
+      <li class="post">
+          <a href="/bzoj4802ti-jie.html">bzoj4802题解</a>
+      </li>
+      <li class="post">
+          <a href="/bzoj3157ti-jie.html">bzoj3157题解</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+      
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="/category/posts.html">posts</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+    <a href="/tag/dan-diao-zhan-dui-lie.html">单调栈/队列</a>,    <a href="/tag/dong-tai-kai-dian.html">动态开点</a>,    <a href="/tag/pei-dui-dui.html">配对堆</a>,    <a href="/tag/trie.html">trie</a>,    <a href="/tag/luan-gao.html">乱搞</a>,    <a href="/tag/fft.html">FFT</a>,    <a href="/tag/bing-cha-ji.html">并查集</a>,    <a href="/tag/exgcd.html">exgcd</a>,    <a href="/tag/ji-suan-ji-he.html">计算几何</a>,    <a href="/tag/fen-ceng-tu.html">分层图</a>,    <a href="/tag/dijkstra.html">dijkstra</a>,    <a href="/tag/poj.html">poj</a>,    <a href="/tag/du-jiao-shai.html">杜教筛</a>,    <a href="/tag/stuffs.html">stuffs</a>,    <a href="/tag/shu-fen-zhi.html">树分治</a>,    <a href="/tag/xian-xing-gui-hua.html">线性规划</a>,    <a href="/tag/huffman.html">huffman</a>,    <a href="/tag/er-fen.html">二分</a>,    <a href="/tag/zhi-yu-xian-duan-shu-fen-lie-he-bing.html">值域线段树分裂合并</a>,    <a href="/tag/git.html">git</a>,    <a href="/tag/kuai-zhuang-shu.html">块状树</a>,    <a href="/tag/gua-hao-xu-lie.html">括号序列</a>,    <a href="/tag/noip.html">noip</a>,    <a href="/tag/luogu.html">luogu</a>,    <a href="/tag/manacher.html">manacher</a>,    <a href="/tag/hou-zhui-shu-ju-jie-gou.html">后缀数据结构</a>,    <a href="/tag/wang-luo-liu.html">网络流</a>,    <a href="/tag/shu-xue.html">数学</a>,    <a href="/tag/codeforces.html">codeforces</a>,    <a href="/tag/tu-lun.html">图论</a>,    <a href="/tag/tong-ji.html">统计</a>,    <a href="/tag/ju-zhen.html">矩阵</a>,    <a href="/tag/treap.html">treap</a>,    <a href="/tag/shu-shang-mo-dui.html">树上莫队</a>,    <a href="/tag/ti-jie.html">题解</a>,    <a href="/tag/san-fen.html">三分</a>,    <a href="/tag/zheng-ti-er-fen.html">整体二分</a>,    <a href="/tag/kmp.html">kmp</a>,    <a href="/tag/kdshu.html">KD树</a>,    <a href="/tag/zhi-huan-qun.html">置换群</a>,    <a href="/tag/you-xian-dui-lie.html">优先队列</a>,    <a href="/tag/xie-lu-you-hua.html">斜率优化</a>,    <a href="/tag/mo-dui.html">莫队</a>,    <a href="/tag/hash.html">hash</a>,    <a href="/tag/xian-duan-shu.html">线段树</a>,    <a href="/tag/shu-pou.html">树剖</a>,    <a href="/tag/tan-xin.html">贪心</a>,    <a href="/tag/shu-zhuang-shu-zu.html">树状数组</a>,    <a href="/tag/miller_rabin.html">miller_rabin</a>,    <a href="/tag/pollard_rho.html">pollard_rho</a>,    <a href="/tag/spoj.html">spoj</a>,    <a href="/tag/zi-fu-chuan.html">字符串</a>,    <a href="/tag/bitset.html">bitset</a>,    <a href="/tag/zhuang-tai-ya-suo.html">状态压缩</a>,    <a href="/tag/uoj.html">uoj</a>,    <a href="/tag/zhu-xi-shu.html">主席树</a>,    <a href="/tag/dian-fen-shu.html">点分树</a>,    <a href="/tag/dp.html">DP</a>,    <a href="/tag/bzoj.html">bzoj</a>,    <a href="/tag/a.html">A*</a>,    <a href="/tag/hdu.html">hdu</a>,    <a href="/tag/shu-wei-dp.html">数位dp</a>,    <a href="/tag/cot.html">COT</a>,    <a href="/tag/yuan-gen.html">原根</a>,    <a href="/tag/ou-la-xu-lie.html">欧拉序列</a>,    <a href="/tag/kuai-zhuang-lian-biao.html">块状链表</a>,    <a href="/tag/qi-fa-shi-he-bing.html">启发式合并</a>,    <a href="/tag/er-fen-tu.html">二分图</a>,    <a href="/tag/stbiao.html">st表</a>,    <a href="/tag/spfa.html">spfa</a>,    <a href="/tag/bo-yi-lun.html">博弈论</a>,    <a href="/tag/zu-he.html">组合</a>,    <a href="/tag/mobius.html">mobius</a>,    <a href="/tag/ping-mian-tu.html">平面图</a>,    <a href="/tag/fen-kuai.html">分块</a>,    <a href="/tag/fen-kuai-sou-suo-fa.html">分块搜索法</a>,    <a href="/tag/tu-bao.html">凸包</a>,    <a href="/tag/gao-si-xiao-yuan.html">高斯消元</a>,    <a href="/tag/bsgs.html">BSGS</a>  </section>
+
+
+    <section>
+        <h1>Social</h1>
+        <ul>
+            <li><a href="#" target="_blank">You can add links in your config file</a></li>
+            <li><a href="#" target="_blank">Another social link</a></li>
+        </ul>
+    </section>
+    <section>
+        <h1>Blogroll</h1>
+        <ul>
+            <li><a href="http://getpelican.com/" target="_blank">Pelican</a></li>
+            <li><a href="http://python.org/" target="_blank">Python.org</a></li>
+            <li><a href="http://jinja.pocoo.org/" target="_blank">Jinja2</a></li>
+            <li><a href="#" target="_blank">You can modify those links in your config file</a></li>
+        </ul>
+    </section>
+
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+    Copyright &copy;  2016&ndash;2017  iamplm &mdash;
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+  <script src="/theme/js/modernizr-2.0.js"></script>
+  <script src="/theme/js/ender.js"></script>
+  <script src="/theme/js/octopress.js" type="text/javascript"></script>
+</body>
+</html>
