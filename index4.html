@@ -49,6 +49,42 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj3110ti-jie.html">bzoj3110题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2017-01-15T00:00:00+01:00" pubdate>Sun 15 January 2017</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p>题目写得比较奇怪……应该理解成每个位置可以堆很多个数。</p>
+<p>用整体二分就可以做了。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#define ele long long</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxn 100010</span>
+<span class="k">struct</span> <span class="n">ASK</span><span class="p">{</span>
+    <span class="n">ele</span> <span class="n">l</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">id</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="k">struct</span> <span class="n">BIT</span><span class="p">{</span>
+    <span class="kr">inline</span> <span class="kt">void</span> <span class="n">alloc</span><span class="p">(</span><span class="n">ele</span> <span class="n">n</span><span class="p">){</span>
+        <span class="n">memset</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">a</span><span class="p">));</span>
+        <span class="k">this</span><span class="o">-&gt;</span><span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kr">inline</span> <span class="kt">void</span> <span class="n">add</span><span class="p">(</span><span class="n">ele ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj3110ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj1857ti-jie.html">bzoj1857题解</a>
       </h1>
     <p class="meta">
@@ -331,42 +367,6 @@ $$\begin{align*}f(n,m)&amp;=\sum\sum ij\sum_{d|i,d|j}\mu(d)\\&amp;=\sum d^2\mu(d
     <a rel="full-article" href="/bzoj2654ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj1009ti-jie.html">bzoj1009题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2016-12-18T00:00:00+01:00" pubdate>Sun 18 December 2016</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=27808044&auto=0&height=66"></iframe>
-
-<p><a href="http://www.jianshu.com/p/3d10f7876e41">这里</a>有一篇写得比较好的题解。</p>
-<p>可以考虑出一道题，有多个不吉利的串，那样应该就要用AC自动机来做了。</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#define ele int</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="cp">#define maxm 25</span>
-<span class="k">struct</span> <span class="n">matrix</span><span class="p">{</span>
-    <span class="kr">inline</span> <span class="kt">void</span> <span class="n">I</span><span class="p">(){</span>
-        <span class="n">memset</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">a</span><span class="p">));</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
-            <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="n">ele</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">a</span><span class="p">[</span><span class="n">maxm ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj1009ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index5.html">&larr; Older</a>
 
@@ -378,6 +378,9 @@ $$\begin{align*}f(n,m)&amp;=\sum\sum ij\sum_{d|i,d|j}\mu(d)\\&amp;=\sum d^2\mu(d
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1019ti-jie.html">bzoj1019题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1018ti-jie.html">bzoj1018题解</a>
       </li>
       <li class="post">
@@ -388,9 +391,6 @@ $$\begin{align*}f(n,m)&amp;=\sum\sum ij\sum_{d|i,d|j}\mu(d)\\&amp;=\sum d^2\mu(d
       </li>
       <li class="post">
           <a href="/bzoj1011ti-jie.html">bzoj1011题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj3876ti-jie.html">bzoj3876题解</a>
       </li>
     </ul>
   </section>
