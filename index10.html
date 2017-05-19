@@ -49,6 +49,43 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj2875ti-jie.html">bzoj2875题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-07-09T00:00:00+02:00" pubdate>Sat 09 July 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=18550042&auto=0&height=66"></iframe>
+
+<p>为什么题目不说清楚线性伪随机的生成公式……</p>
+<p>$$X_{i+1}=(aX_i+c) \mod m$$</p>
+<p>所以用矩阵快速幂就可以做了。</p>
+<p>还有一个坑点，就是longlong乘longlong模longlong。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#define ele long long</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">struct</span> <span class="n">MAT</span>
+<span class="p">{</span>
+    <span class="n">ele</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">a</span><span class="p">[</span><span class="mi">10</span><span class="p">][</span><span class="mi">10</span><span class="p">];</span>
+<span class="p">};</span>
+<span class="n">ele</span> <span class="n">m</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">x0</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">g</span><span class="p">;</span>
+<span class="n">MAT</span> <span class="n">ans</span><span class="p">,</span><span class="n">C</span><span class="p">;</span>
+<span class="kr">inline</span> <span class="n">ele</span> <span class="nf">mul</span><span class="p">(</span><span class="n">ele ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj2875ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj2326ti-jie.html">bzoj2326题解</a>
       </h1>
     <p class="meta">
@@ -354,29 +391,6 @@ i-1 ...</p></!--more--></div>
     <a rel="full-article" href="/bzoj2440ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj3994ti-jie.html">bzoj3994题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2016-06-06T00:00:00+02:00" pubdate>Mon 06 June 2016</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=357279&auto=0&height=66"></iframe>
-
-<p>首先有一条神奇的式子：$$d(nm)=\sum_{i|n}\sum_{j|m}[gcd(i,j)=1]$$</p>
-<p>为什么呢？考虑使用归纳法。如果$gcd(n,m)=1$，那么上面那个式子显然是成立的。否则取一个质数$p$使得$p|n$且$p|m$，让$n=n'\times p^{k1}$，$m=m'\times p^{k2}$，就有$d(nm)=(k1+k2 ...</p></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj3994ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index11.html">&larr; Older</a>
 
@@ -388,6 +402,9 @@ i-1 ...</p></!--more--></div>
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1021ti-jie.html">bzoj1021题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1019ti-jie.html">bzoj1019题解</a>
       </li>
       <li class="post">
@@ -398,9 +415,6 @@ i-1 ...</p></!--more--></div>
       </li>
       <li class="post">
           <a href="/bzoj2589spojcot2ti-jie.html">bzoj2589&&spojcot2题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1011ti-jie.html">bzoj1011题解</a>
       </li>
     </ul>
   </section>

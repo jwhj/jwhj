@@ -49,6 +49,29 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj3994ti-jie.html">bzoj3994题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-06-06T00:00:00+02:00" pubdate>Mon 06 June 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=357279&auto=0&height=66"></iframe>
+
+<p>首先有一条神奇的式子：$$d(nm)=\sum_{i|n}\sum_{j|m}[gcd(i,j)=1]$$</p>
+<p>为什么呢？考虑使用归纳法。如果$gcd(n,m)=1$，那么上面那个式子显然是成立的。否则取一个质数$p$使得$p|n$且$p|m$，让$n=n'\times p^{k1}$，$m=m'\times p^{k2}$，就有$d(nm)=(k1+k2 ...</p></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj3994ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj3884ti-jie.html">bzoj3884题解</a>
       </h1>
     <p class="meta">
@@ -333,33 +356,6 @@ $$G(n)=\sum_{i=1}^n\sum_{d|i}f(i)$$
     <a rel="full-article" href="/bzoj3944ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj2818ti-jie.html">bzoj2818题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2016-05-17T00:00:00+02:00" pubdate>Tue 17 May 2016</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=1799885&auto=0&height=66"></iframe>
-
-<p>因为$(x,y)=p$等价于$(\frac{x}{p},\frac{y}{p})$，所以有：
-$$ans=\sum_{i}\sum_{1&lt;=j&lt;=\frac{n}{p_i}}{\phi(j)}$$。</p>
-<p>先用线性筛求出所有质数。</p>
-<p>先让phi[i]=i，然后对于每个质数p，把phi[p]，phi[2p]，...乘上$\frac{p-1}{p}$。</p>
-<p>下面开始玄学的时间复杂度分析：</p>
-<p>1~n中，质数有$O(\frac{n}{\log n ...</p></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj2818ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index12.html">&larr; Older</a>
 
@@ -371,6 +367,9 @@ $$ans=\sum_{i}\sum_{1&lt;=j&lt;=\frac{n}{p_i}}{\phi(j)}$$。</p>
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1021ti-jie.html">bzoj1021题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1019ti-jie.html">bzoj1019题解</a>
       </li>
       <li class="post">
@@ -381,9 +380,6 @@ $$ans=\sum_{i}\sum_{1&lt;=j&lt;=\frac{n}{p_i}}{\phi(j)}$$。</p>
       </li>
       <li class="post">
           <a href="/bzoj2589spojcot2ti-jie.html">bzoj2589&&spojcot2题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1011ti-jie.html">bzoj1011题解</a>
       </li>
     </ul>
   </section>

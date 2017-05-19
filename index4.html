@@ -49,6 +49,31 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj2006ti-jie.html">bzoj2006题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2017-01-15T00:00:00+01:00" pubdate>Sun 15 January 2017</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p>令四元组(i,l,r,t)表示一个决策：左端点选i，右端点在l～r中选，并且选t的时候取到最大值。</p>
+<p>把(1,l1,r1,t1) (2,l2,r2,t2)...扔进一个优先队列里，每次取出最大的，假设是(i,l,r,t)，把(i,l,t-1,t')和(i,t+1,r,t'')扔进优先队列里。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;queue ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj2006ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj3110ti-jie.html">bzoj3110题解</a>
       </h1>
     <p class="meta">
@@ -334,39 +359,6 @@ $$\begin{align*}f(n,m)&amp;=\sum\sum ij\sum_{d|i,d|j}\mu(d)\\&amp;=\sum d^2\mu(d
     <a rel="full-article" href="/bzoj2466ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj2654ti-jie.html">bzoj2654题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2016-12-19T00:00:00+01:00" pubdate>Mon 19 December 2016</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<p>假设给图中每条白边边权加上delta，然后直接跑一次kruskal，如果白边数量比较少，就可以把delta调小一点，如果白边比较多，就可以把delta调大一点。</p>
-<p>所以二分这个delta，就能得到恰好有need条白边的权值和最小的生成树了。</p>
-<p>有一点要注意一下，排序的时候，除了要比较边权之外，还要比较边的颜色，同权值的情况下，一定要指定白边优先或者黑边优先。</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
-<span class="cp">#define ele int</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="cp">#define maxn 50010</span>
-<span class="cp">#define maxm 100010</span>
-<span class="k">struct</span> <span class="n">edge</span><span class="p">{</span>
-    <span class="n">ele</span> <span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">,</span><span class="n">w</span><span class="p">,</span><span class="n">c</span><span class="p">;</span>
-    <span class="kr">inline</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">&lt;</span><span class="p">(</span><span class="n">edge</span> <span class="n">b ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj2654ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index5.html">&larr; Older</a>
 
@@ -378,6 +370,9 @@ $$\begin{align*}f(n,m)&amp;=\sum\sum ij\sum_{d|i,d|j}\mu(d)\\&amp;=\sum d^2\mu(d
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1021ti-jie.html">bzoj1021题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1019ti-jie.html">bzoj1019题解</a>
       </li>
       <li class="post">
@@ -388,9 +383,6 @@ $$\begin{align*}f(n,m)&amp;=\sum\sum ij\sum_{d|i,d|j}\mu(d)\\&amp;=\sum d^2\mu(d
       </li>
       <li class="post">
           <a href="/bzoj2589spojcot2ti-jie.html">bzoj2589&&spojcot2题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1011ti-jie.html">bzoj1011题解</a>
       </li>
     </ul>
   </section>

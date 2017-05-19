@@ -49,6 +49,30 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj3675ti-jie.html">bzoj3675题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2017-03-15T00:00:00+01:00" pubdate>Wed 15 March 2017</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p>容易证明顺序是无关紧要的，而且允许出现长度为0的序列的话，答案不受影响。</p>
+<p>那么可以写出一个$O(n^2k)$的DP方程：</p>
+<p>$$dp[i][p]=\max{dp[j][k-1]+s[j](s[i]-s[j])}$$</p>
+<p>然后用斜率优化可以优化到$O(nk)$。</p>
+<p>这里有一个小问题，斜率优化的时候，斜率函数$\mathrm{slope}(i,j)=\frac{f[j]-f[k]}{s[k]-s[j]}+s[k]+s[j]$在 ...</p></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj3675ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj1412ti-jie.html">bzoj1412题解</a>
       </h1>
     <p class="meta">
@@ -329,37 +353,6 @@
     <a rel="full-article" href="/bzoj4540ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj4552ti-jie.html">bzoj4552题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2017-02-11T00:00:00+01:00" pubdate>Sat 11 February 2017</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<p>之前听同学讲过一个神奇的做法。</p>
-<p>首先，值域线段树在动态开点的情况下是可以分裂合并的。</p>
-<p>合并两棵树a，b，如果a，b中有一个为空，则返回另一个，否则递归合并左右子树，接到a上面，然后把b删掉。</p>
-<p>分裂的话，随便想一想就知道了吧……</p>
-<p>这样，序列一开始可以看成n个升序排列的块，每块1个数。每次排序可以看成分裂不超过2个块，并合并若干个块。用map维护每个块的位置，询问的两个端点所在的块的位置可以$O(\log n)$求出来。</p>
-<p>时间复杂度的分析如下：</p>
-<p>每次合并两棵线段树，总代价为删去的点数和。初始时点数为$O(n\log n)$，每次分裂至多增加$O(\log n)$个点。</p>
-<p>据说复杂度比正解更优，跑到了第一版。</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#include ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj4552ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index3.html">&larr; Older</a>
 
@@ -371,6 +364,9 @@
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1021ti-jie.html">bzoj1021题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1019ti-jie.html">bzoj1019题解</a>
       </li>
       <li class="post">
@@ -381,9 +377,6 @@
       </li>
       <li class="post">
           <a href="/bzoj2589spojcot2ti-jie.html">bzoj2589&&spojcot2题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1011ti-jie.html">bzoj1011题解</a>
       </li>
     </ul>
   </section>

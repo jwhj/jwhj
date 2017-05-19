@@ -49,6 +49,37 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj4552ti-jie.html">bzoj4552题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2017-02-11T00:00:00+01:00" pubdate>Sat 11 February 2017</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p>之前听同学讲过一个神奇的做法。</p>
+<p>首先，值域线段树在动态开点的情况下是可以分裂合并的。</p>
+<p>合并两棵树a，b，如果a，b中有一个为空，则返回另一个，否则递归合并左右子树，接到a上面，然后把b删掉。</p>
+<p>分裂的话，随便想一想就知道了吧……</p>
+<p>这样，序列一开始可以看成n个升序排列的块，每块1个数。每次排序可以看成分裂不超过2个块，并合并若干个块。用map维护每个块的位置，询问的两个端点所在的块的位置可以$O(\log n)$求出来。</p>
+<p>时间复杂度的分析如下：</p>
+<p>每次合并两棵线段树，总代价为删去的点数和。初始时点数为$O(n\log n)$，每次分裂至多增加$O(\log n)$个点。</p>
+<p>据说复杂度比正解更优，跑到了第一版。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj4552ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj2209ti-jie.html">bzoj2209题解</a>
       </h1>
     <p class="meta">
@@ -347,31 +378,6 @@
     <a rel="full-article" href="/bzoj3720ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj2006ti-jie.html">bzoj2006题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2017-01-15T00:00:00+01:00" pubdate>Sun 15 January 2017</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<p>令四元组(i,l,r,t)表示一个决策：左端点选i，右端点在l～r中选，并且选t的时候取到最大值。</p>
-<p>把(1,l1,r1,t1) (2,l2,r2,t2)...扔进一个优先队列里，每次取出最大的，假设是(i,l,r,t)，把(i,l,t-1,t')和(i,t+1,r,t'')扔进优先队列里。</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;queue ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj2006ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index4.html">&larr; Older</a>
 
@@ -383,6 +389,9 @@
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1021ti-jie.html">bzoj1021题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1019ti-jie.html">bzoj1019题解</a>
       </li>
       <li class="post">
@@ -393,9 +402,6 @@
       </li>
       <li class="post">
           <a href="/bzoj2589spojcot2ti-jie.html">bzoj2589&&spojcot2题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1011ti-jie.html">bzoj1011题解</a>
       </li>
     </ul>
   </section>
