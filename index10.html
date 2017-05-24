@@ -49,6 +49,43 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj36733674ti-jie.html">bzoj3673&3674题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-08-13T00:00:00+02:00" pubdate>Sat 13 August 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=346085&auto=0&height=66"></iframe>
+
+<p>并查集的实现基于数组，如果可以把数组可持久化的话，问题就解决了。</p>
+<p>可以建立一棵线段树当数组用，线段树是很容易可持久化的。这样复杂度多处一个$O(\log n)$。当然可持久化数组可以做到$O(\log\log n)$，不过我不会。</p>
+<p>3674代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#define ele int</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxn 200010</span>
+<span class="k">struct</span> <span class="n">node</span>
+<span class="p">{</span>
+    <span class="n">ele</span> <span class="n">f</span><span class="p">;</span>
+    <span class="n">node</span> <span class="o">*</span><span class="n">l</span><span class="p">,</span><span class="o">*</span><span class="n">r</span><span class="p">;</span>
+<span class="p">}</span><span class="n">pool</span><span class="p">[</span><span class="n">maxn</span><span class="o">&lt;&lt;</span><span class="mi">6</span><span class="p">];</span>
+<span class="n">ele</span> <span class="n">ncnt</span><span class="p">;</span>
+<span class="n">node</span> <span class="o">*</span><span class="nf">build ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj36733674ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/gitshi-yong-zong-jie.html">git使用总结</a>
       </h1>
     <p class="meta">
@@ -371,42 +408,6 @@ i-1 ...</p></!--more--></div>
     <a rel="full-article" href="/bzoj2242ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj2435ti-jie.html">bzoj2435题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2016-06-08T00:00:00+02:00" pubdate>Wed 08 June 2016</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=167837&auto=0&height=66"></iframe>
-
-<p>理论上来讲dfs一下就好了，然而我写的dfs一直RE，换成bfs就过了，大概是爆栈了吧。</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;queue&gt;</span><span class="cp"></span>
-<span class="cp">#define ele long long</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="cp">#define maxn 1000010</span>
-<span class="k">struct</span> <span class="n">edge</span>
-<span class="p">{</span>
-    <span class="n">ele</span> <span class="n">v</span><span class="p">,</span><span class="n">w</span><span class="p">;</span>
-    <span class="n">edge</span> <span class="o">*</span><span class="n">nxt</span><span class="p">;</span>
-<span class="p">}</span><span class="n">pool</span><span class="p">[</span><span class="n">maxn</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">];</span>
-<span class="n">ele</span> <span class="n">n</span><span class="p">,</span><span class="n">ecnt</span><span class="p">,</span><span class="n">scnt</span><span class="p">,</span><span class="n">f</span><span class="p">[</span><span class="n">maxn</span><span class="p">],</span><span class="n">f1</span><span class="p">[</span><span class="n">maxn</span><span class="p">],</span><span class="n">size</span><span class="p">[</span><span class="n">maxn</span><span class="p">],</span><span class="n">seq</span><span class="p">[</span><span class="n">maxn</span><span class="p">];</span>
-<span class="n">edge</span> <span class="o">*</span><span class="n">h ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj2435ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index11.html">&larr; Older</a>
 
@@ -418,6 +419,9 @@ i-1 ...</p></!--more--></div>
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj10234316ti-jie.html">bzoj1023&4316题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj2125ti-jie.html">bzoj2125题解</a>
       </li>
       <li class="post">
@@ -428,9 +432,6 @@ i-1 ...</p></!--more--></div>
       </li>
       <li class="post">
           <a href="/bzoj1018ti-jie.html">bzoj1018题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1017ti-jie.html">bzoj1017题解</a>
       </li>
     </ul>
   </section>

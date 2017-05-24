@@ -49,6 +49,30 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj2299ti-jie.html">bzoj2299题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-12-12T00:00:00+01:00" pubdate>Mon 12 December 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p>如果已经有了(a,b)，那么(-a,-b)作用就不大了，可以允许(a,b)的个数为负，然后不管(-a,-b)。</p>
+<p>这样有效的向量就剩下四个：(a,b),(a,-b),(b,a),(b,-a)。设他们分别使用了t1,t2,t3,t4次，那么有</p>
+<p>$$(t1+t2)a+(t3+t4)b=x$$
+$$(t3-t4)a+(t1-t2)b=y$$</p>
+<p>令$A_1=t1+t2,B_1 ...</p></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj2299ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj4373ti-jie.html">bzoj4373题解</a>
       </h1>
     <p class="meta">
@@ -331,43 +355,6 @@
     <a rel="full-article" href="/bzoj1013ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj2333ti-jie.html">bzoj2333题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2016-11-14T00:00:00+01:00" pubdate>Mon 14 November 2016</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=1958226&auto=0&height=66"></iframe>
-
-<p>网上的题解很多都说用可并堆，可我不是很清楚可并堆打标记怎么合并，所以就用stl的priority_queue+启发式合并水过去了……</p>
-<p>顺便还要用并查集维护一些东西。</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;queue&gt;</span><span class="cp"></span>
-<span class="cp">#define ele int</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="cp">#define maxn 300010</span>
-<span class="k">struct</span> <span class="n">hn</span><span class="p">{</span>
-    <span class="n">ele</span> <span class="n">i</span><span class="p">,</span><span class="n">x</span><span class="p">;</span>
-    <span class="kr">inline</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">&lt;</span><span class="p">(</span><span class="n">hn</span> <span class="n">b</span><span class="p">)</span><span class="k">const</span><span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">x</span><span class="o">!=</span><span class="n">b</span><span class="p">.</span><span class="n">x</span><span class="p">)</span> <span class="k">return</span> <span class="n">x</span><span class="o">&lt;</span><span class="n">b</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
-        <span class="k">return</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">b</span><span class="p">.</span><span class="n">i</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="kr">inline ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj2333ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index7.html">&larr; Older</a>
 
@@ -379,6 +366,9 @@
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj10234316ti-jie.html">bzoj1023&4316题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj2125ti-jie.html">bzoj2125题解</a>
       </li>
       <li class="post">
@@ -389,9 +379,6 @@
       </li>
       <li class="post">
           <a href="/bzoj1018ti-jie.html">bzoj1018题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1017ti-jie.html">bzoj1017题解</a>
       </li>
     </ul>
   </section>
