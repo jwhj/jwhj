@@ -49,6 +49,38 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj1025ti-jie.html">bzoj1025题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2017-05-26T00:00:00+02:00" pubdate>Fri 26 May 2017</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=26304168&auto=0&height=66"></iframe>
+
+<p>题意可以简化为：把n拆成若干个正整数，它们的lcm有多少种不同的可能。</p>
+<p>直接考虑有多少种可能比较困难，考虑判断一个A是否是某一个拆分的lcm。</p>
+<p>设$A=\prod p_i^{a_i}$，易证它是某一拆分的lcm当且仅当$\sum p_i^{a_i}\le n$。</p>
+<p>让f[i][j]表示只考虑前i种素数，满足$\sum p_i^{a_i}\le j$的${a_i}$有多少个。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#define ele long long</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxn 1010</span>
+<span class="n">ele ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj1025ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj10234316ti-jie.html">bzoj1023&4316题解</a>
       </h1>
     <p class="meta">
@@ -335,28 +367,6 @@
     <a rel="full-article" href="/bzoj3876ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj4802ti-jie.html">bzoj4802题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2017-04-24T00:00:00+02:00" pubdate>Mon 24 April 2017</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<p>这么大的数$O(\sqrt{n})$的算法肯定过不了，花了点时间研究了一下pollard_rho算法，感觉玄学无比。</p>
-<p>这个算法基于这样一个事实，反复从$[1,n-1]$中取出两个数$a,b$，$|a-b|$与$n$不互质的概率是很大的。这之中的原理跟生日攻击类似。</p>
-<p>这个算法还要更玄学一些，每次随机生成一个数t，定义函数$f(x)=x^2+t$。一开始$a=t,b=f(t)$，接着每次让$a=f(a),b=f(f(b))$。这么做有可能出现循环，如果出现，就随机再找一个t。用floyd判圈法可以快速判断循环 ...</p></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj4802ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index2.html">&larr; Older</a>
 
@@ -366,6 +376,9 @@
   <section>
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
+      <li class="post">
+          <a href="/bzoj1025ti-jie.html">bzoj1025题解</a>
+      </li>
       <li class="post">
           <a href="/bzoj10234316ti-jie.html">bzoj1023&4316题解</a>
       </li>
@@ -377,9 +390,6 @@
       </li>
       <li class="post">
           <a href="/bzoj1019ti-jie.html">bzoj1019题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1018ti-jie.html">bzoj1018题解</a>
       </li>
     </ul>
   </section>

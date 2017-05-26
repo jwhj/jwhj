@@ -4,7 +4,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>bzoj1024题解 &mdash; 蒟蒻的博客</title>
+  <title>bzoj1025题解 &mdash; 蒟蒻的博客</title>
   <meta name="author" content="iamplm">
 
 
@@ -50,9 +50,9 @@
 <div>
   <article class="hentry" role="article">
 <header>
-      <h1 class="entry-title">bzoj1024题解</h1>
+      <h1 class="entry-title">bzoj1025题解</h1>
     <p class="meta">
-<time datetime="2016-12-25T00:00:00+01:00" pubdate>Sun 25 December 2016</time>    </p>
+<time datetime="2017-05-26T00:00:00+02:00" pubdate>Fri 26 May 2017</time>    </p>
 </header>
 
   <div class="entry-content"><!--more-->
@@ -61,30 +61,38 @@
 
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
-<p>最近刷水严重啊……</p>
-<p>枚举切下去的位置，因为切出来大小一样，所以左右两块的大小必须是$\frac{xy}{n}$的整数倍。由于n的范围很小，直接暴搜就可以了。</p>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=26304168&auto=0&height=66"></iframe>
+
+<p>题意可以简化为：把n拆成若干个正整数，它们的lcm有多少种不同的可能。</p>
+<p>直接考虑有多少种可能比较困难，考虑判断一个A是否是某一个拆分的lcm。</p>
+<p>设$A=\prod p_i^{a_i}$，易证它是某一拆分的lcm当且仅当$\sum p_i^{a_i}\le n$。</p>
+<p>让f[i][j]表示只考虑前i种素数，满足$\sum p_i^{a_i}\le j$的${a_i}$有多少个。</p>
 <p>代码：</p>
 <div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
-<span class="cp">#define ele int</span>
-<span class="cp">#define real double</span>
+<span class="cp">#define ele long long</span>
 <span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="n">ele</span> <span class="n">n</span><span class="p">;</span>
-<span class="n">real</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">p</span><span class="p">;</span>
-<span class="n">real</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">real</span> <span class="n">x</span><span class="p">,</span><span class="n">real</span> <span class="n">y</span><span class="p">,</span><span class="n">ele</span> <span class="n">n</span><span class="p">){</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">n</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="n">max</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span><span class="o">/</span><span class="n">min</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
-    <span class="n">real</span> <span class="n">ans</span><span class="o">=</span><span class="mf">1e9</span><span class="p">;</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
-        <span class="n">ans</span><span class="o">=</span><span class="n">min</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span><span class="n">max</span><span class="p">(</span><span class="n">dfs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">/</span><span class="n">n</span><span class="o">*</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">),</span><span class="n">dfs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">/</span><span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">i</span><span class="p">),</span><span class="n">n</span><span class="o">-</span><span class="n">i</span><span class="p">)));</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
-        <span class="n">ans</span><span class="o">=</span><span class="n">min</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span><span class="n">max</span><span class="p">(</span><span class="n">dfs</span><span class="p">(</span><span class="n">x</span><span class="o">/</span><span class="n">n</span><span class="o">*</span><span class="n">i</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">i</span><span class="p">),</span><span class="n">dfs</span><span class="p">(</span><span class="n">x</span><span class="o">/</span><span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">i</span><span class="p">),</span><span class="n">y</span><span class="p">,</span><span class="n">n</span><span class="o">-</span><span class="n">i</span><span class="p">)));</span>
-    <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="cp">#define maxn 1010</span>
+<span class="n">ele</span> <span class="n">n</span><span class="p">,</span><span class="n">pcnt</span><span class="p">,</span><span class="n">plst</span><span class="p">[</span><span class="n">maxn</span><span class="p">],</span><span class="n">f</span><span class="p">[</span><span class="n">maxn</span><span class="p">][</span><span class="n">maxn</span><span class="p">];</span>
+<span class="kt">bool</span> <span class="n">flag</span><span class="p">[</span><span class="n">maxn</span><span class="p">];</span>
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
-    <span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%lf%lf%d&quot;</span><span class="p">,</span><span class="o">&amp;</span><span class="n">x</span><span class="p">,</span><span class="o">&amp;</span><span class="n">y</span><span class="p">,</span><span class="o">&amp;</span><span class="n">n</span><span class="p">);</span>
-    <span class="n">p</span><span class="o">=</span><span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="o">/</span><span class="n">n</span><span class="p">;</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%.6lf</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">dfs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">n</span><span class="p">));</span>
+    <span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%lld&quot;</span><span class="p">,</span><span class="o">&amp;</span><span class="n">n</span><span class="p">);</span>
+    <span class="n">pcnt</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">flag</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">flag</span><span class="p">));</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">){</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">flag</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="n">plst</span><span class="p">[</span><span class="n">pcnt</span><span class="o">++</span><span class="p">]</span><span class="o">=</span><span class="n">i</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">pcnt</span> <span class="o">&amp;&amp;</span> <span class="n">i</span><span class="o">*</span><span class="n">plst</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span><span class="p">){</span>
+            <span class="n">flag</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="n">plst</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span><span class="o">=</span><span class="nb">true</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">%</span><span class="n">plst</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span> <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">pcnt</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span><span class="p">){</span>
+            <span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">];</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="o">=</span><span class="n">plst</span><span class="p">[</span><span class="n">i</span><span class="p">];</span> <span class="n">k</span><span class="o">&lt;=</span><span class="n">j</span><span class="p">;</span> <span class="n">k</span><span class="o">*=</span><span class="n">plst</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">+=</span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="n">k</span><span class="p">];</span>
+        <span class="p">}</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%lld</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">f</span><span class="p">[</span><span class="n">pcnt</span><span class="p">][</span><span class="n">n</span><span class="p">]);</span>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div></div>
@@ -95,11 +103,11 @@
         iamplm
     </span>
   </span>
-<time datetime="2016-12-25T00:00:00+01:00" pubdate>Sun 25 December 2016</time>  <span class="categories">
+<time datetime="2017-05-26T00:00:00+02:00" pubdate>Fri 26 May 2017</time>  <span class="categories">
     <a class='category' href='/category/posts.html'>posts</a>
   </span>
   <span class="categories">
-    <a class="category" href="/tag/ti-jie.html">题解</a>,    <a class="category" href="/tag/bzoj.html">bzoj</a>  </span>
+    <a class="category" href="/tag/ti-jie.html">题解</a>,    <a class="category" href="/tag/bzoj.html">bzoj</a>,    <a class="category" href="/tag/dp.html">DP</a>,    <a class="category" href="/tag/shu-xue.html">数学</a>  </span>
 </p><div class="sharing">
 </div>    </footer>
   </article>

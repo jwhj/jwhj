@@ -49,6 +49,42 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj2463ti-jie.html">bzoj2463题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-09-12T00:00:00+02:00" pubdate>Mon 12 September 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=3949494&auto=0&height=66"></iframe>
+
+<p>当n为偶数时，棋盘可以用多米诺骨牌覆盖，所以后手每走一步，先手总能走到骨牌的另一端，因而先手必胜。</p>
+<p>当n为奇数时，除去棋盘的右上角，剩下的区域可以用多米诺骨牌覆盖，所以所以先手每走一步，后手总能走到骨牌的另一端，因而先手必败。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#define ele int</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">ele</span> <span class="n">n</span><span class="p">;</span>
+        <span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%d&quot;</span><span class="p">,</span><span class="o">&amp;</span><span class="n">n</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">n</span><span class="p">)</span> <span class="k">break</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">n</span><span class="o">&amp;</span><span class="mi">1</span><span class="p">)</span> <span class="n">puts</span><span class="p">(</span><span class="s">&quot;Bob&quot;</span><span class="p">);</span> <span class="k">else</span> <span class="n">puts</span><span class="p">(</span><span class="s">&quot;Alice&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div></div>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj1875ti-jie.html">bzoj1875题解</a>
       </h1>
     <p class="meta">
@@ -350,37 +386,6 @@
     <a rel="full-article" href="/bzoj4653noi2016-qu-jian-ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj2653ti-jie.html">bzoj2653题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2016-08-26T00:00:00+02:00" pubdate>Fri 26 August 2016</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=27571290&auto=0&height=66"></iframe>
-
-<p>军训完第一道OI题。</p>
-<p>感觉方法挺难想的……不过看了题解马上就懂了。</p>
-<p>对于一个数x，置数列中所有比x小的数为-1，所有等于x的数为0，所有大于x的数为1。取$l \in [a,b]$,$r \in [c,d]$，区间[l,r]的和最大为k。如果k&gt;=0，那么答案&gt;=x,否则答案小于x。</p>
-<p>于是就可以二分了。</p>
-<p>但是有一个问题：如何把数列中的数改为-1,0和1？</p>
-<p>考虑使用主席树，一开始所有数为1，把原数列中的数从小到大排序，每次加入一个数，就把前面的那个数改为-1或0。当原数列中最后一个x被插入时，数列中所有比x小的数为-1，所有等于x的数为0，所有大于x的数为1。</p>
-<p>最大区间和的维护是一个简单的线段树问题。</p>
-<p>代码（写得好丑啊）：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj2653ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index10.html">&larr; Older</a>
 
@@ -392,6 +397,9 @@
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1025ti-jie.html">bzoj1025题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj10234316ti-jie.html">bzoj1023&4316题解</a>
       </li>
       <li class="post">
@@ -402,9 +410,6 @@
       </li>
       <li class="post">
           <a href="/bzoj1019ti-jie.html">bzoj1019题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1018ti-jie.html">bzoj1018题解</a>
       </li>
     </ul>
   </section>
