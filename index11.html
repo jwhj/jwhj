@@ -49,6 +49,32 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj2431ti-jie.html">bzoj2431题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-06-20T00:00:00+02:00" pubdate>Mon 20 June 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=28838174&auto=0&height=66"></iframe>
+
+<p>中考结束后第一题。话说突然间初中就毕业了，感觉还没反应过来。</p>
+<p>让f[i][j]代表1~i的排列中逆序对为j的有多少个。</p>
+<p>考虑1~i-1的一个排列P，有j'个逆序对，那么加入一个i，最多可增加i-1个逆序对，最少可增加0个。所以加入i以后的排列的逆序对个数为j'~j'+i-1。</p>
+<p>所以$f[i][j]=\sum_{k\le j\le k+i-1} f[i-1][k]$。</p>
+<p>直接计算这个dp方程是$O(n^3)$的，不过可以维护每个f[i]的前缀和，把转移的时间优化到$O(1)$，此时算法复杂度为$O ...</p></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj2431ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj2242ti-jie.html">bzoj2242题解</a>
       </h1>
     <p class="meta">
@@ -342,39 +368,6 @@
     <a rel="full-article" href="/bzoj3065ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj4198ti-jie.html">bzoj4198题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2016-05-29T00:00:00+02:00" pubdate>Sun 29 May 2016</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=27268032&auto=0&height=66"></iframe>
-
-<p>如果不会huffman树，先去学一学吧。</p>
-<p>这道题显然就是一个k叉的huffman树，问题是网上好像很难找得到这样的资料，估计是出题人自己想出来的（？）</p>
-<p>如果简单地修改huffman树的构造过程，把每次选两个改成每次选k个，得到的算法是错误的。正确的算法应该是怎么样的呢？</p>
-<p>先考虑比较简单的情况，假设最后构造出来的huffman树每个非叶子节点都有k个孩子。这个时候上面的算法可以跑出正确的解。一开始有n棵树，每次选k个出来并成一棵，树的数量减少了(k-1)。最后只剩一棵，所以$k-1|n-1$。</p>
-<p>如果最后构造出来的huffman树有些非叶子节点有不到k个孩子，那么这样的节点只应有一个，而且在树的最底部。所以第一次选出节点并成一棵树时要选少一些，准确来说，是(n-1)%(k-1)+1个。</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;queue&gt;</span><span class="cp"></span>
-<span class="cp">#define ele long long</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj4198ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index12.html">&larr; Older</a>
 
@@ -386,6 +379,9 @@
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1027ti-jie.html">bzoj1027题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1025ti-jie.html">bzoj1025题解</a>
       </li>
       <li class="post">
@@ -396,9 +392,6 @@
       </li>
       <li class="post">
           <a href="/bzoj1021ti-jie.html">bzoj1021题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1019ti-jie.html">bzoj1019题解</a>
       </li>
     </ul>
   </section>
