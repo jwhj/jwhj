@@ -49,6 +49,38 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj2957ti-jie.html">bzoj2957题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-09-21T00:00:00+02:00" pubdate>Wed 21 September 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=3413895&auto=0&height=66"></iframe>
+
+<p>如果房子i能被看见，且它前面一座能被看见的房子为j，那么就有hj/j&lt;hi/i。</p>
+<p>因此能看到的房子的序列的斜率一定是单调递增的。</p>
+<p>每S栋房子分成一块，每块维护一个“可视序列”，即假设其他块的楼房均不存在，这一块中能被看到的楼房的序列。</p>
+<p>每次修改时暴力维护可视序列，时间复杂度$O(S)$。</p>
+<p>每次查询时，维护目前看到的斜率最大的房屋，从左到右扫每个块，二分找出每块的可视序列中第一个斜率比目前看到的斜率最大的房屋更大的房屋，然后更新答案和目前看到的最大斜率。时间复杂度$O(\frac{n}{S}\log S)$。</p>
+<p>易得$S=\sqrt{\frac{n\log n}{2}}$时跑得比较快。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cmath&gt;</span><span class="cp"></span>
+<span class="cp">#include ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj2957ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj3309ti-jie.html">bzoj3309题解</a>
       </h1>
     <p class="meta">
@@ -343,40 +375,6 @@
     <a rel="full-article" href="/bzoj3956ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj3489ti-jie.html">bzoj3489题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2016-09-02T00:00:00+02:00" pubdate>Fri 02 September 2016</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=18161816&auto=0&height=66"></iframe>
-
-<p>最快的解法似乎是可持久化树套树，然而我智商太低只会用kd树来做。</p>
-<p>记pi,qi为ai上一次出现的位置和下一次出现的位置，那么要求的答案就是$$\max_{l\le i\le r且p_i\lt l且q_i\gt r}{a_i}$$</p>
-<p>把每个ai看成一个三位空间中的点(i,pi,qi)，就可以用kd树来进行查询了。</p>
-<p>kd树查询最大值的时候有一个优化的技巧：如果当前子树的最大值比已经找到的最大值要小，那么这个子树就不用查询了。在本题中这个优化的效果非常明显。</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
-<span class="cp">#define ele int</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="cp">#define maxn 100010</span>
-<span class="cp">#define K 3</span>
-<span class="k">struct ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj3489ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index10.html">&larr; Older</a>
 
@@ -388,6 +386,9 @@
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj2115ti-jie.html">bzoj2115题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1027ti-jie.html">bzoj1027题解</a>
       </li>
       <li class="post">
@@ -398,9 +399,6 @@
       </li>
       <li class="post">
           <a href="/bzoj1025ti-jie.html">bzoj1025题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj10234316ti-jie.html">bzoj1023&4316题解</a>
       </li>
     </ul>
   </section>

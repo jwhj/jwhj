@@ -49,6 +49,41 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj3744ti-jie.html">bzoj3744题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-12-01T00:00:00+01:00" pubdate>Thu 01 December 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=3254416&auto=0&height=66"></iframe>
+
+<p>如果这道题没有强制在线，那么用莫队算法就能水过去了。</p>
+<p>不过莫队也是可以在线的。</p>
+<p>先把整个序列离散化一下。</p>
+<p>把整个序列分成$O(\sqrt{n})$块，维护一个f[i][j]，代表第i块到第j块的答案，一会再说这个怎么求。</p>
+<p>对于每个询问[l,r]，考虑两种情况：</p>
+<ul>
+<li>
+<p>l，r在同一块或相邻的块中，暴力求答案就可以了</p>
+</li>
+<li>
+<p>否则，l，r中间整块的答案可以通过f数组直接知道，只需暴力考虑两边不超过$2\sqrt{n}$个数的贡献。</p>
+</li>
+</ul>
+<p>如果已经知道某个区间的答案，现在只需考虑如何在区间边上再加一个数。加上一个数x，对答案的贡献为原区间中大于/小于x的数的个数。于是可以维护$\sqrt{n}$个树状数组，f1[i]代表一个树状数组，储存0~i这i个块中每个元素出现多少次。每次加一个数x，中间块里面比x大 ...</p></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj3744ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/noip2016ti-jie.html">noip2016题解</a>
       </h1>
     <p class="meta">
@@ -360,44 +395,6 @@
     <a rel="full-article" href="/bzoj1095ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj2152ti-jie.html">bzoj2152题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2016-11-06T00:00:00+01:00" pubdate>Sun 06 November 2016</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=1698391&auto=0&height=66"></iframe>
-
-<p>点剖裸题……</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
-<span class="cp">#define ele long long</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="cp">#define maxn 20010</span>
-<span class="cp">#define func(x) ((x)*((x)-1)/2)</span>
-<span class="k">struct</span> <span class="n">edge</span><span class="p">{</span>
-    <span class="n">ele</span> <span class="n">v</span><span class="p">,</span><span class="n">w</span><span class="p">;</span>
-    <span class="n">edge</span> <span class="o">*</span><span class="n">nxt</span><span class="p">;</span>
-<span class="p">}</span><span class="n">ep</span><span class="p">[</span><span class="n">maxn</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">];</span>
-<span class="n">ele</span> <span class="n">n</span><span class="p">,</span><span class="n">ecnt</span><span class="p">;</span>
-<span class="kt">bool</span> <span class="n">flag</span><span class="p">[</span><span class="n">maxn</span><span class="p">];</span>
-<span class="n">edge</span> <span class="o">*</span><span class="n">h</span><span class="p">[</span><span class="n">maxn</span><span class="p">];</span>
-<span class="kr">inline ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj2152ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index8.html">&larr; Older</a>
 
@@ -409,6 +406,9 @@
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj2115ti-jie.html">bzoj2115题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1027ti-jie.html">bzoj1027题解</a>
       </li>
       <li class="post">
@@ -419,9 +419,6 @@
       </li>
       <li class="post">
           <a href="/bzoj1025ti-jie.html">bzoj1025题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj10234316ti-jie.html">bzoj1023&4316题解</a>
       </li>
     </ul>
   </section>
