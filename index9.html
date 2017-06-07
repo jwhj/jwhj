@@ -49,6 +49,36 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/cf718cti-jie.html">CF718C题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-09-24T00:00:00+02:00" pubdate>Sat 24 September 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=30953009&auto=0&height=66"></iframe>
+
+<p>令$b_i=\begin{bmatrix}f(a_i)\\f(a_i-1)\end{bmatrix}$，用线段树来维护序列${b_i}$。</p>
+<p>注意到$a_i$加上x等价于$b_i$乘上$\begin{bmatrix}1&amp;1\\1&amp; 0\end{bmatrix}^x$，所以线段树上打一个标记就能支持修改操作了。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#define ele long long</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxn 100010</span>
+<span class="cp">#define maxmn 2 ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/cf718cti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj2957ti-jie.html">bzoj2957题解</a>
       </h1>
     <p class="meta">
@@ -349,32 +379,6 @@
     <a rel="full-article" href="/bzoj4517ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj3956ti-jie.html">bzoj3956题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2016-09-04T00:00:00+02:00" pubdate>Sun 04 September 2016</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=133998&auto=0&height=66"></iframe>
-
-<p>假设(i,j)是一个好点对，且$a_i\lt a_j$，那么$a_j$只能是$a_i$右侧第一个大于$a_i$的数。</p>
-<p>同样地，如果$a_i\gt a_j$，那么$a_i$只能是$a_j$左侧第一个大于$a_i$的数。</p>
-<p>所以，如果一个数作为好点对中的较小数，那么至多只有两种情况：左边一个，右边一个。</p>
-<p>用单调栈可以$O(n)$地统计出每个数左右第一个比它大的数，接着就可以得出以每个数为起点（不一定要是较小数）的好点对个数，以及以每个数为终点（也不一定要是较小数）的好点对个数。</p>
-<p>考虑询问l,r，求出 ...</p></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj3956ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index10.html">&larr; Older</a>
 
@@ -386,6 +390,9 @@
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj2844ti-jie.html">bzoj2844题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj2115ti-jie.html">bzoj2115题解</a>
       </li>
       <li class="post">
@@ -396,9 +403,6 @@
       </li>
       <li class="post">
           <a href="/hdu3949ti-jie.html">hdu3949题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1025ti-jie.html">bzoj1025题解</a>
       </li>
     </ul>
   </section>

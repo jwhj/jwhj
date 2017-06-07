@@ -49,6 +49,40 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj2844ti-jie.html">bzoj2844题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2017-06-07T00:00:00+02:00" pubdate>Wed 07 June 2017</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=435288233&auto=1&height=66"></iframe>
+
+<p>如果重复出现的数只算一个，用线性基就可以很容易地解决。可是现在重复出现的数需要重复计算。</p>
+<p>观察样例，发现每个数的出现次数是一样的。下面证明这一点。</p>
+<p>假设集合的大小为n，线性基的大小为m。容易发现，对于不在线性基里的那n-m个数的任意一种取法，都有唯一的方案，异或上线性基中的若干个数，得到某个特定的数x。注意到从n-m个数中取若干个数共$2^{n-m}$种方案，所以可以得到每个数的出现子树不仅是一样的，而且刚好是$2^{n-m}$。</p>
+<p>那么再加上一个快速幂就可以解决了。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#define ele int</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxn 100010</span>
+<span class="cp">#define W 32</span>
+<span class="cp">#define MOD 10086</span>
+<span class="n">ele</span> <span class="n">n</span><span class="p">,</span><span class="n">a ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj2844ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj2115ti-jie.html">bzoj2115题解</a>
       </h1>
     <p class="meta">
@@ -345,38 +379,6 @@
     <a rel="full-article" href="/bzoj1019ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj1018ti-jie.html">bzoj1018题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2017-05-14T00:00:00+02:00" pubdate>Sun 14 May 2017</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<p>我们考虑一个更一般的问题——动态维护图的连通性。</p>
-<p>在线的做法我还不会，但是如果离线的话，有一个非常妙的做法。</p>
-<p>用一棵线段树维护时间轴，每一条边在时间轴中存在一定的时间。这些时间可以像区间修改那样对应到线段树的若干个节点。每个节点维护一个vector，这个vector里面的边在该节点代表的时间段里均存在。</p>
-<p>接着对这棵线段树dfs，用一个并查集维护图的联通性，每到达一个节点，就把这个节点的vector里面的所有边加进去。每到达一个叶子节点，就可以利用并查集回答相应的询问。回朔的时候需要删边，但删边是很困难的。不过注意到这里只需要撤销加入的边，那么在每个节点上维护当时对并查集的修改，然后回朔的时候改回去就可以了。</p>
-<p>路径压缩的势能分析在有撤销操作时会失效，因此要写按大小和并，时间复杂度$O(n\log n)$。</p>
-<p>写合并的时候脑残忘了判断两点在同一集合中的情况……</p>
-<p>其实，对于那些有插入和删除操作，删除很困难但撤销插入相对容易的问题，按时间分治往往是很有用的想法。</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
-<span class="cp">#define ele int ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj1018ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index2.html">&larr; Older</a>
 
@@ -386,6 +388,9 @@
   <section>
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
+      <li class="post">
+          <a href="/bzoj2844ti-jie.html">bzoj2844题解</a>
+      </li>
       <li class="post">
           <a href="/bzoj2115ti-jie.html">bzoj2115题解</a>
       </li>
@@ -397,9 +402,6 @@
       </li>
       <li class="post">
           <a href="/hdu3949ti-jie.html">hdu3949题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1025ti-jie.html">bzoj1025题解</a>
       </li>
     </ul>
   </section>

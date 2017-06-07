@@ -49,6 +49,37 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj3438ti-jie.html">bzoj3438题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2017-03-02T00:00:00+01:00" pubdate>Thu 02 March 2017</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p>像这种题，有一堆东西，每个东西有两种选择，分别会有一定的贡献，一些选择的组合又会有一定的贡献的，可以用最小割模型来做。</p>
+<p>对于此题，从s到每个作物连一条权为ai的边，每个作物到t连一条权为bi的边。如果割掉s到i的边，说明i种在B，否则说明i种在A。</p>
+<p>如果一些作物都种在A会有额外收益c，那么新建一个点x，s到x连一条权为c的边，x到那些作物分别连一条权为INF的边。这样的话，如果这些作物中有一个i，它到t的边没有被割掉，那么s到x的边必须被割掉。于是所有没割掉的边的权值之和即为总收益，求出这个图的最小割，并用所有可能出现的收益的和减掉最小割就可以得到答案了。</p>
+<p>据说这个模型可以解决未知数只能取0/1的线性规划？晚点研究一下。<del>还是打单纯形吧。</del></p>
+<p>写了一个dinic结果TLE了好几发，跟别人写的对比了之后发现我写得还是过于naive……有好多可以优化的地方。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cctype&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#define ele int</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj3438ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj1066ti-jie.html">bzoj1066题解</a>
       </h1>
     <p class="meta">
@@ -325,38 +356,6 @@
     <a rel="full-article" href="/bzoj2209ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj3295ti-jie.html">bzoj3295题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2017-02-01T00:00:00+01:00" pubdate>Wed 01 February 2017</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<p>网上题解似乎都是树套树&amp;cdq分治。我感觉可以用块状链表水过去，于是就写了一下，没开long long结果WA了一次,然后就A了。</p>
-<p>块的大小要设为$\sqrt{n\log n}$。这道题只有删除，所以可以不考虑块的合并/块状链表重构，把每$\sqrt{n}$次操作后重构的代码删了以后程序快了很多……</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cmath&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
-<span class="cp">#define ele int</span>
-<span class="cp">#define ll long long</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="cp">#define maxn 100010</span>
-<span class="cp">#define maxs 1300</span>
-<span class="k">struct ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj3295ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index4.html">&larr; Older</a>
 
@@ -368,6 +367,9 @@
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj2844ti-jie.html">bzoj2844题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj2115ti-jie.html">bzoj2115题解</a>
       </li>
       <li class="post">
@@ -378,9 +380,6 @@
       </li>
       <li class="post">
           <a href="/hdu3949ti-jie.html">hdu3949题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1025ti-jie.html">bzoj1025题解</a>
       </li>
     </ul>
   </section>
