@@ -49,6 +49,33 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj3930ti-jie.html">bzoj3930题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-05-16T00:00:00+02:00" pubdate>Mon 16 May 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=104602&auto=0&height=66"></iframe>
+
+<p>问题可以转化为，在$[\lceil\frac{l}{k}\rceil,\lfloor\frac{h}{k}\rfloor]$间取n个整数，他们互质。</p>
+<p>容易推得$ans=\sum(\lfloor\frac{h}{dk}\rfloor-\lceil\frac{l}{dk}\rceil+1)^n\mu(d)$。</p>
+<p>然而这么做是$O(n)$的。</p>
+<p>先膜<a href="http://blog.csdn.net/popoqqq/article/details/44917831">popoqq的做法</a>。</p>
+<p>我的做法是这样的：</p>
+<p>当取出来的整数不全相等时，上面那条式子要改成$\sum[(\lfloor\frac{h}{dk ...</p></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj3930ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/poj3737ti-jie.html">poj3737题解</a>
       </h1>
     <p class="meta">
@@ -338,6 +365,9 @@ $$E=mc^2$$</p>
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj4803ti-jie.html">bzoj4803题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj2844ti-jie.html">bzoj2844题解</a>
       </li>
       <li class="post">
@@ -348,9 +378,6 @@ $$E=mc^2$$</p>
       </li>
       <li class="post">
           <a href="/bzoj1028ti-jie.html">bzoj1028题解</a>
-      </li>
-      <li class="post">
-          <a href="/hdu3949ti-jie.html">hdu3949题解</a>
       </li>
     </ul>
   </section>
