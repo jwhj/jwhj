@@ -49,6 +49,42 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj2423ti-jie.html">bzoj2423题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-09-09T00:00:00+02:00" pubdate>Fri 09 September 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=3950060&auto=0&height=66"></iframe>
+
+<p>DP硬上，细节看代码。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#define ele int</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define MOD 100000000</span>
+<span class="cp">#define maxn 5010</span>
+<span class="n">ele</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">f</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="n">maxn</span><span class="p">],</span><span class="n">g</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="n">maxn</span><span class="p">];</span>
+<span class="kt">char</span> <span class="n">s1</span><span class="p">[</span><span class="n">maxn</span><span class="p">],</span><span class="n">s2</span><span class="p">[</span><span class="n">maxn</span><span class="p">];</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%s%s&quot;</span><span class="p">,</span><span class="n">s1</span><span class="p">,</span><span class="n">s2</span><span class="p">);</span>
+    <span class="n">n</span><span class="o">=</span><span class="n">strlen</span><span class="p">(</span><span class="n">s1 ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj2423ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj2819ti-jie.html">bzoj2819题解</a>
       </h1>
     <p class="meta">
@@ -350,53 +386,6 @@
     <a rel="full-article" href="/bzoj36733674ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/gitshi-yong-zong-jie.html">git使用总结</a>
-      </h1>
-    <p class="meta">
-<time datetime="2016-08-13T00:00:00+02:00" pubdate>Sat 13 August 2016</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=18649447&auto=0&height=66"></iframe>
-
-<p>自从去北欧旅游以后A了题都不写题解了……写点东西拯救一下。</p>
-<h2>git是什么</h2>
-<p>自己去看<a href="https://en.wikipedia.org/wiki/Git_(software)">wiki</a>。</p>
-<p>需要提一下，git与github是两个不同的东西，你可以认为github是一个支持git的网站，当然这样的网站还有很多，如<a href="http://coding.net">coding</a>，<a href="http://bitbucket.org">bitbucket</a>。</p>
-<h2>安装git</h2>
-<p>Windows</p>
-<div class="highlight"><pre><span></span>我早忘了，自己上网查一下吧……很容易搜到的。
-</pre></div>
-
-
-<p>Ubuntu</p>
-<div class="highlight"><pre><span></span>sudo apt-get install git
-</pre></div>
-
-
-<p>Arch</p>
-<div class="highlight"><pre><span></span>sudo pacman -S git
-</pre></div>
-
-
-<h2>使用git</h2>
-<h3>创建软件仓库</h3>
-<p>自己在网页端建吧……</p>
-<h3>把git仓库下载到本地</h3>
-<p>网页端项目页上应该有一个clone的按钮，可以得到项目的https地址，如<code>https://github.com/jwhj/jwhj.git</code>。执行下面的命令。</p>
-<div class="highlight"><pre><span></span>git clone https://github ...</pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/gitshi-yong-zong-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index11.html">&larr; Older</a>
 
@@ -408,6 +397,9 @@
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1202ti-jie.html">bzoj1202题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1149ti-jie.html">bzoj1149题解</a>
       </li>
       <li class="post">
@@ -418,9 +410,6 @@
       </li>
       <li class="post">
           <a href="/bzoj2115ti-jie.html">bzoj2115题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1027ti-jie.html">bzoj1027题解</a>
       </li>
     </ul>
   </section>

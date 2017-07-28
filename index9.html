@@ -49,6 +49,38 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj3209ti-jie.html">bzoj3209题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-10-22T00:00:00+02:00" pubdate>Sat 22 October 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=26473399&auto=0&height=66"></iframe>
+
+<p>用数位dp统计出sum(i)=1,2,...的i分别有多少个，然后用快速幂求出答案。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#define ele long long</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxk 53</span>
+<span class="cp">#define MOD 10000007</span>
+<span class="n">ele</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">c</span><span class="p">[</span><span class="n">maxk</span><span class="p">],</span><span class="n">f</span><span class="p">[</span><span class="n">maxk</span><span class="p">][</span><span class="n">maxk</span><span class="p">],</span><span class="n">g</span><span class="p">[</span><span class="n">maxk</span><span class="p">][</span><span class="n">maxk</span><span class="p">];</span>
+<span class="kr">inline</span> <span class="n">ele</span> <span class="nf">pow</span><span class="p">(</span><span class="n">ele</span> <span class="n">a</span><span class="p">,</span><span class="n">ele</span> <span class="n">x</span><span class="p">){</span>
+    <span class="n">ele</span> <span class="n">ans</span><span class="o">=</span><span class="mi">1 ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj3209ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj3563ti-jie.html">bzoj3563题解</a>
       </h1>
     <p class="meta">
@@ -352,42 +384,6 @@
     <a rel="full-article" href="/bzoj1875ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj2423ti-jie.html">bzoj2423题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2016-09-09T00:00:00+02:00" pubdate>Fri 09 September 2016</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=3950060&auto=0&height=66"></iframe>
-
-<p>DP硬上，细节看代码。</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
-<span class="cp">#define ele int</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="cp">#define MOD 100000000</span>
-<span class="cp">#define maxn 5010</span>
-<span class="n">ele</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">f</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="n">maxn</span><span class="p">],</span><span class="n">g</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="n">maxn</span><span class="p">];</span>
-<span class="kt">char</span> <span class="n">s1</span><span class="p">[</span><span class="n">maxn</span><span class="p">],</span><span class="n">s2</span><span class="p">[</span><span class="n">maxn</span><span class="p">];</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
-<span class="p">{</span>
-    <span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%s%s&quot;</span><span class="p">,</span><span class="n">s1</span><span class="p">,</span><span class="n">s2</span><span class="p">);</span>
-    <span class="n">n</span><span class="o">=</span><span class="n">strlen</span><span class="p">(</span><span class="n">s1 ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj2423ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index10.html">&larr; Older</a>
 
@@ -399,6 +395,9 @@
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1202ti-jie.html">bzoj1202题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1149ti-jie.html">bzoj1149题解</a>
       </li>
       <li class="post">
@@ -409,9 +408,6 @@
       </li>
       <li class="post">
           <a href="/bzoj2115ti-jie.html">bzoj2115题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1027ti-jie.html">bzoj1027题解</a>
       </li>
     </ul>
   </section>

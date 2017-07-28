@@ -49,6 +49,41 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj3720ti-jie.html">bzoj3720题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2017-01-21T00:00:00+01:00" pubdate>Sat 21 January 2017</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p>用块状树来做，每次加入一个点的时候，如果父节点所在的块已经满了，就新开一个块，否则把这个节点加到父节点所在的块里面。</p>
+<p>每个块维护块中的所有权值排好序的列表。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#define ele int</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxn 60010</span>
+<span class="cp">#define B 250</span>
+<span class="k">struct</span> <span class="n">edge</span><span class="p">{</span>
+    <span class="n">ele</span> <span class="n">v</span><span class="p">;</span>
+    <span class="n">edge</span> <span class="o">*</span><span class="n">nxt</span><span class="p">;</span>
+<span class="p">}</span><span class="n">ep</span><span class="p">[</span><span class="n">maxn</span><span class="o">*</span><span class="mi">3</span><span class="p">];</span>
+<span class="n">ele</span> <span class="n">n</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="n">ecnt</span><span class="p">,</span><span class="n">w</span><span class="p">[</span><span class="n">maxn</span><span class="p">],</span><span class="n">fa</span><span class="p">[</span><span class="n">maxn</span><span class="p">],</span><span class="n">r ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj3720ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj2006ti-jie.html">bzoj2006题解</a>
       </h1>
     <p class="meta">
@@ -324,41 +359,6 @@ $$\begin{align*}f(n,m)&amp;=\sum\sum ij\sum_{d|i,d|j}\mu(d)\\&amp;=\sum d^2\mu(d
     <a rel="full-article" href="/bzoj1004ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj2466ti-jie.html">bzoj2466题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2016-12-23T00:00:00+01:00" pubdate>Fri 23 December 2016</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<p>首先，按按钮的次序是无关紧要的。</p>
-<p>一开始我在想树形dp，然而不知道怎么让它无后效性，结果就没想出来。</p>
-<p>所以可以列一个异或方程组用高斯消元来做。异或方程组的高斯消元，在普通高斯消元的基础上想一想就可以想出来了，当然略微有一点不同。细节可以看代码。</p>
-<p>对异或方程组进行高斯消元后，主对角线上可能会有若干个0,它们对应的未知数是自由元，需要枚举它们的取值然后找到一个最优方案。</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
-<span class="cp">#define ele int</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="cp">#define maxn 110</span>
-<span class="k">struct</span> <span class="n">edge</span><span class="p">{</span>
-    <span class="n">ele</span> <span class="n">v</span><span class="p">;</span>
-    <span class="n">edge</span> <span class="o">*</span><span class="n">nxt</span><span class="p">;</span>
-<span class="p">}</span><span class="n">ep</span><span class="p">[</span><span class="n">maxn</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">];</span>
-<span class="n">ele</span> <span class="n">n</span><span class="p">,</span><span class="n">ecnt</span><span class="p">,</span><span class="n">ans</span><span class="p">,</span><span class="n">a</span><span class="p">[</span><span class="n">maxn ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj2466ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index6.html">&larr; Older</a>
 
@@ -370,6 +370,9 @@ $$\begin{align*}f(n,m)&amp;=\sum\sum ij\sum_{d|i,d|j}\mu(d)\\&amp;=\sum d^2\mu(d
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1202ti-jie.html">bzoj1202题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1149ti-jie.html">bzoj1149题解</a>
       </li>
       <li class="post">
@@ -380,9 +383,6 @@ $$\begin{align*}f(n,m)&amp;=\sum\sum ij\sum_{d|i,d|j}\mu(d)\\&amp;=\sum d^2\mu(d
       </li>
       <li class="post">
           <a href="/bzoj2115ti-jie.html">bzoj2115题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1027ti-jie.html">bzoj1027题解</a>
       </li>
     </ul>
   </section>
