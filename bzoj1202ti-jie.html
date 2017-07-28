@@ -67,7 +67,7 @@
 <p>设b[i]为前i个月的总收入，那么每条信息(s,t,v)就相当于b[t]-b[s-1]=v。</p>
 <p>于是题目转化为：给你n+1个变量，给定若干个他们之前差的关系，问是否有解。</p>
 <p>用一个并查集来维护变量之间是否有关系。建一个图，每次得到一条新信息的时候，如果涉及的两个变量无关，则连一条s-1到t，权为v的边，和一条t-1到s，权为-v的边。如果涉及的变量有关，那么就要判断能不能成立。在图中找到s-1到t的路径，如果权值和恰为v，则成立。注意此时无论成不成立，均不需连边。</p>
-<p>这个做法的思路跟查分约束比较类似，其实此题也可以直接用查分约束来做。</p>
+<p>这个做法的思路跟差分约束比较类似，其实此题也可以直接用查分约束来做。</p>
 <p>代码：</p>
 <div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
