@@ -49,6 +49,40 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj2809ti-jie.html">bzoj2809题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-05-28T00:00:00+02:00" pubdate>Sat 28 May 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=1696754&auto=0&height=66"></iframe>
+
+<p>由题，管理者必须是所有被派遣者的祖先。</p>
+<p>于是我们就得到了这样一个大暴力：</p>
+<blockquote>
+<p>枚举管理者，在以它为根的子树中从小到大选取被派遣者，直到预算被用完。用这个管理者的领导能力*人数去更新答案。</p>
+</blockquote>
+<p>考虑优化一下这个算法。如何<code>在以它为根的子树中从小到大选取被派遣者，直到预算被用完</code>？可以把以它为根的子树中的所有节点放进一个优先队列里，每次删掉花费最多的，直到花费少于预算。</p>
+<p>考虑具体实现。枚举管理者的时候，可以从下往上枚举。对于每个点，保存一个指针，指向一个优先队列。一开始每个点指向的优先队列里面只有那个点本身。每次枚举到一个点，就把它的孩子所指向的优先队列合并起来，再把这个优先队列与自己指向的优先队列合并，就可以得到以它为根的子树中所有节点构成的优先队列。</p>
+<p>还有点细节自己想吧。</p>
+<p>注意到，这里使用到的优先队列需要支持几个操作：合并、删除最大值。所以可以用左偏树、斜堆、配对堆这样的数据结构维护。我写的是配对堆，据说是个很好用的数据结构？</p>
+<p><a href="https://tarawa.github.io/2015/09/04/Pairing-Heap/">这里</a>有关于配对堆的介绍。<code>orz yjq</code></p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj2809ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj3238ti-jie.html">bzoj3238题解</a>
       </h1>
     <p class="meta">
@@ -333,39 +367,6 @@ $$\ldots$$</p>
     <a rel="full-article" href="/bzoj2186ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj3160ti-jie.html">bzoj3160题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2016-05-01T00:00:00+02:00" pubdate>Sun 01 May 2016</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<p>首先，答案=所有的-连续的。连续的可以用manacher解出来，只需考虑如何求所有的自序列个数。</p>
-<p>对于每个对称中心，只需求出有多少对对称的字符即可，而对称中心确定以后，每对对称的字符，位置加起来的值是固定的，可以写个类似卷积的东西，然后用FFT来求。</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cmath&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;complex&gt;</span><span class="cp"></span>
-<span class="cp">#define ele long long</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="cp">#define maxn 400010</span>
-<span class="cp">#define MOD 1000000007</span>
-<span class="cp">#define pn complex&lt;double&gt;</span>
-<span class="k">const</span> <span class="kt">double</span> <span class="n">pi</span><span class="o">=</span><span class="mf">3.1415926535897 ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj3160ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index14.html">&larr; Older</a>
 
@@ -377,6 +378,9 @@ $$\ldots$$</p>
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1177ti-jie.html">bzoj1177题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1189ti-jie.html">bzoj1189题解</a>
       </li>
       <li class="post">
@@ -387,9 +391,6 @@ $$\ldots$$</p>
       </li>
       <li class="post">
           <a href="/bzoj4803ti-jie.html">bzoj4803题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj2844ti-jie.html">bzoj2844题解</a>
       </li>
     </ul>
   </section>
