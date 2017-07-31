@@ -49,6 +49,34 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj1193ti-jie.html">bzoj1193题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2017-07-31T00:00:00+02:00" pubdate>Mon 31 July 2017</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=2920947&auto=0&height=66"></iframe>
+
+<p>网上最多见的做法好像都挺玄学的……感觉我的做法比较靠谱而且高效。</p>
+<p>一开始的思路跟<a href="http://blog.eleele.gq/bzoj2299ti-jie.html">这道题</a>一样，得到方程：
+$$(t_1+t_2)+2(t_3+t_4)=x$$
+$$(t_3-t_4)+2(t_1-t_2)=y$$</p>
+<p>要求$|t_1|+|t_2|+|t_3|+|t_4|$的最小值。</p>
+<p>x，y的正负是无关紧要的，所以不妨把x，y都取绝对值。</p>
+<p>注意到$|t_1|+|t_2|=\mathrm{max}\{|t_1+t_2|,|t_1-t_2|\}$，即要求$\mathrm{max}\{|x-2p|,|q|\}+\mathrm{max}\{|y-2q|,|p|\}$的最小值。（这里假设 ...</p></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj1193ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj1177ti-jie.html">bzoj1177题解</a>
       </h1>
     <p class="meta">
@@ -347,42 +375,6 @@
     <a rel="full-article" href="/bzoj1028ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/hdu3949ti-jie.html">hdu3949题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2017-05-27T00:00:00+02:00" pubdate>Sat 27 May 2017</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=36586669&auto=0&height=66"></iframe>
-
-<p>线性基的介绍可以看<a href="https://blog.sengxian.com/algorithms/linear-basis">这里</a>。</p>
-<p>多组数据忘了清零……我真是越来越sb了……</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
-<span class="cp">#define ele long long</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="cp">#define maxn 10010</span>
-<span class="cp">#define W 64</span>
-<span class="n">ele</span> <span class="n">n</span><span class="p">,</span><span class="n">Q</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">a</span><span class="p">[</span><span class="n">maxn</span><span class="p">],</span><span class="n">b</span><span class="p">[</span><span class="n">W</span><span class="p">],</span><span class="n">c</span><span class="p">[</span><span class="n">W</span><span class="p">];</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
-    <span class="n">ele</span> <span class="n">T</span><span class="p">;</span>
-    <span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%lld&quot;</span><span class="p">,</span><span class="o">&amp;</span><span class="n">T</span><span class="p">);</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">tc</span><span class="o">=</span><span class="mi">0 ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/hdu3949ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index2.html">&larr; Older</a>
 
@@ -392,6 +384,9 @@
   <section>
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
+      <li class="post">
+          <a href="/bzoj1193ti-jie.html">bzoj1193题解</a>
+      </li>
       <li class="post">
           <a href="/bzoj1177ti-jie.html">bzoj1177题解</a>
       </li>
@@ -403,9 +398,6 @@
       </li>
       <li class="post">
           <a href="/bzoj1149ti-jie.html">bzoj1149题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj4803ti-jie.html">bzoj4803题解</a>
       </li>
     </ul>
   </section>

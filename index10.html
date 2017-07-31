@@ -49,6 +49,42 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj1295ti-jie.html">bzoj1295题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-09-17T00:00:00+02:00" pubdate>Sat 17 September 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=3950826&auto=0&height=66"></iframe>
+
+<p>搬走T个障碍后X能走到Y等价于存在一条X到Y的路径，上面有不超过T个障碍。</p>
+<p>枚举X，用spfa求出X能通过不超过T个障碍走到的所有位置，并找出离X最远的那个，更新答案。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cmath&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#define ele int</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxn 40</span>
+<span class="cp">#define INF 1e9</span>
+<span class="k">const</span> <span class="n">ele</span> <span class="n">di</span><span class="p">[]</span><span class="o">=</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">};</span>
+<span class="k">const</span> <span class="n">ele</span> <span class="n">dj</span><span class="p">[]</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">};</span>
+<span class="k">struct</span> <span class="n">crd</span><span class="p">{</span>
+    <span class="n">ele</span> <span class="n">i ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj1295ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj2463ti-jie.html">bzoj2463题解</a>
       </h1>
     <p class="meta">
@@ -347,45 +383,6 @@
     <a rel="full-article" href="/bzoj3329ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj4653noi2016-qu-jian-ti-jie.html">bzoj4653(noi2016 区间)题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2016-08-27T00:00:00+02:00" pubdate>Sat 27 August 2016</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=346073&auto=0&height=66"></iframe>
-
-<p>对于若干个区间，如果其中有一个点被覆盖至少m次，那么一定能从这些区间中选出m个，满足题意。</p>
-<p>于是我就开始想扫瞄线，想了好久没想出来……最后只好看题解。</p>
-<p>先把区间按长度排序，用两个指针l，r表示当前选出的最短和最长的区间。</p>
-<p>用一个线段树维护每个点被l，r间的这些区间覆盖了多少次。</p>
-<p>每次将r右移，并尝试将l右移，使l指向的区间尽可能长。用r指向的区间长度-l指向的区间长度来更新答案。</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
-<span class="cp">#define ele int</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="cp">#define maxn 500010</span>
-<span class="cp">#define INF 1000000001</span>
-<span class="k">struct</span> <span class="n">node</span>
-<span class="p">{</span>
-    <span class="n">ele</span> <span class="n">add</span><span class="p">,</span><span class="n">max</span><span class="p">;</span>
-    <span class="n">node</span> <span class="o">*</span><span class="n">l</span><span class="p">,</span><span class="o">*</span><span class="n">r</span><span class="p">;</span>
-<span class="p">}</span><span class="n">pool</span><span class="p">[</span><span class="n">maxn ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj4653noi2016-qu-jian-ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index11.html">&larr; Older</a>
 
@@ -397,6 +394,9 @@
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1193ti-jie.html">bzoj1193题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1177ti-jie.html">bzoj1177题解</a>
       </li>
       <li class="post">
@@ -407,9 +407,6 @@
       </li>
       <li class="post">
           <a href="/bzoj1149ti-jie.html">bzoj1149题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj4803ti-jie.html">bzoj4803题解</a>
       </li>
     </ul>
   </section>

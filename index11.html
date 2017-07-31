@@ -49,6 +49,45 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj4653noi2016-qu-jian-ti-jie.html">bzoj4653(noi2016 区间)题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-08-27T00:00:00+02:00" pubdate>Sat 27 August 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=346073&auto=0&height=66"></iframe>
+
+<p>对于若干个区间，如果其中有一个点被覆盖至少m次，那么一定能从这些区间中选出m个，满足题意。</p>
+<p>于是我就开始想扫瞄线，想了好久没想出来……最后只好看题解。</p>
+<p>先把区间按长度排序，用两个指针l，r表示当前选出的最短和最长的区间。</p>
+<p>用一个线段树维护每个点被l，r间的这些区间覆盖了多少次。</p>
+<p>每次将r右移，并尝试将l右移，使l指向的区间尽可能长。用r指向的区间长度-l指向的区间长度来更新答案。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#define ele int</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxn 500010</span>
+<span class="cp">#define INF 1000000001</span>
+<span class="k">struct</span> <span class="n">node</span>
+<span class="p">{</span>
+    <span class="n">ele</span> <span class="n">add</span><span class="p">,</span><span class="n">max</span><span class="p">;</span>
+    <span class="n">node</span> <span class="o">*</span><span class="n">l</span><span class="p">,</span><span class="o">*</span><span class="n">r</span><span class="p">;</span>
+<span class="p">}</span><span class="n">pool</span><span class="p">[</span><span class="n">maxn ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj4653noi2016-qu-jian-ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj2653ti-jie.html">bzoj2653题解</a>
       </h1>
     <p class="meta">
@@ -372,32 +411,6 @@ i-1 ...</p></!--more--></div>
     <a rel="full-article" href="/bzoj3289ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj2431ti-jie.html">bzoj2431题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2016-06-20T00:00:00+02:00" pubdate>Mon 20 June 2016</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=28838174&auto=0&height=66"></iframe>
-
-<p>中考结束后第一题。话说突然间初中就毕业了，感觉还没反应过来。</p>
-<p>让f[i][j]代表1~i的排列中逆序对为j的有多少个。</p>
-<p>考虑1~i-1的一个排列P，有j'个逆序对，那么加入一个i，最多可增加i-1个逆序对，最少可增加0个。所以加入i以后的排列的逆序对个数为j'~j'+i-1。</p>
-<p>所以$f[i][j]=\sum_{k\le j\le k+i-1} f[i-1][k]$。</p>
-<p>直接计算这个dp方程是$O(n^3)$的，不过可以维护每个f[i]的前缀和，把转移的时间优化到$O(1)$，此时算法复杂度为$O ...</p></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj2431ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index12.html">&larr; Older</a>
 
@@ -409,6 +422,9 @@ i-1 ...</p></!--more--></div>
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1193ti-jie.html">bzoj1193题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1177ti-jie.html">bzoj1177题解</a>
       </li>
       <li class="post">
@@ -419,9 +435,6 @@ i-1 ...</p></!--more--></div>
       </li>
       <li class="post">
           <a href="/bzoj1149ti-jie.html">bzoj1149题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj4803ti-jie.html">bzoj4803题解</a>
       </li>
     </ul>
   </section>

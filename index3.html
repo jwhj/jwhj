@@ -49,6 +49,42 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj3876ti-jie.html">bzoj3876题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2017-04-24T00:00:00+02:00" pubdate>Mon 24 April 2017</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p>关于带上下界的网络流，<a href="http://www.acyume.com/archives/1011">这里</a>有一份比较好的教程。</p>
+<p>今天才发现我的spfa写得过于naive……要用一个数组记录某个点是否在队列中……我以前为什么一直没发现……</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;queue&gt;</span><span class="cp"></span>
+<span class="cp">#define ele int</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxn 310</span>
+<span class="cp">#define INF 1000000000</span>
+<span class="k">struct</span> <span class="n">edge</span><span class="p">{</span>
+    <span class="n">ele</span> <span class="n">v</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">r</span><span class="p">;</span>
+    <span class="n">edge</span> <span class="o">*</span><span class="n">nxt</span><span class="p">,</span><span class="o">*</span><span class="n">rev</span><span class="p">;</span>
+<span class="p">}</span><span class="n">ep</span><span class="p">[</span><span class="mi">10000000</span><span class="p">],</span><span class="o">*</span><span class="n">ecnt</span><span class="p">;</span>
+<span class="n">edge</span> <span class="o">*</span><span class="n">g</span><span class="p">[</span><span class="n">maxn</span><span class="p">];</span>
+<span class="kr">inline</span> <span class="kt">void</span> <span class="nf">addedge1 ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj3876ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj4802ti-jie.html">bzoj4802题解</a>
       </h1>
     <p class="meta">
@@ -318,37 +354,6 @@
     <a rel="full-article" href="/bzoj2958ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/wc2017gdkoi2017jiang-you-ji.html">WC2017&GDKOI2017酱油记</a>
-      </h1>
-    <p class="meta">
-<time datetime="2017-02-22T00:00:00+01:00" pubdate>Wed 22 February 2017</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=25714147&auto=0&height=66"></iframe>
-
-<p>拖了这么久才开始写这个东西，我真是药丸。</p>
-<h3>WC2017</h3>
-<h4>Day 0</h4>
-<p>一大早起来坐地铁去机场，走上地铁的时候心里想：我不会晕地铁吧，结果就真的晕地铁了……</p>
-<p>到了绍一，感觉浙江不愧是发达地区，设施比我们学校好多了。我发现宿舍有wifi感觉非常劲<del>，但事实上大多数时间都连不上/网速慢得不能用</del>。</p>
-<p><del>跑遍了整栋宿舍没有发现男厕所，去问了一下志愿者，他让我们不要管那个标。</del></p>
-<h4>Day 1～4</h4>
-<p>各大神犇讲课，状态好的话大概能听个半懂吧。线性代数什么的基本没听懂……<del>松爷讲卡常数的时候我非常认真地听了，因为据说会考。</del></p>
-<h4>Day 5</h4>
-<p>开考之后先把三道题扫了一遍，感觉一、二题的暴力都很显然的样子，就先写了一个第一题10分的状压。接下来看了一下第一题的特殊数据，分析了一下，感觉是一棵树的时候似乎也很好搞，就写了那10分的做法。这个时候看时间似乎已经不是很早了，就去码第二题的暴力，期间想了想似乎没想到更快的做法。接下来看了看第三题，排序网络似乎是之前讲过的一个东西？写了个程序输出一个通用的排序网络，结果发现完全拿不到分，就又回去看第一题，分析了一下图是一个环的时候得性质 ...</p></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/wc2017gdkoi2017jiang-you-ji.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index4.html">&larr; Older</a>
 
@@ -360,6 +365,9 @@
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1193ti-jie.html">bzoj1193题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1177ti-jie.html">bzoj1177题解</a>
       </li>
       <li class="post">
@@ -370,9 +378,6 @@
       </li>
       <li class="post">
           <a href="/bzoj1149ti-jie.html">bzoj1149题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj4803ti-jie.html">bzoj4803题解</a>
       </li>
     </ul>
   </section>
