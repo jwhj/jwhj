@@ -49,6 +49,30 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj4403ti-jie.html">bzoj4403题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-11-04T00:00:00+01:00" pubdate>Fri 04 November 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=1698374&auto=0&height=66"></iframe>
+
+<p>令$m=r-l+1$，长度为i，元素大小在l到r之间的单调不降序列的数量等于长度为i，元素大小在0到m-1之间的单调不降序列的数量。</p>
+<p>假设这个序列为$a_1,a_2,\ldots,a_i$，令$b_1=a_1,b_j=a_j-a_{j-1},b_{i+1}=m-1-a_i(j=2,3,\ldots,i)$，那么就有$b_1+b_2+\ldots+b_{i+1}=m-1$且所有的b非负。</p>
+<p>由插板法可得这样的序列个数为$C_{i+m-1}^{i}=C_{i+m-1}^{m-1 ...</p></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj4403ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj2763ti-jie.html">bzoj2763题解</a>
       </h1>
     <p class="meta">
@@ -355,32 +379,6 @@
     <a rel="full-article" href="/bzoj2957ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj3309ti-jie.html">bzoj3309题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2016-09-21T00:00:00+02:00" pubdate>Wed 21 September 2016</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=19674656&auto=0&height=66"></iframe>
-
-<p>不妨设a&lt;=b。</p>
-<p>考虑gcd为k的所有(i,j)的贡献。</p>
-<p>$$\begin{align}
-  &amp; \sum_{i=1}^{a} \sum_{j=1}^{b} f((i, j)) \\
-= &amp; \sum_{d=1}^{a} f(d) \sum_{i=1}^{a'} \sum_{j=1}^{b'} [(i, j)=1] &amp; \left( a' = \left \lfloor \frac{a}{d} \right \rfloor ...</p></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj3309ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index10.html">&larr; Older</a>
 
@@ -392,6 +390,9 @@
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1070ti-jie.html">bzoj1070题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1040ti-jie.html">bzoj1040题解</a>
       </li>
       <li class="post">
@@ -402,9 +403,6 @@
       </li>
       <li class="post">
           <a href="/bzoj1189ti-jie.html">bzoj1189题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1202ti-jie.html">bzoj1202题解</a>
       </li>
     </ul>
   </section>

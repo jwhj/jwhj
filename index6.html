@@ -49,6 +49,39 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj2729ti-jie.html">bzoj2729题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2017-01-07T00:00:00+01:00" pubdate>Sat 07 January 2017</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p>先把老师都看成男生随便排，再把女生放进去。</p>
+<p>如果排出来两个老师不是相邻的，那么女生可以随便放。</p>
+<p>如果排出来两个老师是相邻的，那么他们之间应当恰好放入一个女生，把这三人看成一个整体。</p>
+<p>这题需要高精度，我比较懒就直接用了python。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">P</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">):</span>
+    <span class="n">ans</span><span class="o">=</span><span class="mi">1</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+        <span class="n">ans</span><span class="o">*=</span><span class="n">n</span><span class="o">-</span><span class="n">i</span>
+    <span class="k">return</span> <span class="n">ans</span>
+<span class="n">s</span><span class="o">=</span><span class="nb">raw_input</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+<span class="n">n</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">m</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">a1</span><span class="o">=</span><span class="n">P</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">3</span><span class="p">,</span><span class="n">m</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">P</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">2 ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj2729ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj1053ti-jie.html">bzoj1053题解</a>
       </h1>
     <p class="meta">
@@ -348,42 +381,6 @@
     <a rel="full-article" href="/bzoj1016ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj1007ti-jie.html">bzoj1007题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2016-12-16T00:00:00+01:00" pubdate>Fri 16 December 2016</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<p>维护一个下凸壳再乱搞一下就可以了。</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
-<span class="cp">#define ele int</span>
-<span class="cp">#define real double</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="cp">#define maxn 50010</span>
-<span class="cp">#define eps 1e-6</span>
-<span class="kr">inline</span> <span class="n">real</span> <span class="nf">rabs</span><span class="p">(</span><span class="n">real</span> <span class="n">x</span><span class="p">){</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">x</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">)</span><span class="o">?</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">:</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="k">struct</span> <span class="n">line</span><span class="p">{</span>
-    <span class="n">real</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">;</span>
-    <span class="n">ele</span> <span class="n">id</span><span class="p">;</span>
-    <span class="kr">inline</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">&lt;</span><span class="p">(</span><span class="n">line</span> <span class="n">y ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj1007ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index7.html">&larr; Older</a>
 
@@ -395,6 +392,9 @@
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1070ti-jie.html">bzoj1070题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1040ti-jie.html">bzoj1040题解</a>
       </li>
       <li class="post">
@@ -405,9 +405,6 @@
       </li>
       <li class="post">
           <a href="/bzoj1189ti-jie.html">bzoj1189题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1202ti-jie.html">bzoj1202题解</a>
       </li>
     </ul>
   </section>

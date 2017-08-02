@@ -49,6 +49,32 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj3309ti-jie.html">bzoj3309题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-09-21T00:00:00+02:00" pubdate>Wed 21 September 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=19674656&auto=0&height=66"></iframe>
+
+<p>不妨设a&lt;=b。</p>
+<p>考虑gcd为k的所有(i,j)的贡献。</p>
+<p>$$\begin{align}
+  &amp; \sum_{i=1}^{a} \sum_{j=1}^{b} f((i, j)) \\
+= &amp; \sum_{d=1}^{a} f(d) \sum_{i=1}^{a'} \sum_{j=1}^{b'} [(i, j)=1] &amp; \left( a' = \left \lfloor \frac{a}{d} \right \rfloor ...</p></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj3309ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj1263ti-jie.html">bzoj1263题解</a>
       </h1>
     <p class="meta">
@@ -351,43 +377,6 @@
     <a rel="full-article" href="/bzoj3489ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj4066ti-jie.html">bzoj4066题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2016-09-01T00:00:00+02:00" pubdate>Thu 01 September 2016</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=26289183&auto=0&height=66"></iframe>
-
-<p>直接用KD树就能做了。</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
-<span class="cp">#define ele int</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="cp">#define maxm 200010</span>
-<span class="cp">#define alpha 0.7</span>
-<span class="cp">#define dc(x) (x)^=lastans</span>
-<span class="k">struct</span> <span class="n">node</span>
-<span class="p">{</span>
-    <span class="n">ele</span> <span class="n">c</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">mn</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">mx</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">x</span><span class="p">,</span><span class="n">s</span><span class="p">,</span><span class="n">sum</span><span class="p">;</span>
-    <span class="n">node</span> <span class="o">*</span><span class="n">l</span><span class="p">,</span><span class="o">*</span><span class="n">r</span><span class="p">;</span>
-<span class="p">}</span><span class="n">pool</span><span class="p">[</span><span class="n">maxm</span><span class="p">];</span>
-<span class="n">ele</span> <span class="n">n ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj4066ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index11.html">&larr; Older</a>
 
@@ -399,6 +388,9 @@
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1070ti-jie.html">bzoj1070题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1040ti-jie.html">bzoj1040题解</a>
       </li>
       <li class="post">
@@ -409,9 +401,6 @@
       </li>
       <li class="post">
           <a href="/bzoj1189ti-jie.html">bzoj1189题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1202ti-jie.html">bzoj1202题解</a>
       </li>
     </ul>
   </section>
