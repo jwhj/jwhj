@@ -49,6 +49,30 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj1019ti-jie.html">bzoj1019题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2017-05-16T00:00:00+02:00" pubdate>Tue 16 May 2017</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p>让f[i][j]表示在i号柱上有j个盘子，要多少补步才能把它们移到另一个柱子上，g[i][j]表示移到的柱子的编号。</p>
+<p>那么f[i][1]和g[i][1]是可以马上确定的。</p>
+<p>对于f[i][j]，不妨设x=g[i][j-1]，y=0+1+2-i-x，那么首先经过f[i][j-1]步，上方的j-1个盘子被移动到x号柱上。因为最小的那个盘子刚刚被移动过，接下来必然是最大的那一个盘子被移到y号柱上。</p>
+<p>若g[x][j-1]=y，那么接下来f[x][j-1]步就会把那j-1个盘子移动到y号柱上。</p>
+<p>若g[x][j-1 ...</p></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj1019ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj1018ti-jie.html">bzoj1018题解</a>
       </h1>
     <p class="meta">
@@ -316,40 +340,6 @@
     <a rel="full-article" href="/bzoj3675ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj1412ti-jie.html">bzoj1412题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2017-03-03T00:00:00+01:00" pubdate>Fri 03 March 2017</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<p>就是一个最小割，但建图的时候还是有一些细节的，看代码吧……</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
-<span class="cp">#define ele int</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="cp">#define maxn 10010</span>
-<span class="cp">#define INF 1000000000</span>
-<span class="k">const</span> <span class="n">ele</span> <span class="n">di</span><span class="p">[]</span><span class="o">=</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">};</span>
-<span class="k">const</span> <span class="n">ele</span> <span class="n">dj</span><span class="p">[]</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">};</span>
-<span class="k">struct</span> <span class="n">edge</span><span class="p">{</span>
-    <span class="n">ele</span> <span class="n">v</span><span class="p">,</span><span class="n">r</span><span class="p">;</span>
-    <span class="n">edge</span> <span class="o">*</span><span class="n">nxt</span><span class="p">,</span><span class="o">*</span><span class="n">rev</span><span class="p">;</span>
-<span class="p">}</span><span class="n">ep ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj1412ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index4.html">&larr; Older</a>
 
@@ -361,6 +351,9 @@
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1034ti-jie.html">bzoj1034题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1006ti-jie.html">bzoj1006题解</a>
       </li>
       <li class="post">
@@ -371,9 +364,6 @@
       </li>
       <li class="post">
           <a href="/bzoj1040ti-jie.html">bzoj1040题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1193ti-jie.html">bzoj1193题解</a>
       </li>
     </ul>
   </section>

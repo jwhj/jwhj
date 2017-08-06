@@ -49,6 +49,33 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj2962ti-jie.html">bzoj2962题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-12-08T00:00:00+01:00" pubdate>Thu 08 December 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=434974661&auto=0&height=66"></iframe>
+
+<p>操作3看上去很可怕，但是其实这个操作是可以区间合并的。用$f_i$表示选i个数的所有乘积的和，那么有$f_i=\sum \mathrm{lc.}f_j\times\mathrm{rc.}f_{i-j}$。</p>
+<p>操作2也很容易，对于所有奇的i，给$f_i$取相反数就可以了。</p>
+<p>操作1自己推一下可以得到，如果加上x，那么$f'_i=\sum f_{i-j}C_{\mathrm{len}-i+j}^{j}x^j$这里len代表区间的长度。</p>
+<p>这么一道题我调了一晚上，最近代码能力大幅下降啊。以后一定要记住，给线段树打标记的时候一定要弄清楚各个标记之间、标记和维护的信息之间的先后顺序。</p>
+<p>另外数组好像要开大一点才能过？</p>
+<p>代码 ...</p></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj2962ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj2741ti-jie.html">bzoj2741题解</a>
       </h1>
     <p class="meta">
@@ -356,39 +383,6 @@
     <a rel="full-article" href="/bzoj4401ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj4325ti-jie.html">bzoj4325题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2016-11-08T00:00:00+01:00" pubdate>Tue 08 November 2016</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=1696840&auto=0&height=66"></iframe>
-
-<p>以前一直认为是码农题，今天打了一下感觉还是比较好打的，码量绝对比前几天的一些题少……</p>
-<p>显然出牌顺序是无关紧要的，所以先用dfs枚举怎么出顺子。对于剩下的牌，牌的点数大小已经不重要了，所以可以用(a,b,c,d)来表示状态，指的是有a张单牌，b种两张的牌，c种三张的牌，d种4张的牌。</p>
-<p>然后记忆化搜索一下就可以得到答案了。</p>
-<p>不过这道题被认为是码农题也不是没道理的，有好些细节要考虑一下，比如说两张鬼不能当成对子放在三带二里面，出王炸不一定是最优的。有些地方写起来比较麻烦，比如出三带一的时候，如果没有单牌，一样有可能需要从多张一样的牌里抽一张出来用。因此状态转移的时候要考虑非常多种情况，可以看着我的代码感受一下……</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
-<span class="cp">#define ele int</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="cp">#define maxc 15</span>
-<span class="cp">#define ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj4325ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index9.html">&larr; Older</a>
 
@@ -400,6 +394,9 @@
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1034ti-jie.html">bzoj1034题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1006ti-jie.html">bzoj1006题解</a>
       </li>
       <li class="post">
@@ -410,9 +407,6 @@
       </li>
       <li class="post">
           <a href="/bzoj1040ti-jie.html">bzoj1040题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1193ti-jie.html">bzoj1193题解</a>
       </li>
     </ul>
   </section>
