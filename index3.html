@@ -49,6 +49,72 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj2125ti-jie.html">bzoj2125题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2017-05-22T00:00:00+02:00" pubdate>Mon 22 May 2017</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=171530&auto=0&height=66"></iframe>
+
+<p>圆方树太神啦！</p>
+<p>对于仙人掌中原来的点，建立一个圆点。对于每一个环，建立一个方点，然后把环上所有的点对应的圆点连到这个方点上面。对于其它的边，连接端点对应的圆点。这样就得到了仙人掌对应的圆方树。</p>
+<p>圆方树有一些很好的性质，比如说：</p>
+<ul>
+<li><del>它是一棵树</del></li>
+<li>不管怎么换根，圆方树的形态不变化 </li>
+</ul>
+<p>对于树中所有圆圆边，边权为其在仙人掌中对应的边的边权。对于方圆/圆方边，边权为圆点对应的点到它所在环的最高点的最短路的长度。</p>
+<p>考虑求u，v之间的最短路长度。若u，v在圆方树中的lca为圆点，两点在仙人掌中最短路的长度即为它们在圆方树中的路径长度。若u，v的lca为方点，说明它们在仙人掌上的lca是一个环。<del>上一句话意会一下就可以了。</del>那么就要考虑一下在lca那个环上怎么走。对于每条方圆边，还要保存一下它在仙人掌上对应的路径是顺时针还是逆时针的。</p>
+<p><code>if (od[pu]!=od[pv])</code>打成了<code>if (od[pu]==od[pv])</code>结果调了好久……我太弱了……</p>
+<p>代码 ...</p></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj2125ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="/bzoj1021ti-jie.html">bzoj1021题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2017-05-19T00:00:00+02:00" pubdate>Fri 19 May 2017</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=3950435&auto=0&height=66"></iframe>
+
+<p>容易发现，不可能会有A把一张钞票给B，B再将其给C的情况，因为这样的话直接由A交给C就可以了。</p>
+<p>于是，对于每一种面额的钞票，总共有6种情况：A给BC，BC给A，B给AC，AC给B，C给AB，AB给C。</p>
+<p>让f[i][j][k]代表只交换前i种钞票，使得A有j元，B有k元的最少交换次数，那么可以通过枚举上面的6中情况来进行转移。</p>
+<p>由于很多状态实际上是达不到的，所以可以用类似bfs的方式，用一个队列保存状态并拓展。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;queue&gt;</span><span class="cp"></span>
+<span class="cp">#define ele int</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxn 1010</span>
+<span class="k">const</span> <span class="n">ele</span> <span class="n">p ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj1021ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj1019ti-jie.html">bzoj1019题解</a>
       </h1>
     <p class="meta">
@@ -282,64 +348,6 @@
     <a rel="full-article" href="/bzoj3157ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj4805ti-jie.html">bzoj4805题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2017-04-03T00:00:00+02:00" pubdate>Mon 03 April 2017</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<p>非常简单的杜教筛……</p>
-<p>刚刚发现杜教筛的不用散列表和map的写法，效率比我以前写的那种高很多。</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#define ele long long</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="cp">#define maxs 3000010</span>
-<span class="n">ele</span> <span class="n">n</span><span class="p">,</span><span class="n">pcnt</span><span class="p">,</span><span class="n">S</span><span class="p">,</span><span class="n">plst</span><span class="p">[</span><span class="n">maxs</span><span class="p">],</span><span class="n">phi</span><span class="p">[</span><span class="n">maxs</span><span class="p">],</span><span class="n">ans</span><span class="p">[</span><span class="n">maxs</span><span class="p">];</span>
-<span class="kt">bool</span> <span class="n">flag</span><span class="p">[</span><span class="n">maxs</span><span class="p">];</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
-    <span class="n">S</span><span class="o">=</span><span class="mi">3000000</span><span class="p">;</span>
-    <span class="n">pcnt</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
-    <span class="n">memset</span><span class="p">(</span><span class="n">flag</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">flag</span><span class="p">));</span>
-    <span class="n">phi</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="mi">1 ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj4805ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj3675ti-jie.html">bzoj3675题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2017-03-15T00:00:00+01:00" pubdate>Wed 15 March 2017</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<p>容易证明顺序是无关紧要的，而且允许出现长度为0的序列的话，答案不受影响。</p>
-<p>那么可以写出一个$O(n^2k)$的DP方程：</p>
-<p>$$dp[i][p]=\max{dp[j][k-1]+s[j](s[i]-s[j])}$$</p>
-<p>然后用斜率优化可以优化到$O(nk)$。</p>
-<p>这里有一个小问题，斜率优化的时候，斜率函数$\mathrm{slope}(i,j)=\frac{f[j]-f[k]}{s[k]-s[j]}+s[k]+s[j]$在 ...</p></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj3675ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index4.html">&larr; Older</a>
 
@@ -351,6 +359,12 @@
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1037ti-jie.html">bzoj1037题解</a>
+      </li>
+      <li class="post">
+          <a href="/bzoj1042ti-jie.html">bzoj1042题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1034ti-jie.html">bzoj1034题解</a>
       </li>
       <li class="post">
@@ -358,12 +372,6 @@
       </li>
       <li class="post">
           <a href="/bzoj1047ti-jie.html">bzoj1047题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1070ti-jie.html">bzoj1070题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1040ti-jie.html">bzoj1040题解</a>
       </li>
     </ul>
   </section>
@@ -378,7 +386,7 @@
 
   <section>
   <h1>Tags</h1>
-    <a href="/tag/tarjan.html">tarjan</a>,    <a href="/tag/fft.html">FFT</a>,    <a href="/tag/yuan-fang-shu.html">圆方树</a>,    <a href="/tag/dian-fen-shu.html">点分树</a>,    <a href="/tag/huffman.html">huffman</a>,    <a href="/tag/kuai-zhuang-shu.html">块状树</a>,    <a href="/tag/noip.html">noip</a>,    <a href="/tag/hou-zhui-shu-ju-jie-gou.html">后缀数据结构</a>,    <a href="/tag/zhi-yu-xian-duan-shu-fen-lie-he-bing.html">值域线段树分裂合并</a>,    <a href="/tag/shu-xue.html">数学</a>,    <a href="/tag/xian-xing-gui-hua.html">线性规划</a>,    <a href="/tag/ju-zhen.html">矩阵</a>,    <a href="/tag/xian-tu.html">弦图</a>,    <a href="/tag/dp.html">dp</a>,    <a href="/tag/uoj.html">uoj</a>,    <a href="/tag/mo-dui.html">莫队</a>,    <a href="/tag/shu-pou.html">树剖</a>,    <a href="/tag/tu-lun.html">图论</a>,    <a href="/tag/zhu-xi-shu.html">主席树</a>,    <a href="/tag/yuan-gen.html">原根</a>,    <a href="/tag/shu-zhuang-shu-zu.html">树状数组</a>,    <a href="/tag/dijkstra.html">dijkstra</a>,    <a href="/tag/exgcd.html">exgcd</a>,    <a href="/tag/spfa.html">spfa</a>,    <a href="/tag/fen-kuai-sou-suo-fa.html">分块搜索法</a>,    <a href="/tag/bing-cha-ji.html">并查集</a>,    <a href="/tag/fen-ceng-tu.html">分层图</a>,    <a href="/tag/stuffs.html">stuffs</a>,    <a href="/tag/shu-fen-zhi.html">树分治</a>,    <a href="/tag/zi-fu-chuan.html">字符串</a>,    <a href="/tag/codeforces.html">codeforces</a>,    <a href="/tag/ti-jie.html">题解</a>,    <a href="/tag/kmp.html">kmp</a>,    <a href="/tag/hash.html">hash</a>,    <a href="/tag/luogu.html">luogu</a>,    <a href="/tag/miller_rabin.html">miller_rabin</a>,    <a href="/tag/pollard_rho.html">pollard_rho</a>,    <a href="/tag/bitset.html">bitset</a>,    <a href="/tag/bzoj.html">bzoj</a>,    <a href="/tag/cot.html">COT</a>,    <a href="/tag/ji-yi-hua-sou-suo.html">记忆化搜索</a>,    <a href="/tag/fen-kuai.html">分块</a>,    <a href="/tag/gao-si-xiao-yuan.html">高斯消元</a>,    <a href="/tag/wang-luo-liu.html">网络流</a>,    <a href="/tag/pei-dui-dui.html">配对堆</a>,    <a href="/tag/poj.html">poj</a>,    <a href="/tag/er-fen.html">二分</a>,    <a href="/tag/git.html">git</a>,    <a href="/tag/gua-hao-xu-lie.html">括号序列</a>,    <a href="/tag/tu-bao.html">凸包</a>,    <a href="/tag/treap.html">treap</a>,    <a href="/tag/shu-shang-mo-dui.html">树上莫队</a>,    <a href="/tag/san-fen.html">三分</a>,    <a href="/tag/you-xian-dui-lie.html">优先队列</a>,    <a href="/tag/shu-wei-dp.html">数位dp</a>,    <a href="/tag/kdshu.html">KD树</a>,    <a href="/tag/tan-xin.html">贪心</a>,    <a href="/tag/zheng-ti-er-fen.html">整体二分</a>,    <a href="/tag/zhuang-tai-ya-suo.html">状态压缩</a>,    <a href="/tag/hdu.html">hdu</a>,    <a href="/tag/qi-fa-shi-he-bing.html">启发式合并</a>,    <a href="/tag/ping-mian-tu.html">平面图</a>,    <a href="/tag/zu-he.html">组合</a>,    <a href="/tag/mobius.html">mobius</a>,    <a href="/tag/xian-xing-ji.html">线性基</a>,    <a href="/tag/an-shi-jian-fen-zhi.html">按时间分治</a>,    <a href="/tag/dan-diao-zhan-dui-lie.html">单调栈/队列</a>,    <a href="/tag/trie.html">trie</a>,    <a href="/tag/ji-suan-ji-he.html">计算几何</a>,    <a href="/tag/du-jiao-shai.html">杜教筛</a>,    <a href="/tag/zhi-huan-qun.html">置换群</a>,    <a href="/tag/manacher.html">manacher</a>,    <a href="/tag/dong-tai-kai-dian.html">动态开点</a>,    <a href="/tag/luan-gao.html">乱搞</a>,    <a href="/tag/tong-ji.html">统计</a>,    <a href="/tag/xie-lu-you-hua.html">斜率优化</a>,    <a href="/tag/xian-duan-shu.html">线段树</a>,    <a href="/tag/ou-la-xu-lie.html">欧拉序列</a>,    <a href="/tag/spoj.html">spoj</a>,    <a href="/tag/a.html">A*</a>,    <a href="/tag/kuai-zhuang-lian-biao.html">块状链表</a>,    <a href="/tag/er-fen-tu.html">二分图</a>,    <a href="/tag/stbiao.html">st表</a>,    <a href="/tag/bo-yi-lun.html">博弈论</a>,    <a href="/tag/xian-ren-zhang.html">仙人掌</a>,    <a href="/tag/bsgs.html">BSGS</a>  </section>
+    <a href="/tag/tarjan.html">tarjan</a>,    <a href="/tag/fft.html">FFT</a>,    <a href="/tag/yuan-fang-shu.html">圆方树</a>,    <a href="/tag/dian-fen-shu.html">点分树</a>,    <a href="/tag/huffman.html">huffman</a>,    <a href="/tag/kuai-zhuang-shu.html">块状树</a>,    <a href="/tag/noip.html">noip</a>,    <a href="/tag/hou-zhui-shu-ju-jie-gou.html">后缀数据结构</a>,    <a href="/tag/zhi-yu-xian-duan-shu-fen-lie-he-bing.html">值域线段树分裂合并</a>,    <a href="/tag/shu-xue.html">数学</a>,    <a href="/tag/xian-xing-gui-hua.html">线性规划</a>,    <a href="/tag/ju-zhen.html">矩阵</a>,    <a href="/tag/xian-tu.html">弦图</a>,    <a href="/tag/dp.html">dp</a>,    <a href="/tag/uoj.html">uoj</a>,    <a href="/tag/mo-dui.html">莫队</a>,    <a href="/tag/shu-pou.html">树剖</a>,    <a href="/tag/tu-lun.html">图论</a>,    <a href="/tag/zhu-xi-shu.html">主席树</a>,    <a href="/tag/bei-bao.html">背包</a>,    <a href="/tag/yuan-gen.html">原根</a>,    <a href="/tag/shu-zhuang-shu-zu.html">树状数组</a>,    <a href="/tag/dijkstra.html">dijkstra</a>,    <a href="/tag/exgcd.html">exgcd</a>,    <a href="/tag/spfa.html">spfa</a>,    <a href="/tag/fen-kuai-sou-suo-fa.html">分块搜索法</a>,    <a href="/tag/bing-cha-ji.html">并查集</a>,    <a href="/tag/fen-ceng-tu.html">分层图</a>,    <a href="/tag/stuffs.html">stuffs</a>,    <a href="/tag/shu-fen-zhi.html">树分治</a>,    <a href="/tag/zi-fu-chuan.html">字符串</a>,    <a href="/tag/codeforces.html">codeforces</a>,    <a href="/tag/ti-jie.html">题解</a>,    <a href="/tag/kmp.html">kmp</a>,    <a href="/tag/hash.html">hash</a>,    <a href="/tag/luogu.html">luogu</a>,    <a href="/tag/miller_rabin.html">miller_rabin</a>,    <a href="/tag/pollard_rho.html">pollard_rho</a>,    <a href="/tag/bitset.html">bitset</a>,    <a href="/tag/bzoj.html">bzoj</a>,    <a href="/tag/cot.html">COT</a>,    <a href="/tag/ji-yi-hua-sou-suo.html">记忆化搜索</a>,    <a href="/tag/fen-kuai.html">分块</a>,    <a href="/tag/gao-si-xiao-yuan.html">高斯消元</a>,    <a href="/tag/wang-luo-liu.html">网络流</a>,    <a href="/tag/pei-dui-dui.html">配对堆</a>,    <a href="/tag/poj.html">poj</a>,    <a href="/tag/rong-chi.html">容斥</a>,    <a href="/tag/er-fen.html">二分</a>,    <a href="/tag/git.html">git</a>,    <a href="/tag/gua-hao-xu-lie.html">括号序列</a>,    <a href="/tag/tu-bao.html">凸包</a>,    <a href="/tag/treap.html">treap</a>,    <a href="/tag/shu-shang-mo-dui.html">树上莫队</a>,    <a href="/tag/san-fen.html">三分</a>,    <a href="/tag/you-xian-dui-lie.html">优先队列</a>,    <a href="/tag/shu-wei-dp.html">数位dp</a>,    <a href="/tag/kdshu.html">KD树</a>,    <a href="/tag/tan-xin.html">贪心</a>,    <a href="/tag/zheng-ti-er-fen.html">整体二分</a>,    <a href="/tag/zhuang-tai-ya-suo.html">状态压缩</a>,    <a href="/tag/hdu.html">hdu</a>,    <a href="/tag/qi-fa-shi-he-bing.html">启发式合并</a>,    <a href="/tag/ping-mian-tu.html">平面图</a>,    <a href="/tag/zu-he.html">组合</a>,    <a href="/tag/mobius.html">mobius</a>,    <a href="/tag/xian-xing-ji.html">线性基</a>,    <a href="/tag/an-shi-jian-fen-zhi.html">按时间分治</a>,    <a href="/tag/dan-diao-zhan-dui-lie.html">单调栈/队列</a>,    <a href="/tag/trie.html">trie</a>,    <a href="/tag/ji-suan-ji-he.html">计算几何</a>,    <a href="/tag/du-jiao-shai.html">杜教筛</a>,    <a href="/tag/zhi-huan-qun.html">置换群</a>,    <a href="/tag/manacher.html">manacher</a>,    <a href="/tag/dong-tai-kai-dian.html">动态开点</a>,    <a href="/tag/luan-gao.html">乱搞</a>,    <a href="/tag/tong-ji.html">统计</a>,    <a href="/tag/xie-lu-you-hua.html">斜率优化</a>,    <a href="/tag/xian-duan-shu.html">线段树</a>,    <a href="/tag/ou-la-xu-lie.html">欧拉序列</a>,    <a href="/tag/spoj.html">spoj</a>,    <a href="/tag/a.html">A*</a>,    <a href="/tag/kuai-zhuang-lian-biao.html">块状链表</a>,    <a href="/tag/er-fen-tu.html">二分图</a>,    <a href="/tag/stbiao.html">st表</a>,    <a href="/tag/bo-yi-lun.html">博弈论</a>,    <a href="/tag/xian-ren-zhang.html">仙人掌</a>,    <a href="/tag/bsgs.html">BSGS</a>  </section>
 
 
     <section>
