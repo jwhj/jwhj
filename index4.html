@@ -49,6 +49,35 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj3157ti-jie.html">bzoj3157题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2017-04-22T00:00:00+02:00" pubdate>Sat 22 April 2017</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p><a href="http://trinkle.blog.uoj.ac/blog/478">这里</a>有一份比较好的题解。</p>
+<p>有一个坑点就是最后记得要输出g[m]而不是f[m]，因为如果n=1的话f数组不会被赋值。</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#define ele long long</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxn 210</span>
+<span class="cp">#define MOD 1000000007</span>
+<span class="n">ele</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">top</span><span class="p">,</span><span class="n">stk</span><span class="p">[</span><span class="mi">100</span><span class="p">],</span><span class="n">f</span><span class="p">[</span><span class="n">maxn</span><span class="p">],</span><span class="n">g</span><span class="p">[</span><span class="n">maxn</span><span class="p">],</span><span class="n">fac</span><span class="p">[</span><span class="n">maxn</span><span class="p">],</span><span class="n">ifac</span><span class="p">[</span><span class="n">maxn</span><span class="p">];</span>
+<span class="kr">inline</span> <span class="n">ele</span> <span class="nf">pw</span><span class="p">(</span><span class="n">ele</span> <span class="n">a</span><span class="p">,</span><span class="n">ele ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj3157ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj4805ti-jie.html">bzoj4805题解</a>
       </h1>
     <p class="meta">
@@ -329,41 +358,6 @@
     <a rel="full-article" href="/bzoj2219ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj2329ti-jie.html">bzoj2329题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2017-02-13T00:00:00+01:00" pubdate>Mon 13 February 2017</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<p>跟bzoj2209是差不多的，<a href="http://blog.eleele.gq/bzoj2209ti-jie.html">这里</a>有那道题的题解。</p>
-<p>不同的地方在于要多打一个标记，下传标记的时候要考虑一些细节。</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstdlib&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
-<span class="cp">#define ele int</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="cp">#define maxn 100010</span>
-<span class="k">struct</span> <span class="n">ANS</span><span class="p">{</span>
-    <span class="n">ele</span> <span class="n">pmn</span><span class="p">,</span><span class="n">pmx</span><span class="p">,</span><span class="n">smn</span><span class="p">,</span><span class="n">smx</span><span class="p">,</span><span class="n">sum</span><span class="p">;</span>
-<span class="p">};</span>
-<span class="kr">inline</span> <span class="n">ANS</span> <span class="k">operator</span><span class="o">+</span><span class="p">(</span><span class="n">ANS</span> <span class="n">a</span><span class="p">,</span><span class="n">ANS</span> <span class="n">b</span><span class="p">){</span>
-    <span class="n">ANS</span> <span class="n">c</span><span class="p">;</span>
-    <span class="n">c</span><span class="p">.</span><span class="n">sum</span><span class="o">=</span><span class="n">a</span><span class="p">.</span><span class="n">sum</span><span class="o">+</span><span class="n">b ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj2329ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index5.html">&larr; Older</a>
 
@@ -375,6 +369,9 @@
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1057ti-jie.html">bzoj1057题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1037ti-jie.html">bzoj1037题解</a>
       </li>
       <li class="post">
@@ -385,9 +382,6 @@
       </li>
       <li class="post">
           <a href="/bzoj1006ti-jie.html">bzoj1006题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1047ti-jie.html">bzoj1047题解</a>
       </li>
     </ul>
   </section>

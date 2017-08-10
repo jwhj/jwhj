@@ -49,6 +49,33 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj3238ti-jie.html">bzoj3238题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-05-26T00:00:00+02:00" pubdate>Thu 26 May 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=4172882&auto=0&height=66"></iframe>
+
+<p>网上题解大多数使用后缀数组来做，可是我的后缀数组写出来是$O(n\log^2 n)$的，肯定过不了。</p>
+<p>观察以下题目要求的式子，$\sum_{1\le i\lt j\le n}len(T_i)+len(T_j)=\frac{n(n-1)(n+1)}{2}$。</p>
+<p>对于后缀树上每一个节点，假设它的长度为L，那么在它的两个<strong>不同</strong>子树中选出两个节点，这两个节点对应的后缀的lcp为L。所以要求剩下的那一项，可以在后缀树上dp一下，转移方程还是比较好想的。</p>
+<p>可是后缀树要怎么构造呢？后缀树标准的构造算法太复杂了，我太弱不会写。不过后缀自动机有一个很好的性质：把所有节点和后缀链拿出来，得到的树就是反串的后缀树。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj3238ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj3944ti-jie.html">bzoj3944题解</a>
       </h1>
     <p class="meta">
@@ -339,30 +366,6 @@ $$\ldots$$</p>
     <a rel="full-article" href="/bzoj3160ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj3527ti-jie.html">bzoj3527题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2016-04-22T00:00:00+02:00" pubdate>Fri 22 April 2016</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=17177324&auto=0&height=66"></iframe>
-
-<p>由题,$E_i=\sum_{j&lt;i}\frac{q_j}{(i-j)^2}-\sum_{j&gt;i}\frac{q_j}{(i-j)^2}$。</p>
-<p>假设$A_i=\sum_{j&lt;i}\frac{q_j}{(i-j)^2},B_i=\sum_{j&gt;i}\frac{q_j}{(i-j)^2}$，则$E_i=A_i-B_i$。</p>
-<p>如果让$f(i)=q_i,g(i)=\frac{1}{i ...</p></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj3527ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index15.html">&larr; Older</a>
 
@@ -374,6 +377,9 @@ $$\ldots$$</p>
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1057ti-jie.html">bzoj1057题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1037ti-jie.html">bzoj1037题解</a>
       </li>
       <li class="post">
@@ -384,9 +390,6 @@ $$\ldots$$</p>
       </li>
       <li class="post">
           <a href="/bzoj1006ti-jie.html">bzoj1006题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1047ti-jie.html">bzoj1047题解</a>
       </li>
     </ul>
   </section>

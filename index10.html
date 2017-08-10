@@ -49,6 +49,41 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/cf725dti-jie.html">CF725D题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-10-23T00:00:00+02:00" pubdate>Sun 23 October 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=188647&auto=0&height=66"></iframe>
+
+<p>题目背景真是233</p>
+<p>如果浮起来的队伍数量已经确定了，那么显然要选取排在前面的w-t最小的队伍，让他们浮起来。</p>
+<p>从小到大枚举浮起来的队伍数，用一个优先队列维护排在前面的队伍的w-t值。每次选取最小的，让他们浮起来，然后看看会不会被后面的队伍超越，如果被超越就把那个队也加到优先队列里面。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;queue&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#define ele long long</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxn 300010</span>
+<span class="k">struct</span> <span class="n">team</span><span class="p">{</span>
+    <span class="n">ele</span> <span class="n">t</span><span class="p">,</span><span class="n">w</span><span class="p">;</span>
+    <span class="kr">inline</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">&lt;</span><span class="p">(</span><span class="n">team</span> <span class="n">b</span><span class="p">)</span><span class="k">const</span><span class="p">{</span>
+        <span class="k">return</span> <span class="n">w</span><span class="o">-</span><span class="n">t</span><span class="o">&gt;</span><span class="n">b</span><span class="p">.</span><span class="n">w</span><span class="o">-</span><span class="n">b</span><span class="p">.</span><span class="n">t ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/cf725dti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj3209ti-jie.html">bzoj3209题解</a>
       </h1>
     <p class="meta">
@@ -352,38 +387,6 @@
 <span class="p">}</span>
 </pre></div></div>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj1875ti-jie.html">bzoj1875题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2016-09-11T00:00:00+02:00" pubdate>Sun 11 September 2016</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=115502&auto=0&height=66"></iframe>
-
-<p>如果没有<code>不会立刻沿着刚刚走来的路走回</code>这个条件，可以参考<a href="http://blog.iamplm.cf/bzoj1297ti-jie.html">这道题</a>的做法。</p>
-<p>现在加上了这个条件，可以把每条边拆成两条有向边，然后把这些边作为点建一个新图。边$e_1=(u_1,v_1)$对应的点有边到达边$e_2=(u_2,v_2)$对应的点当且仅当$v_1=u_2$且$e_1,e_2$不由同一条边拆出来。</p>
-<p>然后就可以用矩乘来做了。</p>
-<p>忘了异或的优先级比不等于要低结果调了好久……其实可以直接i^j^1的……</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#define ele long long</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="cp">#define maxn 30</span>
-<span class="cp">#define ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj1875ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index11.html">&larr; Older</a>
 
@@ -395,6 +398,9 @@
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1057ti-jie.html">bzoj1057题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1037ti-jie.html">bzoj1037题解</a>
       </li>
       <li class="post">
@@ -405,9 +411,6 @@
       </li>
       <li class="post">
           <a href="/bzoj1006ti-jie.html">bzoj1006题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1047ti-jie.html">bzoj1047题解</a>
       </li>
     </ul>
   </section>

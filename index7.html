@@ -49,6 +49,40 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj1004ti-jie.html">bzoj1004题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-12-23T00:00:00+01:00" pubdate>Fri 23 December 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=65050&auto=0&height=66"></iframe>
+
+<p>不会置换群的先去学一下吧，最好找本书看一看，网上很多地方没讲清楚，我比较懒不想写上来。</p>
+<p>题目说，<code>输入数据保证任意多次洗牌都可用这m种洗牌法中的一种代替</code>，这说明输入的置换构成一个置换群。</p>
+<p>因为三种颜色的使用次数有限制，所以不能用polya定理，要用burnside引理。</p>
+<p>求每个置换不变元的个数时，先把置换拆成若干个循环。要在置换下不变，每个循环中必须全部同色，所以可以用背包来做。</p>
+<p>最后的除法用逆元来处理。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#define ele int</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxn 70</span>
+<span class="n">ele</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">s1</span><span class="p">,</span><span class="n">s2</span><span class="p">,</span><span class="n">s3</span><span class="p">,</span><span class="n">p</span><span class="p">,</span><span class="n">X</span><span class="p">[</span><span class="n">maxn</span><span class="p">];</span>
+<span class="kr">inline</span> <span class="kt">void</span> <span class="nf">exgcd</span><span class="p">(</span><span class="n">ele</span> <span class="n">a</span><span class="p">,</span><span class="n">ele ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj1004ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj2466ti-jie.html">bzoj2466题解</a>
       </h1>
     <p class="meta">
@@ -358,30 +392,6 @@
     <a rel="full-article" href="/bzoj1001ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj2299ti-jie.html">bzoj2299题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2016-12-12T00:00:00+01:00" pubdate>Mon 12 December 2016</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<p>如果已经有了(a,b)，那么(-a,-b)作用就不大了，可以允许(a,b)的个数为负，然后不管(-a,-b)。</p>
-<p>这样有效的向量就剩下四个：(a,b),(a,-b),(b,a),(b,-a)。设他们分别使用了t1,t2,t3,t4次，那么有</p>
-<p>$$(t1+t2)a+(t3+t4)b=x$$
-$$(t3-t4)a+(t1-t2)b=y$$</p>
-<p>令$A_1=t1+t2,B_1 ...</p></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj2299ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index8.html">&larr; Older</a>
 
@@ -393,6 +403,9 @@ $$(t3-t4)a+(t1-t2)b=y$$</p>
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1057ti-jie.html">bzoj1057题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1037ti-jie.html">bzoj1037题解</a>
       </li>
       <li class="post">
@@ -403,9 +416,6 @@ $$(t3-t4)a+(t1-t2)b=y$$</p>
       </li>
       <li class="post">
           <a href="/bzoj1006ti-jie.html">bzoj1006题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1047ti-jie.html">bzoj1047题解</a>
       </li>
     </ul>
   </section>

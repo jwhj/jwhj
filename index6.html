@@ -49,6 +49,42 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj3731ti-jie.html">bzoj3731题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2017-01-23T00:00:00+01:00" pubdate>Mon 23 January 2017</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p>不考虑删边的话就是bzoj3720,在<a href="http://blog.eleele.gq/bzoj3720ti-jie.html">这里</a>有题解。</p>
+<p>如果要删边的话，其实就是要把删除的点从所在的块里面分离出来，因为块里的元素不多，直接暴力分离就可以了。</p>
+<p>细节还是比较多的。考虑到邻接表删边不方便，需要保存一个数组，记录每个点到父节点的边有没有被删除；用一个数组保存每个块的根上面那个块的根。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
+<span class="cp">#define ele int</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxn 200010</span>
+<span class="cp">#define B 500</span>
+<span class="k">struct</span> <span class="n">edge</span><span class="p">{</span>
+    <span class="n">ele</span> <span class="n">v</span><span class="p">;</span>
+    <span class="n">edge</span> <span class="o">*</span><span class="n">nxt</span><span class="p">;</span>
+<span class="p">}</span><span class="n">ep</span><span class="p">[</span><span class="n">maxn</span><span class="o">*</span><span class="mi">3</span><span class="p">];</span>
+<span class="n">ele</span> <span class="n">n ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj3731ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj3720ti-jie.html">bzoj3720题解</a>
       </h1>
     <p class="meta">
@@ -325,40 +361,6 @@ $$\begin{align*}f(n,m)&amp;=\sum\sum ij\sum_{d|i,d|j}\mu(d)\\&amp;=\sum d^2\mu(d
     <a rel="full-article" href="/bzoj3732ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj1004ti-jie.html">bzoj1004题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2016-12-23T00:00:00+01:00" pubdate>Fri 23 December 2016</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=65050&auto=0&height=66"></iframe>
-
-<p>不会置换群的先去学一下吧，最好找本书看一看，网上很多地方没讲清楚，我比较懒不想写上来。</p>
-<p>题目说，<code>输入数据保证任意多次洗牌都可用这m种洗牌法中的一种代替</code>，这说明输入的置换构成一个置换群。</p>
-<p>因为三种颜色的使用次数有限制，所以不能用polya定理，要用burnside引理。</p>
-<p>求每个置换不变元的个数时，先把置换拆成若干个循环。要在置换下不变，每个循环中必须全部同色，所以可以用背包来做。</p>
-<p>最后的除法用逆元来处理。</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#define ele int</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="cp">#define maxn 70</span>
-<span class="n">ele</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">s1</span><span class="p">,</span><span class="n">s2</span><span class="p">,</span><span class="n">s3</span><span class="p">,</span><span class="n">p</span><span class="p">,</span><span class="n">X</span><span class="p">[</span><span class="n">maxn</span><span class="p">];</span>
-<span class="kr">inline</span> <span class="kt">void</span> <span class="nf">exgcd</span><span class="p">(</span><span class="n">ele</span> <span class="n">a</span><span class="p">,</span><span class="n">ele ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj1004ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index7.html">&larr; Older</a>
 
@@ -370,6 +372,9 @@ $$\begin{align*}f(n,m)&amp;=\sum\sum ij\sum_{d|i,d|j}\mu(d)\\&amp;=\sum d^2\mu(d
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1057ti-jie.html">bzoj1057题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1037ti-jie.html">bzoj1037题解</a>
       </li>
       <li class="post">
@@ -380,9 +385,6 @@ $$\begin{align*}f(n,m)&amp;=\sum\sum ij\sum_{d|i,d|j}\mu(d)\\&amp;=\sum d^2\mu(d
       </li>
       <li class="post">
           <a href="/bzoj1006ti-jie.html">bzoj1006题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1047ti-jie.html">bzoj1047题解</a>
       </li>
     </ul>
   </section>

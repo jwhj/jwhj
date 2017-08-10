@@ -49,6 +49,41 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj2329ti-jie.html">bzoj2329题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2017-02-13T00:00:00+01:00" pubdate>Mon 13 February 2017</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p>跟bzoj2209是差不多的，<a href="http://blog.eleele.gq/bzoj2209ti-jie.html">这里</a>有那道题的题解。</p>
+<p>不同的地方在于要多打一个标记，下传标记的时候要考虑一些细节。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstdlib&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#define ele int</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxn 100010</span>
+<span class="k">struct</span> <span class="n">ANS</span><span class="p">{</span>
+    <span class="n">ele</span> <span class="n">pmn</span><span class="p">,</span><span class="n">pmx</span><span class="p">,</span><span class="n">smn</span><span class="p">,</span><span class="n">smx</span><span class="p">,</span><span class="n">sum</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="kr">inline</span> <span class="n">ANS</span> <span class="k">operator</span><span class="o">+</span><span class="p">(</span><span class="n">ANS</span> <span class="n">a</span><span class="p">,</span><span class="n">ANS</span> <span class="n">b</span><span class="p">){</span>
+    <span class="n">ANS</span> <span class="n">c</span><span class="p">;</span>
+    <span class="n">c</span><span class="p">.</span><span class="n">sum</span><span class="o">=</span><span class="n">a</span><span class="p">.</span><span class="n">sum</span><span class="o">+</span><span class="n">b ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj2329ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj4540ti-jie.html">bzoj4540题解</a>
       </h1>
     <p class="meta">
@@ -330,42 +365,6 @@
     <a rel="full-article" href="/hdu5869ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj3731ti-jie.html">bzoj3731题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2017-01-23T00:00:00+01:00" pubdate>Mon 23 January 2017</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<p>不考虑删边的话就是bzoj3720,在<a href="http://blog.eleele.gq/bzoj3720ti-jie.html">这里</a>有题解。</p>
-<p>如果要删边的话，其实就是要把删除的点从所在的块里面分离出来，因为块里的元素不多，直接暴力分离就可以了。</p>
-<p>细节还是比较多的。考虑到邻接表删边不方便，需要保存一个数组，记录每个点到父节点的边有没有被删除；用一个数组保存每个块的根上面那个块的根。</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
-<span class="cp">#define ele int</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="cp">#define maxn 200010</span>
-<span class="cp">#define B 500</span>
-<span class="k">struct</span> <span class="n">edge</span><span class="p">{</span>
-    <span class="n">ele</span> <span class="n">v</span><span class="p">;</span>
-    <span class="n">edge</span> <span class="o">*</span><span class="n">nxt</span><span class="p">;</span>
-<span class="p">}</span><span class="n">ep</span><span class="p">[</span><span class="n">maxn</span><span class="o">*</span><span class="mi">3</span><span class="p">];</span>
-<span class="n">ele</span> <span class="n">n ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj3731ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index6.html">&larr; Older</a>
 
@@ -377,6 +376,9 @@
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1057ti-jie.html">bzoj1057题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1037ti-jie.html">bzoj1037题解</a>
       </li>
       <li class="post">
@@ -387,9 +389,6 @@
       </li>
       <li class="post">
           <a href="/bzoj1006ti-jie.html">bzoj1006题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1047ti-jie.html">bzoj1047题解</a>
       </li>
     </ul>
   </section>
