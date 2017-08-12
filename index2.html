@@ -49,6 +49,39 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj1177ti-jie.html">bzoj1177题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2017-07-30T00:00:00+02:00" pubdate>Sun 30 July 2017</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=25714275&auto=0&height=66"></iframe>
+
+<p>先考虑最简单的情况：取一个k×k的矩形。这个……不用考虑了吧……</p>
+<p>再考虑一个复杂一些的情况：取两个k×k的矩形。易知，两个矩形投影到行上或投影到列上，至少有一种情况，两个矩形的投影是不重合的。那么只需要枚举一下行或列上的分界线就可以分别dp出来了。</p>
+<p>最后考虑原题的情况：取三个k×k的矩形。可以证明，投影到行上或投影到列上，至少有一种情况，其中一个矩形的投影与其它矩形不重合。枚举这个分界线，然后一边可以看成两个矩形的情况，一边可以看成一个矩形的情况。</p>
+<p>要写一大堆dp挺麻烦的。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#define ele int</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxn 1510</span>
+<span class="n">ele</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">ans ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj1177ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj1189ti-jie.html">bzoj1189题解</a>
       </h1>
     <p class="meta">
@@ -350,38 +383,6 @@
     <a rel="full-article" href="/hdu3949ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj1025ti-jie.html">bzoj1025题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2017-05-26T00:00:00+02:00" pubdate>Fri 26 May 2017</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=26304168&auto=0&height=66"></iframe>
-
-<p>题意可以简化为：把n拆成若干个正整数，它们的lcm有多少种不同的可能。</p>
-<p>直接考虑有多少种可能比较困难，考虑判断一个A是否是某一个拆分的lcm。</p>
-<p>设$A=\prod p_i^{a_i}$，易证它是某一拆分的lcm当且仅当$\sum p_i^{a_i}\le n$。</p>
-<p>让f[i][j]表示只考虑前i种素数，满足$\sum p_i^{a_i}\le j$的${a_i}$有多少个。</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#define ele long long</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="cp">#define maxn 1010</span>
-<span class="n">ele ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj1025ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index3.html">&larr; Older</a>
 
@@ -393,6 +394,9 @@
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1044ti-jie.html">bzoj1044题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1057ti-jie.html">bzoj1057题解</a>
       </li>
       <li class="post">
@@ -403,9 +407,6 @@
       </li>
       <li class="post">
           <a href="/bzoj1034ti-jie.html">bzoj1034题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1006ti-jie.html">bzoj1006题解</a>
       </li>
     </ul>
   </section>

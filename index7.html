@@ -49,6 +49,38 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj3732ti-jie.html">bzoj3732题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-12-24T00:00:00+01:00" pubdate>Sat 24 December 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p>题目其实就是要求最小瓶颈路，而最小瓶颈路一定在最小生成树上面，所以就可以转换为求树上两点间的最大边权。</p>
+<p>求树上两点间的最大边权有很多种做法，比如倍增、lct（我不明白为什么会有人用这个）等。</p>
+<p>然而其实这题有一种更简单的方法。</p>
+<p>考虑kruskal算法求最小生成树的过程，每次加入一条边，连接两个联通块A、B。因为这条边的边权比已加入的任何一条边都要大，所以可以改变这条边的两个端点，只要端点仍然分别在A、B中，对结果就没有影响。</p>
+<p>于是可以考虑像按大小合并、不路径压缩的并查集那样连边，这样最后得到的树高是$O(\log n)$的，所以暴力查询就可以了。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#define ele int</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxn 15010</span>
+<span class="cp">#define maxm 30010 ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj3732ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj1004ti-jie.html">bzoj1004题解</a>
       </h1>
     <p class="meta">
@@ -354,44 +386,6 @@
     <a rel="full-article" href="/bzoj1010ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj1001ti-jie.html">bzoj1001题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2016-12-12T00:00:00+01:00" pubdate>Mon 12 December 2016</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<p>平面图最小割等于对偶图最短路，可以去看一看<a href="http://wenku.baidu.com/view/5a7df375a417866fb84a8e54.html">这个东西</a>。</p>
-<p>几年前就该来写这道题的……拖到现在……</p>
-<p>要特判一下n，m中有一个是1的情况。</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;queue&gt;</span><span class="cp"></span>
-<span class="cp">#define ele int</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="cp">#define maxn 1010</span>
-<span class="cp">#define maxv 2000010</span>
-<span class="cp">#define INF 1000000000</span>
-<span class="k">struct</span> <span class="n">hn</span><span class="p">{</span>
-    <span class="n">ele</span> <span class="n">i</span><span class="p">,</span><span class="n">d</span><span class="p">;</span>
-    <span class="kr">inline</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">&lt;</span><span class="p">(</span><span class="n">hn</span> <span class="n">b</span><span class="p">)</span><span class="k">const</span><span class="p">{</span>
-        <span class="k">return</span> <span class="n">d</span><span class="o">&gt;</span><span class="n">b</span><span class="p">.</span><span class="n">d</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">};</span>
-<span class="k">struct ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj1001ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index8.html">&larr; Older</a>
 
@@ -403,6 +397,9 @@
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1044ti-jie.html">bzoj1044题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1057ti-jie.html">bzoj1057题解</a>
       </li>
       <li class="post">
@@ -413,9 +410,6 @@
       </li>
       <li class="post">
           <a href="/bzoj1034ti-jie.html">bzoj1034题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1006ti-jie.html">bzoj1006题解</a>
       </li>
     </ul>
   </section>

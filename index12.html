@@ -49,6 +49,37 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj2653ti-jie.html">bzoj2653题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-08-26T00:00:00+02:00" pubdate>Fri 26 August 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=27571290&auto=0&height=66"></iframe>
+
+<p>军训完第一道OI题。</p>
+<p>感觉方法挺难想的……不过看了题解马上就懂了。</p>
+<p>对于一个数x，置数列中所有比x小的数为-1，所有等于x的数为0，所有大于x的数为1。取$l \in [a,b]$,$r \in [c,d]$，区间[l,r]的和最大为k。如果k&gt;=0，那么答案&gt;=x,否则答案小于x。</p>
+<p>于是就可以二分了。</p>
+<p>但是有一个问题：如何把数列中的数改为-1,0和1？</p>
+<p>考虑使用主席树，一开始所有数为1，把原数列中的数从小到大排序，每次加入一个数，就把前面的那个数改为-1或0。当原数列中最后一个x被插入时，数列中所有比x小的数为-1，所有等于x的数为0，所有大于x的数为1。</p>
+<p>最大区间和的维护是一个简单的线段树问题。</p>
+<p>代码（写得好丑啊）：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj2653ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj36733674ti-jie.html">bzoj3673&3674题解</a>
       </h1>
     <p class="meta">
@@ -367,47 +398,6 @@ i-1 ...</p></!--more--></div>
     <a rel="full-article" href="/bzoj2431ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj2242ti-jie.html">bzoj2242题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2016-06-10T00:00:00+02:00" pubdate>Fri 10 June 2016</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=25714082&auto=0&height=66"></iframe>
-
-<p>做道数学题给明天高联初赛求RP。</p>
-<p>第一问用快速幂，第二问用拓展欧几里得，第三问用BSGS。</p>
-<p>注意一大堆特判。</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cmath&gt;</span><span class="cp"></span>
-<span class="cp">#define ele long long</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="cp">#define R 100007</span>
-<span class="k">struct</span> <span class="n">HASH</span>
-<span class="p">{</span>
-    <span class="k">const</span> <span class="n">ele</span> <span class="n">null</span><span class="p">;</span>
-    <span class="n">HASH</span><span class="p">()</span><span class="o">:</span><span class="n">null</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">){}</span>
-    <span class="kr">inline</span> <span class="kt">void</span> <span class="n">clear</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">R</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
-            <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">null</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="kr">inline</span> <span class="n">ele ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj2242ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index13.html">&larr; Older</a>
 
@@ -419,6 +409,9 @@ i-1 ...</p></!--more--></div>
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1044ti-jie.html">bzoj1044题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1057ti-jie.html">bzoj1057题解</a>
       </li>
       <li class="post">
@@ -429,9 +422,6 @@ i-1 ...</p></!--more--></div>
       </li>
       <li class="post">
           <a href="/bzoj1034ti-jie.html">bzoj1034题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1006ti-jie.html">bzoj1006题解</a>
       </li>
     </ul>
   </section>
