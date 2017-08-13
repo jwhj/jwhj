@@ -49,6 +49,38 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj1085ti-jie.html">bzoj1085题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2017-08-13T00:00:00+02:00" pubdate>Sun 13 August 2017</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=2117009&auto=0&height=66"></iframe>
+
+<p>IDA*的模板题，把跟目标状态不同的格子数量作为估价函数。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#define ele int</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">const</span> <span class="n">ele</span> <span class="n">di</span><span class="p">[]</span><span class="o">=</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">};</span>
+<span class="k">const</span> <span class="n">ele</span> <span class="n">dj</span><span class="p">[]</span><span class="o">=</span><span class="p">{</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">};</span>
+<span class="k">const</span> <span class="n">ele</span> <span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">;</span>
+<span class="kt">char</span> <span class="n">s</span><span class="p">[</span><span class="n">n ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj1085ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj1044ti-jie.html">bzoj1044题解</a>
       </h1>
     <p class="meta">
@@ -353,34 +385,6 @@
     <a rel="full-article" href="/bzoj1040ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj1193ti-jie.html">bzoj1193题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2017-07-31T00:00:00+02:00" pubdate>Mon 31 July 2017</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=2920947&auto=0&height=66"></iframe>
-
-<p>网上最多见的做法好像都挺玄学的……感觉我的做法比较靠谱而且高效。</p>
-<p>一开始的思路跟<a href="http://blog.eleele.gq/bzoj2299ti-jie.html">这道题</a>一样，得到方程：
-$$(t_1+t_2)+2(t_3+t_4)=x$$
-$$(t_3-t_4)+2(t_1-t_2)=y$$</p>
-<p>要求$|t_1|+|t_2|+|t_3|+|t_4|$的最小值。</p>
-<p>x，y的正负是无关紧要的，所以不妨把x，y都取绝对值。</p>
-<p>注意到$|t_1|+|t_2|=\mathrm{max}\{|t_1+t_2|,|t_1-t_2|\}$，即要求$\mathrm{max}\{|x-2p|,|q|\}+\mathrm{max}\{|y-2q|,|p|\}$的最小值，保证x与q同奇偶 ...</p></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj1193ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index2.html">&larr; Older</a>
 
@@ -390,6 +394,9 @@ $$(t_3-t_4)+2(t_1-t_2)=y$$</p>
   <section>
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
+      <li class="post">
+          <a href="/bzoj1085ti-jie.html">bzoj1085题解</a>
+      </li>
       <li class="post">
           <a href="/bzoj1044ti-jie.html">bzoj1044题解</a>
       </li>
@@ -401,9 +408,6 @@ $$(t_3-t_4)+2(t_1-t_2)=y$$</p>
       </li>
       <li class="post">
           <a href="/bzoj1042ti-jie.html">bzoj1042题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1034ti-jie.html">bzoj1034题解</a>
       </li>
     </ul>
   </section>

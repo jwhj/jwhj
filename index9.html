@@ -49,6 +49,42 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj2783ti-jie.html">bzoj2783题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-11-15T00:00:00+01:00" pubdate>Tue 15 November 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=16435049&auto=0&height=66"></iframe>
+
+<h2>bzoj150题留念。</h2>
+<p>dfs整棵树，维护一个队列，每次某个点入栈，就把它加到队尾，并调整队首，使得队中元素之和恰好&lt;=s。这个点出栈的时候就把队首恢复原位。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#define ele int</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxn 100010</span>
+<span class="k">struct</span> <span class="n">edge</span><span class="p">{</span>
+    <span class="n">ele</span> <span class="n">v</span><span class="p">;</span>
+    <span class="n">edge</span> <span class="o">*</span><span class="n">nxt</span><span class="p">;</span>
+<span class="p">}</span><span class="n">ep</span><span class="p">[</span><span class="n">maxn</span><span class="p">];</span>
+<span class="n">ele</span> <span class="n">n</span><span class="p">,</span><span class="n">s</span><span class="p">,</span><span class="n">ecnt</span><span class="p">,</span><span class="n">ans</span><span class="p">,</span><span class="n">w</span><span class="p">[</span><span class="n">maxn</span><span class="p">],</span><span class="n">q</span><span class="p">[</span><span class="n">maxn</span><span class="p">];</span>
+<span class="n">edge</span> <span class="o">*</span><span class="n">h</span><span class="p">[</span><span class="n">maxn</span><span class="p">];</span>
+<span class="kr">inline</span> <span class="kt">void ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj2783ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj1013ti-jie.html">bzoj1013题解</a>
       </h1>
     <p class="meta">
@@ -361,45 +397,6 @@
     <a rel="full-article" href="/bzoj2763ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj3083ti-jie.html">bzoj3083题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2016-11-02T00:00:00+01:00" pubdate>Wed 02 November 2016</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=21253966&auto=0&height=66"></iframe>
-
-<p>这题又有子树操作，又有换根，用估计做不了。</p>
-<p>注意到虽然根换了，树的形态不会变，所以可以用树剖来做。</p>
-<p>换根对链上操作没有影响，子树操作分三种情况讨论换根的影响，详细的看代码。</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
-<span class="cp">#define ele int</span>
-<span class="cp">#define ll long long</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="cp">#define maxn 100010</span>
-<span class="cp">#define maxk 19</span>
-<span class="cp">#define INF 1e10</span>
-<span class="k">struct</span> <span class="n">edge</span><span class="p">{</span>
-    <span class="n">ele</span> <span class="n">v</span><span class="p">;</span>
-    <span class="n">edge</span> <span class="o">*</span><span class="n">nxt</span><span class="p">;</span>
-<span class="p">}</span><span class="n">ep</span><span class="p">[</span><span class="n">maxn</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">];</span>
-<span class="n">ele ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj3083ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index10.html">&larr; Older</a>
 
@@ -411,6 +408,9 @@
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1085ti-jie.html">bzoj1085题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1044ti-jie.html">bzoj1044题解</a>
       </li>
       <li class="post">
@@ -421,9 +421,6 @@
       </li>
       <li class="post">
           <a href="/bzoj1042ti-jie.html">bzoj1042题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1034ti-jie.html">bzoj1034题解</a>
       </li>
     </ul>
   </section>

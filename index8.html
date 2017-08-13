@@ -49,6 +49,36 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj1010ti-jie.html">bzoj1010题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-12-13T00:00:00+01:00" pubdate>Tue 13 December 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p>没什么好说的……直接斜率优化就可以了。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#define ele long long</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxn 50010</span>
+<span class="n">ele</span> <span class="n">n</span><span class="p">,</span><span class="n">p</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">c</span><span class="p">[</span><span class="n">maxn</span><span class="p">],</span><span class="n">bt</span><span class="p">[</span><span class="n">maxn</span><span class="p">],</span><span class="n">bf</span><span class="p">[</span><span class="n">maxn</span><span class="p">],</span><span class="n">q</span><span class="p">[</span><span class="n">maxn</span><span class="p">];</span>
+<span class="n">ele</span> <span class="o">*</span><span class="n">t</span><span class="o">=</span><span class="n">bt</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="o">*</span><span class="n">f</span><span class="o">=</span><span class="n">bf</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+<span class="kr">inline</span> <span class="kt">double</span> <span class="nf">slop</span><span class="p">(</span><span class="n">ele</span> <span class="n">j</span><span class="p">,</span><span class="n">ele</span> <span class="n">k</span><span class="p">){</span>
+    <span class="k">return ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj1010ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj1001ti-jie.html">bzoj1001题解</a>
       </h1>
     <p class="meta">
@@ -322,42 +352,6 @@ $$(t3-t4)a+(t1-t2)b=y$$</p>
     <a rel="full-article" href="/bzoj1452ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj2783ti-jie.html">bzoj2783题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2016-11-15T00:00:00+01:00" pubdate>Tue 15 November 2016</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=16435049&auto=0&height=66"></iframe>
-
-<h2>bzoj150题留念。</h2>
-<p>dfs整棵树，维护一个队列，每次某个点入栈，就把它加到队尾，并调整队首，使得队中元素之和恰好&lt;=s。这个点出栈的时候就把队首恢复原位。</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#define ele int</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="cp">#define maxn 100010</span>
-<span class="k">struct</span> <span class="n">edge</span><span class="p">{</span>
-    <span class="n">ele</span> <span class="n">v</span><span class="p">;</span>
-    <span class="n">edge</span> <span class="o">*</span><span class="n">nxt</span><span class="p">;</span>
-<span class="p">}</span><span class="n">ep</span><span class="p">[</span><span class="n">maxn</span><span class="p">];</span>
-<span class="n">ele</span> <span class="n">n</span><span class="p">,</span><span class="n">s</span><span class="p">,</span><span class="n">ecnt</span><span class="p">,</span><span class="n">ans</span><span class="p">,</span><span class="n">w</span><span class="p">[</span><span class="n">maxn</span><span class="p">],</span><span class="n">q</span><span class="p">[</span><span class="n">maxn</span><span class="p">];</span>
-<span class="n">edge</span> <span class="o">*</span><span class="n">h</span><span class="p">[</span><span class="n">maxn</span><span class="p">];</span>
-<span class="kr">inline</span> <span class="kt">void ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj2783ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index9.html">&larr; Older</a>
 
@@ -369,6 +363,9 @@ $$(t3-t4)a+(t1-t2)b=y$$</p>
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1085ti-jie.html">bzoj1085题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1044ti-jie.html">bzoj1044题解</a>
       </li>
       <li class="post">
@@ -379,9 +376,6 @@ $$(t3-t4)a+(t1-t2)b=y$$</p>
       </li>
       <li class="post">
           <a href="/bzoj1042ti-jie.html">bzoj1042题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1034ti-jie.html">bzoj1034题解</a>
       </li>
     </ul>
   </section>
