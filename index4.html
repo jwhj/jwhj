@@ -49,6 +49,38 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj1018ti-jie.html">bzoj1018题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2017-05-14T00:00:00+02:00" pubdate>Sun 14 May 2017</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p>我们考虑一个更一般的问题——动态维护图的连通性。</p>
+<p>在线的做法我还不会，但是如果离线的话，有一个非常妙的做法。</p>
+<p>用一棵线段树维护时间轴，每一条边在时间轴中存在一定的时间。这些时间可以像区间修改那样对应到线段树的若干个节点。每个节点维护一个vector，这个vector里面的边在该节点代表的时间段里均存在。</p>
+<p>接着对这棵线段树dfs，用一个并查集维护图的联通性，每到达一个节点，就把这个节点的vector里面的所有边加进去。每到达一个叶子节点，就可以利用并查集回答相应的询问。回朔的时候需要删边，但删边是很困难的。不过注意到这里只需要撤销加入的边，那么在每个节点上维护当时对并查集的修改，然后回朔的时候改回去就可以了。</p>
+<p>路径压缩的势能分析在有撤销操作时会失效，因此要写按大小和并，时间复杂度$O(n\log n)$。</p>
+<p>写合并的时候脑残忘了判断两点在同一集合中的情况……</p>
+<p>其实，对于那些有插入和删除操作，删除很困难但撤销插入相对容易的问题，按时间分治往往是很有用的想法。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
+<span class="cp">#define ele int ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj1018ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj1017ti-jie.html">bzoj1017题解</a>
       </h1>
     <p class="meta">
@@ -318,37 +350,6 @@
     <a rel="full-article" href="/bzoj1412ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj3438ti-jie.html">bzoj3438题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2017-03-02T00:00:00+01:00" pubdate>Thu 02 March 2017</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<p>像这种题，有一堆东西，每个东西有两种选择，分别会有一定的贡献，一些选择的组合又会有一定的贡献的，可以用最小割模型来做。</p>
-<p>对于此题，从s到每个作物连一条权为ai的边，每个作物到t连一条权为bi的边。如果割掉s到i的边，说明i种在B，否则说明i种在A。</p>
-<p>如果一些作物都种在A会有额外收益c，那么新建一个点x，s到x连一条权为c的边，x到那些作物分别连一条权为INF的边。这样的话，如果这些作物中有一个i，它到t的边没有被割掉，那么s到x的边必须被割掉。于是所有没割掉的边的权值之和即为总收益，求出这个图的最小割，并用所有可能出现的收益的和减掉最小割就可以得到答案了。</p>
-<p>据说这个模型可以解决未知数只能取0/1的线性规划？晚点研究一下。<del>还是打单纯形吧。</del></p>
-<p>写了一个dinic结果TLE了好几发，跟别人写的对比了之后发现我写得还是过于naive……有好多可以优化的地方。</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cctype&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
-<span class="cp">#define ele int</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj3438ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index5.html">&larr; Older</a>
 
@@ -360,6 +361,9 @@
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1076ti-jie.html">bzoj1076题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1093ti-jie.html">bzoj1093题解</a>
       </li>
       <li class="post">
@@ -370,9 +374,6 @@
       </li>
       <li class="post">
           <a href="/bzoj1085ti-jie.html">bzoj1085题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1044ti-jie.html">bzoj1044题解</a>
       </li>
     </ul>
   </section>

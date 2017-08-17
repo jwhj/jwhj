@@ -49,6 +49,38 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj3295ti-jie.html">bzoj3295题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2017-02-01T00:00:00+01:00" pubdate>Wed 01 February 2017</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p>网上题解似乎都是树套树&amp;cdq分治。我感觉可以用块状链表水过去，于是就写了一下，没开long long结果WA了一次,然后就A了。</p>
+<p>块的大小要设为$\sqrt{n\log n}$。这道题只有删除，所以可以不考虑块的合并/块状链表重构，把每$\sqrt{n}$次操作后重构的代码删了以后程序快了很多……</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cmath&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#define ele int</span>
+<span class="cp">#define ll long long</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxn 100010</span>
+<span class="cp">#define maxs 1300</span>
+<span class="k">struct ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj3295ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj2243ti-jie.html">bzoj2243题解</a>
       </h1>
     <p class="meta">
@@ -346,40 +378,6 @@
     <a rel="full-article" href="/bzoj3110ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj1857ti-jie.html">bzoj1857题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2017-01-14T00:00:00+01:00" pubdate>Sat 14 January 2017</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<p>三分套三分就可以了。</p>
-<p>至于外层三分为什么是对的，我不知道……晚点看心情试着证一下吧。</p>
-<p>UPD：可以用分块搜索法，这样不需要证明是单峰函数。</p>
-<p>UPD：内层肯定是单峰函数所以可以内层三分外层分块搜索，这样不需要证明外层是不是单峰，而且效率也提高了。</p>
-<p>代码（分块搜索套三分）：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cmath&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
-<span class="cp">#define ele int</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="cp">#define eps 1e-6</span>
-<span class="cp">#define K 27</span>
-<span class="cp">#define M 3</span>
-<span class="kt">double</span> <span class="n">ax</span><span class="p">,</span><span class="n">ay</span><span class="p">,</span><span class="n">bx</span><span class="p">,</span><span class="n">by</span><span class="p">,</span><span class="n">cx</span><span class="p">,</span><span class="n">cy</span><span class="p">,</span><span class="n">dx</span><span class="p">,</span><span class="n">dy ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj1857ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index7.html">&larr; Older</a>
 
@@ -391,6 +389,9 @@
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1076ti-jie.html">bzoj1076题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1093ti-jie.html">bzoj1093题解</a>
       </li>
       <li class="post">
@@ -401,9 +402,6 @@
       </li>
       <li class="post">
           <a href="/bzoj1085ti-jie.html">bzoj1085题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1044ti-jie.html">bzoj1044题解</a>
       </li>
     </ul>
   </section>

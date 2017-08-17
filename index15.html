@@ -49,6 +49,40 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/poj3737ti-jie.html">poj3737题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-05-11T00:00:00+02:00" pubdate>Wed 11 May 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=31877078&auto=0&height=66"></iframe>
+
+<p>体积V是关于底面半径r的函数，而且还是上凸的单峰函数。</p>
+<p>其实如果把表达式写出来，求个导就可以做了，当然这里也可以用三分法。</p>
+<p>下面讲一下三分法，以求上凸的单峰函数的最大值为例:</p>
+<p>假设已经确定最大值在[l,r]中，取[l,r]的三等分点m1,m2。</p>
+<p>如果f(m1) &lt;= f(m2)，最大值在[l,m2]中。</p>
+<p>如果f(m1)&gt;f(m2),最大值在[m1,r]中。</p>
+<p>然后就可以做了。</p>
+<p>这道题比较奇怪，如果用G++交的话过不了。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cmath&gt;</span><span class="cp"></span>
+<span class="cp">#define ele int</span>
+<span class="k">using ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/poj3737ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj1260ti-jie.html">bzoj1260题解</a>
       </h1>
     <p class="meta">
@@ -304,6 +338,9 @@ $$E=mc^2$$</p>
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1076ti-jie.html">bzoj1076题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1093ti-jie.html">bzoj1093题解</a>
       </li>
       <li class="post">
@@ -314,9 +351,6 @@ $$E=mc^2$$</p>
       </li>
       <li class="post">
           <a href="/bzoj1085ti-jie.html">bzoj1085题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1044ti-jie.html">bzoj1044题解</a>
       </li>
     </ul>
   </section>

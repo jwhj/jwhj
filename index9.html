@@ -49,6 +49,39 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj2741ti-jie.html">bzoj2741题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-12-05T00:00:00+01:00" pubdate>Mon 05 December 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p>首先求出每个前缀的异或值，那么询问就可以转化为，在区间中找两个值，使它们异或起来最大。</p>
+<p>考虑在线莫队，如果不会的话看一下<a href="http://blog.eleele.gq/bzoj3744ti-jie.html">这篇题解</a>。</p>
+<p>把区间中的数的二进制用一个trie维护起来，对于一个新的数x，可以$O(\log x)$地找到x与区间中某个数异或的最大值。</p>
+<p>令f1[i]表示[0,i]中的数组成的trie，用可持久化的方法把他们维护起来，就可以用在线莫队来做了。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cmath&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#define ele int</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxn 12010</span>
+<span class="cp">#define maxs 120</span>
+<span class="cp">#define maxk ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj2741ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj3744ti-jie.html">bzoj3744题解</a>
       </h1>
     <p class="meta">
@@ -356,45 +389,6 @@
     <a rel="full-article" href="/bzoj4325ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj1095ti-jie.html">bzoj1095题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2016-11-06T00:00:00+01:00" pubdate>Sun 06 November 2016</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=2069470&auto=0&height=66"></iframe>
-
-<p>先考虑静态的情况，显然点剖一下就做完了。</p>
-<p>动态也是一个道理，但是要用优先队列来维护信息，每个点维护两个堆：</p>
-<ul>
-<li>以该点为重心的分治结构中所有关灯的点到上一层分治结构重心的距离</li>
-<li>以该点为重心的分治结构中所有子树的堆顶，如果该点关灯，还有一个0</li>
-</ul>
-<p>用一个全局的堆维护每个点的第二个堆的最大值+次大值，那么全局堆的堆顶就是答案。</p>
-<p>修改自己想吧，知道要维护什么堆应该不难想……</p>
-<p>空间复杂度分析类似树套树，可以得到是$O(n\log n)$的。</p>
-<p>发现一个实现删除任意已知元素的优先队列的实现方法，详情看代码。</p>
-<p>写了句<code>char s[10],u;</code>调了几个小时……惨啊</p>
-<p>现在是时候思考<code>动态树 分治</code>的可行性了233</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;queue&gt;</span><span class="cp"></span>
-<span class="cp">#define ele ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj1095ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index10.html">&larr; Older</a>
 
@@ -406,6 +400,9 @@
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1076ti-jie.html">bzoj1076题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1093ti-jie.html">bzoj1093题解</a>
       </li>
       <li class="post">
@@ -416,9 +413,6 @@
       </li>
       <li class="post">
           <a href="/bzoj1085ti-jie.html">bzoj1085题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1044ti-jie.html">bzoj1044题解</a>
       </li>
     </ul>
   </section>

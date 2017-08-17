@@ -49,6 +49,32 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj3956ti-jie.html">bzoj3956题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-09-04T00:00:00+02:00" pubdate>Sun 04 September 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=133998&auto=0&height=66"></iframe>
+
+<p>假设(i,j)是一个好点对，且$a_i\lt a_j$，那么$a_j$只能是$a_i$右侧第一个大于$a_i$的数。</p>
+<p>同样地，如果$a_i\gt a_j$，那么$a_i$只能是$a_j$左侧第一个大于$a_i$的数。</p>
+<p>所以，如果一个数作为好点对中的较小数，那么至多只有两种情况：左边一个，右边一个。</p>
+<p>用单调栈可以$O(n)$地统计出每个数左右第一个比它大的数，接着就可以得出以每个数为起点（不一定要是较小数）的好点对个数，以及以每个数为终点（也不一定要是较小数）的好点对个数。</p>
+<p>考虑询问l,r，求出 ...</p></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj3956ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj3489ti-jie.html">bzoj3489题解</a>
       </h1>
     <p class="meta">
@@ -379,43 +405,6 @@ i-1 ...</p></!--more--></div>
     <a rel="full-article" href="/bzoj2326ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj3333ti-jie.html">bzoj3333题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2016-07-03T00:00:00+02:00" pubdate>Sun 03 July 2016</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=5120885&auto=0&height=66"></iframe>
-
-<p>注意到这样一个性质：</p>
-<blockquote>
-<p>每次选定一个位置P后，减少的逆序对数量就是p~n中满足要求的人原来构成的逆序对——而且当操作完成之后，这些人将永远不会产生逆序对了。</p>
-</blockquote>
-<p>于是可以先求出以i开头的逆序对fi以及开始时的逆序对总数，对于一个询问p，选出p~n中所有使hj&lt;=hp的j，在答案中减去fj，最后把j这个人删掉。</p>
-<p>为了找出所有使hj&lt;=hp的j，维护一个线段树，每次查询p~n中hj最小的位置j，答案中减去fj之后，把hj置为无穷，相当于把这个人删掉。重复此操作直到身高不超过hp的人都被删掉为止。</p>
-<p>细节还是有点多的。</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
-<span class="cp">#define ele long long</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="cp">#define INF 1000000001</span>
-<span class="cp">#define maxn 500010</span>
-<span class="k">const</span> <span class="n">ele ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj3333ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index13.html">&larr; Older</a>
 
@@ -427,6 +416,9 @@ i-1 ...</p></!--more--></div>
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1076ti-jie.html">bzoj1076题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1093ti-jie.html">bzoj1093题解</a>
       </li>
       <li class="post">
@@ -437,9 +429,6 @@ i-1 ...</p></!--more--></div>
       </li>
       <li class="post">
           <a href="/bzoj1085ti-jie.html">bzoj1085题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1044ti-jie.html">bzoj1044题解</a>
       </li>
     </ul>
   </section>
