@@ -49,6 +49,44 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj2326ti-jie.html">bzoj2326题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-07-05T00:00:00+02:00" pubdate>Tue 05 July 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=407677659&auto=0&height=66"></iframe>
+
+<p>记$f_i=Concatenate(1..i)$。</p>
+<p>如果i是k位数，就有$f_i=10^kf_{i-1}+i$，利用这个，就可以在$O(n)$的时间内求出答案了。</p>
+<p>然而这么做还是慢。注意到
+$$
+\begin{bmatrix}
+f_i\\
+i\\
+1
+\end{bmatrix}=
+\begin{bmatrix}
+10^k &amp; 1 &amp; 1\\
+0 &amp; 1 &amp; 1\\
+0 &amp; 0 &amp; 1
+\end{bmatrix}
+\begin{bmatrix}
+f_{i-1}\\
+i-1 ...</p></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj2326ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj3333ti-jie.html">bzoj3333题解</a>
       </h1>
     <p class="meta">
@@ -339,36 +377,6 @@
     <a rel="full-article" href="/bzoj3994ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj3884ti-jie.html">bzoj3884题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2016-06-05T00:00:00+02:00" pubdate>Sun 05 June 2016</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=27533158&auto=0&height=66"></iframe>
-
-<p>神犇们的题解里面都说：</p>
-<blockquote>
-<p>不要被无穷个2吓到了</p>
-</blockquote>
-<p>反正我是被吓到了。</p>
-<p>为了叙述方便，我们让$u=2^{2^{2\ldots}}$，那么因为2有无穷个，所以$u=2^u$。</p>
-<p>设$p=2^k\times q$，这里$q$为奇数。</p>
-<p>那么有$$u\mod p=2^u\mod p=2^k(2^{u-k}\mod q)$$</p>
-<p>这里$q$是奇数，与2互质，所以有$$2^{u-k ...</p></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj3884ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index14.html">&larr; Older</a>
 
@@ -380,6 +388,9 @@
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1079ti-jie.html">bzoj1079题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1076ti-jie.html">bzoj1076题解</a>
       </li>
       <li class="post">
@@ -390,9 +401,6 @@
       </li>
       <li class="post">
           <a href="/poj2187ti-jie.html">poj2187题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1085ti-jie.html">bzoj1085题解</a>
       </li>
     </ul>
   </section>

@@ -49,6 +49,38 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj1079ti-jie.html">bzoj1079题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2017-08-19T00:00:00+02:00" pubdate>Sat 19 August 2017</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=16686604&auto=0&height=66"></iframe>
+
+<p>注意到ci&lt;=5以及对于某一个状态，剩余次数相同的颜色地位是差不多的，可以考虑把状态表示为(a,b,c,d,e,k)，即剩下1次的有a种……剩下5次的有e种，当前最后一位的颜色还剩k次，然后记忆化搜索就可以了。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#define ele long long</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxk 17</span>
+<span class="cp">#define maxc 6</span>
+<span class="cp">#define MOD 1000000007</span>
+<span class="n">ele</span> <span class="n">k</span><span class="p">,</span><span class="n">c</span><span class="p">[</span><span class="n">maxk</span><span class="p">],</span><span class="n">cnt</span><span class="p">[</span><span class="n">maxc</span><span class="p">],</span><span class="n">f</span><span class="p">[</span><span class="n">maxk ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj1079ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj1076ti-jie.html">bzoj1076题解</a>
       </h1>
     <p class="meta">
@@ -350,36 +382,6 @@
     <a rel="full-article" href="/bzoj1042ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj1034ti-jie.html">bzoj1034题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2017-08-06T00:00:00+02:00" pubdate>Sun 06 August 2017</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=475277165&auto=0&height=66"></iframe>
-
-<p>每次找出对手中最强的一个，用己方能赢的最弱的人去打，如果都不能赢，暂不分配对手。接下来，对于剩下的对手，能打平尽量打平。这样一定能得到最多的分数。</p>
-<p>大概说一下为什么是对的。考虑当前某个对手a，按当前策略选出的对手是b。如果存在某个最优策略，己方输给了a，那么把a的对手调成b，一定不会更差。如果存在某个最优策略，己方与a打平，假设己方派出的是c，那么c比a弱且与b相当。考虑b，如果b输了或者平了，那么把a的对手改成b一定不会更差；如果b赢了，考虑b的对手d，如果d比a弱或者与a相当，同样可以把a的对手调成b，如果d比a强，由算法流程，为a挑对手的时候不可能调到b，矛盾。</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;set&gt;</span><span class="cp"></span>
-<span class="cp">#define ele int</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj1034ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index2.html">&larr; Older</a>
 
@@ -389,6 +391,9 @@
   <section>
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
+      <li class="post">
+          <a href="/bzoj1079ti-jie.html">bzoj1079题解</a>
+      </li>
       <li class="post">
           <a href="/bzoj1076ti-jie.html">bzoj1076题解</a>
       </li>
@@ -400,9 +405,6 @@
       </li>
       <li class="post">
           <a href="/poj2187ti-jie.html">poj2187题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1085ti-jie.html">bzoj1085题解</a>
       </li>
     </ul>
   </section>

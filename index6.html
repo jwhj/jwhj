@@ -49,6 +49,36 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj2209ti-jie.html">bzoj2209题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2017-02-01T00:00:00+01:00" pubdate>Wed 01 February 2017</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p>把左括号看成-1，右括号看成1，那么一个区间中，前缀和最大值即为未匹配的右括号个数，后缀和最小值的相反数即为未匹配的左括号的个数。</p>
+<p>设两者分别为a，b，如果$2|a,b$，那么答案为$\frac{a+b}{2}$，否则答案为$\frac{a+b}{2}+1$。</p>
+<p>有一个细节需要注意，如果前缀和最大值为负，则右括号全部匹配完，如果后缀和最小值为正，则左括号全部匹配完。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstdlib&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#define ele int</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxn 100010 ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj2209ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj3295ti-jie.html">bzoj3295题解</a>
       </h1>
     <p class="meta">
@@ -342,42 +372,6 @@
     <a rel="full-article" href="/bzoj2006ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj3110ti-jie.html">bzoj3110题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2017-01-15T00:00:00+01:00" pubdate>Sun 15 January 2017</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<p>题目写得比较奇怪……应该理解成每个位置可以堆很多个数。</p>
-<p>用整体二分就可以做了。</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#define ele long long</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="cp">#define maxn 100010</span>
-<span class="k">struct</span> <span class="n">ASK</span><span class="p">{</span>
-    <span class="n">ele</span> <span class="n">l</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">id</span><span class="p">;</span>
-<span class="p">};</span>
-<span class="k">struct</span> <span class="n">BIT</span><span class="p">{</span>
-    <span class="kr">inline</span> <span class="kt">void</span> <span class="n">alloc</span><span class="p">(</span><span class="n">ele</span> <span class="n">n</span><span class="p">){</span>
-        <span class="n">memset</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">a</span><span class="p">));</span>
-        <span class="k">this</span><span class="o">-&gt;</span><span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="kr">inline</span> <span class="kt">void</span> <span class="n">add</span><span class="p">(</span><span class="n">ele ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj3110ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index7.html">&larr; Older</a>
 
@@ -389,6 +383,9 @@
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1079ti-jie.html">bzoj1079题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1076ti-jie.html">bzoj1076题解</a>
       </li>
       <li class="post">
@@ -399,9 +396,6 @@
       </li>
       <li class="post">
           <a href="/poj2187ti-jie.html">poj2187题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1085ti-jie.html">bzoj1085题解</a>
       </li>
     </ul>
   </section>
