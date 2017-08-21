@@ -4,7 +4,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>bzoj2783题解 &mdash; 蒟蒻的博客</title>
+  <title>bzoj1086题解 &mdash; 蒟蒻的博客</title>
   <meta name="author" content="iamplm">
 
 
@@ -50,9 +50,9 @@
 <div>
   <article class="hentry" role="article">
 <header>
-      <h1 class="entry-title">bzoj2783题解</h1>
+      <h1 class="entry-title">bzoj1086题解</h1>
     <p class="meta">
-<time datetime="2016-11-15T00:00:00+01:00" pubdate>Tue 15 November 2016</time>    </p>
+<time datetime="2017-08-21T00:00:00+02:00" pubdate>Mon 21 August 2017</time>    </p>
 </header>
 
   <div class="entry-content"><!--more-->
@@ -61,54 +61,57 @@
 
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=16435049&auto=0&height=66"></iframe>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=28188173&auto=0&height=66"></iframe>
 
-<h2>bzoj150题留念。</h2>
-<p>dfs整棵树，维护一个队列，每次某个点入栈，就把它加到队尾，并调整队首，使得队中元素之和恰好&lt;=s。这个点出栈的时候就把队首恢复原位。</p>
+<p>dfs整棵树，当dfs(u)的时候，为u维护一个等待序列，初始时为空。设v为u的一个孩子，递归dfs(v)结束后将v的等待序列加到u的末尾。如果u的等待序列长度不小于B，将等待序列中的所有点划入一个省，以u为省会（但不将v划入这个省），同时将u的等待序列清空。u的所有孩子都dfs完后，将u加入它的等待序列，回溯。</p>
+<p>dfs(root)结束后，root的等待序列中还会剩下一些点，直接划入最后一个省就可以了。</p>
+<p>等待序列的维护可以用一个栈，另外要注意维护一个“栈底”，以此将当前节点的等待序列与其祖先的兄弟结点的等待序列分开。</p>
 <p>代码：</p>
 <div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
 <span class="cp">#define ele int</span>
 <span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="cp">#define maxn 100010</span>
+<span class="cp">#define maxn 1010</span>
 <span class="k">struct</span> <span class="n">edge</span><span class="p">{</span>
     <span class="n">ele</span> <span class="n">v</span><span class="p">;</span>
     <span class="n">edge</span> <span class="o">*</span><span class="n">nxt</span><span class="p">;</span>
-<span class="p">}</span><span class="n">ep</span><span class="p">[</span><span class="n">maxn</span><span class="p">];</span>
-<span class="n">ele</span> <span class="n">n</span><span class="p">,</span><span class="n">s</span><span class="p">,</span><span class="n">ecnt</span><span class="p">,</span><span class="n">ans</span><span class="p">,</span><span class="n">w</span><span class="p">[</span><span class="n">maxn</span><span class="p">],</span><span class="n">q</span><span class="p">[</span><span class="n">maxn</span><span class="p">];</span>
+<span class="p">}</span><span class="n">ep</span><span class="p">[</span><span class="n">maxn</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">],</span><span class="o">*</span><span class="n">ecnt</span><span class="p">;</span>
+<span class="n">ele</span> <span class="n">n</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="n">bcnt</span><span class="p">,</span><span class="n">btm</span><span class="p">,</span><span class="n">top</span><span class="p">,</span><span class="n">blg</span><span class="p">[</span><span class="n">maxn</span><span class="p">],</span><span class="n">stk</span><span class="p">[</span><span class="n">maxn</span><span class="p">],</span><span class="n">a</span><span class="p">[</span><span class="n">maxn</span><span class="p">];</span>
 <span class="n">edge</span> <span class="o">*</span><span class="n">h</span><span class="p">[</span><span class="n">maxn</span><span class="p">];</span>
 <span class="kr">inline</span> <span class="kt">void</span> <span class="nf">addedge</span><span class="p">(</span><span class="n">ele</span> <span class="n">u</span><span class="p">,</span><span class="n">ele</span> <span class="n">v</span><span class="p">){</span>
-    <span class="n">edge</span> <span class="o">*</span><span class="n">p</span><span class="o">=&amp;</span><span class="n">ep</span><span class="p">[</span><span class="n">ecnt</span><span class="o">++</span><span class="p">];</span>
+    <span class="n">edge</span> <span class="o">*</span><span class="n">p</span><span class="o">=</span><span class="n">ecnt</span><span class="o">++</span><span class="p">;</span>
     <span class="n">p</span><span class="o">-&gt;</span><span class="n">v</span><span class="o">=</span><span class="n">v</span><span class="p">;</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">nxt</span><span class="o">=</span><span class="n">h</span><span class="p">[</span><span class="n">u</span><span class="p">];</span>
     <span class="n">h</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">=</span><span class="n">p</span><span class="p">;</span>
 <span class="p">}</span>
-<span class="kt">void</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">ele</span> <span class="n">i</span><span class="p">,</span><span class="n">ele</span> <span class="n">t1</span><span class="p">,</span><span class="n">ele</span> <span class="n">t2</span><span class="p">,</span><span class="n">ele</span> <span class="n">sum</span><span class="p">){</span>
-    <span class="n">q</span><span class="p">[</span><span class="n">t2</span><span class="o">++</span><span class="p">]</span><span class="o">=</span><span class="n">i</span><span class="p">;</span>
-    <span class="n">sum</span><span class="o">+=</span><span class="n">w</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-    <span class="k">while</span> <span class="p">(</span><span class="n">sum</span><span class="o">&gt;</span><span class="n">s</span> <span class="o">&amp;&amp;</span> <span class="n">t1</span><span class="o">&lt;</span><span class="n">t2</span><span class="p">){</span>
-        <span class="n">sum</span><span class="o">-=</span><span class="n">w</span><span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="n">t1</span><span class="p">]];</span>
-        <span class="o">++</span><span class="n">t1</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">sum</span><span class="o">==</span><span class="n">s</span><span class="p">)</span>
-        <span class="o">++</span><span class="n">ans</span><span class="p">;</span>
+<span class="kt">void</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">ele</span> <span class="n">p</span><span class="p">,</span><span class="n">ele</span> <span class="n">i</span><span class="p">){</span>
     <span class="k">for</span> <span class="p">(</span><span class="n">edge</span> <span class="o">*</span><span class="n">j</span><span class="o">=</span><span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="p">];</span> <span class="n">j</span><span class="p">;</span> <span class="n">j</span><span class="o">=</span><span class="n">j</span><span class="o">-&gt;</span><span class="n">nxt</span><span class="p">)</span>
-        <span class="n">dfs</span><span class="p">(</span><span class="n">j</span><span class="o">-&gt;</span><span class="n">v</span><span class="p">,</span><span class="n">t1</span><span class="p">,</span><span class="n">t2</span><span class="p">,</span><span class="n">sum</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">j</span><span class="o">-&gt;</span><span class="n">v</span><span class="o">!=</span><span class="n">p</span><span class="p">){</span>
+            <span class="n">ele</span> <span class="n">tmp</span><span class="o">=</span><span class="n">btm</span><span class="p">;</span> <span class="n">btm</span><span class="o">=</span><span class="n">top</span><span class="p">;</span>
+            <span class="n">dfs</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="o">-&gt;</span><span class="n">v</span><span class="p">);</span>
+            <span class="n">btm</span><span class="o">=</span><span class="n">tmp</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">top</span><span class="o">-</span><span class="n">btm</span><span class="o">&gt;=</span><span class="n">B</span><span class="p">){</span>
+                <span class="n">a</span><span class="p">[</span><span class="n">bcnt</span><span class="p">]</span><span class="o">=</span><span class="n">i</span><span class="p">;</span>
+                <span class="k">while</span> <span class="p">(</span><span class="n">top</span><span class="o">&gt;</span><span class="n">btm</span><span class="p">)</span> <span class="n">blg</span><span class="p">[</span><span class="n">stk</span><span class="p">[</span><span class="o">--</span><span class="n">top</span><span class="p">]]</span><span class="o">=</span><span class="n">bcnt</span><span class="p">;</span>
+                <span class="o">++</span><span class="n">bcnt</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="n">stk</span><span class="p">[</span><span class="n">top</span><span class="o">++</span><span class="p">]</span><span class="o">=</span><span class="n">i</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
-    <span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%d%d&quot;</span><span class="p">,</span><span class="o">&amp;</span><span class="n">n</span><span class="p">,</span><span class="o">&amp;</span><span class="n">s</span><span class="p">);</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
-        <span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%d&quot;</span><span class="p">,</span><span class="n">w</span><span class="o">+</span><span class="n">i</span><span class="p">);</span>
-    <span class="n">ecnt</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
-    <span class="n">memset</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">h</span><span class="p">));</span>
+    <span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%d%d&quot;</span><span class="p">,</span><span class="o">&amp;</span><span class="n">n</span><span class="p">,</span><span class="o">&amp;</span><span class="n">B</span><span class="p">);</span>
+    <span class="n">ecnt</span><span class="o">=</span><span class="n">ep</span><span class="p">;</span> <span class="n">memset</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">h</span><span class="p">));</span>
     <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">){</span>
         <span class="n">ele</span> <span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">;</span>
-        <span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%d%d&quot;</span><span class="p">,</span><span class="o">&amp;</span><span class="n">u</span><span class="p">,</span><span class="o">&amp;</span><span class="n">v</span><span class="p">);</span>
-        <span class="o">--</span><span class="n">u</span><span class="p">,</span><span class="o">--</span><span class="n">v</span><span class="p">;</span>
-        <span class="n">addedge</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">);</span>
+        <span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%d%d&quot;</span><span class="p">,</span><span class="o">&amp;</span><span class="n">u</span><span class="p">,</span><span class="o">&amp;</span><span class="n">v</span><span class="p">);</span> <span class="o">--</span><span class="n">u</span><span class="p">,</span><span class="o">--</span><span class="n">v</span><span class="p">;</span>
+        <span class="n">addedge</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">);</span> <span class="n">addedge</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">u</span><span class="p">);</span>
     <span class="p">}</span>
-    <span class="n">ans</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
-    <span class="n">dfs</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">ans</span><span class="p">);</span>
+    <span class="n">btm</span><span class="o">=</span><span class="n">top</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+    <span class="n">dfs</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">top</span><span class="p">)</span> <span class="n">blg</span><span class="p">[</span><span class="n">stk</span><span class="p">[</span><span class="o">--</span><span class="n">top</span><span class="p">]]</span><span class="o">=</span><span class="n">bcnt</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">bcnt</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="n">printf</span><span class="p">((</span><span class="n">i</span><span class="o">==</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">?</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">:</span><span class="s">&quot;%d &quot;</span><span class="p">,</span><span class="n">blg</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">bcnt</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="n">printf</span><span class="p">((</span><span class="n">i</span><span class="o">==</span><span class="n">bcnt</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">?</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">:</span><span class="s">&quot;%d &quot;</span><span class="p">,</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div></div>
@@ -119,11 +122,11 @@
         iamplm
     </span>
   </span>
-<time datetime="2016-11-15T00:00:00+01:00" pubdate>Tue 15 November 2016</time>  <span class="categories">
+<time datetime="2017-08-21T00:00:00+02:00" pubdate>Mon 21 August 2017</time>  <span class="categories">
     <a class='category' href='/category/posts.html'>posts</a>
   </span>
   <span class="categories">
-    <a class="category" href="/tag/ti-jie.html">题解</a>,    <a class="category" href="/tag/bzoj.html">bzoj</a>,    <a class="category" href="/tag/luan-gao.html">乱搞</a>  </span>
+    <a class="category" href="/tag/ti-jie.html">题解</a>,    <a class="category" href="/tag/bzoj.html">bzoj</a>,    <a class="category" href="/tag/kuai-zhuang-shu.html">块状树</a>  </span>
 </p><div class="sharing">
 </div>    </footer>
   </article>

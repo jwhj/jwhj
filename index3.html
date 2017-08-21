@@ -49,6 +49,38 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj1149ti-jie.html">bzoj1149题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2017-07-12T00:00:00+02:00" pubdate>Wed 12 July 2017</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=461347796&auto=0&height=66"></iframe>
+
+<p>一开始没看到题目里面的“或至多相差一层”，那就很尴尬了……</p>
+<p>首先，如果最深深度和最浅深度相差2或以上，那肯定是不能通过交换满足条件的。</p>
+<p>满足条件之后，任何一条线上吊着的”子风铃“也都是满足条件的。让f[i]代表以i为根的子树的最小交换次数，如果其左右子树均包含较深深度和较浅深度，那么也肯定是不行的。否则，设i左右子树为j，k，则f[i]=f[j]+f[k]+(是否要交换)。处理出左右子树包含的深度，是否要交换是很好判断的。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#define ele int</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxn 100010</span>
+<span class="k">const</span> <span class="n">ele ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj1149ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj4803ti-jie.html">bzoj4803题解</a>
       </h1>
     <p class="meta">
@@ -354,40 +386,6 @@
     <a rel="full-article" href="/bzoj2125ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj1021ti-jie.html">bzoj1021题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2017-05-19T00:00:00+02:00" pubdate>Fri 19 May 2017</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=3950435&auto=0&height=66"></iframe>
-
-<p>容易发现，不可能会有A把一张钞票给B，B再将其给C的情况，因为这样的话直接由A交给C就可以了。</p>
-<p>于是，对于每一种面额的钞票，总共有6种情况：A给BC，BC给A，B给AC，AC给B，C给AB，AB给C。</p>
-<p>让f[i][j][k]代表只交换前i种钞票，使得A有j元，B有k元的最少交换次数，那么可以通过枚举上面的6中情况来进行转移。</p>
-<p>由于很多状态实际上是达不到的，所以可以用类似bfs的方式，用一个队列保存状态并拓展。</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;queue&gt;</span><span class="cp"></span>
-<span class="cp">#define ele int</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="cp">#define maxn 1010</span>
-<span class="k">const</span> <span class="n">ele</span> <span class="n">p ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj1021ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index4.html">&larr; Older</a>
 
@@ -399,6 +397,9 @@
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1086ti-jie.html">bzoj1086题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1079ti-jie.html">bzoj1079题解</a>
       </li>
       <li class="post">
@@ -409,9 +410,6 @@
       </li>
       <li class="post">
           <a href="/bzoj1069ti-jie.html">bzoj1069题解</a>
-      </li>
-      <li class="post">
-          <a href="/poj2187ti-jie.html">poj2187题解</a>
       </li>
     </ul>
   </section>

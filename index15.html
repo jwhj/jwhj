@@ -49,6 +49,33 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj2818ti-jie.html">bzoj2818题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-05-17T00:00:00+02:00" pubdate>Tue 17 May 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=1799885&auto=0&height=66"></iframe>
+
+<p>因为$(x,y)=p$等价于$(\frac{x}{p},\frac{y}{p})$，所以有：
+$$ans=\sum_{i}\sum_{1&lt;=j&lt;=\frac{n}{p_i}}{\phi(j)}$$。</p>
+<p>先用线性筛求出所有质数。</p>
+<p>先让phi[i]=i，然后对于每个质数p，把phi[p]，phi[2p]，...乘上$\frac{p-1}{p}$。</p>
+<p>下面开始玄学的时间复杂度分析：</p>
+<p>1~n中，质数有$O(\frac{n}{\log n ...</p></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj2818ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj3930ti-jie.html">bzoj3930题解</a>
       </h1>
     <p class="meta">
@@ -336,26 +363,8 @@ $$\ldots$$</p>
     <a rel="full-article" href="/uoj34ti-jie-kuai-su-fu-li-xie-bian-huan.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/just-a-test.html">Just A Test</a>
-      </h1>
-    <p class="meta">
-<time datetime="2016-01-01T00:00:00+01:00" pubdate>Fri 01 January 2016</time>    </p>
-</header>
-
-  <div class="entry-content"><script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<p>Test mathjax.
-$$E=mc^2$$</p>
-<p>Test code:</p>
-<div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Hello, world!&#39;</span><span class="p">)</span>
-</pre></div></div>
-  		</article>
 <div class="pagination">
+    <a class="prev" href="/index16.html">&larr; Older</a>
 
     <a class="next" href="/index14.html">Newer &rarr;</a>
   <br />
@@ -364,6 +373,9 @@ $$E=mc^2$$</p>
   <section>
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
+      <li class="post">
+          <a href="/bzoj1086ti-jie.html">bzoj1086题解</a>
+      </li>
       <li class="post">
           <a href="/bzoj1079ti-jie.html">bzoj1079题解</a>
       </li>
@@ -375,9 +387,6 @@ $$E=mc^2$$</p>
       </li>
       <li class="post">
           <a href="/bzoj1069ti-jie.html">bzoj1069题解</a>
-      </li>
-      <li class="post">
-          <a href="/poj2187ti-jie.html">poj2187题解</a>
       </li>
     </ul>
   </section>

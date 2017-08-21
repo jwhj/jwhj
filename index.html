@@ -49,6 +49,38 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj1086ti-jie.html">bzoj1086题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2017-08-21T00:00:00+02:00" pubdate>Mon 21 August 2017</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=28188173&auto=0&height=66"></iframe>
+
+<p>dfs整棵树，当dfs(u)的时候，为u维护一个等待序列，初始时为空。设v为u的一个孩子，递归dfs(v)结束后将v的等待序列加到u的末尾。如果u的等待序列长度不小于B，将等待序列中的所有点划入一个省，以u为省会（但不将v划入这个省），同时将u的等待序列清空。u的所有孩子都dfs完后，将u加入它的等待序列，回溯。</p>
+<p>dfs(root)结束后，root的等待序列中还会剩下一些点，直接划入最后一个省就可以了。</p>
+<p>等待序列的维护可以用一个栈，另外要注意维护一个“栈底”，以此将当前节点的等待序列与其祖先的兄弟结点的等待序列分开。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#define ele int</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxn 1010</span>
+<span class="k">struct</span> <span class="n">edge ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj1086ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj1079ti-jie.html">bzoj1079题解</a>
       </h1>
     <p class="meta">
@@ -348,40 +380,6 @@
     <a rel="full-article" href="/bzoj1037ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj1042ti-jie.html">bzoj1042题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2017-08-08T00:00:00+02:00" pubdate>Tue 08 August 2017</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=4153490&auto=0&height=66"></iframe>
-
-<p>看到题目第一个想法肯定是多重背包，但是这么做会超时。需要注意的是，只能判断可行性的O(VN)做法似乎不能用来计算方法总数，所以也不行。</p>
-<p>再观察一下题目，会发现货币的种类很少，有很多个询问但是每个询问的货币种类是一样的。所以可以考虑容斥，也就是毫无限制的总方法数-1种超限的总方法数+2种超限的总方法数-3种超限的总方法数+4种超限的总方法数。</p>
-<p>上面式子中每一项都可以用完全背包算出来，而对于每个询问货币种类一样，所以预处理一次完全背包就够了，不需要每次询问都算一次。</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
-<span class="cp">#define ele long long</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="cp">#define maxn 5</span>
-<span class="cp">#define maxs 100010</span>
-<span class="cp">#define v calc</span>
-<span class="k">const</span> <span class="n">ele</span> <span class="n">INF</span><span class="o">=</span><span class="mf">1e9 ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj1042ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index2.html">&larr; Older</a>
 
@@ -391,6 +389,9 @@
   <section>
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
+      <li class="post">
+          <a href="/bzoj1086ti-jie.html">bzoj1086题解</a>
+      </li>
       <li class="post">
           <a href="/bzoj1079ti-jie.html">bzoj1079题解</a>
       </li>
@@ -402,9 +403,6 @@
       </li>
       <li class="post">
           <a href="/bzoj1069ti-jie.html">bzoj1069题解</a>
-      </li>
-      <li class="post">
-          <a href="/poj2187ti-jie.html">poj2187题解</a>
       </li>
     </ul>
   </section>

@@ -4,10 +4,8 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>git使用总结 &mdash; 蒟蒻的博客</title>
+  <title>蒟蒻的博客</title>
   <meta name="author" content="iamplm">
-
-
 
 
 
@@ -40,104 +38,38 @@
 <ul class="main-navigation">
       <li><a href="/pages/about-me.html">About me</a></li>
       <li><a href="/pages/orz.html">Orz!</a></li>
-      <li class="active">
+      <li >
         <a href="/category/posts.html">Posts</a>
       </li>
   <li><a href="/tags.html">Tags</a></li>
 </ul></nav>
   <div id="main">
     <div id="content">
-<div>
-  <article class="hentry" role="article">
+<div class="blog-index">
+  		<article>
 <header>
-      <h1 class="entry-title">git使用总结</h1>
+      <h1 class="entry-title">
+        <a href="/just-a-test.html">Just A Test</a>
+      </h1>
     <p class="meta">
-<time datetime="2016-08-13T00:00:00+02:00" pubdate>Sat 13 August 2016</time>    </p>
+<time datetime="2016-01-01T00:00:00+01:00" pubdate>Fri 01 January 2016</time>    </p>
 </header>
 
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+  <div class="entry-content"><script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
 
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=18649447&auto=0&height=66"></iframe>
+<p>Test mathjax.
+$$E=mc^2$$</p>
+<p>Test code:</p>
+<div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Hello, world!&#39;</span><span class="p">)</span>
+</pre></div></div>
+  		</article>
+<div class="pagination">
 
-<p>自从去北欧旅游以后A了题都不写题解了……写点东西拯救一下。</p>
-<h2>git是什么</h2>
-<p>自己去看<a href="https://en.wikipedia.org/wiki/Git_(software)">wiki</a>。</p>
-<p>需要提一下，git与github是两个不同的东西，你可以认为github是一个支持git的网站，当然这样的网站还有很多，如<a href="http://coding.net">coding</a>，<a href="http://bitbucket.org">bitbucket</a>。</p>
-<h2>安装git</h2>
-<p>Windows</p>
-<div class="highlight"><pre><span></span>我早忘了，自己上网查一下吧……很容易搜到的。
-</pre></div>
-
-
-<p>Ubuntu</p>
-<div class="highlight"><pre><span></span>sudo apt-get install git
-</pre></div>
-
-
-<p>Arch</p>
-<div class="highlight"><pre><span></span>sudo pacman -S git
-</pre></div>
-
-
-<h2>使用git</h2>
-<h3>创建软件仓库</h3>
-<p>自己在网页端建吧……</p>
-<h3>把git仓库下载到本地</h3>
-<p>网页端项目页上应该有一个clone的按钮，可以得到项目的https地址，如<code>https://github.com/jwhj/jwhj.git</code>。执行下面的命令。</p>
-<div class="highlight"><pre><span></span>git clone https://github.com/jwhj/jwhj.git
-</pre></div>
-
-
-<p>一个项目可能有多个分支，按照上面的命令，会下载master分支。如果要指定一个分支，如<code>gh-pages</code>，可以使用-b选项。</p>
-<div class="highlight"><pre><span></span>git clone -b gh-pages https://github.com/jwhj/jwhj.git
-</pre></div>
-
-
-<h3>上传本地的项目</h3>
-<p>如果是第一次使用，需要说清楚你是谁：</p>
-<div class="highlight"><pre><span></span>git config --global user.email <span class="s2">&quot;your email&quot;</span>
-git config --global user.name <span class="s2">&quot;your name&quot;</span>
-</pre></div>
-
-
-<p>首先你的项目得是clone下来的……</p>
-<p>假设你没有删除项目中的什么文件。</p>
-<p>进入项目的文件夹，执行：</p>
-<div class="highlight"><pre><span></span>git add ./*
-git commit -m <span class="s1">&#39;此次提交的备注，不能为空，想不到的话可以随便写点东西&#39;</span>
-git push
-</pre></div>
-
-
-<h2>讲个好玩的东西</h2>
-<p>刚刚说了有些东西要在网页端操作，可如果我用linux，而且没装图形界面，只用tty的话，该怎么办呢？</p>
-<div class="highlight"><pre><span></span>sudo pacman -S w3m
-w3m github.com
-</pre></div>
-
-
-<p>看看效果吧。</p></div>
-    <footer>
-<p class="meta">
-  <span class="byline author vcard">
-    Posted by <span class="fn">
-        iamplm
-    </span>
-  </span>
-<time datetime="2016-08-13T00:00:00+02:00" pubdate>Sat 13 August 2016</time>  <span class="categories">
-    <a class='category' href='/category/posts.html'>posts</a>
-  </span>
-  <span class="categories">
-    <a class="category" href="/tag/stuffs.html">stuffs</a>,    <a class="category" href="/tag/git.html">git</a>  </span>
-</p><div class="sharing">
-</div>    </footer>
-  </article>
-
-</div>
+    <a class="next" href="/index15.html">Newer &rarr;</a>
+  <br />
+</div></div>
 <aside class="sidebar">
   <section>
     <h1>Recent Posts</h1>

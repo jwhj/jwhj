@@ -49,6 +49,39 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj2654ti-jie.html">bzoj2654题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-12-19T00:00:00+01:00" pubdate>Mon 19 December 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p>假设给图中每条白边边权加上delta，然后直接跑一次kruskal，如果白边数量比较少，就可以把delta调小一点，如果白边比较多，就可以把delta调大一点。</p>
+<p>所以二分这个delta，就能得到恰好有need条白边的权值和最小的生成树了。</p>
+<p>有一点要注意一下，排序的时候，除了要比较边权之外，还要比较边的颜色，同权值的情况下，一定要指定白边优先或者黑边优先。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#define ele int</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxn 50010</span>
+<span class="cp">#define maxm 100010</span>
+<span class="k">struct</span> <span class="n">edge</span><span class="p">{</span>
+    <span class="n">ele</span> <span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">,</span><span class="n">w</span><span class="p">,</span><span class="n">c</span><span class="p">;</span>
+    <span class="kr">inline</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">&lt;</span><span class="p">(</span><span class="n">edge</span> <span class="n">b ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj2654ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj1009ti-jie.html">bzoj1009题解</a>
       </h1>
     <p class="meta">
@@ -347,29 +380,6 @@ $$(t3-t4)a+(t1-t2)b=y$$</p>
     <a rel="full-article" href="/bzoj4373ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj4318ti-jie.html">bzoj4318题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2016-12-09T00:00:00+01:00" pubdate>Fri 09 December 2016</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=34200442&auto=0&height=66"></iframe>
-
-<p>假设已经得到了一个确定的01序列，让$L_i$代表以i结尾的连续1的最长长度，比方说在10111这个串里，$L_0=1,L_1=0,L_2=1,L_3=2,L_4=3$。</p>
-<p>记$L_i$的期望为$x_i$，$L_i^2$的期望为$y_i$。第i位上如果是1，贡献为$(L_{i-1}+1)^3-L_{i-1}^3=3L_{i-1}^2+3L_{i-1}+1$，否则为0。所以答案为$\sum p_i(3x_{i-1}+3y_{i-1 ...</p></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj4318ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index9.html">&larr; Older</a>
 
@@ -381,6 +391,9 @@ $$(t3-t4)a+(t1-t2)b=y$$</p>
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1086ti-jie.html">bzoj1086题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1079ti-jie.html">bzoj1079题解</a>
       </li>
       <li class="post">
@@ -391,9 +404,6 @@ $$(t3-t4)a+(t1-t2)b=y$$</p>
       </li>
       <li class="post">
           <a href="/bzoj1069ti-jie.html">bzoj1069题解</a>
-      </li>
-      <li class="post">
-          <a href="/poj2187ti-jie.html">poj2187题解</a>
       </li>
     </ul>
   </section>
