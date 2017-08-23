@@ -49,6 +49,39 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj1037ti-jie.html">bzoj1037题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2017-08-09T00:00:00+02:00" pubdate>Wed 09 August 2017</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=28854176&auto=0&height=66"></iframe>
+
+<p>去掉一个合法排列的最后一个人（假设是男孩），剩下的人也应该满足题目条件，即对于任意连续的一段，男孩与女孩的数目之
+差不超过k。除了这之外，剩下的人还应该满足一个额外的条件，即对于任意一个后缀，男孩数减女孩数在-k到k-1之间。</p>
+<p>所以我们可以这样表示状态：(i,j,s,t)代表i个男孩，j个女孩排成一排，满足题目条件，并且对于任意一个后缀，男孩数减女孩数在s到t之间的方案数。转移挺简单的，看代码吧。</p>
+<p>直接这么dp还是不行的，因为会MLE。但是注意到很多状态实际上是用不到的，所以可以改成记忆化搜索并用散列表/map来保存状态。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;map&gt;</span><span class="cp"></span>
+<span class="cp">#define ele int</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxn 155 ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj1037ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj1042ti-jie.html">bzoj1042题解</a>
       </h1>
     <p class="meta">
@@ -353,37 +386,6 @@ $$(t_3-t_4)+2(t_1-t_2)=y$$</p>
     <a rel="full-article" href="/bzoj1189ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj1202ti-jie.html">bzoj1202题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2017-07-28T00:00:00+02:00" pubdate>Fri 28 July 2017</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=142604&auto=0&height=66"></iframe>
-
-<p>好久没碰过键盘了，做道水题练练手。</p>
-<p>设b[i]为前i个月的总收入，那么每条信息(s,t,v)就相当于b[t]-b[s-1]=v。</p>
-<p>于是题目转化为：给你n+1个变量，给定若干个他们之前差的关系，问是否有解。</p>
-<p>用一个并查集来维护变量之间是否有关系。建一个图，每次得到一条新信息的时候，如果涉及的两个变量无关，则连一条s-1到t，权为v的边，和一条t-1到s，权为-v的边。如果涉及的变量有关，那么就要判断能不能成立。在图中找到s-1到t的路径，如果权值和恰为v，则成立。注意此时无论成不成立，均不需连边。</p>
-<p>这个做法的思路跟差分约束比较类似，其实此题也可以直接用差分约束来做。</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#define ele int</span>
-<span class="k">using ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj1202ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index3.html">&larr; Older</a>
 
@@ -395,6 +397,9 @@ $$(t_3-t_4)+2(t_1-t_2)=y$$</p>
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1038ti-jie.html">bzoj1038题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1086ti-jie.html">bzoj1086题解</a>
       </li>
       <li class="post">
@@ -405,9 +410,6 @@ $$(t_3-t_4)+2(t_1-t_2)=y$$</p>
       </li>
       <li class="post">
           <a href="/bzoj1093ti-jie.html">bzoj1093题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1069ti-jie.html">bzoj1069题解</a>
       </li>
     </ul>
   </section>

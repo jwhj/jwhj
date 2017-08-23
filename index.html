@@ -49,6 +49,40 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj1038ti-jie.html">bzoj1038题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2017-08-23T00:00:00+02:00" pubdate>Wed 23 August 2017</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=28341474&auto=0&height=66"></iframe>
+
+<p>容易证明，在任意一段山坡内，瞭望塔需要的最低海拔是单峰的，另一方面，山坡的海拔是单峰的，而两个单峰函数加起来还是单峰函数，所以在任意一段山坡内，瞭望塔的高度是单峰的。这样的话就可以对每一段山坡进行三分了。</p>
+<p>精度是个问题……我用了long double并把eps调到了$10^{-9}$才AC。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#define ele int</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxn 310</span>
+<span class="cp">#define eps 1e-9</span>
+<span class="n">ele</span> <span class="n">n</span><span class="p">,</span><span class="n">cnt</span><span class="p">;</span>
+<span class="kt">long</span> <span class="kt">double</span> <span class="n">x</span><span class="p">[</span><span class="n">maxn</span><span class="p">],</span><span class="n">y</span><span class="p">[</span><span class="n">maxn</span><span class="p">];</span>
+<span class="kr">inline</span> <span class="kt">long ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj1038ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj1086ti-jie.html">bzoj1086题解</a>
       </h1>
     <p class="meta">
@@ -347,39 +381,6 @@
     <a rel="full-article" href="/bzoj1057ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj1037ti-jie.html">bzoj1037题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2017-08-09T00:00:00+02:00" pubdate>Wed 09 August 2017</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=28854176&auto=0&height=66"></iframe>
-
-<p>去掉一个合法排列的最后一个人（假设是男孩），剩下的人也应该满足题目条件，即对于任意连续的一段，男孩与女孩的数目之
-差不超过k。除了这之外，剩下的人还应该满足一个额外的条件，即对于任意一个后缀，男孩数减女孩数在-k到k-1之间。</p>
-<p>所以我们可以这样表示状态：(i,j,s,t)代表i个男孩，j个女孩排成一排，满足题目条件，并且对于任意一个后缀，男孩数减女孩数在s到t之间的方案数。转移挺简单的，看代码吧。</p>
-<p>直接这么dp还是不行的，因为会MLE。但是注意到很多状态实际上是用不到的，所以可以改成记忆化搜索并用散列表/map来保存状态。</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;map&gt;</span><span class="cp"></span>
-<span class="cp">#define ele int</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="cp">#define maxn 155 ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj1037ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index2.html">&larr; Older</a>
 
@@ -389,6 +390,9 @@
   <section>
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
+      <li class="post">
+          <a href="/bzoj1038ti-jie.html">bzoj1038题解</a>
+      </li>
       <li class="post">
           <a href="/bzoj1086ti-jie.html">bzoj1086题解</a>
       </li>
@@ -400,9 +404,6 @@
       </li>
       <li class="post">
           <a href="/bzoj1093ti-jie.html">bzoj1093题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1069ti-jie.html">bzoj1069题解</a>
       </li>
     </ul>
   </section>

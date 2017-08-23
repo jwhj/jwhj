@@ -49,6 +49,37 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj2440ti-jie.html">bzoj2440题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-06-07T00:00:00+02:00" pubdate>Tue 07 June 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=3950015&auto=0&height=66"></iframe>
+
+<p>先吐槽一下题意，所有的整数都是$1^2$的倍数。</p>
+<p>然而这题显然是不算$1^2$的。所以一个数不被讨厌当且仅当它没有平方因子。</p>
+<p>可以二分答案x，统计1~x中有多少个数无平方因子，然后调整二分的左右端点。</p>
+<p>这就留下来两个问题：如何统计、如何确定二分上界。</p>
+<p>统计的话可以用容斥，1~x中无平方因子的数的个数为：$$\sum_{i=1}^{\sqrt{n}}\mu(i)\lfloor\frac{x}{i^2}\rfloor$$</p>
+<p>至于为什么使劲想一想就明白了吧。</p>
+<p>如何确定二分上界呢？先让上界是1，用上面的方法检查一下，如果发现1~1中无平方因子的数不到k，就把上界乘2，反复进行这个操作即可。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj2440ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj3994ti-jie.html">bzoj3994题解</a>
       </h1>
     <p class="meta">
@@ -328,34 +359,6 @@
     <a rel="full-article" href="/bzoj3238ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj3944ti-jie.html">bzoj3944题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2016-05-22T00:00:00+02:00" pubdate>Sun 22 May 2016</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=72396&auto=0&height=66"></iframe>
-
-<p>假设有函数$f(n)$和$g(n)$，满足：
-$$g(n)=\sum_{d|n}f(d)$$
-$$F(n)=\sum_{i=1}^n f(i)$$
-$$G(n)=\sum_{i=1}^n g(i)$$
-那么有：
-$$G(n)=\sum_{i=1}^n\sum_{d|i}f(i)$$
-考虑$f(i ...</p></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj3944ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index15.html">&larr; Older</a>
 
@@ -367,6 +370,9 @@ $$G(n)=\sum_{i=1}^n\sum_{d|i}f(i)$$
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1038ti-jie.html">bzoj1038题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1086ti-jie.html">bzoj1086题解</a>
       </li>
       <li class="post">
@@ -377,9 +383,6 @@ $$G(n)=\sum_{i=1}^n\sum_{d|i}f(i)$$
       </li>
       <li class="post">
           <a href="/bzoj1093ti-jie.html">bzoj1093题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1069ti-jie.html">bzoj1069题解</a>
       </li>
     </ul>
   </section>

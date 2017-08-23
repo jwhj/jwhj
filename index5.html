@@ -49,6 +49,40 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj4805ti-jie.html">bzoj4805题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2017-04-03T00:00:00+02:00" pubdate>Mon 03 April 2017</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p>非常简单的杜教筛……</p>
+<p>刚刚发现杜教筛的不用散列表和map的写法，效率比我以前写的那种高很多。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#define ele long long</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxs 3000010</span>
+<span class="n">ele</span> <span class="n">n</span><span class="p">,</span><span class="n">pcnt</span><span class="p">,</span><span class="n">S</span><span class="p">,</span><span class="n">plst</span><span class="p">[</span><span class="n">maxs</span><span class="p">],</span><span class="n">phi</span><span class="p">[</span><span class="n">maxs</span><span class="p">],</span><span class="n">ans</span><span class="p">[</span><span class="n">maxs</span><span class="p">];</span>
+<span class="kt">bool</span> <span class="n">flag</span><span class="p">[</span><span class="n">maxs</span><span class="p">];</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="n">S</span><span class="o">=</span><span class="mi">3000000</span><span class="p">;</span>
+    <span class="n">pcnt</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">flag</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">flag</span><span class="p">));</span>
+    <span class="n">phi</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="mi">1 ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj4805ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj3675ti-jie.html">bzoj3675题解</a>
       </h1>
     <p class="meta">
@@ -330,29 +364,6 @@
     <a rel="full-article" href="/bzoj2329ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj4540ti-jie.html">bzoj4540题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2017-02-12T00:00:00+01:00" pubdate>Sun 12 February 2017</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<p>记a[i]左边第一个比a[i]小的数的位置为prv[i]。</p>
-<p>考虑莫队，将[l,r-1]变为[l,r]的时候，对于$i\in [\mathrm{prv}[r]+1,r]$，[i,r]的最小值为a[r]。对于$i\in [\mathrm{prv}[\mathrm{prv}[r]]+1,\mathrm{prv}[r]]$，[i,r]的最小值为a[prv[r]]……</p>
-<p>在左边加入一个数的情况类似。</p>
-<p>我比较懒就写了个在线莫队 ...</p></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj4540ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index6.html">&larr; Older</a>
 
@@ -364,6 +375,9 @@
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1038ti-jie.html">bzoj1038题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1086ti-jie.html">bzoj1086题解</a>
       </li>
       <li class="post">
@@ -374,9 +388,6 @@
       </li>
       <li class="post">
           <a href="/bzoj1093ti-jie.html">bzoj1093题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1069ti-jie.html">bzoj1069题解</a>
       </li>
     </ul>
   </section>

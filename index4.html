@@ -49,6 +49,38 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj2125ti-jie.html">bzoj2125题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2017-05-22T00:00:00+02:00" pubdate>Mon 22 May 2017</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=171530&auto=0&height=66"></iframe>
+
+<p>圆方树太神啦！</p>
+<p>对于仙人掌中原来的点，建立一个圆点。对于每一个环，建立一个方点，然后把环上所有的点对应的圆点连到这个方点上面。对于其它的边，连接端点对应的圆点。这样就得到了仙人掌对应的圆方树。</p>
+<p>圆方树有一些很好的性质，比如说：</p>
+<ul>
+<li><del>它是一棵树</del></li>
+<li>不管怎么换根，圆方树的形态不变化 </li>
+</ul>
+<p>对于树中所有圆圆边，边权为其在仙人掌中对应的边的边权。对于方圆/圆方边，边权为圆点对应的点到它所在环的最高点的最短路的长度。</p>
+<p>考虑求u，v之间的最短路长度。若u，v在圆方树中的lca为圆点，两点在仙人掌中最短路的长度即为它们在圆方树中的路径长度。若u，v的lca为方点，说明它们在仙人掌上的lca是一个环。<del>上一句话意会一下就可以了。</del>那么就要考虑一下在lca那个环上怎么走。对于每条方圆边，还要保存一下它在仙人掌上对应的路径是顺时针还是逆时针的。</p>
+<p><code>if (od[pu]!=od[pv])</code>打成了<code>if (od[pu]==od[pv])</code>结果调了好久……我太弱了……</p>
+<p>代码 ...</p></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj2125ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj1021ti-jie.html">bzoj1021题解</a>
       </h1>
     <p class="meta">
@@ -316,40 +348,6 @@
     <a rel="full-article" href="/bzoj3157ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj4805ti-jie.html">bzoj4805题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2017-04-03T00:00:00+02:00" pubdate>Mon 03 April 2017</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<p>非常简单的杜教筛……</p>
-<p>刚刚发现杜教筛的不用散列表和map的写法，效率比我以前写的那种高很多。</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#define ele long long</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="cp">#define maxs 3000010</span>
-<span class="n">ele</span> <span class="n">n</span><span class="p">,</span><span class="n">pcnt</span><span class="p">,</span><span class="n">S</span><span class="p">,</span><span class="n">plst</span><span class="p">[</span><span class="n">maxs</span><span class="p">],</span><span class="n">phi</span><span class="p">[</span><span class="n">maxs</span><span class="p">],</span><span class="n">ans</span><span class="p">[</span><span class="n">maxs</span><span class="p">];</span>
-<span class="kt">bool</span> <span class="n">flag</span><span class="p">[</span><span class="n">maxs</span><span class="p">];</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
-    <span class="n">S</span><span class="o">=</span><span class="mi">3000000</span><span class="p">;</span>
-    <span class="n">pcnt</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
-    <span class="n">memset</span><span class="p">(</span><span class="n">flag</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">flag</span><span class="p">));</span>
-    <span class="n">phi</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="mi">1 ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj4805ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index5.html">&larr; Older</a>
 
@@ -361,6 +359,9 @@
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1038ti-jie.html">bzoj1038题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1086ti-jie.html">bzoj1086题解</a>
       </li>
       <li class="post">
@@ -371,9 +372,6 @@
       </li>
       <li class="post">
           <a href="/bzoj1093ti-jie.html">bzoj1093题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1069ti-jie.html">bzoj1069题解</a>
       </li>
     </ul>
   </section>

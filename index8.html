@@ -49,6 +49,41 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj2466ti-jie.html">bzoj2466题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-12-23T00:00:00+01:00" pubdate>Fri 23 December 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p>首先，按按钮的次序是无关紧要的。</p>
+<p>一开始我在想树形dp，然而不知道怎么让它无后效性，结果就没想出来。</p>
+<p>所以可以列一个异或方程组用高斯消元来做。异或方程组的高斯消元，在普通高斯消元的基础上想一想就可以想出来了，当然略微有一点不同。细节可以看代码。</p>
+<p>对异或方程组进行高斯消元后，主对角线上可能会有若干个0,它们对应的未知数是自由元，需要枚举它们的取值然后找到一个最优方案。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#define ele int</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxn 110</span>
+<span class="k">struct</span> <span class="n">edge</span><span class="p">{</span>
+    <span class="n">ele</span> <span class="n">v</span><span class="p">;</span>
+    <span class="n">edge</span> <span class="o">*</span><span class="n">nxt</span><span class="p">;</span>
+<span class="p">}</span><span class="n">ep</span><span class="p">[</span><span class="n">maxn</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">];</span>
+<span class="n">ele</span> <span class="n">n</span><span class="p">,</span><span class="n">ecnt</span><span class="p">,</span><span class="n">ans</span><span class="p">,</span><span class="n">a</span><span class="p">[</span><span class="n">maxn ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj2466ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj2654ti-jie.html">bzoj2654题解</a>
       </h1>
     <p class="meta">
@@ -347,39 +382,6 @@ $$(t3-t4)a+(t1-t2)b=y$$</p>
     <a rel="full-article" href="/bzoj2299ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj4373ti-jie.html">bzoj4373题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2016-12-11T00:00:00+01:00" pubdate>Sun 11 December 2016</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<p>可以使用一种神奇的hash，维护区间的最小值和平方和，对于每个询问，先找出区间的最小值a，然后看看以a为首项，k为公差的等差数列的平方和是否等于这个区间的平方和。</p>
-<p>平方和比较大，让它自然溢出就可以了。</p>
-<p>为了速度写了zkw。</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
-<span class="cp">#define ele int</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="cp">#define maxn 300010</span>
-<span class="cp">#define INF 1000000000</span>
-<span class="k">const</span> <span class="n">ele</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">20</span><span class="p">;</span>
-<span class="k">const</span> <span class="n">ele</span> <span class="n">M</span><span class="o">=</span><span class="n">size</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">;</span>
-<span class="n">ele</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">m1</span><span class="p">[</span><span class="n">size</span><span class="p">],</span><span class="n">m2</span><span class="p">[</span><span class="n">size ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj4373ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index9.html">&larr; Older</a>
 
@@ -391,6 +393,9 @@ $$(t3-t4)a+(t1-t2)b=y$$</p>
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1038ti-jie.html">bzoj1038题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1086ti-jie.html">bzoj1086题解</a>
       </li>
       <li class="post">
@@ -401,9 +406,6 @@ $$(t3-t4)a+(t1-t2)b=y$$</p>
       </li>
       <li class="post">
           <a href="/bzoj1093ti-jie.html">bzoj1093题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1069ti-jie.html">bzoj1069题解</a>
       </li>
     </ul>
   </section>
