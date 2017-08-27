@@ -49,6 +49,35 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj1057ti-jie.html">bzoj1057题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2017-08-10T00:00:00+02:00" pubdate>Thu 10 August 2017</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=16686627&auto=0&height=66"></iframe>
+
+<p>从左上到右下枚举正方形/矩形的右下角。维护f[j]代表当前行第j列之多向上多少格满足黑白相间。若存在i<j，f[i]>f[j]，那么这个f[i]实际上是毫无意义的。维护f[i]向左严格递减的序列，对每个右下角，在每个最大高度降低的点计算一次最大面积就可以了。</p>
+<p>这个dp看上去非常暴力，时间复杂度像是$O(nm^2)$，然而它却A了，原因是，一个长度为k的序列的递增/递减子序列长度的期望是$O(\log k)$，也就是说，算法的期望复杂度是$O(nm\log m)$。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#define ele int</span>
+<span class="k">using ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj1057ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj1037ti-jie.html">bzoj1037题解</a>
       </h1>
     <p class="meta">
@@ -351,41 +380,6 @@ $$(t_3-t_4)+2(t_1-t_2)=y$$</p>
     <a rel="full-article" href="/bzoj1177ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj1189ti-jie.html">bzoj1189题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2017-07-29T00:00:00+02:00" pubdate>Sat 29 July 2017</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=110400&auto=0&height=66"></iframe>
-
-<p>利用bfs得出格子之间两两的最短路。</p>
-<p>首先二分答案T，把每扇门拆成T个点，把每个有人的格子看成一个点，随便建一下图跑网络流，根据是否满流判断当前答案是否可行。</p>
-<p>bfs都能写错……真是太久没碰oi了……</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
-<span class="cp">#define ele int</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="cp">#define maxn 25</span>
-<span class="cp">#define maxnode 320010</span>
-<span class="k">const</span> <span class="n">ele</span> <span class="n">INF</span><span class="o">=</span><span class="mf">1e9</span><span class="p">;</span>
-<span class="k">const</span> <span class="n">ele</span> <span class="n">di</span><span class="p">[]</span><span class="o">=</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">};</span>
-<span class="k">const</span> <span class="n">ele</span> <span class="n">dj</span><span class="p">[]</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1 ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj1189ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index3.html">&larr; Older</a>
 
@@ -397,6 +391,9 @@ $$(t_3-t_4)+2(t_1-t_2)=y$$</p>
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1064ti-jie.html">bzoj1064题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1038ti-jie.html">bzoj1038题解</a>
       </li>
       <li class="post">
@@ -407,9 +404,6 @@ $$(t_3-t_4)+2(t_1-t_2)=y$$</p>
       </li>
       <li class="post">
           <a href="/bzoj1076ti-jie.html">bzoj1076题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1093ti-jie.html">bzoj1093题解</a>
       </li>
     </ul>
   </section>

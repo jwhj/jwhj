@@ -49,6 +49,41 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj1189ti-jie.html">bzoj1189题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2017-07-29T00:00:00+02:00" pubdate>Sat 29 July 2017</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=110400&auto=0&height=66"></iframe>
+
+<p>利用bfs得出格子之间两两的最短路。</p>
+<p>首先二分答案T，把每扇门拆成T个点，把每个有人的格子看成一个点，随便建一下图跑网络流，根据是否满流判断当前答案是否可行。</p>
+<p>bfs都能写错……真是太久没碰oi了……</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
+<span class="cp">#define ele int</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxn 25</span>
+<span class="cp">#define maxnode 320010</span>
+<span class="k">const</span> <span class="n">ele</span> <span class="n">INF</span><span class="o">=</span><span class="mf">1e9</span><span class="p">;</span>
+<span class="k">const</span> <span class="n">ele</span> <span class="n">di</span><span class="p">[]</span><span class="o">=</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">};</span>
+<span class="k">const</span> <span class="n">ele</span> <span class="n">dj</span><span class="p">[]</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1 ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj1189ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj1202ti-jie.html">bzoj1202题解</a>
       </h1>
     <p class="meta">
@@ -347,44 +382,6 @@
     <a rel="full-article" href="/bzoj1025ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj10234316ti-jie.html">bzoj1023&4316题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2017-05-24T00:00:00+02:00" pubdate>Wed 24 May 2017</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=29567189&auto=0&height=66"></iframe>
-
-<p>不会圆方树的话可以先看一下<a href="http://blog.eleele.gq/bzoj2125ti-jie.html">这篇题解</a>。</p>
-<p>这两题都是圆方树上的dp。</p>
-<p>首先考虑在树上怎么dp。在圆方树的圆点上，情况是一样的，对于方点，再特殊考虑一下即可。</p>
-<p>bzoj1023在dp的时候还要用单调队列优化一下。</p>
-<p>代码（bzoj1023）：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
-<span class="cp">#define ele int</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="cp">#define maxn 666666</span>
-<span class="k">struct</span> <span class="n">edge</span><span class="p">{</span>
-    <span class="n">ele</span> <span class="n">v</span><span class="p">,</span><span class="n">w</span><span class="p">;</span>
-    <span class="n">edge</span> <span class="o">*</span><span class="n">nxt</span><span class="p">;</span>
-<span class="p">}</span><span class="n">ep</span><span class="p">[</span><span class="n">maxn</span><span class="o">&lt;&lt;</span><span class="mi">2</span><span class="p">],</span><span class="o">*</span><span class="n">ecnt</span><span class="p">;</span>
-<span class="n">ele</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">ans</span><span class="p">,</span><span class="n">sqcnt</span><span class="p">,</span><span class="n">tcnt ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj10234316ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index4.html">&larr; Older</a>
 
@@ -396,6 +393,9 @@
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1064ti-jie.html">bzoj1064题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1038ti-jie.html">bzoj1038题解</a>
       </li>
       <li class="post">
@@ -406,9 +406,6 @@
       </li>
       <li class="post">
           <a href="/bzoj1076ti-jie.html">bzoj1076题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1093ti-jie.html">bzoj1093题解</a>
       </li>
     </ul>
   </section>
