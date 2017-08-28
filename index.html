@@ -49,6 +49,44 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj1060ti-jie.html">bzoj1060题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2017-08-28T00:00:00+02:00" pubdate>Mon 28 August 2017</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=436633018&auto=0&height=66"></iframe>
+
+<p>树形dp。</p>
+<p>据说当时做数据的时候标程有问题，要除了ans以外全部用int，ans用long long才能过……</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#define ele int</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxn 500010</span>
+<span class="k">struct</span> <span class="n">edge</span><span class="p">{</span>
+    <span class="n">ele</span> <span class="n">v</span><span class="p">,</span><span class="n">w</span><span class="p">;</span>
+    <span class="n">edge</span> <span class="o">*</span><span class="n">nxt</span><span class="p">;</span>
+<span class="p">}</span><span class="n">ep</span><span class="p">[</span><span class="n">maxn</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">],</span><span class="o">*</span><span class="n">ecnt</span><span class="p">;</span>
+<span class="n">ele</span> <span class="n">n</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">d</span><span class="p">[</span><span class="n">maxn</span><span class="p">];</span>
+<span class="kt">long</span> <span class="kt">long</span> <span class="n">ans</span><span class="p">;</span>
+<span class="n">edge</span> <span class="o">*</span><span class="n">h</span><span class="p">[</span><span class="n">maxn</span><span class="p">];</span>
+<span class="kr">inline</span> <span class="kt">void ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj1060ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj1064ti-jie.html">bzoj1064题解</a>
       </h1>
     <p class="meta">
@@ -353,40 +391,6 @@
     <a rel="full-article" href="/bzoj1085ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj1044ti-jie.html">bzoj1044题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2017-08-12T00:00:00+02:00" pubdate>Sat 12 August 2017</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=490895842&auto=0&height=66"></iframe>
-
-<p>本来是道水题的，可是智商下线走了好多弯路。</p>
-<p>一开始我通过dp+二分优化来计算最大长度的最小值，并且顺便求出方案数，后来发现写起来非常麻烦，调了半天调不动了。</p>
-<p>接下来发现分两次dp，第一次求出最大长度的最小值，第二次求出方案数，写起来会清晰很多。这回大概是写对了，可是$O(nm\log n)$的复杂度实在是过不了。不过分两次dp来降低代码复杂度这个思想应该还是很有用的。</p>
-<p>后来我发现求出最大长度最小值只需要二分+贪心就可以了，而且跟NOIP2015D2T1长得几乎一样。计算方案数的dp可以用双指针来优化。</p>
-<p>这道题我一上来就在想dp，这种习惯是不对的，因为实际上有的时候可能还有更简单、更高效的方法。</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
-<span class="cp">#define ele int</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="cp">#define maxn 50010</span>
-<span class="cp">#define MOD ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj1044ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index2.html">&larr; Older</a>
 
@@ -396,6 +400,9 @@
   <section>
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
+      <li class="post">
+          <a href="/bzoj1060ti-jie.html">bzoj1060题解</a>
+      </li>
       <li class="post">
           <a href="/bzoj1064ti-jie.html">bzoj1064题解</a>
       </li>
@@ -407,9 +414,6 @@
       </li>
       <li class="post">
           <a href="/bzoj1079ti-jie.html">bzoj1079题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1076ti-jie.html">bzoj1076题解</a>
       </li>
     </ul>
   </section>

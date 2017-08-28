@@ -49,6 +49,39 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj3160ti-jie.html">bzoj3160题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-05-01T00:00:00+02:00" pubdate>Sun 01 May 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p>首先，答案=所有的-连续的。连续的可以用manacher解出来，只需考虑如何求所有的自序列个数。</p>
+<p>对于每个对称中心，只需求出有多少对对称的字符即可，而对称中心确定以后，每对对称的字符，位置加起来的值是固定的，可以写个类似卷积的东西，然后用FFT来求。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cmath&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;complex&gt;</span><span class="cp"></span>
+<span class="cp">#define ele long long</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxn 400010</span>
+<span class="cp">#define MOD 1000000007</span>
+<span class="cp">#define pn complex&lt;double&gt;</span>
+<span class="k">const</span> <span class="kt">double</span> <span class="n">pi</span><span class="o">=</span><span class="mf">3.1415926535897 ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj3160ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj3527ti-jie.html">bzoj3527题解</a>
       </h1>
     <p class="meta">
@@ -127,6 +160,9 @@ $$E=mc^2$$</p>
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1060ti-jie.html">bzoj1060题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1064ti-jie.html">bzoj1064题解</a>
       </li>
       <li class="post">
@@ -137,9 +173,6 @@ $$E=mc^2$$</p>
       </li>
       <li class="post">
           <a href="/bzoj1079ti-jie.html">bzoj1079题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1076ti-jie.html">bzoj1076题解</a>
       </li>
     </ul>
   </section>

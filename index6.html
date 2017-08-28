@@ -49,6 +49,37 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj2219ti-jie.html">bzoj2219题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2017-02-15T00:00:00+01:00" pubdate>Wed 15 February 2017</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p>如果2k+1存在原根，直接用原根来做就可以了。</p>
+<p>不过，大多数情况下2k+1都是不存在原根的。</p>
+<p>将2k+1分解质因数，设$2k+1=p_1^{a_1} p_2^{a_2}\ldots p_s^{a_s}$。我们对于每个$\mod p_i^{a_i}$分别用原根做一遍，然后乘起来就是答案，这个可以用中国剩余定理证明。</p>
+<p>细节比较多，可以看一下<a href="http://blog.csdn.net/regina8023/article/details/44863519">这个题解</a>。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cmath&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;map&gt;</span><span class="cp"></span>
+<span class="cp">#define ele long long</span>
+<span class="k">using</span> <span class="k">namespace ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj2219ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj2329ti-jie.html">bzoj2329题解</a>
       </h1>
     <p class="meta">
@@ -336,35 +367,6 @@
     <a rel="full-article" href="/bzoj3676ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/hdu5869ti-jie.html">hdu5869题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2017-01-27T00:00:00+01:00" pubdate>Fri 27 January 2017</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<p>首先，固定右端点的话，不同的gcd至多有$\log\mathrm{max}\{a_i\}$个。这是因为，不断左移左端点的时候，只要gcd变化了，一定是原来的因数，所以至少会除以2。</p>
-<p>预处理出一个类似st表的东西，就可以在$O(\log n)$的时间里求出一个区间的gcd。这样通过二分就可以求出固定右端点之后所有的gcd。</p>
-<p>这道题可以使用类似于SPOJ DQUERY的一个思路：把询问按右端点排序，把序列中的数一个个加入，如果出现重复的数，保留最靠右的一个。加入第k个数之后回答所有右端点为k的询问。这道题也是一样，出现重复的gcd则保留最靠右的一个。</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
-<span class="cp">#define ele int</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="cp">#define maxn 100010 ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/hdu5869ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index7.html">&larr; Older</a>
 
@@ -376,6 +378,9 @@
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1060ti-jie.html">bzoj1060题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1064ti-jie.html">bzoj1064题解</a>
       </li>
       <li class="post">
@@ -386,9 +391,6 @@
       </li>
       <li class="post">
           <a href="/bzoj1079ti-jie.html">bzoj1079题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1076ti-jie.html">bzoj1076题解</a>
       </li>
     </ul>
   </section>
