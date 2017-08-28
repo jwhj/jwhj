@@ -49,6 +49,37 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/wc2017gdkoi2017jiang-you-ji.html">WC2017&GDKOI2017酱油记</a>
+      </h1>
+    <p class="meta">
+<time datetime="2017-02-22T00:00:00+01:00" pubdate>Wed 22 February 2017</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=25714147&auto=0&height=66"></iframe>
+
+<p>拖了这么久才开始写这个东西，我真是药丸。</p>
+<h3>WC2017</h3>
+<h4>Day 0</h4>
+<p>一大早起来坐地铁去机场，走上地铁的时候心里想：我不会晕地铁吧，结果就真的晕地铁了……</p>
+<p>到了绍一，感觉浙江不愧是发达地区，设施比我们学校好多了。我发现宿舍有wifi感觉非常劲<del>，但事实上大多数时间都连不上/网速慢得不能用</del>。</p>
+<p><del>跑遍了整栋宿舍没有发现男厕所，去问了一下志愿者，他让我们不要管那个标。</del></p>
+<h4>Day 1～4</h4>
+<p>各大神犇讲课，状态好的话大概能听个半懂吧。线性代数什么的基本没听懂……<del>松爷讲卡常数的时候我非常认真地听了，因为据说会考。</del></p>
+<h4>Day 5</h4>
+<p>开考之后先把三道题扫了一遍，感觉一、二题的暴力都很显然的样子，就先写了一个第一题10分的状压。接下来看了一下第一题的特殊数据，分析了一下，感觉是一棵树的时候似乎也很好搞，就写了那10分的做法。这个时候看时间似乎已经不是很早了，就去码第二题的暴力，期间想了想似乎没想到更快的做法。接下来看了看第三题，排序网络似乎是之前讲过的一个东西？写了个程序输出一个通用的排序网络，结果发现完全拿不到分，就又回去看第一题，分析了一下图是一个环的时候得性质 ...</p></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/wc2017gdkoi2017jiang-you-ji.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj2219ti-jie.html">bzoj2219题解</a>
       </h1>
     <p class="meta">
@@ -335,38 +366,6 @@
     <a rel="full-article" href="/bzoj3196ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj3676ti-jie.html">bzoj3676题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2017-01-27T00:00:00+01:00" pubdate>Fri 27 January 2017</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<p>首先，串中至多有n种本质上不同的回文子串，即manacher执行过程中，每次回文子串向右延伸的最远位置变化的时候，才会出现本质上不同的回文子串。</p>
-<p>于是我们可以枚举这些子串，并求出它们出现的次数。</p>
-<p>使用后缀自动机来解决这个问题。通过dp可以求出后缀自动机每个节点对应的字符串的出现次数。所以对于某个子串，只需求出它在后缀自动机里面对应的节点就可以了。假设这个子串是s[l~r]，首先求出s[0~r]对应的子串，然后沿着后缀边走。我不知道这个做法时间复杂度对不对，反正AC了……</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
-<span class="cp">#define ele int</span>
-<span class="cp">#define ll long long</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="cp">#define maxn 300010</span>
-<span class="cp">#define alpha 26</span>
-<span class="k">struct ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj3676ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index7.html">&larr; Older</a>
 
@@ -381,6 +380,9 @@
           <a href="/bzoj1060ti-jie.html">bzoj1060题解</a>
       </li>
       <li class="post">
+          <a href="/bzoj1090ti-jie.html">bzoj1090题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1064ti-jie.html">bzoj1064题解</a>
       </li>
       <li class="post">
@@ -388,9 +390,6 @@
       </li>
       <li class="post">
           <a href="/bzoj1086ti-jie.html">bzoj1086题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1079ti-jie.html">bzoj1079题解</a>
       </li>
     </ul>
   </section>

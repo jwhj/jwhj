@@ -49,6 +49,39 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj4198ti-jie.html">bzoj4198题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-05-29T00:00:00+02:00" pubdate>Sun 29 May 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=27268032&auto=0&height=66"></iframe>
+
+<p>如果不会huffman树，先去学一学吧。</p>
+<p>这道题显然就是一个k叉的huffman树，问题是网上好像很难找得到这样的资料，估计是出题人自己想出来的（？）</p>
+<p>如果简单地修改huffman树的构造过程，把每次选两个改成每次选k个，得到的算法是错误的。正确的算法应该是怎么样的呢？</p>
+<p>先考虑比较简单的情况，假设最后构造出来的huffman树每个非叶子节点都有k个孩子。这个时候上面的算法可以跑出正确的解。一开始有n棵树，每次选k个出来并成一棵，树的数量减少了(k-1)。最后只剩一棵，所以$k-1|n-1$。</p>
+<p>如果最后构造出来的huffman树有些非叶子节点有不到k个孩子，那么这样的节点只应有一个，而且在树的最底部。所以第一次选出节点并成一棵树时要选少一些，准确来说，是(n-1)%(k-1)+1个。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;queue&gt;</span><span class="cp"></span>
+<span class="cp">#define ele long long</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj4198ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj2809ti-jie.html">bzoj2809题解</a>
       </h1>
     <p class="meta">
@@ -339,34 +372,6 @@ $$ans=\sum_{i}\sum_{1&lt;=j&lt;=\frac{n}{p_i}}{\phi(j)}$$。</p>
     <a rel="full-article" href="/bzoj1150ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj2186ti-jie.html">bzoj2186题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2016-05-05T00:00:00+02:00" pubdate>Thu 05 May 2016</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=25650032&auto=0&height=66"></iframe>
-
-<p>当$n=m$时，答案显然是$\phi(m!)$。</p>
-<p>由于gcd(a+b,b)=gcd(a,b)，当$n&gt;m$时，由于$m!|n!$，我们可以把$n!$分成若干组：
-$$1,2,\ldots,m!$$
-$$m!+1,m!+2,\ldots,2\times m!$$
-$$\ldots$$</p>
-<p>每一组中，显然都有$\phi(m!)$种真货币。</p>
-<p>所以答案为$\phi(m ...</p></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj2186ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index16.html">&larr; Older</a>
 
@@ -381,6 +386,9 @@ $$\ldots$$</p>
           <a href="/bzoj1060ti-jie.html">bzoj1060题解</a>
       </li>
       <li class="post">
+          <a href="/bzoj1090ti-jie.html">bzoj1090题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1064ti-jie.html">bzoj1064题解</a>
       </li>
       <li class="post">
@@ -388,9 +396,6 @@ $$\ldots$$</p>
       </li>
       <li class="post">
           <a href="/bzoj1086ti-jie.html">bzoj1086题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1079ti-jie.html">bzoj1079题解</a>
       </li>
     </ul>
   </section>

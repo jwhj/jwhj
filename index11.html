@@ -49,6 +49,45 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj3083ti-jie.html">bzoj3083题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-11-02T00:00:00+01:00" pubdate>Wed 02 November 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=21253966&auto=0&height=66"></iframe>
+
+<p>这题又有子树操作，又有换根，用估计做不了。</p>
+<p>注意到虽然根换了，树的形态不会变，所以可以用树剖来做。</p>
+<p>换根对链上操作没有影响，子树操作分三种情况讨论换根的影响，详细的看代码。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#define ele int</span>
+<span class="cp">#define ll long long</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxn 100010</span>
+<span class="cp">#define maxk 19</span>
+<span class="cp">#define INF 1e10</span>
+<span class="k">struct</span> <span class="n">edge</span><span class="p">{</span>
+    <span class="n">ele</span> <span class="n">v</span><span class="p">;</span>
+    <span class="n">edge</span> <span class="o">*</span><span class="n">nxt</span><span class="p">;</span>
+<span class="p">}</span><span class="n">ep</span><span class="p">[</span><span class="n">maxn</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">];</span>
+<span class="n">ele ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj3083ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj4544ti-jie.html">bzoj4544题解</a>
       </h1>
     <p class="meta">
@@ -342,42 +381,6 @@
     <a rel="full-article" href="/bzoj1263ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj1295ti-jie.html">bzoj1295题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2016-09-17T00:00:00+02:00" pubdate>Sat 17 September 2016</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=3950826&auto=0&height=66"></iframe>
-
-<p>搬走T个障碍后X能走到Y等价于存在一条X到Y的路径，上面有不超过T个障碍。</p>
-<p>枚举X，用spfa求出X能通过不超过T个障碍走到的所有位置，并找出离X最远的那个，更新答案。</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cmath&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
-<span class="cp">#define ele int</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="cp">#define maxn 40</span>
-<span class="cp">#define INF 1e9</span>
-<span class="k">const</span> <span class="n">ele</span> <span class="n">di</span><span class="p">[]</span><span class="o">=</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">};</span>
-<span class="k">const</span> <span class="n">ele</span> <span class="n">dj</span><span class="p">[]</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">};</span>
-<span class="k">struct</span> <span class="n">crd</span><span class="p">{</span>
-    <span class="n">ele</span> <span class="n">i ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj1295ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index12.html">&larr; Older</a>
 
@@ -392,6 +395,9 @@
           <a href="/bzoj1060ti-jie.html">bzoj1060题解</a>
       </li>
       <li class="post">
+          <a href="/bzoj1090ti-jie.html">bzoj1090题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1064ti-jie.html">bzoj1064题解</a>
       </li>
       <li class="post">
@@ -399,9 +405,6 @@
       </li>
       <li class="post">
           <a href="/bzoj1086ti-jie.html">bzoj1086题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1079ti-jie.html">bzoj1079题解</a>
       </li>
     </ul>
   </section>
