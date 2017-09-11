@@ -49,6 +49,34 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj1011ti-jie.html">bzoj1011题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2017-05-02T00:00:00+02:00" pubdate>Tue 02 May 2017</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p>这题真是玄妙无比……</p>
+<p>题目描述不是很清楚，应该是要求$f_i=\sum_{j=1}^{A\times i} \frac{m_i m_j}{i-j}$</p>
+<p>考虑到A很小，$i$和$i-A\times i$之间的差是很小的，特别是对于比较大的i来说。计算$f_i$的时候，把j分成M段，每一段的i-j当成同一个值来算。这样对于小的i就分得细一些，对于大的i分得粗略一些。<del>M的值看着时限调一调就好了。</del></p>
+<p>要注意计算$A\times i$的时候要加上一个eps以免精度误差。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#define ele int ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj1011ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj3876ti-jie.html">bzoj3876题解</a>
       </h1>
     <p class="meta">
@@ -323,37 +351,6 @@
     <a rel="full-article" href="/hdu6017ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj2958ti-jie.html">bzoj2958题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2017-02-23T00:00:00+01:00" pubdate>Thu 23 February 2017</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=28563070&auto=0&height=66"></iframe>
-
-<p>令f[i][j][k]表示0~i这段，状态为j，最后的一个字符为k的方案数。其中j=2代表已经出现了一段长大于等于k的B、一段长大于等于k的W；j=1代表只出现了一段长大于等于k的B；j=0代表都没有出现。k=0代表B，k=1代表W。</p>
-<p>转移起来比较麻烦，看代码吧……</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#define ele long long</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="cp">#define maxn 1000010</span>
-<span class="cp">#define MOD 1000000007</span>
-<span class="n">ele</span> <span class="n">n</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">f</span><span class="p">[</span><span class="n">maxn</span><span class="p">][</span><span class="mi">3 ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj2958ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index6.html">&larr; Older</a>
 
@@ -365,6 +362,9 @@
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1082ti-jie.html">bzoj1082题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1060ti-jie.html">bzoj1060题解</a>
       </li>
       <li class="post">
@@ -375,9 +375,6 @@
       </li>
       <li class="post">
           <a href="/bzoj1038ti-jie.html">bzoj1038题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1086ti-jie.html">bzoj1086题解</a>
       </li>
     </ul>
   </section>

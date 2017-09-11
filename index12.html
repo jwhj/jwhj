@@ -49,6 +49,44 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj1263ti-jie.html">bzoj1263题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-09-17T00:00:00+02:00" pubdate>Sat 17 September 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=419594258&auto=0&height=66"></iframe>
+
+<p>小学奥数+高精度就可以做了。</p>
+<p>我偷懒写了python……</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="n">n</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="nb">raw_input</span><span class="p">())</span>
+<span class="n">tmp</span><span class="o">=</span><span class="n">n</span><span class="o">%</span><span class="mi">3</span>
+<span class="k">if</span> <span class="n">tmp</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+    <span class="n">ans</span><span class="o">=</span><span class="mi">3</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">tmp</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+    <span class="n">ans</span><span class="o">=</span><span class="mi">3</span><span class="o">**</span><span class="p">((</span><span class="n">n</span><span class="o">-</span><span class="mi">4</span><span class="p">)</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">ans</span><span class="o">*=</span><span class="mi">4</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">ans</span><span class="o">=</span><span class="mi">3</span><span class="o">**</span><span class="p">((</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">ans</span><span class="o">*=</span><span class="mi">2</span>
+<span class="n">ans</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">ans</span><span class="p">)</span>
+<span class="n">L</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">ans</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">L ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj1263ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj1295ti-jie.html">bzoj1295题解</a>
       </h1>
     <p class="meta">
@@ -350,39 +388,6 @@
     <a rel="full-article" href="/bzoj4066ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj3329ti-jie.html">bzoj3329题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2016-08-27T00:00:00+02:00" pubdate>Sat 27 August 2016</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=64886&auto=0&height=66"></iframe>
-
-<p>考虑到异或的逆运算还是异或，原式可以变形成$x\oplus 2x=3x$。</p>
-<p>另一方面，显然有$x+2x=3x$，也就是说，$x$与$2x$相加的时候没有进位。</p>
-<p>所以$x$的二进制表示中没有连续的1。</p>
-<p>第一问数位dp，第二问数位dp+矩阵快速幂。</p>
-<p>开数组的时候不小心开成了18调了好久……要开成$\log_2 n$，而不是$\lg n$……</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
-<span class="cp">#define ele long long</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="cp">#define maxlogn ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj3329ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index13.html">&larr; Older</a>
 
@@ -394,6 +399,9 @@
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1082ti-jie.html">bzoj1082题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1060ti-jie.html">bzoj1060题解</a>
       </li>
       <li class="post">
@@ -404,9 +412,6 @@
       </li>
       <li class="post">
           <a href="/bzoj1038ti-jie.html">bzoj1038题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1086ti-jie.html">bzoj1086题解</a>
       </li>
     </ul>
   </section>

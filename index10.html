@@ -49,6 +49,41 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj1452ti-jie.html">bzoj1452题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-11-15T00:00:00+01:00" pubdate>Tue 15 November 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=3986040&auto=0&height=66"></iframe>
+
+<p>为每种权值开一个二位树状数组记录就可以了。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#define ele int</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxn 310</span>
+<span class="cp">#define maxc 110</span>
+<span class="k">struct</span> <span class="n">BIT</span><span class="p">{</span>
+    <span class="kr">inline</span> <span class="kt">void</span> <span class="n">alloc</span><span class="p">(</span><span class="n">ele</span> <span class="n">n</span><span class="p">,</span><span class="n">ele</span> <span class="n">m</span><span class="p">){</span>
+        <span class="k">this</span><span class="o">-&gt;</span><span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">;</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">m</span><span class="o">=</span><span class="n">m</span><span class="p">;</span>
+        <span class="n">memset</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">a</span><span class="p">));</span>
+    <span class="p">}</span>
+    <span class="kr">inline</span> <span class="kt">void</span> <span class="n">add</span><span class="p">(</span><span class="n">ele</span> <span class="n">x</span><span class="p">,</span><span class="n">ele</span> <span class="n">y ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj1452ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj2783ti-jie.html">bzoj2783题解</a>
       </h1>
     <p class="meta">
@@ -359,44 +394,6 @@
     <a rel="full-article" href="/bzoj4403ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj2763ti-jie.html">bzoj2763题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2016-11-03T00:00:00+01:00" pubdate>Thu 03 November 2016</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=63677&auto=0&height=66"></iframe>
-
-<p>考虑把图拆成k+1层，第i层表示已经免费i次。</p>
-<p>对于每条原来的边，每层内照常，层间连一条权值为0的边，表示使用了一次免费机会。</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;queue&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
-<span class="cp">#define ele int</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="cp">#define maxn 10010</span>
-<span class="cp">#define maxm 50010</span>
-<span class="cp">#define maxk 12</span>
-<span class="cp">#define INF 1000000000</span>
-<span class="k">struct</span> <span class="n">edge</span><span class="p">{</span>
-    <span class="n">ele</span> <span class="n">v</span><span class="p">,</span><span class="n">w</span><span class="p">;</span>
-    <span class="n">edge</span> <span class="o">*</span><span class="n">nxt</span><span class="p">;</span>
-<span class="p">}</span><span class="n">ep</span><span class="p">[</span><span class="n">maxm</span><span class="o">*</span><span class="mi">4</span><span class="o">*</span><span class="n">maxk ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj2763ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index11.html">&larr; Older</a>
 
@@ -408,6 +405,9 @@
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1082ti-jie.html">bzoj1082题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1060ti-jie.html">bzoj1060题解</a>
       </li>
       <li class="post">
@@ -418,9 +418,6 @@
       </li>
       <li class="post">
           <a href="/bzoj1038ti-jie.html">bzoj1038题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1086ti-jie.html">bzoj1086题解</a>
       </li>
     </ul>
   </section>

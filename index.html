@@ -49,6 +49,46 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj1082ti-jie.html">bzoj1082题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2017-09-11T00:00:00+02:00" pubdate>Mon 11 September 2017</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=468490562&auto=0&height=66"></iframe>
+
+<p>怎么评价这道题好呢……</p>
+<p>首先一个显然的想法是，如果某个最优方案得到k块木板，那么一定有一种最优方案的到的是最小的k块木板。于是我们可以二分答案k再想办法判断可行性。</p>
+<p>判断可行性，我一开始的想法是网络流，结果建图建了半天发现是错的，感觉并不可做。后来看了一眼题解发现是爆搜+剪枝？？？</p>
+<p>我搜索的思路是，对于每块提供的木材，枚举它被分成哪些需要的木材，然后用以下的一些思路来优化：</p>
+<ul>
+<li>提供的木材从小到大枚举，需要的木材从大到小枚举</li>
+<li>每块提供的木材被用到不能再分出一块需要的木材时，才枚举下一块</li>
+<li>统计当前浪费的木材长度，如果超过提供木材总量减去所需木材长度，直接剪枝</li>
+<li>直接忽略大于提供木材最大长度的所需木材</li>
+</ul>
+<p>最大一组数据开了O2在本机还是跑了1.74s，在bzoj上勉强A了。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#define ele int</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxn 1010</span>
+<span class="cp">#define maxm 55 ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj1082ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj1060ti-jie.html">bzoj1060题解</a>
       </h1>
     <p class="meta">
@@ -353,45 +393,6 @@
     <a rel="full-article" href="/bzoj1069ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/poj2187ti-jie.html">poj2187题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2017-08-14T00:00:00+02:00" pubdate>Mon 14 August 2017</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1645112&auto=0&height=66"></iframe>
-
-<p>还不会旋转卡壳的可以看<a href="http://www.cnblogs.com/Booble/archive/2011/04/03/2004865.html">这里</a>。</p>
-<p>WA了一段时间，要注意的主要有以下几个：</p>
-<ul>
-<li>对点排序的时候，xy坐标都要比较，因为可能会有重合的点，要确保它们排完序之后在一起。</li>
-<li>求凸包的时候有一些细节，比方说要处理好点共线的情况</li>
-</ul>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
-<span class="cp">#define ele int</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="cp">#define maxn 50010</span>
-<span class="cp">#define vec pt</span>
-<span class="k">struct</span> <span class="n">pt</span><span class="p">{</span>
-    <span class="n">ele</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">;</span>
-    <span class="kr">inline</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">&lt;</span><span class="p">(</span><span class="n">pt</span> <span class="n">b</span><span class="p">)</span><span class="k">const</span><span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">x</span><span class="o">!=</span><span class="n">b</span><span class="p">.</span><span class="n">x</span><span class="p">)</span> <span class="k">return ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/poj2187ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index2.html">&larr; Older</a>
 
@@ -401,6 +402,9 @@
   <section>
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
+      <li class="post">
+          <a href="/bzoj1082ti-jie.html">bzoj1082题解</a>
+      </li>
       <li class="post">
           <a href="/bzoj1060ti-jie.html">bzoj1060题解</a>
       </li>
@@ -412,9 +416,6 @@
       </li>
       <li class="post">
           <a href="/bzoj1038ti-jie.html">bzoj1038题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1086ti-jie.html">bzoj1086题解</a>
       </li>
     </ul>
   </section>

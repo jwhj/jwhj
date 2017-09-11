@@ -49,6 +49,39 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj3329ti-jie.html">bzoj3329题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-08-27T00:00:00+02:00" pubdate>Sat 27 August 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=64886&auto=0&height=66"></iframe>
+
+<p>考虑到异或的逆运算还是异或，原式可以变形成$x\oplus 2x=3x$。</p>
+<p>另一方面，显然有$x+2x=3x$，也就是说，$x$与$2x$相加的时候没有进位。</p>
+<p>所以$x$的二进制表示中没有连续的1。</p>
+<p>第一问数位dp，第二问数位dp+矩阵快速幂。</p>
+<p>开数组的时候不小心开成了18调了好久……要开成$\log_2 n$，而不是$\lg n$……</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#define ele long long</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxlogn ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj3329ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj4653noi2016-qu-jian-ti-jie.html">bzoj4653(noi2016 区间)题解</a>
       </h1>
     <p class="meta">
@@ -373,44 +406,6 @@ i-1 ...</p></!--more--></div>
     <a rel="full-article" href="/bzoj1087ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj3289ti-jie.html">bzoj3289题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2016-06-26T00:00:00+02:00" pubdate>Sun 26 June 2016</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=346576&auto=0&height=66"></iframe>
-
-<p>先把文件的大小离散化，再用一个树状数组来存储当前询问区间中每个数出现的次数，就可以用莫队算法来做了。</p>
-<p>时间复杂度是$O(n\sqrt n\log n)$。</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cmath&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
-<span class="cp">#define ele long long</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="cp">#define maxn 50010</span>
-<span class="n">ele</span> <span class="n">B</span><span class="p">;</span>
-<span class="k">struct</span> <span class="n">query</span>
-<span class="p">{</span>
-    <span class="n">ele</span> <span class="n">l</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">id</span><span class="p">;</span>
-    <span class="kr">inline</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">&lt;</span><span class="p">(</span><span class="n">query</span> <span class="n">b</span><span class="p">)</span><span class="k">const</span>
-    <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">l ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj3289ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index14.html">&larr; Older</a>
 
@@ -422,6 +417,9 @@ i-1 ...</p></!--more--></div>
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1082ti-jie.html">bzoj1082题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1060ti-jie.html">bzoj1060题解</a>
       </li>
       <li class="post">
@@ -432,9 +430,6 @@ i-1 ...</p></!--more--></div>
       </li>
       <li class="post">
           <a href="/bzoj1038ti-jie.html">bzoj1038题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1086ti-jie.html">bzoj1086题解</a>
       </li>
     </ul>
   </section>

@@ -49,6 +49,49 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj1150ti-jie.html">bzoj1150题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-05-06T00:00:00+02:00" pubdate>Fri 06 May 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=27228821&auto=0&height=66"></iframe>
+
+<p>考虑有1，2，3，4四栋楼，与其这样：</p>
+<div class="highlight"><pre><span></span>1-----4
+  2-3
+</pre></div>
+
+
+<p>不如这样:</p>
+<div class="highlight"><pre><span></span>1-2 3-4
+</pre></div>
+
+
+<p>所以可以得到，最优解只能把相邻的楼配对。于是可以把n栋楼看成n-1条边，从中取k条，而且任意两条不能紧挨着。</p>
+<p>数据小的话，dp肯定是能做的。</p>
+<p>可以想到一个贪心策略：每次取最小边。但这是错的。</p>
+<p>于是就有一种奇怪的乱搞：把所有边排成一行<del>（它们貌似本来就是一行）</del>，每次取最小边，假设它的权为b，左右的权为a和c。删除左右的两边，把这条边的权改为a+c-b。</p>
+<p>这是什么意思呢？可以发现，如果以后再次选了这条权为a+c-b边，就相当于放弃原来的b去选择a和c。</p>
+<p>所以这么做的意义在于允许之前的某次贪心选择是错误的，可以在后面的某次选择中改正。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;queue&gt;</span><span class="cp"></span>
+<span class="cp">#define ele ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj1150ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj2186ti-jie.html">bzoj2186题解</a>
       </h1>
     <p class="meta">
@@ -188,6 +231,9 @@ $$E=mc^2$$</p>
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1082ti-jie.html">bzoj1082题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1060ti-jie.html">bzoj1060题解</a>
       </li>
       <li class="post">
@@ -198,9 +244,6 @@ $$E=mc^2$$</p>
       </li>
       <li class="post">
           <a href="/bzoj1038ti-jie.html">bzoj1038题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1086ti-jie.html">bzoj1086题解</a>
       </li>
     </ul>
   </section>

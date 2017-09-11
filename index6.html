@@ -49,6 +49,37 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj2958ti-jie.html">bzoj2958题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2017-02-23T00:00:00+01:00" pubdate>Thu 23 February 2017</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=28563070&auto=0&height=66"></iframe>
+
+<p>令f[i][j][k]表示0~i这段，状态为j，最后的一个字符为k的方案数。其中j=2代表已经出现了一段长大于等于k的B、一段长大于等于k的W；j=1代表只出现了一段长大于等于k的B；j=0代表都没有出现。k=0代表B，k=1代表W。</p>
+<p>转移起来比较麻烦，看代码吧……</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#define ele long long</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxn 1000010</span>
+<span class="cp">#define MOD 1000000007</span>
+<span class="n">ele</span> <span class="n">n</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">f</span><span class="p">[</span><span class="n">maxn</span><span class="p">][</span><span class="mi">3 ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj2958ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/wc2017gdkoi2017jiang-you-ji.html">WC2017&GDKOI2017酱油记</a>
       </h1>
     <p class="meta">
@@ -331,41 +362,6 @@
     <a rel="full-article" href="/bzoj2671ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj3196ti-jie.html">bzoj3196题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2017-01-27T00:00:00+01:00" pubdate>Fri 27 January 2017</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<p>分块，每块维护一个快内元素排好序的数组，就可以做了。</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cmath&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
-<span class="cp">#define ele int</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="cp">#define maxn 50010</span>
-<span class="cp">#define maxs 3500</span>
-<span class="cp">#define maxc 20</span>
-<span class="cp">#define maxa 100000000</span>
-<span class="k">struct</span> <span class="n">block</span><span class="p">{</span>
-    <span class="n">ele</span> <span class="n">n</span><span class="p">,</span><span class="n">a</span><span class="p">[</span><span class="n">maxs</span><span class="p">],</span><span class="n">b</span><span class="p">[</span><span class="n">maxs</span><span class="p">];</span>
-<span class="p">};</span>
-<span class="n">ele</span> <span class="n">n</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="n">S</span><span class="p">,</span><span class="n">bcnt</span><span class="p">,</span><span class="n">a</span><span class="p">[</span><span class="n">maxn ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj3196ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index7.html">&larr; Older</a>
 
@@ -377,6 +373,9 @@
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1082ti-jie.html">bzoj1082题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1060ti-jie.html">bzoj1060题解</a>
       </li>
       <li class="post">
@@ -387,9 +386,6 @@
       </li>
       <li class="post">
           <a href="/bzoj1038ti-jie.html">bzoj1038题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1086ti-jie.html">bzoj1086题解</a>
       </li>
     </ul>
   </section>

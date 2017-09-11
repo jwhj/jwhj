@@ -49,6 +49,44 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj3289ti-jie.html">bzoj3289题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-06-26T00:00:00+02:00" pubdate>Sun 26 June 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=346576&auto=0&height=66"></iframe>
+
+<p>先把文件的大小离散化，再用一个树状数组来存储当前询问区间中每个数出现的次数，就可以用莫队算法来做了。</p>
+<p>时间复杂度是$O(n\sqrt n\log n)$。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cmath&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#define ele long long</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxn 50010</span>
+<span class="n">ele</span> <span class="n">B</span><span class="p">;</span>
+<span class="k">struct</span> <span class="n">query</span>
+<span class="p">{</span>
+    <span class="n">ele</span> <span class="n">l</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">id</span><span class="p">;</span>
+    <span class="kr">inline</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">&lt;</span><span class="p">(</span><span class="n">query</span> <span class="n">b</span><span class="p">)</span><span class="k">const</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">l ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj3289ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj2431ti-jie.html">bzoj2431题解</a>
       </h1>
     <p class="meta">
@@ -336,38 +374,6 @@
     <a rel="full-article" href="/bzoj2120ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj3065ti-jie.html">bzoj3065题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2016-05-29T00:00:00+02:00" pubdate>Sun 29 May 2016</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=1571835&auto=0&height=66"></iframe>
-
-<p>块状链表，每个块内部按升序排序，查询的时候二分套二分。</p>
-<p>分块的时候每$\sqrt{n}\log n$分一个块，效率最高。</p>
-<p>块状链表有一个比较短的写法：不对块进行分裂、合并，但每$\sqrt{n}$次操作后把整个链表暴力重构一次，摊还时间复杂度也是一样的。</p>
-<p>时间复杂度：</p>
-<p>查询$O(\sqrt{n}\log n)$</p>
-<p>修改$O(\sqrt{n}\log n)$</p>
-<p>插入$O(\sqrt{n}\log n)$</p>
-<p>看上去很可怕，但据说这么做常数很小，就是A了……</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj3065ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index15.html">&larr; Older</a>
 
@@ -379,6 +385,9 @@
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1082ti-jie.html">bzoj1082题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1060ti-jie.html">bzoj1060题解</a>
       </li>
       <li class="post">
@@ -389,9 +398,6 @@
       </li>
       <li class="post">
           <a href="/bzoj1038ti-jie.html">bzoj1038题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1086ti-jie.html">bzoj1086题解</a>
       </li>
     </ul>
   </section>

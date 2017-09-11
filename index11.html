@@ -49,6 +49,44 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj2763ti-jie.html">bzoj2763题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-11-03T00:00:00+01:00" pubdate>Thu 03 November 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=63677&auto=0&height=66"></iframe>
+
+<p>考虑把图拆成k+1层，第i层表示已经免费i次。</p>
+<p>对于每条原来的边，每层内照常，层间连一条权值为0的边，表示使用了一次免费机会。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;queue&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#define ele int</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxn 10010</span>
+<span class="cp">#define maxm 50010</span>
+<span class="cp">#define maxk 12</span>
+<span class="cp">#define INF 1000000000</span>
+<span class="k">struct</span> <span class="n">edge</span><span class="p">{</span>
+    <span class="n">ele</span> <span class="n">v</span><span class="p">,</span><span class="n">w</span><span class="p">;</span>
+    <span class="n">edge</span> <span class="o">*</span><span class="n">nxt</span><span class="p">;</span>
+<span class="p">}</span><span class="n">ep</span><span class="p">[</span><span class="n">maxm</span><span class="o">*</span><span class="mi">4</span><span class="o">*</span><span class="n">maxk ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj2763ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj3083ti-jie.html">bzoj3083题解</a>
       </h1>
     <p class="meta">
@@ -343,44 +381,6 @@
     <a rel="full-article" href="/bzoj3309ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj1263ti-jie.html">bzoj1263题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2016-09-17T00:00:00+02:00" pubdate>Sat 17 September 2016</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=419594258&auto=0&height=66"></iframe>
-
-<p>小学奥数+高精度就可以做了。</p>
-<p>我偷懒写了python……</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="n">n</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="nb">raw_input</span><span class="p">())</span>
-<span class="n">tmp</span><span class="o">=</span><span class="n">n</span><span class="o">%</span><span class="mi">3</span>
-<span class="k">if</span> <span class="n">tmp</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
-    <span class="n">ans</span><span class="o">=</span><span class="mi">3</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
-<span class="k">elif</span> <span class="n">tmp</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
-    <span class="n">ans</span><span class="o">=</span><span class="mi">3</span><span class="o">**</span><span class="p">((</span><span class="n">n</span><span class="o">-</span><span class="mi">4</span><span class="p">)</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
-    <span class="n">ans</span><span class="o">*=</span><span class="mi">4</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="n">ans</span><span class="o">=</span><span class="mi">3</span><span class="o">**</span><span class="p">((</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
-    <span class="n">ans</span><span class="o">*=</span><span class="mi">2</span>
-<span class="n">ans</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">ans</span><span class="p">)</span>
-<span class="n">L</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">ans</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
-<span class="k">if</span> <span class="p">(</span><span class="n">L ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj1263ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index12.html">&larr; Older</a>
 
@@ -392,6 +392,9 @@
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1082ti-jie.html">bzoj1082题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1060ti-jie.html">bzoj1060题解</a>
       </li>
       <li class="post">
@@ -402,9 +405,6 @@
       </li>
       <li class="post">
           <a href="/bzoj1038ti-jie.html">bzoj1038题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1086ti-jie.html">bzoj1086题解</a>
       </li>
     </ul>
   </section>
