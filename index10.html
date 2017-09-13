@@ -49,6 +49,34 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/noip2016ti-jie.html">noip2016题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-11-21T00:00:00+01:00" pubdate>Mon 21 November 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<h3>D1T1</h3>
+<p>坑着</p>
+<h3>D1T2</h3>
+<p>暴力的方法当然是很容易想的，期望得分25。</p>
+<p>考虑一种简单一些的情况：玩家都在序列而不是树上跑，而且所有玩家都在往右跑。</p>
+<p>假设某个玩家从l跑到r，那么他会在满足$j \in [l,r]$且$j-w_j=l$的点j上被观测到。</p>
+<p>于是，我们可以将所有的玩家按照l排序，把序列上的所有点按照$j-w_j$排序，每次加入l=p的所有玩家，用树状数组统计序列上每个点被覆盖了几次，据此计算所有$j-w_j=p$的点的答案，最后把l=p的玩家删去。这样每个玩家被加入一次，删去一次，序列上每个点被计算一次，时间复杂度为$O(n\log n)$。</p>
+<p>考虑复杂一点的情况，有的玩家往右跑，有的往左跑。</p>
+<p>此时可以把这两种玩家分开处理，往右跑的处理方法同上 ...</p></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/noip2016ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj1452ti-jie.html">bzoj1452题解</a>
       </h1>
     <p class="meta">
@@ -370,30 +398,6 @@
     <a rel="full-article" href="/bzoj2152ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj4403ti-jie.html">bzoj4403题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2016-11-04T00:00:00+01:00" pubdate>Fri 04 November 2016</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=1698374&auto=0&height=66"></iframe>
-
-<p>令$m=r-l+1$，长度为i，元素大小在l到r之间的单调不降序列的数量等于长度为i，元素大小在0到m-1之间的单调不降序列的数量。</p>
-<p>假设这个序列为$a_1,a_2,\ldots,a_i$，令$b_1=a_1,b_j=a_j-a_{j-1},b_{i+1}=m-1-a_i(j=2,3,\ldots,i)$，那么就有$b_1+b_2+\ldots+b_{i+1}=m-1$且所有的b非负。</p>
-<p>由插板法可得这样的序列个数为$C_{i+m-1}^{i}=C_{i+m-1}^{m-1 ...</p></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj4403ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index11.html">&larr; Older</a>
 
@@ -405,6 +409,9 @@
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1052ti-jie.html">bzoj1052题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1082ti-jie.html">bzoj1082题解</a>
       </li>
       <li class="post">
@@ -415,9 +422,6 @@
       </li>
       <li class="post">
           <a href="/bzoj1064ti-jie.html">bzoj1064题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1038ti-jie.html">bzoj1038题解</a>
       </li>
     </ul>
   </section>

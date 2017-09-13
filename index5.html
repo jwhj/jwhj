@@ -49,6 +49,38 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj2589spojcot2ti-jie.html">bzoj2589&&spojcot2题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2017-05-05T00:00:00+02:00" pubdate>Fri 05 May 2017</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p>把根节点设成关键点，然后对于每个关键点，如果它的子数里有某个点跟它的距离等于K，那么把那个节点也设成关键点。据说这样关键点个数至多为$O(\frac{n}{K})$。</p>
+<p>接下来预处理出每个关键点到所有点的答案，用可持久化数组保存每个点到根的路径上每种权值的出现次数。然后每个询问就可以从预处理出的答案加上不超过K个点得出。</p>
+<p>本来这么写是为了做bzoj上那道强制在线的版本的……结果时限卡得太紧了……优化了好几天之后只AC了spoj上那个……</p>
+<p>比较有效的优化大概是下面几个：</p>
+<ul>
+<li>用函数式块状数组而不是主席树来实现可持久化数组</li>
+<li>用1～2次dfs来预处理每个关键点到所有点的答案，而不是$O(\frac{n}{K})$次</li>
+<li>回答询问的时候，需要计算一些路径上某个值出现的次数，求这个的时候要计算lca，而每个询问所需要计算的多条路径所需的lca是一样的。</li>
+<li><del>凭感觉乱</del>调整K的大小</li>
+</ul>
+<p>UPD：最近在uoj上看到了另外一种做法，如下。</p>
+<p>考虑点分的过程，每个点作为重心的时候，用bitset维护它到下面每一个点路径上的权值构成的集合。这样，询问跨过这个点的某条路径（设为u-&gt;v）的时候，就可以用这个点到u的权值集合按位或这个点到v的权值集合，然后统计结果中1的个数。</p>
+<p>为了支持在线 ...</p></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj2589spojcot2ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj1011ti-jie.html">bzoj1011题解</a>
       </h1>
     <p class="meta">
@@ -324,33 +356,6 @@
     <a rel="full-article" href="/bzoj1066ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/hdu6017ti-jie.html">hdu6017题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2017-02-25T00:00:00+01:00" pubdate>Sat 25 February 2017</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=20201419&auto=0&height=66"></iframe>
-
-<p>比赛的时候没调出来，我还是太弱……</p>
-<p>首先，其实就是要移动序列中的2，使得移动次数不超过$\lfloor\frac{m}{2}\rfloor$，且后面接着至少两个3的2的数量尽可能多。</p>
-<p>让f[i][j][k]表示将前i个2分散在前j-1位里，且下一个2在第j位，移动次数上限为k时，后面接着至少两个3的2的数量的最大值。</p>
-<p>考虑i的位置，如果p[i]&gt;=j-3，那么不应该将其移动到j-3的左边，这是因为从j-3继续往左移的话，移动次数增多，左边留有的空间变小，答案不会变得更优。</p>
-<p>如果p[i]&lt;j-3，那么不应该将其左移。如果i被移到j-1或j-2，单独计算一下，否则假设其右移t位，此时的个数为f[i-1][p[i]+t][k-t]+1。</p>
-<p>如果按照上面的方法转移，时间复杂度是四次的。注意到在f ...</p></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/hdu6017ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index6.html">&larr; Older</a>
 
@@ -362,6 +367,9 @@
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1052ti-jie.html">bzoj1052题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1082ti-jie.html">bzoj1082题解</a>
       </li>
       <li class="post">
@@ -372,9 +380,6 @@
       </li>
       <li class="post">
           <a href="/bzoj1064ti-jie.html">bzoj1064题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1038ti-jie.html">bzoj1038题解</a>
       </li>
     </ul>
   </section>

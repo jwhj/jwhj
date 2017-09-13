@@ -49,6 +49,34 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj2120ti-jie.html">bzoj2120题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-06-01T00:00:00+02:00" pubdate>Wed 01 June 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=18538630&auto=0&height=66"></iframe>
+
+<p>五月刚过，然而BGM歌名的直译貌似是“十一月过了”……</p>
+<p>跟<a href="http://www.lydsy.com/JudgeOnline/problem.php?id=1878">bzoj1878</a>很像，但区别在于这道题有修改。</p>
+<p>没有修改的话可以用莫队来做，其实有修改也可以。</p>
+<p>没有修改的时候，提出询问的时间对询问的结果没有影响，但是现在有修改，所以我们要考虑询问的时间，每个询问要用一个三元组$(l,r,t)$来表示。</p>
+<p>没有修改的时候，我们会移动左端点和右端点，其实时间也是可以像移动左右端点那样移动的。</p>
+<p>把整个序列每S个分成一块，以左端点所在块为第一关键字，右端点所在块为第二关键字，时间为第三关键字排序，然后跑莫队。</p>
+<p>方便起见，我们假设n和q同阶，可得时间复杂度为$O(n(S+(\frac{n}{S})^2))$，所以我们应该让$S=n^\frac{2}{3}$，此时算法的时间复杂度是$O(n ...</p></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj2120ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj3065ti-jie.html">bzoj3065题解</a>
       </h1>
     <p class="meta">
@@ -325,42 +353,6 @@ $$ans=\sum_{i}\sum_{1&lt;=j&lt;=\frac{n}{p_i}}{\phi(j)}$$。</p>
     <a rel="full-article" href="/bzoj1260ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj1297ti-jie.html">bzoj1297题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2016-05-07T00:00:00+02:00" pubdate>Sat 07 May 2016</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=26470630&auto=0&height=66"></iframe>
-
-<p>首先假设边权全都是1。</p>
-<p>定义$C_i$为一个矩阵，且满足$C_{ijk}$为j到k长度为i的路径条数。</p>
-<p>那么显然$C_1$就是邻接矩阵，可以证明$C_i=C_1^i$。</p>
-<p>现在边权有大于1的，但都是整数，而且不超过9，所以可以把每个点拆成9个点来做。</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
-<span class="cp">#define ele int</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="cp">#define maxn 110</span>
-<span class="cp">#define MOD 2009</span>
-<span class="k">struct</span> <span class="n">mat</span><span class="p">{</span>
-    <span class="n">ele</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">a</span><span class="p">[</span><span class="n">maxn</span><span class="p">][</span><span class="n">maxn</span><span class="p">];</span>
-<span class="p">};</span>
-<span class="kr">inline ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj1297ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index16.html">&larr; Older</a>
 
@@ -372,6 +364,9 @@ $$ans=\sum_{i}\sum_{1&lt;=j&lt;=\frac{n}{p_i}}{\phi(j)}$$。</p>
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1052ti-jie.html">bzoj1052题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1082ti-jie.html">bzoj1082题解</a>
       </li>
       <li class="post">
@@ -382,9 +377,6 @@ $$ans=\sum_{i}\sum_{1&lt;=j&lt;=\frac{n}{p_i}}{\phi(j)}$$。</p>
       </li>
       <li class="post">
           <a href="/bzoj1064ti-jie.html">bzoj1064题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1038ti-jie.html">bzoj1038题解</a>
       </li>
     </ul>
   </section>

@@ -49,6 +49,38 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="/bzoj1070ti-jie.html">bzoj1070题解</a>
+      </h1>
+    <p class="meta">
+<time datetime="2017-08-02T00:00:00+02:00" pubdate>Wed 02 August 2017</time>    </p>
+</header>
+
+  <div class="entry-content"><!--more-->
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=25638740&auto=0&height=66"></iframe>
+
+<p>单独考虑每辆车的等待时间较为困难，考虑每辆车对总等待时间的贡献，易知若i这辆车是j倒数第k个修的，那么贡献为k*time[i][j]。</p>
+<p>用费用流来解决，把每个修理人员拆成n个点，代表倒数第1个，第2个，……第n个（不一定都存在）修的。从s到每辆车连容量为1，费用为0的边，从每辆车到每个修理人员拆出的点连容量为1，费用为k*time[i][j]的边，每个修理人员拆出的点到t连容量为1，费用为0的边。满流时的最小费用即为答案。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;queue&gt;</span><span class="cp"></span>
+<span class="cp">#define ele int</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">const</span> <span class="n">ele</span> <span class="n">INF</span><span class="o">=</span><span class="mf">1e9</span><span class="p">;</span>
+<span class="cp">#define ...</span></pre></div></!--more--></div>
+  <footer>
+    <a rel="full-article" href="/bzoj1070ti-jie.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="/bzoj1040ti-jie.html">bzoj1040题解</a>
       </h1>
     <p class="meta">
@@ -343,37 +375,6 @@ $$(t_3-t_4)+2(t_1-t_2)=y$$</p>
     <a rel="full-article" href="/bzoj2115ti-jie.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="/bzoj1027ti-jie.html">bzoj1027题解</a>
-      </h1>
-    <p class="meta">
-<time datetime="2017-05-27T00:00:00+02:00" pubdate>Sat 27 May 2017</time>    </p>
-</header>
-
-  <div class="entry-content"><!--more-->
-
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=27192039&auto=0&height=66"></iframe>
-
-<p>首先注意到a+b+c=1，那么只需要管a和b就可以了。</p>
-<p>把每种材料看成一个点(a,b)，那么两个材料(a1,b1)，(a2,b2)所合成的东西对应的点一定在两点的连线上。于是拿一堆材料进行合成，结果一定在它们构成的凸包内（包括边界），而且凸包内任何一个点都是可以达到的。</p>
-<p>于是题目转化为，从点集A中选出最少的点，使点集B中所有点落在它们的凸包内。</p>
-<p>顺时针绕凸包一圈，考虑每条边对应的向量，会发现凸包内所有点在其右侧。</p>
-<p>对于A中任意两点i，j（i，j可相同），若B中所有点在向量i-&gt;j右侧，则连一条i到j的边长为1的边，然后跑最小环就能得到答案。</p>
-<p>i和j可以相同是因为有可能A中只有一个点。</p>
-<p>需要注意一个小细节，如果某个点与i，j共线，若它应该在i，j之间，连i到j的边，否则就不应该连。</p>
-<p>代码：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstring ...</span></pre></div></!--more--></div>
-  <footer>
-    <a rel="full-article" href="/bzoj1027ti-jie.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="/index4.html">&larr; Older</a>
 
@@ -385,6 +386,9 @@ $$(t_3-t_4)+2(t_1-t_2)=y$$</p>
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/bzoj1052ti-jie.html">bzoj1052题解</a>
+      </li>
+      <li class="post">
           <a href="/bzoj1082ti-jie.html">bzoj1082题解</a>
       </li>
       <li class="post">
@@ -395,9 +399,6 @@ $$(t_3-t_4)+2(t_1-t_2)=y$$</p>
       </li>
       <li class="post">
           <a href="/bzoj1064ti-jie.html">bzoj1064题解</a>
-      </li>
-      <li class="post">
-          <a href="/bzoj1038ti-jie.html">bzoj1038题解</a>
       </li>
     </ul>
   </section>
