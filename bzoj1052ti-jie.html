@@ -65,64 +65,63 @@
 
 <p>一个很明显的思路就是二分答案，然后判定可行性。</p>
 <p>判定可行性的时候，有一个很容易想到的贪心思路：用一个边平行于坐标轴的最小矩形覆盖所有点，然后在左上角塞一个正方形，对剩下的点反复进行这样的操作。很可惜这个思路不对，结果我就卡了很久，后来发现正确思路是，在矩形的四个角之一塞一个正方形，然后对剩下的点反复进行这个操作。</p>
-<p>代码：
-```cpp</p>
-<h1>include <cstdio></h1>
-<h1>include <cstring></h1>
-<h1>include <algorithm></h1>
-<h1>define ele int</h1>
-<p>using namespace std;</p>
-<h1>define maxn 20010</h1>
-<p>const ele INF=1e9;
-ele n,m,x[maxn],y[maxn],a[maxn];
-inline ele _abs(ele x){
-    return (x&lt;0)?-x:x;
-}
-bool dfs(ele L,ele i){
-    if (i==3) return !m;
-    ele mnx=INF,mxx=-INF,mny=INF,mxy=-INF;
-    for (int j=0; j<m; ++j){
-        mnx=min(mnx,x[a[j]]); mxx=max(mxx,x[a[j]]);
-        mny=min(mny,y[a[j]]); mxy=max(mxy,y[a[j]]);
-    }
-    ele *t1=new ele[m];
-    ele m1=m;
-    memcpy(t1,a,sizeof(ele)*m);
-    bool f=false;
-    for (int s=0; s<2 && !f; ++s)
-        for (int t=0; t<2 && !f; ++t){
-            ele p=mnx+s*(mxx-mnx),q=mny+t*(mxy-mny);
-            m=0;
-            for (int j=0; j<m1; ++j)
-                if (_abs(p-x[t1[j]])>L || _abs(q-y[t1[j]])&gt;L) a[m++]=t1[j];
-            if (dfs(L,i+1)) f=true;
-        }
-    m=m1;
-    memcpy(a,t1,sizeof(ele)*m);
-    return f;
-}
-inline bool test(ele L){
-    m=n;
-    for (int i=0; i<n; ++i) a[i]=i;
-    return dfs(L,0);
-}
-int main(){
-    scanf("%d",&n);
-    ele mnx=INF,mxx=-INF,mny=INF,mxy=-INF;
-    for (int i=0; i<n; ++i){
-        scanf("%d%d",x+i,y+i);
-        mnx=min(mnx,x[i]); mxx=max(mxx,x[i]);
-        mny=min(mny,y[i]); mxy=max(mxy,y[i]);
-    }
-    ele L=-1,R=max(mxx-mnx,mxy-mny);
-    while (R-L>1){
-        ele mid=(L+R)&gt;&gt;1;
-        if (test(mid)) R=mid; else L=mid;
-    }
-    printf("%d\n",R);
-    return 0;
-}
-``</p></div>
+<p>代码：</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#define ele int</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define maxn 20010</span>
+<span class="k">const</span> <span class="n">ele</span> <span class="n">INF</span><span class="o">=</span><span class="mf">1e9</span><span class="p">;</span>
+<span class="n">ele</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">x</span><span class="p">[</span><span class="n">maxn</span><span class="p">],</span><span class="n">y</span><span class="p">[</span><span class="n">maxn</span><span class="p">],</span><span class="n">a</span><span class="p">[</span><span class="n">maxn</span><span class="p">];</span>
+<span class="kr">inline</span> <span class="n">ele</span> <span class="nf">_abs</span><span class="p">(</span><span class="n">ele</span> <span class="n">x</span><span class="p">){</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">x</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">)</span><span class="o">?-</span><span class="nl">x</span><span class="p">:</span><span class="n">x</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">bool</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">ele</span> <span class="n">L</span><span class="p">,</span><span class="n">ele</span> <span class="n">i</span><span class="p">){</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">==</span><span class="mi">3</span><span class="p">)</span> <span class="k">return</span> <span class="o">!</span><span class="n">m</span><span class="p">;</span>
+    <span class="n">ele</span> <span class="n">mnx</span><span class="o">=</span><span class="n">INF</span><span class="p">,</span><span class="n">mxx</span><span class="o">=-</span><span class="n">INF</span><span class="p">,</span><span class="n">mny</span><span class="o">=</span><span class="n">INF</span><span class="p">,</span><span class="n">mxy</span><span class="o">=-</span><span class="n">INF</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">m</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span><span class="p">){</span>
+        <span class="n">mnx</span><span class="o">=</span><span class="n">min</span><span class="p">(</span><span class="n">mnx</span><span class="p">,</span><span class="n">x</span><span class="p">[</span><span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">]]);</span> <span class="n">mxx</span><span class="o">=</span><span class="n">max</span><span class="p">(</span><span class="n">mxx</span><span class="p">,</span><span class="n">x</span><span class="p">[</span><span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">]]);</span>
+        <span class="n">mny</span><span class="o">=</span><span class="n">min</span><span class="p">(</span><span class="n">mny</span><span class="p">,</span><span class="n">y</span><span class="p">[</span><span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">]]);</span> <span class="n">mxy</span><span class="o">=</span><span class="n">max</span><span class="p">(</span><span class="n">mxy</span><span class="p">,</span><span class="n">y</span><span class="p">[</span><span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">]]);</span>
+    <span class="p">}</span>
+    <span class="n">ele</span> <span class="o">*</span><span class="n">t1</span><span class="o">=</span><span class="k">new</span> <span class="n">ele</span><span class="p">[</span><span class="n">m</span><span class="p">];</span>
+    <span class="n">ele</span> <span class="n">m1</span><span class="o">=</span><span class="n">m</span><span class="p">;</span>
+    <span class="n">memcpy</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">ele</span><span class="p">)</span><span class="o">*</span><span class="n">m</span><span class="p">);</span>
+    <span class="kt">bool</span> <span class="n">f</span><span class="o">=</span><span class="nb">false</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">s</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">s</span><span class="o">&lt;</span><span class="mi">2</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">f</span><span class="p">;</span> <span class="o">++</span><span class="n">s</span><span class="p">)</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">t</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">t</span><span class="o">&lt;</span><span class="mi">2</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">f</span><span class="p">;</span> <span class="o">++</span><span class="n">t</span><span class="p">){</span>
+            <span class="n">ele</span> <span class="n">p</span><span class="o">=</span><span class="n">mnx</span><span class="o">+</span><span class="n">s</span><span class="o">*</span><span class="p">(</span><span class="n">mxx</span><span class="o">-</span><span class="n">mnx</span><span class="p">),</span><span class="n">q</span><span class="o">=</span><span class="n">mny</span><span class="o">+</span><span class="n">t</span><span class="o">*</span><span class="p">(</span><span class="n">mxy</span><span class="o">-</span><span class="n">mny</span><span class="p">);</span>
+            <span class="n">m</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">m1</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">_abs</span><span class="p">(</span><span class="n">p</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="n">t1</span><span class="p">[</span><span class="n">j</span><span class="p">]])</span><span class="o">&gt;</span><span class="n">L</span> <span class="o">||</span> <span class="n">_abs</span><span class="p">(</span><span class="n">q</span><span class="o">-</span><span class="n">y</span><span class="p">[</span><span class="n">t1</span><span class="p">[</span><span class="n">j</span><span class="p">]])</span><span class="o">&gt;</span><span class="n">L</span><span class="p">)</span> <span class="n">a</span><span class="p">[</span><span class="n">m</span><span class="o">++</span><span class="p">]</span><span class="o">=</span><span class="n">t1</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">dfs</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span> <span class="n">f</span><span class="o">=</span><span class="nb">true</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="n">m</span><span class="o">=</span><span class="n">m1</span><span class="p">;</span>
+    <span class="n">memcpy</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">t1</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">ele</span><span class="p">)</span><span class="o">*</span><span class="n">m</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">f</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kr">inline</span> <span class="kt">bool</span> <span class="nf">test</span><span class="p">(</span><span class="n">ele</span> <span class="n">L</span><span class="p">){</span>
+    <span class="n">m</span><span class="o">=</span><span class="n">n</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">i</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">dfs</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%d&quot;</span><span class="p">,</span><span class="o">&amp;</span><span class="n">n</span><span class="p">);</span>
+    <span class="n">ele</span> <span class="n">mnx</span><span class="o">=</span><span class="n">INF</span><span class="p">,</span><span class="n">mxx</span><span class="o">=-</span><span class="n">INF</span><span class="p">,</span><span class="n">mny</span><span class="o">=</span><span class="n">INF</span><span class="p">,</span><span class="n">mxy</span><span class="o">=-</span><span class="n">INF</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">){</span>
+        <span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%d%d&quot;</span><span class="p">,</span><span class="n">x</span><span class="o">+</span><span class="n">i</span><span class="p">,</span><span class="n">y</span><span class="o">+</span><span class="n">i</span><span class="p">);</span>
+        <span class="n">mnx</span><span class="o">=</span><span class="n">min</span><span class="p">(</span><span class="n">mnx</span><span class="p">,</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span> <span class="n">mxx</span><span class="o">=</span><span class="n">max</span><span class="p">(</span><span class="n">mxx</span><span class="p">,</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+        <span class="n">mny</span><span class="o">=</span><span class="n">min</span><span class="p">(</span><span class="n">mny</span><span class="p">,</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span> <span class="n">mxy</span><span class="o">=</span><span class="n">max</span><span class="p">(</span><span class="n">mxy</span><span class="p">,</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+    <span class="p">}</span>
+    <span class="n">ele</span> <span class="n">L</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span><span class="n">R</span><span class="o">=</span><span class="n">max</span><span class="p">(</span><span class="n">mxx</span><span class="o">-</span><span class="n">mnx</span><span class="p">,</span><span class="n">mxy</span><span class="o">-</span><span class="n">mny</span><span class="p">);</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">R</span><span class="o">-</span><span class="n">L</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">){</span>
+        <span class="n">ele</span> <span class="n">mid</span><span class="o">=</span><span class="p">(</span><span class="n">L</span><span class="o">+</span><span class="n">R</span><span class="p">)</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">test</span><span class="p">(</span><span class="n">mid</span><span class="p">))</span> <span class="n">R</span><span class="o">=</span><span class="n">mid</span><span class="p">;</span> <span class="k">else</span> <span class="n">L</span><span class="o">=</span><span class="n">mid</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">R</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div></div>
     <footer>
 <p class="meta">
   <span class="byline author vcard">
