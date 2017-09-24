@@ -17,7 +17,7 @@
       <pubDate>Wed, 22 Feb 2017 10:02:43 +0000</pubDate>
       
       <guid>http://blog.eleele.gq/post/wc2017gdkoi2017/</guid>
-      <description></description>
+      <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -26,7 +26,7 @@
       <pubDate>Sat, 13 Aug 2016 10:02:43 +0000</pubDate>
       
       <guid>http://blog.eleele.gq/post/git/</guid>
-      <description></description>
+      <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -61,7 +61,7 @@ orz oceaneye</description>
       <pubDate>Fri, 01 Jan 2016 10:02:43 +0000</pubDate>
       
       <guid>http://blog.eleele.gq/post/test/</guid>
-      <description>MathJax.Hub.Config({tex2jax: {inlineMath: [[&amp;lsquo;$&amp;rsquo;,&amp;lsquo;$&amp;rsquo;], [&amp;rsquo;\(&amp;lsquo;,&amp;rsquo;\)&amp;lsquo;]]}}); Test mathjax. $$E=mc^2$$
+      <description>MathJax.Hub.Config({tex2jax: {inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]]}}); $$E=mc^2$$
 Test code:
 print(&#39;Hello, world!&#39;)  </description>
     </item>

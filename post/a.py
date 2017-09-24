@@ -19,6 +19,7 @@ def func(n):
 	if (len(s1[2])==1): s1[2]='0'+s1[2]
 	x[3]='-'.join(s1)
 	x[3]='d'+x[3][1:]+'T10:02:43Z'
+	x[7]=''
 	f.write('\n'.join(x))
 	f.close()
 for a,b,c in os.walk('./'):
