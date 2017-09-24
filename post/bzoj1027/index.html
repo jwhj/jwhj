@@ -1,0 +1,173 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj1027题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj1027题解
+                    </h1>
+                    <h2 class="headline">
+                    May 27, 2017 10:02
+                    · 161 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95">计算几何</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=27192039&auto=0&height=66"></iframe></p>
+
+<p>首先注意到a+b+c=1，那么只需要管a和b就可以了。</p>
+
+<p>把每种材料看成一个点(a,b)，那么两个材料(a1,b1)，(a2,b2)所合成的东西对应的点一定在两点的连线上。于是拿一堆材料进行合成，结果一定在它们构成的凸包内（包括边界），而且凸包内任何一个点都是可以达到的。</p>
+
+<p>于是题目转化为，从点集A中选出最少的点，使点集B中所有点落在它们的凸包内。</p>
+
+<p>顺时针绕凸包一圈，考虑每条边对应的向量，会发现凸包内所有点在其右侧。</p>
+
+<p>对于A中任意两点i，j（i，j可相同），若B中所有点在向量i-&gt;j右侧，则连一条i到j的边长为1的边，然后跑最小环就能得到答案。</p>
+
+<p>i和j可以相同是因为有可能A中只有一个点。</p>
+
+<p>需要注意一个小细节，如果某个点与i，j共线，若它应该在i，j之间，连i到j的边，否则就不应该连。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#include &lt;cmath&gt;
+#define ele int
+#define ll long long
+using namespace std;
+#define maxn 510
+#define eps 1e-7
+const ele INF=1e9+10;
+struct pt{
+	double x,y;
+};
+#define vc pt
+inline vc operator-(pt a,pt b){
+	return (vc){a.x-b.x,a.y-b.y};
+}
+inline double dot(vc a,vc b){
+	return a.x*b.x+a.y*b.y;
+}
+inline double cross(vc a,vc b){
+	return a.x*b.y-a.y*b.x;
+}
+ele m,n,g[maxn][maxn];
+pt a[maxn],b[maxn];
+int main(){
+	scanf(&quot;%d%d&quot;,&amp;m,&amp;n);
+	double t;
+	for (int i=0; i&lt;m; ++i) scanf(&quot;%lf%lf%lf&quot;,&amp;a[i].x,&amp;a[i].y,&amp;t);
+	for (int i=0; i&lt;n; ++i) scanf(&quot;%lf%lf%lf&quot;,&amp;b[i].x,&amp;b[i].y,&amp;t);
+	for (int i=0; i&lt;m; ++i)
+		for (int j=0; j&lt;m; ++j) g[i][j]=INF;
+	for (int i=0; i&lt;m; ++i)
+		for (int j=0; j&lt;m; ++j){
+			bool flag=true;
+			for (int k=0; k&lt;n; ++k){
+				t=cross(a[i]-b[k],a[j]-b[k]);
+				if (t&gt;eps || (fabs(t)&lt;eps &amp;&amp; dot(a[i]-b[k],a[j]-b[k])&gt;eps)) flag=false;
+			}
+			if (flag) g[i][j]=1;
+		}
+	ele ans=INF;
+	for (int k=0; k&lt;m; ++k)
+		for (int i=0; i&lt;m; ++i)
+			for (int j=0; j&lt;m; ++j) g[i][j]=min(g[i][j],g[i][k]+g[k][j]);
+	for (int i=0; i&lt;m; ++i) ans=min(ans,g[i][i]);
+	printf(&quot;%d\n&quot;,(ans&lt;INF)?ans:-1);
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

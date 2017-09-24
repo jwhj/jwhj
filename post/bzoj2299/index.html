@@ -1,0 +1,155 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj2299题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj2299题解
+                    </h1>
+                    <h2 class="headline">
+                    Dec 12, 2016 10:02
+                    · 74 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E6%95%B0%E5%AD%A6">数学</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script></p>
+
+<p>如果已经有了(a,b)，那么(-a,-b)作用就不大了，可以允许(a,b)的个数为负，然后不管(-a,-b)。</p>
+
+<p>这样有效的向量就剩下四个：(a,b),(a,-b),(b,a),(b,-a)。设他们分别使用了t1,t2,t3,t4次，那么有</p>
+
+<p>$$(t1+t2)a+(t3+t4)b=x$$
+$$(t3-t4)a+(t1-t2)b=y$$</p>
+
+<p>令$A_1=t1+t2,B_1=t3+t4,A_2=t3-t4,B_2=t1-t2$，那么$A_1,B_2$同奇偶，$A_2,B_1$同奇偶，且</p>
+
+<p>$$A_1a+B_1b=x$$
+$$A_2a+B_2b=y$$</p>
+
+<p>若$A_1,B_1$均为偶数，那么有解当且仅当$2(a,b)|x$且$2(a,b)|y$。</p>
+
+<p>如果$A_1$为偶，$B_1$为奇，变形成</p>
+
+<p>$$A_1a+(B_1-1)b=x-b$$
+$$(A_2-1)a+B_2b=y-a$$</p>
+
+<p>这样同理就可以做了。</p>
+
+<p>另外两种情况也是类似的做法。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#define ele long long
+using namespace std;
+ele t,a,b,x,y,d;
+ele gcd(ele a,ele b){
+    if (!b) return a;
+    return gcd(b,a%b);
+}
+inline bool test(ele x,ele y){
+    return x%d==0 &amp;&amp; y%d==0;
+}
+int main(){
+    scanf(&quot;%lld&quot;,&amp;t);
+    while (t--){
+        scanf(&quot;%lld%lld%lld%lld&quot;,&amp;a,&amp;b,&amp;x,&amp;y);
+        d=gcd(a,b)&lt;&lt;1;
+        if (test(x,y) || test(x-a,y-b) || test(x-b,y-a) || test(x-a-b,y-a-b))
+            puts(&quot;Y&quot;);
+        else puts(&quot;N&quot;);
+    }
+    return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

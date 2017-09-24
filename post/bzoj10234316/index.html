@@ -1,0 +1,315 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj1023&amp;4316题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj1023&amp;4316题解
+                    </h1>
+                    <h2 class="headline">
+                    May 24, 2017 10:02
+                    · 401 words
+                    · 2 minutes read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E4%BB%99%E4%BA%BA%E6%8E%8C">仙人掌</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E5%9C%86%E6%96%B9%E6%A0%91">圆方树</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/dp">DP</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E5%8D%95%E8%B0%83%E6%A0%88/%E9%98%9F%E5%88%97">单调栈/队列</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=29567189&auto=0&height=66"></iframe></p>
+
+<p>不会圆方树的话可以先看一下<a href="http://blog.eleele.gq/bzoj2125ti-jie.html">这篇题解</a>。</p>
+
+<p>这两题都是圆方树上的dp。</p>
+
+<p>首先考虑在树上怎么dp。在圆方树的圆点上，情况是一样的，对于方点，再特殊考虑一下即可。</p>
+
+<p>bzoj1023在dp的时候还要用单调队列优化一下。</p>
+
+<p>代码（bzoj1023）：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#include &lt;vector&gt;
+#define ele int
+using namespace std;
+#define maxn 666666
+struct edge{
+	ele v,w;
+	edge *nxt;
+}ep[maxn&lt;&lt;2],*ecnt;
+ele n,m,ans,sqcnt,tcnt,top,dfn[maxn],low[maxn],stk[maxn],d[maxn],D[maxn],f[maxn];
+edge *h[maxn],*h1[maxn];
+vector&lt;ele&gt; vec[maxn];
+inline void addedge1(edge **h,ele u,ele v,ele w){
+	edge *p=ecnt++;
+	p-&gt;v=v; p-&gt;w=w; p-&gt;nxt=h[u];
+	h[u]=p;
+}
+inline void addedge(edge **h,ele u,ele v,ele w){
+	addedge1(h,u,v,w); addedge1(h,v,u,w);
+}
+void tarjan(ele p,ele i){
+	low[i]=dfn[i]=tcnt++;
+	stk[top++]=i;
+	for (edge *j=h[i]; j; j=j-&gt;nxt)
+		if (!~dfn[j-&gt;v]){
+			d[j-&gt;v]=d[i]+1;
+			tarjan(i,j-&gt;v);
+			low[i]=min(low[i],low[j-&gt;v]);
+			if (dfn[i]==low[j-&gt;v]){
+				D[sqcnt]=d[stk[top-1]]-d[i]+1;
+				vec[sqcnt].clear();
+				addedge(h1,i,sqcnt,0);
+				ele k;
+				do{
+					k=stk[--top];
+					addedge(h1,sqcnt,k,min(d[k]-d[i],D[sqcnt]-d[k]+d[i]));
+					vec[sqcnt].push_back(k);
+				}while (k!=j-&gt;v);
+				++sqcnt;
+			}
+			else if (dfn[i]&lt;low[j-&gt;v]) addedge(h1,i,j-&gt;v,j-&gt;w),--top;
+		}
+		else if (j-&gt;v!=p) low[i]=min(low[i],dfn[j-&gt;v]);
+}
+void dfs(ele p,ele i){
+	f[i]=0;
+	for (edge *j=h1[i]; j; j=j-&gt;nxt)
+		if (j-&gt;v!=p){
+			dfs(i,j-&gt;v);
+			f[i]=max(f[i],f[j-&gt;v]+j-&gt;w);
+		}
+	if (i&gt;=n){
+		static pair&lt;ele,ele&gt; Q[maxn];
+		ele qh=0,qt=0,tmp=-1;
+		for (int j=0; j&lt;vec[i].size(); ++j){
+			ele k=vec[i][j];
+			while (qh&lt;qt &amp;&amp; (j-Q[qh].second)*2&gt;D[i]){
+				tmp=max(tmp,f[Q[qh].first]+Q[qh].second);
+				++qh;
+			}
+			if (qh&lt;qt) ans=max(ans,f[k]+f[Q[qh].first]+j-Q[qh].second);
+			if (~tmp) ans=max(ans,D[i]+f[k]-j+tmp);
+			while (qh&lt;qt &amp;&amp; f[Q[qt-1].first]-Q[qt-1].second&lt;f[k]-j) --qt;
+			Q[qt++]=make_pair(k,j);
+		}
+	}
+	else{
+		ele mx=0;
+		for (edge *j=h1[i]; j; j=j-&gt;nxt)
+			if (j-&gt;v!=p){
+				ans=max(ans,mx+f[j-&gt;v]+j-&gt;w);
+				mx=max(mx,f[j-&gt;v]+j-&gt;w);
+			}
+	}
+}
+int main(){
+	scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+	ecnt=ep; memset(h,0,sizeof(h)); memset(h1,0,sizeof(h1));
+	while (m--){
+		ele k;
+		static ele ts[maxn];
+		scanf(&quot;%d&quot;,&amp;k);
+		for (int i=0; i&lt;k; ++i) scanf(&quot;%d&quot;,ts+i);
+		for (int i=0; i&lt;k-1; ++i) addedge(h,ts[i]-1,ts[i+1]-1,1);
+	}
+	tcnt=0; top=0; sqcnt=n; d[0]=0;
+	memset(dfn,-1,sizeof(dfn));
+	tarjan(-1,0);
+	ans=0;
+	dfs(-1,0);
+	printf(&quot;%d\n&quot;,ans);
+	return 0;
+}
+</code></pre>
+
+<p>代码（bzoj4316）：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#include &lt;vector&gt;
+#define ele int
+using namespace std;
+#define maxn 60010
+struct edge{
+	ele v;
+	edge *nxt;
+}ep[maxn&lt;&lt;2],*ecnt;
+ele n,m,sqcnt,top,tcnt,stk[maxn],dfn[maxn],low[maxn],f[maxn],g[maxn];
+edge *h[maxn],*h1[maxn];
+vector&lt;ele&gt; vec[maxn];
+inline void addedge1(edge **h,ele u,ele v){
+	edge *p=ecnt++;
+	p-&gt;v=v; p-&gt;nxt=h[u];
+	h[u]=p;
+}
+inline void addedge(edge **h,ele u,ele v){
+	addedge1(h,u,v); addedge1(h,v,u);
+}
+void tarjan(ele p,ele i){
+	low[i]=dfn[i]=tcnt++;
+	stk[top++]=i;
+	for (edge *j=h[i]; j; j=j-&gt;nxt)
+		if (!~dfn[j-&gt;v]){
+			tarjan(i,j-&gt;v);
+			low[i]=min(low[i],low[j-&gt;v]);
+			if (dfn[i]==low[j-&gt;v]){
+				addedge(h1,i,sqcnt);
+				vec[sqcnt].clear();
+				ele k;
+				do{
+					k=stk[--top];
+					addedge(h1,sqcnt,k);
+					vec[sqcnt].push_back(k);
+				}while (k!=j-&gt;v);
+				++sqcnt;
+			}
+			else if (dfn[i]&lt;low[j-&gt;v]) addedge(h1,i,j-&gt;v),--top;
+		}
+		else if (j-&gt;v!=p) low[i]=min(low[i],dfn[j-&gt;v]);
+}
+void dfs(ele p,ele i){
+	for (edge *j=h1[i]; j; j=j-&gt;nxt)
+		if (j-&gt;v!=p) dfs(i,j-&gt;v);
+	if (i&lt;n){
+		f[i]=1; g[i]=0;
+		for (edge *j=h1[i]; j; j=j-&gt;nxt)
+			if (j-&gt;v!=p){
+				f[i]+=g[j-&gt;v];
+				g[i]+=max(f[j-&gt;v],g[j-&gt;v]);
+			}
+	}
+	else{
+		static ele t1[maxn],t2[maxn];
+		t1[0]=t2[0]=g[vec[i][0]];
+		for (int j=1; j&lt;vec[i].size(); ++j){
+			ele k=vec[i][j];
+			t1[j]=t2[j-1]+f[k];
+			t2[j]=max(t1[j-1],t2[j-1])+g[k];
+		}
+		g[i]=t2[vec[i].size()-1];
+		t1[0]=f[vec[i][0]]; t2[0]=g[vec[i][0]];
+		for (int j=1; j&lt;vec[i].size(); ++j){
+			ele k=vec[i][j];
+			t1[j]=t2[j-1]+f[k];
+			t2[j]=max(t1[j-1],t2[j-1])+g[k];
+		}
+		f[i]=max(t1[vec[i].size()-1],t2[vec[i].size()-1]);
+	}
+}
+int main(){
+	scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+	ecnt=ep; memset(h,0,sizeof(h)); memset(h1,0,sizeof(h1));
+	for (int i=0; i&lt;m; ++i){
+		ele u,v;
+		scanf(&quot;%d%d&quot;,&amp;u,&amp;v); --u,--v;
+		addedge(h,u,v);
+	}
+	sqcnt=n; top=0; tcnt=0;
+	memset(dfn,-1,sizeof(dfn));
+	for (int i=0; i&lt;n; ++i)
+		if (!~dfn[i]) tarjan(-1,i);
+	memset(f,-1,sizeof(f));
+	ele ans=0;
+	for (int i=0; i&lt;n; ++i)
+		if (!~f[i]) dfs(-1,i),ans+=max(f[i],g[i]);
+	printf(&quot;%d\n&quot;,ans);
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

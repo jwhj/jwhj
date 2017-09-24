@@ -1,0 +1,167 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj4198题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj4198题解
+                    </h1>
+                    <h2 class="headline">
+                    May 29, 2016 10:02
+                    · 104 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/huffman">huffman</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=27268032&auto=0&height=66"></iframe></p>
+
+<p>如果不会huffman树，先去学一学吧。</p>
+
+<p>这道题显然就是一个k叉的huffman树，问题是网上好像很难找得到这样的资料，估计是出题人自己想出来的（？）</p>
+
+<p>如果简单地修改huffman树的构造过程，把每次选两个改成每次选k个，得到的算法是错误的。正确的算法应该是怎么样的呢？</p>
+
+<p>先考虑比较简单的情况，假设最后构造出来的huffman树每个非叶子节点都有k个孩子。这个时候上面的算法可以跑出正确的解。一开始有n棵树，每次选k个出来并成一棵，树的数量减少了(k-1)。最后只剩一棵，所以$k-1|n-1$。</p>
+
+<p>如果最后构造出来的huffman树有些非叶子节点有不到k个孩子，那么这样的节点只应有一个，而且在树的最底部。所以第一次选出节点并成一棵树时要选少一些，准确来说，是(n-1)%(k-1)+1个。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#include &lt;queue&gt;
+#define ele long long
+using namespace std;
+#define maxn 100010
+struct node
+{
+    ele w,h;
+    inline bool operator&lt;(node b)const
+    {
+        if (w&lt;b.w) return false;
+        if (w&gt;b.w) return true;
+        return h&gt;b.h;
+    }
+};
+ele n,k;
+priority_queue&lt;node&gt; q;
+int main()
+{
+    scanf(&quot;%lld%lld&quot;,&amp;n,&amp;k);
+    for (int i=0; i&lt;n; ++i)
+    {
+        ele w;
+        scanf(&quot;%lld&quot;,&amp;w);
+        node p=(node){w,1};
+        q.push(p);
+    }
+    ele ans=0;
+    while (q.size()&gt;1)
+    {
+        ele m=(q.size()-1)%(k-1);
+        if (m==0) m=k; else ++m;
+        ele w1=0,h1=0;
+        for (int i=0; i&lt;m; ++i)
+        {
+            node p=q.top(); q.pop();
+            w1+=p.w;
+            h1=max(h1,p.h);
+        }
+        ans+=w1;
+        q.push((node){w1,h1+1});
+    }
+    printf(&quot;%lld\n%lld\n&quot;,ans,q.top().h-1);
+    return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

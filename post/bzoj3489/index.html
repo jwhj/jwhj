@@ -1,0 +1,231 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj3489题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj3489题解
+                    </h1>
+                    <h2 class="headline">
+                    Sep 2, 2016 10:02
+                    · 270 words
+                    · 2 minutes read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/kd%E6%A0%91">KD树</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E7%BB%9F%E8%AE%A1">统计</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=18161816&auto=0&height=66"></iframe></p>
+
+<p>最快的解法似乎是可持久化树套树，然而我智商太低只会用kd树来做。</p>
+
+<p>记pi,qi为ai上一次出现的位置和下一次出现的位置，那么要求的答案就是$$\max_{l\le i\le r且p_i\lt l且q_i\gt r}{a_i}$$</p>
+
+<p>把每个ai看成一个三位空间中的点(i,pi,qi)，就可以用kd树来进行查询了。</p>
+
+<p>kd树查询最大值的时候有一个优化的技巧：如果当前子树的最大值比已经找到的最大值要小，那么这个子树就不用查询了。在本题中这个优化的效果非常明显。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#define ele int
+using namespace std;
+#define maxn 100010
+#define K 3
+struct node
+{
+	ele c[K],mn[K],mx[K],max,s,x;
+	node *l,*r;
+}pool[maxn];
+ele D,ans;
+inline bool cmp(node *a,node *b)
+{
+	return a-&gt;c[D]&lt;b-&gt;c[D];
+}
+inline void maintain(node *x)
+{
+	x-&gt;s=1; x-&gt;max=x-&gt;x;
+	for (int i=0; i&lt;K; ++i) x-&gt;mn[i]=x-&gt;mx[i]=x-&gt;c[i];
+	if (x-&gt;l)
+	{
+		x-&gt;s+=x-&gt;l-&gt;s; x-&gt;max=max(x-&gt;max,x-&gt;l-&gt;max);
+		for (int i=0; i&lt;K; ++i)
+			x-&gt;mn[i]=min(x-&gt;mn[i],x-&gt;l-&gt;mn[i]),
+			x-&gt;mx[i]=max(x-&gt;mx[i],x-&gt;l-&gt;mx[i]);
+	}
+	if (x-&gt;r)
+	{
+		x-&gt;s+=x-&gt;r-&gt;s; x-&gt;max=max(x-&gt;max,x-&gt;r-&gt;max);
+		for (int i=0; i&lt;K; ++i)
+			x-&gt;mn[i]=min(x-&gt;mn[i],x-&gt;r-&gt;mn[i]),
+			x-&gt;mx[i]=max(x-&gt;mx[i],x-&gt;r-&gt;mx[i]);
+	}
+}
+node* build(node **a,ele l,ele r,ele d)
+{
+	if (l&gt;r) return NULL;
+	if (l==r)
+	{
+		a[l]-&gt;l=a[l]-&gt;r=NULL;
+		maintain(a[l]);
+		return a[l];
+	}
+	ele mid=l+r&gt;&gt;1;
+	D=d;
+	nth_element(a+l,a+mid,a+r+1,cmp);
+	a[mid]-&gt;l=build(a,l,mid-1,(d+1)%K);
+	a[mid]-&gt;r=build(a,mid+1,r,(d+1)%K);
+	maintain(a[mid]);
+	return a[mid];
+}
+inline bool in(ele a[],ele b[],ele c[],ele d[])
+{
+	for (int i=0; i&lt;K; ++i)
+		if (a[i]&lt;c[i] || b[i]&gt;d[i]) return false;
+	return true;
+}
+inline bool out(ele a[],ele b[],ele c[],ele d[])
+{
+	for (int i=0; i&lt;K; ++i)
+		if (b[i]&lt;c[i] || a[i]&gt;d[i]) return true;
+	return false;
+}
+ele query(node *x,ele q1[],ele q2[])
+{
+	if (!x) return 0;
+	if (ans&gt;x-&gt;max) return 0;
+	if (in(x-&gt;mn,x-&gt;mx,q1,q2)) return ans=max(ans,x-&gt;max);
+	if (out(x-&gt;mn,x-&gt;mx,q1,q2)) return 0;
+	if (in(x-&gt;c,x-&gt;c,q1,q2)) ans=max(ans,x-&gt;x);
+	ans=max(ans,query(x-&gt;l,q1,q2));
+	ans=max(ans,query(x-&gt;r,q1,q2));
+	return ans;
+}
+ele n,m,a[maxn],pos[maxn],p[maxn],q[maxn];
+node *root,*tmp[maxn];
+int main()
+{
+	scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+	for (int i=0; i&lt;n; ++i) scanf(&quot;%d&quot;,a+i);
+	for (int i=1; i&lt;=n; ++i) pos[i]=-1;
+	for (int i=0; i&lt;n; ++i) p[i]=pos[a[i]],pos[a[i]]=i;
+	for (int i=1; i&lt;=n; ++i) pos[i]=n;
+	for (int i=n-1; i&gt;=0; --i) q[i]=pos[a[i]],pos[a[i]]=i;
+	for (int i=0; i&lt;n; ++i)
+	{
+		node *x=pool+i;
+		x-&gt;c[0]=i; x-&gt;c[1]=p[i]; x-&gt;c[2]=q[i];
+		x-&gt;x=a[i];
+		x-&gt;l=x-&gt;r=NULL;
+		maintain(x);
+		tmp[i]=pool+i;
+	}
+	root=build(tmp,0,n-1,0);
+	ele lastans=0;
+	while (m--)
+	{
+		ele u,v;
+		scanf(&quot;%d%d&quot;,&amp;u,&amp;v);
+		u=(u+lastans)%n;
+		v=(v+lastans)%n;
+		if (u&gt;v) swap(u,v);
+		ele q1[K]={u,-1,v+1},q2[K]={v,u-1,n};
+		ans=0;
+		lastans=query(root,q1,q2);
+		printf(&quot;%d\n&quot;,lastans);
+	}
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

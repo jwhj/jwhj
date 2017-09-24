@@ -1,0 +1,171 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj1052题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj1052题解
+                    </h1>
+                    <h2 class="headline">
+                    Sep 13, 2017 10:02
+                    · 144 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E4%BA%8C%E5%88%86">二分</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E4%B9%B1%E6%90%9E">乱搞</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=21924560&auto=0&height=66"></iframe></p>
+
+<p>一个很明显的思路就是二分答案，然后判定可行性。</p>
+
+<p>判定可行性的时候，有一个很容易想到的贪心思路：用一个边平行于坐标轴的最小矩形覆盖所有点，然后在左上角塞一个正方形，对剩下的点反复进行这样的操作。很可惜这个思路不对，结果我就卡了很久，后来发现正确思路是，在矩形的四个角之一塞一个正方形，然后对剩下的点反复进行这个操作。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#define ele int
+using namespace std;
+#define maxn 20010
+const ele INF=1e9;
+ele n,m,x[maxn],y[maxn],a[maxn];
+inline ele _abs(ele x){
+	return (x&lt;0)?-x:x;
+}
+bool dfs(ele L,ele i){
+	if (i==3) return !m;
+	ele mnx=INF,mxx=-INF,mny=INF,mxy=-INF;
+	for (int j=0; j&lt;m; ++j){
+		mnx=min(mnx,x[a[j]]); mxx=max(mxx,x[a[j]]);
+		mny=min(mny,y[a[j]]); mxy=max(mxy,y[a[j]]);
+	}
+	ele *t1=new ele[m];
+	ele m1=m;
+	memcpy(t1,a,sizeof(ele)*m);
+	bool f=false;
+	for (int s=0; s&lt;2 &amp;&amp; !f; ++s)
+		for (int t=0; t&lt;2 &amp;&amp; !f; ++t){
+			ele p=mnx+s*(mxx-mnx),q=mny+t*(mxy-mny);
+			m=0;
+			for (int j=0; j&lt;m1; ++j)
+				if (_abs(p-x[t1[j]])&gt;L || _abs(q-y[t1[j]])&gt;L) a[m++]=t1[j];
+			if (dfs(L,i+1)) f=true;
+		}
+	m=m1;
+	memcpy(a,t1,sizeof(ele)*m);
+	return f;
+}
+inline bool test(ele L){
+	m=n;
+	for (int i=0; i&lt;n; ++i) a[i]=i;
+	return dfs(L,0);
+}
+int main(){
+	scanf(&quot;%d&quot;,&amp;n);
+	ele mnx=INF,mxx=-INF,mny=INF,mxy=-INF;
+	for (int i=0; i&lt;n; ++i){
+		scanf(&quot;%d%d&quot;,x+i,y+i);
+		mnx=min(mnx,x[i]); mxx=max(mxx,x[i]);
+		mny=min(mny,y[i]); mxy=max(mxy,y[i]);
+	}
+	ele L=-1,R=max(mxx-mnx,mxy-mny);
+	while (R-L&gt;1){
+		ele mid=(L+R)&gt;&gt;1;
+		if (test(mid)) R=mid; else L=mid;
+	}
+	printf(&quot;%d\n&quot;,R);
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

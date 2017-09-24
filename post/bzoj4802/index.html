@@ -1,0 +1,191 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj4802题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj4802题解
+                    </h1>
+                    <h2 class="headline">
+                    Apr 24, 2017 10:02
+                    · 168 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E6%95%B0%E5%AD%A6">数学</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/miller_rabin">miller_rabin</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/pollard_rho">pollard_rho</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script></p>
+
+<p>这么大的数$O(\sqrt{n})$的算法肯定过不了，花了点时间研究了一下pollard_rho算法，感觉玄学无比。</p>
+
+<p>这个算法基于这样一个事实，反复从$[1,n-1]$中取出两个数$a,b$，$|a-b|$与$n$不互质的概率是很大的。这之中的原理跟生日攻击类似。</p>
+
+<p>这个算法还要更玄学一些，每次随机生成一个数t，定义函数$f(x)=x^2+t$。一开始$a=t,b=f(t)$，接着每次让$a=f(a),b=f(f(b))$。这么做有可能出现循环，如果出现，就随机再找一个t。用floyd判圈法可以快速判断循环，注意到$b$的前进速度是$a$的两倍，什么时候$b$赶上$a$了，就循环了。</p>
+
+<p>分解质因数的时候，先用miller_rabin算法判断是不是质数，如果不是，就用pollard_rho来分解。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cstdlib&gt;
+#include &lt;set&gt;
+#define ele long long
+using namespace std;
+inline ele mul(ele a,ele b,ele p){
+	ele ans=0,tmp=a;
+	for (; b; b&gt;&gt;=1,(tmp&lt;&lt;=1)%=p)
+		if (b&amp;1) (ans+=tmp)%=p;
+	return ans;
+}
+inline ele ABS(ele x){ return (x&lt;0)?-x:x; }
+ele gcd(ele a,ele b){
+	return (!b)?a:gcd(b,a%b);
+}
+inline ele pw(ele a,ele x,ele p){
+	ele ans=1,tmp=a;
+	for (; x; x&gt;&gt;=1,tmp=mul(tmp,tmp,p))
+		if (x&amp;1) ans=mul(ans,tmp,p);
+	return ans;
+}
+inline bool miller_rabin(ele n){
+	if (n==1) return false;
+	ele T=4;
+	while (T--){
+		ele a=rand()%(n-1)+1;
+		if (pw(a,n-1,n)!=1) return false;
+		ele p=n-1;
+		while (p%2==0){
+			p&gt;&gt;=1;
+			ele t=pw(a,p,n);
+			if (t==n-1) break;;
+			if (t!=1) return false;
+		}
+	}
+	return true;
+}
+inline ele pollard_rho(ele n){
+	ele t=rand()%100,p=1,a=t,b=(mul(a,a,n)+t)%n;
+	while (p==1 &amp;&amp; a!=b){
+		p=gcd(ABS(a-b),n);
+		a=(mul(a,a,n)+t)%n;
+		b=(mul(b,b,n)+t)%n;
+		b=(mul(b,b,n)+t)%n;
+	}
+	return p;
+}
+ele n,ans;
+set&lt;ele&gt; S;
+void calc(ele n){
+	if (n==1) return;
+	if (miller_rabin(n)){
+		if (!S.count(n)){
+			S.insert(n);
+			ans/=n; ans*=(n-1);
+		}
+		return;
+	}
+	ele p=1;
+	while (p==1 || p==n) p=pollard_rho(n);
+	calc(p); calc(n/p);
+}
+int main(){
+	scanf(&quot;%lld&quot;,&amp;n);
+	ans=n;
+	calc(n);
+	printf(&quot;%lld\n&quot;,ans);
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

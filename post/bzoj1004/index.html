@@ -1,0 +1,190 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj1004题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj1004题解
+                    </h1>
+                    <h2 class="headline">
+                    Dec 23, 2016 10:02
+                    · 149 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E6%95%B0%E5%AD%A6">数学</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E7%BD%AE%E6%8D%A2%E7%BE%A4">置换群</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=65050&auto=0&height=66"></iframe></p>
+
+<p>不会置换群的先去学一下吧，最好找本书看一看，网上很多地方没讲清楚，我比较懒不想写上来。</p>
+
+<p>题目说，<code>输入数据保证任意多次洗牌都可用这m种洗牌法中的一种代替</code>，这说明输入的置换构成一个置换群。</p>
+
+<p>因为三种颜色的使用次数有限制，所以不能用polya定理，要用burnside引理。</p>
+
+<p>求每个置换不变元的个数时，先把置换拆成若干个循环。要在置换下不变，每个循环中必须全部同色，所以可以用背包来做。</p>
+
+<p>最后的除法用逆元来处理。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#define ele int
+using namespace std;
+#define maxn 70
+ele n,m,s1,s2,s3,p,X[maxn];
+inline void exgcd(ele a,ele b,ele&amp;x,ele&amp;y){
+	if (!b){
+		x=1;
+		y=0;
+		return;
+	}
+	exgcd(b,a%b,y,x);
+	y-=(a/b)*x;
+}
+inline ele inv(ele a,ele p){
+	ele x,y;
+	exgcd(a,p,x,y);
+	return ((x%=p)+=p)%=p;
+}
+inline ele dp(){
+	ele h=0;
+	static ele d[maxn];
+	static bool vis[maxn];
+	memset(vis,0,sizeof(vis));
+	memset(d,0,sizeof(d));
+	for (int i=0; i&lt;n; ++i)
+		if (!vis[i]){
+			int j=i;
+			while (!vis[j]){
+				vis[j]=true;
+				++d[h];
+				j=X[j];
+			}
+			++h;
+		}
+	static ele f[maxn][maxn][maxn];
+	f[0][0][0]=1;
+	for (int i=0; i&lt;h; ++i)
+		for (int u=s1; u&gt;=0; --u)
+			for (int v=s2; v&gt;=0; --v)
+				for (int w=s3; w&gt;=0; --w){
+					f[u][v][w]=0;
+					if (u&gt;=d[i])
+						(f[u][v][w]+=f[u-d[i]][v][w])%=p;
+					if (v&gt;=d[i])
+						(f[u][v][w]+=f[u][v-d[i]][w])%=p;
+					if (w&gt;=d[i])
+						(f[u][v][w]+=f[u][v][w-d[i]])%=p;
+				}
+	return f[s1][s2][s3];
+}
+int main(){
+	scanf(&quot;%d%d%d%d%d&quot;,&amp;s1,&amp;s2,&amp;s3,&amp;m,&amp;p);
+	n=s1+s2+s3;
+	ele ans=0;
+	for (int i=0; i&lt;m; ++i){
+		for (int j=0; j&lt;n; ++j)
+			scanf(&quot;%d&quot;,X+j),--X[j];
+		(ans+=dp())%=p;
+	}
+	for (int i=0; i&lt;n; ++i)
+		X[i]=i;
+	(ans+=dp())%=p;
+	(ans*=inv(m+1,p))%=p;
+	printf(&quot;%d\n&quot;,ans);
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

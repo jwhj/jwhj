@@ -1,0 +1,203 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj1016题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj1016题解
+                    </h1>
+                    <h2 class="headline">
+                    Dec 17, 2016 10:02
+                    · 194 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E5%9B%BE%E8%AE%BA">图论</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E4%B9%B1%E6%90%9E">乱搞</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script></p>
+
+<p><a href="https://blog.sengxian.com/solutions/bzoj-1016">这里</a>有很详细的题解。</p>
+
+<p>感觉里面的“且一定有一条边$b_j$不在$B$中”要改为“且一定有一条边$b_j$不在$A$中”。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#define ele int
+using namespace std;
+#define maxn 110
+#define maxm 1010
+#define MOD 31011
+struct edge{
+    ele u,v,w;
+    inline bool operator&lt;(edge b)const{
+        return w&lt;b.w;
+    }
+};
+ele n,m,len,arr[maxm],cnt[maxm],u[maxn];
+edge e[maxm];
+inline void get(ele&amp;a){
+    char c;
+    while ((c=getchar())&lt;'0' || c&gt;'9');
+    a=c-'0';
+    while ((c=getchar())&gt;='0' &amp;&amp; c&lt;='9')
+        a*=10,a+=c-'0';
+}
+inline ele idx(ele x){
+    return lower_bound(arr,arr+len,x)-arr;
+}
+ele getf(ele *u,ele x){
+    return (x==u[x])?(x):(u[x]=getf(u,u[x]));
+}
+inline void uni(ele *u,ele x,ele y){
+    ele a=getf(u,x),b=getf(u,y);
+    if (a!=b) u[a]=b;
+}
+ele dfs(ele left,ele j,ele k){
+    if (!left) return 1;
+    if (j==k) return 0;
+    ele ans=dfs(left,j+1,k);
+    if (getf(u,e[j].u)!=getf(u,e[j].v)){
+        ele tmp[maxn];
+        memcpy(tmp,u,sizeof(ele)*n);
+        uni(u,e[j].u,e[j].v);
+        ans+=dfs(left-1,j+1,k);
+        ans%=MOD;
+        memcpy(u,tmp,sizeof(ele)*n);
+    }
+    return ans;
+}
+int main(){
+    get(n); get(m);
+    for (int i=0; i&lt;m; ++i){
+        get(e[i].u); get(e[i].v); get(e[i].w);
+        --e[i].u,--e[i].v;
+        arr[i]=e[i].w;
+    }
+    sort(arr,arr+m);
+    len=unique(arr,arr+m)-arr;
+    sort(e,e+m);
+    memset(cnt,0,sizeof(cnt));
+    ele j=0;
+    for (int i=0; i&lt;n; ++i)
+        u[i]=i;
+    for (int i=0; i&lt;m; ++i){
+        if (getf(u,e[i].u)==getf(u,e[i].v)) continue;
+        ++j;
+        uni(u,e[i].u,e[i].v);
+        ++cnt[idx(e[i].w)];
+    }
+    if (j&lt;n-1){
+        puts(&quot;0&quot;);
+        return 0;
+    }
+    ele ans=1;
+    j=0;
+    for (int i=0; i&lt;n; ++i)
+            u[i]=i;
+    for (int i=0; i&lt;len; ++i){
+        ele k=j;
+        while (k&lt;m &amp;&amp; e[k].w==arr[i])
+            ++k;
+        ans*=dfs(cnt[i],j,k);
+        ans%=MOD;
+        for (int p=j; p&lt;k; ++p)
+            uni(u,e[p].u,e[p].v);
+        j=k;
+    }
+    printf(&quot;%d\n&quot;,ans);
+    return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

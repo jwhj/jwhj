@@ -1,0 +1,171 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj1297题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj1297题解
+                    </h1>
+                    <h2 class="headline">
+                    May 7, 2016 10:02
+                    · 131 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E7%9F%A9%E9%98%B5">矩阵</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=26470630&auto=0&height=66"></iframe></p>
+
+<p>首先假设边权全都是1。</p>
+
+<p>定义$C<em>i$为一个矩阵，且满足$C</em>{ijk}$为j到k长度为i的路径条数。</p>
+
+<p>那么显然$C_1$就是邻接矩阵，可以证明$C_i=C_1^i$。</p>
+
+<p>现在边权有大于1的，但都是整数，而且不超过9，所以可以把每个点拆成9个点来做。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#define ele int
+using namespace std;
+#define maxn 110
+#define MOD 2009
+struct mat{
+	ele n,m,a[maxn][maxn];
+};
+inline mat operator*(mat a,mat b){
+	mat ans;
+	ans.n=a.n; ans.m=b.m;
+	for (int i=0; i&lt;a.n; ++i)
+		for (int j=0; j&lt;b.m; ++j){
+			ans.a[i][j]=0;
+			for (int k=0; k&lt;a.m; ++k)
+				ans.a[i][j]+=a.a[i][k]*b.a[k][j]%MOD,
+				ans.a[i][j]%=MOD;
+		}
+	return ans;
+}
+ele n,t;
+mat g,ans;
+char s[20];
+inline mat pow(mat a,ele x){
+	mat ans,tmp=a;
+	ans.n=a.n; ans.m=a.m;
+	memset(ans.a,0,sizeof(ans.a));
+	for (int i=0; i&lt;ans.n; ++i)
+		ans.a[i][i]=1;
+	for (; x&gt;0; x&gt;&gt;=1){
+		if (x&amp;1) ans=ans*tmp;
+		tmp=tmp*tmp;
+	}
+	return ans;
+}
+int main(){
+	scanf(&quot;%d%d&quot;,&amp;n,&amp;t);
+	memset(g.a,0,sizeof(g.a));
+	g.n=g.m=n*9;
+	for (int i=0; i&lt;n; ++i)
+		for (int j=1; j&lt;9; ++j)
+			g.a[i*9+j][i*9+j-1]=1;
+	for (int i=0; i&lt;n; ++i){
+		scanf(&quot;%s&quot;,s);
+		for (int j=0; j&lt;n; ++j)
+			if (s[j]&gt;'0')
+				g.a[i*9][j*9+s[j]-'0'-1]=1;
+	}
+	ans=pow(g,t);
+	printf(&quot;%d\n&quot;,ans.a[0][(n-1)*9]);
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

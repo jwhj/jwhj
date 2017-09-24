@@ -1,0 +1,209 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj1001题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj1001题解
+                    </h1>
+                    <h2 class="headline">
+                    Dec 12, 2016 10:02
+                    · 246 words
+                    · 2 minutes read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/dijkstra">dijkstra</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E5%B9%B3%E9%9D%A2%E5%9B%BE">平面图</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script></p>
+
+<p>平面图最小割等于对偶图最短路，可以去看一看<a href="http://wenku.baidu.com/view/5a7df375a417866fb84a8e54.html">这个东西</a>。</p>
+
+<p>几年前就该来写这道题的……拖到现在……</p>
+
+<p>要特判一下n，m中有一个是1的情况。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;queue&gt;
+#define ele int
+using namespace std;
+#define maxn 1010
+#define maxv 2000010
+#define INF 1000000000
+struct hn{
+	ele i,d;
+	inline bool operator&lt;(hn b)const{
+		return d&gt;b.d;
+	}
+};
+struct edge{
+	ele v,w;
+	edge *nxt;
+}ep[maxv&lt;&lt;2];
+ele n,m,a[maxn][maxn],b[maxn][maxn],c[maxn][maxn],ecnt;
+edge *g[maxv];
+inline ele idx(ele i,ele j,ele k){
+	return 2+(i*(m-1)+j)*2+k;
+}
+inline void addedge(ele u,ele v,ele w){
+	edge *p=&amp;ep[ecnt++];
+	p-&gt;v=v; p-&gt;w=w; p-&gt;nxt=g[u];
+	g[u]=p;
+}
+inline ele dij(ele s,ele t,ele v){
+	static priority_queue&lt;hn&gt; q;
+	static ele d[maxv];
+	static bool vis[maxv];
+	memset(d,-1,sizeof(d));
+	memset(vis,0,sizeof(vis));
+	d[s]=0;
+	q.push({s,0});
+	while (!q.empty()){
+		hn k=q.top(); q.pop();
+		if (vis[k.i]) continue;
+		vis[k.i]=true;
+		for (edge *j=g[k.i]; j; j=j-&gt;nxt)
+			if (d[j-&gt;v]==-1 || d[j-&gt;v]&gt;k.d+j-&gt;w){
+				d[j-&gt;v]=k.d+j-&gt;w;
+				q.push({j-&gt;v,d[j-&gt;v]});
+			}
+	}
+	return d[t];
+}
+int main(){
+	scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+	for (int i=0; i&lt;n; ++i)
+		for (int j=0; j&lt;m-1; ++j)
+			scanf(&quot;%d&quot;,&amp;a[i][j]);
+	for (int i=0; i&lt;n-1; ++i)
+		for (int j=0; j&lt;m; ++j)
+			scanf(&quot;%d&quot;,&amp;b[i][j]);
+	for (int i=0; i&lt;n-1; ++i)
+		for (int j=0; j&lt;m-1; ++j)
+			scanf(&quot;%d&quot;,&amp;c[i][j]);
+	for (int j=0; j&lt;m-1; ++j)
+		addedge(0,idx(0,j,0),a[0][j]);
+	for (int i=0; i&lt;n-1; ++i)
+		addedge(0,idx(i,m-2,0),b[i][m-1]);
+	for (int i=0; i&lt;n-1; ++i)
+		addedge(idx(i,0,1),1,b[i][0]);
+	for (int j=0; j&lt;m-1; ++j)
+		addedge(idx(n-2,j,1),1,a[n-1][j]);
+	for (int i=0; i&lt;n-1; ++i)
+		for (int j=0; j&lt;m-1; ++j)
+			addedge(idx(i,j,0),idx(i,j,1),c[i][j]),
+			addedge(idx(i,j,1),idx(i,j,0),c[i][j]);
+	for (int i=0; i&lt;n-1; ++i)
+		for (int j=0; j&lt;m-2; ++j)
+			addedge(idx(i,j,0),idx(i,j+1,1),b[i][j+1]),
+			addedge(idx(i,j+1,1),idx(i,j,0),b[i][j+1]);
+	for (int j=0; j&lt;m-1; ++j)
+		for (int i=0; i&lt;n-2; ++i)
+			addedge(idx(i,j,1),idx(i+1,j,0),a[i+1][j]),
+			addedge(idx(i+1,j,0),idx(i,j,1),a[i+1][j]);
+	ele ans=INF;
+	if (n&gt;1 &amp;&amp; m&gt;1)
+		ans=dij(0,1,idx(n-1,m-1,1)+1);
+	else if (n==1)
+		for (int j=0; j&lt;m-1; ++j)
+			ans=min(ans,a[0][j]);
+	else
+		for (int i=0; i&lt;n-1; ++i)
+			ans=min(ans,b[i][0]);
+	if (n==1 &amp;&amp; m==1) ans=0;
+	printf(&quot;%d\n&quot;,ans);
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

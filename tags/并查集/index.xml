@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>并查集 on 蒟蒻的博客</title>
+    <link>http://blog.eleele.gq/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/</link>
+    <description>Recent content in 并查集 on 蒟蒻的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 28 Jul 2017 10:02:43 +0000</lastBuildDate>
+    
+	<atom:link href="http://blog.eleele.gq/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>bzoj1202题解</title>
+      <link>http://blog.eleele.gq/post/bzoj1202/</link>
+      <pubDate>Fri, 28 Jul 2017 10:02:43 +0000</pubDate>
+      
+      <guid>http://blog.eleele.gq/post/bzoj1202/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>bzoj1018题解</title>
+      <link>http://blog.eleele.gq/post/bzoj1018/</link>
+      <pubDate>Sun, 14 May 2017 10:02:43 +0000</pubDate>
+      
+      <guid>http://blog.eleele.gq/post/bzoj1018/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>bzoj3732题解</title>
+      <link>http://blog.eleele.gq/post/bzoj3732/</link>
+      <pubDate>Sat, 24 Dec 2016 10:02:43 +0000</pubDate>
+      
+      <guid>http://blog.eleele.gq/post/bzoj3732/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>bzoj2333题解</title>
+      <link>http://blog.eleele.gq/post/bzoj2333/</link>
+      <pubDate>Mon, 14 Nov 2016 10:02:43 +0000</pubDate>
+      
+      <guid>http://blog.eleele.gq/post/bzoj2333/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>bzoj3563题解</title>
+      <link>http://blog.eleele.gq/post/bzoj3563/</link>
+      <pubDate>Fri, 21 Oct 2016 10:02:43 +0000</pubDate>
+      
+      <guid>http://blog.eleele.gq/post/bzoj3563/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>bzoj3673&amp;3674题解</title>
+      <link>http://blog.eleele.gq/post/bzoj36733674/</link>
+      <pubDate>Sat, 13 Aug 2016 10:02:43 +0000</pubDate>
+      
+      <guid>http://blog.eleele.gq/post/bzoj36733674/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

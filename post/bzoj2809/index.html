@@ -1,0 +1,207 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj2809题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj2809题解
+                    </h1>
+                    <h2 class="headline">
+                    May 28, 2016 10:02
+                    · 157 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E8%B4%AA%E5%BF%83">贪心</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97">优先队列</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%85%8D%E5%AF%B9%E5%A0%86">配对堆</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=1696754&auto=0&height=66"></iframe></p>
+
+<p>由题，管理者必须是所有被派遣者的祖先。</p>
+
+<p>于是我们就得到了这样一个大暴力：</p>
+
+<blockquote>
+<p>枚举管理者，在以它为根的子树中从小到大选取被派遣者，直到预算被用完。用这个管理者的领导能力*人数去更新答案。</p>
+</blockquote>
+
+<p>考虑优化一下这个算法。如何<code>在以它为根的子树中从小到大选取被派遣者，直到预算被用完</code>？可以把以它为根的子树中的所有节点放进一个优先队列里，每次删掉花费最多的，直到花费少于预算。</p>
+
+<p>考虑具体实现。枚举管理者的时候，可以从下往上枚举。对于每个点，保存一个指针，指向一个优先队列。一开始每个点指向的优先队列里面只有那个点本身。每次枚举到一个点，就把它的孩子所指向的优先队列合并起来，再把这个优先队列与自己指向的优先队列合并，就可以得到以它为根的子树中所有节点构成的优先队列。</p>
+
+<p>还有点细节自己想吧。</p>
+
+<p>注意到，这里使用到的优先队列需要支持几个操作：合并、删除最大值。所以可以用左偏树、斜堆、配对堆这样的数据结构维护。我写的是配对堆，据说是个很好用的数据结构？</p>
+
+<p><a href="https://tarawa.github.io/2015/09/04/Pairing-Heap/">这里</a>有关于配对堆的介绍。<code>orz yjq</code></p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#define ele long long 
+using namespace std;
+#define maxn 100010
+struct edge
+{
+    ele v;
+    edge *nxt;
+}ep[maxn];
+struct phn
+{
+    ele x;
+    phn *son,*nxt;
+}pool[maxn];
+inline phn* merge(phn *a,phn*b)
+{
+    if (!a) return b;
+    if (!b) return a;
+    if (a-&gt;x&lt;b-&gt;x) swap(a,b);
+    b-&gt;nxt=a-&gt;son;
+    a-&gt;son=b;
+    return a;
+}
+phn* mp(phn *x){
+    if (!x) return NULL;
+    if (!x-&gt;nxt) return x;
+    phn *p=mp(x-&gt;nxt-&gt;nxt),*q=x-&gt;nxt;
+    x-&gt;nxt-&gt;nxt=NULL; x-&gt;nxt=NULL;
+    return merge(merge(x,q),p);
+}
+ele n,m,ecnt,sl[maxn],cnt[maxn],c[maxn],L[maxn];
+edge *h[maxn];
+phn *lk[maxn];
+inline void addedge(ele u,ele v)
+{
+    edge *p=&amp;ep[ecnt++];
+    p-&gt;v=v; p-&gt;nxt=h[u];
+    h[u]=p;
+}
+int main()
+{
+    scanf(&quot;%lld%lld&quot;,&amp;n,&amp;m);
+    ecnt=0;
+    memset(h,0,sizeof(h));
+    for (int i=0; i&lt;n; ++i)
+    {
+        ele b;
+        scanf(&quot;%lld%lld%lld&quot;,&amp;b,c+i,L+i);
+        --b;
+        if (b&gt;=0) addedge(b,i);
+        sl[i]=pool[i].x=c[i];
+        pool[i].son=pool[i].nxt=NULL;
+        lk[i]=pool+i;
+        cnt[i]=1;
+    }
+    ele ans=0;
+    for (int i=n-1; i&gt;=0; --i)
+    {
+        phn *p=lk[i];
+        for (edge *j=h[i]; j; j=j-&gt;nxt)
+        {
+            sl[i]+=sl[j-&gt;v];
+            cnt[i]+=cnt[j-&gt;v];
+            p=merge(p,lk[j-&gt;v]);
+        }
+        while (sl[i]&gt;m)
+            sl[i]-=p-&gt;x,--cnt[i],p=mp(p-&gt;son);
+        lk[i]=p;
+        ans=max(ans,L[i]*cnt[i]);
+    }
+    printf(&quot;%lld\n&quot;,ans);
+    return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

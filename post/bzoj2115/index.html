@@ -1,0 +1,184 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj2115题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj2115题解
+                    </h1>
+                    <h2 class="headline">
+                    May 30, 2017 10:02
+                    · 159 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E7%BA%BF%E6%80%A7%E5%9F%BA">线性基</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=36586466&auto=0&height=66"></iframe></p>
+
+<p>任何一条从1到n的路径，异或上若干个环，就可以得到另外任何一条1到n的路径。</p>
+
+<p>另一方面，假设我们已经有了一条路径，到达n后，再走到某个环上，绕环一圈，再回到n，就可以得到这个环的权值。</p>
+
+<p>所以，我们只需要随便找一条路径，求出上面边权的异或和s，再把所有环找出来，让s异或上其中一些，使得权值最大就可以了。</p>
+
+<p>求出环的权值的线性基，从大到小枚举，如果异或上这个数可以使答案更大，那就异或。利用线性基的性质，很容易从二进制的角度证明这个贪心的正确性。</p>
+
+<p>找出所有的环可以像tarjan那样dfs，找出回边。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#define ele long long
+using namespace std;
+#define maxn 50010
+#define maxm 100010
+#define W 64
+struct edge{
+	ele v,w;
+	edge *nxt,*rev;
+}ep[maxm&lt;&lt;1],*ecnt;
+ele n,m,b[W],d[maxn];
+edge *h[maxn];
+bool vis[maxn];
+inline void addedge(ele u,ele v,ele w){
+	edge *p=ecnt++;
+	p-&gt;v=v; p-&gt;w=w; p-&gt;nxt=h[u]; p-&gt;rev=ep+((ecnt-ep-1)^1);
+	h[u]=p;
+}
+inline void add(ele x){
+	for (int i=W-1; ~i; --i)
+		if (x&gt;&gt;i&amp;1){
+			if (b[i]) x^=b[i];
+			else{
+				b[i]=x;
+				for (int j=i-1; ~j; --j)
+					if (x&gt;&gt;j) x^=b[j];
+				for (int j=i+1; j&lt;W; ++j)
+					if (b[j]&gt;&gt;i) b[j]^=x;
+				break;
+			}
+		}
+}
+void dfs(edge *p,ele i){
+	vis[i]=true;
+	for (edge *j=h[i]; j; j=j-&gt;nxt)
+		if (!vis[j-&gt;v]){
+			d[j-&gt;v]=d[i]^j-&gt;w;
+			dfs(j-&gt;rev,j-&gt;v);
+		}
+		else if (j!=p){
+			ele t=d[i]^d[j-&gt;v]^j-&gt;w;
+			add(t);
+		}
+}
+int main(){
+	scanf(&quot;%lld%lld&quot;,&amp;n,&amp;m);
+	ecnt=ep; memset(h,0,sizeof(h));
+	for (int i=0; i&lt;m; ++i){
+		ele u,v,w;
+		scanf(&quot;%lld%lld%lld&quot;,&amp;u,&amp;v,&amp;w); --u,--v;
+		addedge(u,v,w); addedge(v,u,w);
+	}
+	memset(vis,0,sizeof(vis));
+	memset(b,0,sizeof(b));
+	for (int i=0; i&lt;n; ++i)
+		if (!vis[i]) d[i]=0,dfs(NULL,i);
+	ele ans=d[n-1];
+	for (int i=W-1; ~i; --i)
+		if ((ans^b[i])&gt;ans) ans^=b[i];
+	printf(&quot;%lld\n&quot;,ans);
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

@@ -1,0 +1,188 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj3876题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj3876题解
+                    </h1>
+                    <h2 class="headline">
+                    Apr 24, 2017 10:02
+                    · 173 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E7%BD%91%E7%BB%9C%E6%B5%81">网络流</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script></p>
+
+<p>关于带上下界的网络流，<a href="http://www.acyume.com/archives/1011">这里</a>有一份比较好的教程。</p>
+
+<p>今天才发现我的spfa写得过于naive……要用一个数组记录某个点是否在队列中……我以前为什么一直没发现……</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#include &lt;queue&gt;
+#define ele int
+using namespace std;
+#define maxn 310
+#define INF 1000000000
+struct edge{
+	ele v,c,r;
+	edge *nxt,*rev;
+}ep[10000000],*ecnt;
+edge *g[maxn];
+inline void addedge1(ele u,ele v,ele c,ele r){
+	edge *p=ecnt++;
+	p-&gt;v=v; p-&gt;c=c; p-&gt;r=r; p-&gt;nxt=g[u]; p-&gt;rev=ep+((ecnt-ep-1)^1);
+	g[u]=p;
+}
+inline void addedge(ele u,ele v,ele c,ele r){
+	addedge1(u,v,c,r); addedge1(v,u,-c,0);
+}
+ele n;
+edge *pv[maxn];
+ele dfs(ele i,ele&amp;p){
+	if (!pv[i]) return 0;
+	p=min(p,pv[i]-&gt;rev-&gt;r);
+	ele ans=dfs(pv[i]-&gt;v,p);
+	ans+=pv[i]-&gt;rev-&gt;c*p;
+	pv[i]-&gt;r+=p; pv[i]-&gt;rev-&gt;r-=p;
+	return ans;
+}
+inline ele mincost(ele s,ele t){
+	ele ans=0;
+	static ele d[maxn];
+	static queue&lt;ele&gt; Q;
+	static bool vis[maxn];
+	while (1){
+		memset(d,-1,sizeof(d));
+		d[s]=0;
+		Q.push(s);
+		pv[s]=NULL;
+		memset(vis,0,sizeof(vis));
+		while (!Q.empty()){
+			ele k=Q.front(); Q.pop();
+			vis[k]=false;
+			for (edge *j=g[k]; j; j=j-&gt;nxt)
+				if (j-&gt;r &amp;&amp; (!~d[j-&gt;v] || d[k]+j-&gt;c&lt;d[j-&gt;v])){
+					d[j-&gt;v]=d[k]+j-&gt;c;
+					pv[j-&gt;v]=j-&gt;rev;
+					if (!vis[j-&gt;v]) vis[j-&gt;v]=1,Q.push(j-&gt;v);
+				}
+		}
+		if (!~d[t]) break;
+		ele p=INF; ans+=dfs(t,p);
+	}
+	return ans;
+}
+int main(){
+	scanf(&quot;%d&quot;,&amp;n);
+	ecnt=ep; memset(g,0,sizeof(g));
+	for (int i=0; i&lt;n; ++i){
+		ele c;
+		scanf(&quot;%d&quot;,&amp;c);
+		for (int j=0; j&lt;c; ++j){
+			ele v,w;
+			scanf(&quot;%d%d&quot;,&amp;v,&amp;w); --v;
+			addedge(i,v,w,INF);
+			addedge(n,v,w,1);
+		}
+		addedge(i,n+1,0,c);
+		if (i) addedge(i,0,0,INF);
+	}
+	printf(&quot;%d\n&quot;,mincost(n,n+1));
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

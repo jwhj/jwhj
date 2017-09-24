@@ -1,0 +1,238 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj1189题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj1189题解
+                    </h1>
+                    <h2 class="headline">
+                    Jul 29, 2017 10:02
+                    · 306 words
+                    · 2 minutes read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E7%BD%91%E7%BB%9C%E6%B5%81">网络流</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E4%BA%8C%E5%88%86">二分</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=110400&auto=0&height=66"></iframe></p>
+
+<p>利用bfs得出格子之间两两的最短路。</p>
+
+<p>首先二分答案T，把每扇门拆成T个点，把每个有人的格子看成一个点，随便建一下图跑网络流，根据是否满流判断当前答案是否可行。</p>
+
+<p>bfs都能写错……真是太久没碰oi了……</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;vector&gt;
+#define ele int
+using namespace std;
+#define maxn 25
+#define maxnode 320010
+const ele INF=1e9;
+const ele di[]={-1,1,0,0};
+const ele dj[]={0,0,-1,1};
+struct edge{
+	ele v,r;
+	edge *nxt,*rev;
+}ep[2500000],*ecnt;
+ele n,m,dep[maxnode],d[maxn*maxn][maxn*maxn];
+char s[maxn][maxn];
+edge *h[maxnode],*cur[maxnode];
+vector&lt;ele&gt; plst,dlst;
+inline void addedge1(ele u,ele v,ele w){
+	edge *p=ecnt++;
+	p-&gt;v=v; p-&gt;r=w; p-&gt;nxt=h[u]; p-&gt;rev=ep+((ecnt-1-ep)^1);
+	h[u]=p;
+}
+inline void addedge(ele u,ele v,ele w){
+	addedge1(u,v,w); addedge1(v,u,0);
+}
+inline bool bfs(ele s,ele t){
+	memset(dep,-1,sizeof(dep));
+	ele qh=0,qt=1;
+	static ele Q[maxnode];
+	Q[0]=s; dep[s]=0;
+	while (qh&lt;qt){
+		for (edge *j=h[Q[qh]]; j; j=j-&gt;nxt)
+			if (j-&gt;r &amp;&amp; !~dep[j-&gt;v]){
+				dep[j-&gt;v]=dep[Q[qh]]+1;
+				Q[qt++]=j-&gt;v;
+				if (j-&gt;v==t) return true;
+			}
+		++qh;
+	}
+	return false;
+}
+ele dfs(ele i,ele t,ele p){
+	if (i==t || !p) return p;
+	ele ans=0;
+	for (edge*&amp;j=cur[i]; j; j=j-&gt;nxt)
+		if (j-&gt;r &amp;&amp; dep[i]+1==dep[j-&gt;v]){
+			ele tmp=dfs(j-&gt;v,t,min(p,j-&gt;r));
+			if (tmp){
+				j-&gt;r-=tmp;
+				j-&gt;rev-&gt;r+=tmp;
+				ans+=tmp;
+				p-=tmp;
+				if (!p) break;
+			}
+		}
+	if (!p) dep[i]=-1;
+	return ans;
+}
+inline ele dinic(ele s,ele t){
+	ele ans=0;
+	while (bfs(s,t)){
+		memcpy(cur,h,sizeof(h));
+		ans+=dfs(s,t,INF);
+	}
+	return ans;
+}
+inline void bfs1(ele p){
+	static ele Q[maxn*maxn];
+	static bool vis[maxn][maxn];
+	memset(vis,0,sizeof(vis));
+	ele qh=0,qt=1;
+	Q[0]=p; d[p][p]=0;
+	while (qh&lt;qt){
+		ele i=Q[qh]/m,j=Q[qh]%m;
+		vis[i][j]=true;
+		for (int w=0; w&lt;4; ++w){
+			ele ni=i+di[w],nj=j+dj[w];
+			if (0&lt;=ni &amp;&amp; ni&lt;n &amp;&amp; 0&lt;=nj &amp;&amp; nj&lt;m &amp;&amp; !vis[ni][nj]){
+				vis[ni][nj]=true;
+				d[p][ni*m+nj]=d[p][Q[qh]]+1;
+				if (s[ni][nj]=='.') Q[qt++]=ni*m+nj;
+			}
+		}
+		++qh;
+	}
+}
+inline bool test(ele T){
+	ecnt=ep;
+	memset(h,0,sizeof(h));
+	for (int i=0; i&lt;plst.size(); ++i){
+		addedge(0,2+i,1);
+		for (int j=0; j&lt;dlst.size(); ++j){
+			if (!~d[plst[i]][dlst[j]]) continue;
+			for (int t=d[plst[i]][dlst[j]]; t&lt;=T; ++t)
+				addedge(2+i,2+plst.size()+(t-1)*dlst.size()+j,1);
+		}
+	}
+	for (int t=0; t&lt;T; ++t)
+		for (int j=0; j&lt;dlst.size(); ++j)
+			addedge(2+plst.size()+t*dlst.size()+j,1,1);
+	return dinic(0,1)&gt;=plst.size();
+}
+int main(){
+	scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+	for (int i=0; i&lt;n; ++i) scanf(&quot;%s&quot;,s[i]);
+	for (int i=0; i&lt;n; ++i)
+		for (int j=0; j&lt;m; ++j)
+			if (s[i][j]=='.') plst.push_back(i*m+j);
+			else if (s[i][j]=='D') dlst.push_back(i*m+j);
+	memset(d,-1,sizeof(d));
+	for (int i=0; i&lt;plst.size(); ++i) bfs1(plst[i]);
+	ele L=0,R=n*m+1;
+	while (R-L&gt;1){
+		ele mid=(L+R)&gt;&gt;1;
+		if (test(mid)) R=mid; else L=mid;
+	}
+	if (R&lt;n*m+1) printf(&quot;%d\n&quot;,R); else puts(&quot;impossible&quot;);
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

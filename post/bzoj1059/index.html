@@ -1,0 +1,180 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj1059题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj1059题解
+                    </h1>
+                    <h2 class="headline">
+                    Dec 18, 2016 10:02
+                    · 123 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E4%BA%8C%E5%88%86%E5%9B%BE">二分图</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script></p>
+
+<p>两个同行的黑格，在变换之后还是同行。两个同列的黑格，在变换之后还是同列。</p>
+
+<p>所以，如果不存在n个不同行不同列的黑格，则无解。</p>
+
+<p>下证明如果存在n个不同行不同列的黑格则有解。</p>
+
+<p>首先可以把其中一个黑格移到左上角。</p>
+
+<p>接着只需要不移动第一行和第一列，就能把下一个黑格移到(2,2)。</p>
+
+<p>接着只需要不移动前两行和前两列，就能把下一个黑格移到(3,3)。</p>
+
+<p>以此类推。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#define ele int
+using namespace std;
+#define maxn 210
+struct edge{
+	ele v;
+	edge *nxt;
+}ep[maxn*maxn];
+ele n,ecnt,link[maxn];
+bool flag[maxn];
+edge *g[maxn];
+inline void addedge(ele u,ele v){
+	edge *p=&amp;ep[ecnt++];
+	p-&gt;v=v; p-&gt;nxt=g[u];
+	g[u]=p;
+}
+bool dfs(ele i){
+	for (edge *j=g[i]; j; j=j-&gt;nxt)
+		if (!flag[j-&gt;v]){
+			flag[j-&gt;v]=true;
+			if (link[j-&gt;v]==-1 || dfs(link[j-&gt;v])){
+				link[j-&gt;v]=i;
+				return true;
+			}
+		}
+	return false;
+}
+int main(){
+	ele T;
+	scanf(&quot;%d&quot;,&amp;T);
+	while (T--){
+		scanf(&quot;%d&quot;,&amp;n);
+		ecnt=0;
+		memset(g,0,sizeof(g));
+		for (int i=0; i&lt;n; ++i)
+			for (int j=0; j&lt;n; ++j){
+				ele x;
+				scanf(&quot;%d&quot;,&amp;x);
+				if (x)
+					addedge(i,j);
+			}
+		bool f=true;
+		memset(link,-1,sizeof(link));
+		for (int i=0; i&lt;n; ++i){
+			memset(flag,0,sizeof(flag));
+			if (!dfs(i)){
+				f=false;
+				break;
+			}
+		}
+		if (f)
+			puts(&quot;Yes&quot;);
+		else puts(&quot;No&quot;);
+	}
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

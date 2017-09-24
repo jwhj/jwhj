@@ -1,0 +1,249 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj4066题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj4066题解
+                    </h1>
+                    <h2 class="headline">
+                    Sep 1, 2016 10:02
+                    · 294 words
+                    · 2 minutes read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/kd%E6%A0%91">KD树</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=26289183&auto=0&height=66"></iframe></p>
+
+<p>直接用KD树就能做了。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#define ele int
+using namespace std;
+#define maxm 200010
+#define alpha 0.7
+#define dc(x) (x)^=lastans
+struct node
+{
+    ele c[2],mn[2],mx[2],x,s,sum;
+    node *l,*r;
+}pool[maxm];
+ele n,pcnt,K;
+inline bool cmp(node *a,node *b)
+{
+    return a-&gt;c[K]&lt;b-&gt;c[K];
+}
+inline void maintain(node *x)
+{
+    x-&gt;s=1; x-&gt;sum=x-&gt;x;
+    for (int i=0; i&lt;2; ++i) x-&gt;mn[i]=x-&gt;mx[i]=x-&gt;c[i];
+    if (x-&gt;l)
+    {
+        x-&gt;s+=x-&gt;l-&gt;s,x-&gt;sum+=x-&gt;l-&gt;sum;
+        for (int i=0; i&lt;2; ++i)
+            x-&gt;mn[i]=min(x-&gt;mn[i],x-&gt;l-&gt;mn[i]),
+            x-&gt;mx[i]=max(x-&gt;mx[i],x-&gt;l-&gt;mx[i]);
+    }
+    if (x-&gt;r)
+    {
+        x-&gt;s+=x-&gt;r-&gt;s,x-&gt;sum+=x-&gt;r-&gt;sum;
+        for (int i=0; i&lt;2; ++i)
+            x-&gt;mn[i]=min(x-&gt;mn[i],x-&gt;r-&gt;mn[i]),
+            x-&gt;mx[i]=max(x-&gt;mx[i],x-&gt;r-&gt;mx[i]);
+    }
+}
+node* build(node **a,ele l,ele r,ele k)
+{
+    if (l&gt;r) return NULL;
+    if (l==r)
+    {
+        a[l]-&gt;l=a[l]-&gt;r=NULL;
+        maintain(a[l]);
+        return a[l];
+    }
+    ele mid=l+r&gt;&gt;1;
+    K=k;
+    nth_element(a+l,a+mid,a+r+1,cmp);
+    a[mid]-&gt;l=build(a,l,mid-1,k^1);
+    a[mid]-&gt;r=build(a,mid+1,r,k^1);
+    maintain(a[mid]);
+    return a[mid];
+}
+void expt(node *x,node **res,ele i)
+{
+    if (!x) return;
+    expt(x-&gt;l,res,i);
+    if (x-&gt;l) i+=x-&gt;l-&gt;s;
+    res[i++]=x;
+    expt(x-&gt;r,res,i);
+}
+node* ins(node *x,node *y,ele k)
+{
+    if (!x) return y;
+    K=k;
+    if (cmp(y,x))
+        x-&gt;l=ins(x-&gt;l,y,k^1);
+    else x-&gt;r=ins(x-&gt;r,y,k^1);
+    maintain(x);
+    if (x-&gt;l &amp;&amp; x-&gt;l-&gt;s&gt;x-&gt;s*alpha || x-&gt;r &amp;&amp; x-&gt;r-&gt;s&gt;x-&gt;s*alpha)
+    {
+        static node* tmp[maxm];
+        expt(x,tmp,0);
+        x=build(tmp,0,x-&gt;s-1,k);
+    }
+    return x;
+}
+inline bool init(ele a[],ele b[],ele c[],ele d[])
+{
+    for (int i=0; i&lt;2; ++i)
+        if (a[i]&lt;c[i] || b[i]&gt;d[i]) return false;
+    return true;
+}
+inline bool outit(ele a[],ele b[],ele c[],ele d[])
+{
+    for (int i=0; i&lt;2; ++i)
+        if (b[i]&lt;c[i] || a[i]&gt;d[i]) return true;
+    return false;
+}
+ele query(node *x,node q1,node q2)
+{
+    if (!x) return 0;
+    if (init(x-&gt;mn,x-&gt;mx,q1.c,q2.c)) return x-&gt;sum;
+    if (outit(x-&gt;mn,x-&gt;mx,q1.c,q2.c)) return 0;
+    ele ans=0;
+    if (init(x-&gt;c,x-&gt;c,q1.c,q2.c)) ans+=x-&gt;x;
+    ans+=query(x-&gt;l,q1,q2);
+    ans+=query(x-&gt;r,q1,q2);
+    return ans;
+}
+inline node pt(ele x,ele y)
+{
+    node ans=(node){{x,y},{},{},0,0,0,NULL,NULL};
+    return ans;
+}
+int main()
+{
+    scanf(&quot;%d&quot;,&amp;n);
+    ele lastans=0;
+    node *root=NULL;
+    pcnt=0;
+    while (1)
+    {
+        ele cmd,a,b,c,d;
+        scanf(&quot;%d&quot;,&amp;cmd);
+        if (cmd==3) break;
+        if (cmd==1)
+        {
+            scanf(&quot;%d%d%d&quot;,&amp;a,&amp;b,&amp;c);
+            dc(a); dc(b); dc(c);
+            node *p=&amp;pool[pcnt++];
+            p-&gt;l=p-&gt;r=NULL;
+            p-&gt;c[0]=a; p-&gt;c[1]=b;
+            p-&gt;x=c;
+            maintain(p);
+            root=ins(root,p,0);
+        }
+        else
+        {
+            scanf(&quot;%d%d%d%d&quot;,&amp;a,&amp;b,&amp;c,&amp;d);
+            dc(a); dc(b); dc(c); dc(d);
+            printf(&quot;%d\n&quot;,lastans=query(root,pt(a,b),pt(c,d)));
+        }
+    }
+    return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

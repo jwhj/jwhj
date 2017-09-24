@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Manacher on 蒟蒻的博客</title>
+    <link>http://blog.eleele.gq/tags/manacher/</link>
+    <description>Recent content in Manacher on 蒟蒻的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 27 Jan 2017 10:02:43 +0000</lastBuildDate>
+    
+	<atom:link href="http://blog.eleele.gq/tags/manacher/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>bzoj3676题解</title>
+      <link>http://blog.eleele.gq/post/bzoj3676/</link>
+      <pubDate>Fri, 27 Jan 2017 10:02:43 +0000</pubDate>
+      
+      <guid>http://blog.eleele.gq/post/bzoj3676/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>bzoj3160题解</title>
+      <link>http://blog.eleele.gq/post/bzoj3160/</link>
+      <pubDate>Sun, 01 May 2016 10:02:43 +0000</pubDate>
+      
+      <guid>http://blog.eleele.gq/post/bzoj3160/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

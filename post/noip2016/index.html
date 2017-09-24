@@ -1,0 +1,336 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>noip2016题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        noip2016题解
+                    </h1>
+                    <h2 class="headline">
+                    Nov 21, 2016 10:02
+                    · 445 words
+                    · 3 minutes read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/noip">noip</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script></p>
+
+<p>###D1T1</p>
+
+<p>坑着</p>
+
+<p>###D1T2</p>
+
+<p>暴力的方法当然是很容易想的，期望得分25。</p>
+
+<p>考虑一种简单一些的情况：玩家都在序列而不是树上跑，而且所有玩家都在往右跑。</p>
+
+<p>假设某个玩家从l跑到r，那么他会在满足$j \in [l,r]$且$j-w_j=l$的点j上被观测到。</p>
+
+<p>于是，我们可以将所有的玩家按照l排序，把序列上的所有点按照$j-w_j$排序，每次加入l=p的所有玩家，用树状数组统计序列上每个点被覆盖了几次，据此计算所有$j-w_j=p$的点的答案，最后把l=p的玩家删去。这样每个玩家被加入一次，删去一次，序列上每个点被计算一次，时间复杂度为$O(n\log n)$。</p>
+
+<p>考虑复杂一点的情况，有的玩家往右跑，有的往左跑。</p>
+
+<p>此时可以把这两种玩家分开处理，往右跑的处理方法同上，对于往左跑的玩家，假设他从r跑到l，那么他会在满足$j \in [l,r]$且$j+w_j=r$的点j上被观测到。于是往左跑的玩家也可以用类似上面的办法处理。</p>
+
+<p>现在需要把序列上的做法弄到树上。</p>
+
+<p>一个简单的想法是使用树链剖分，不过码量可能会有一点大，时间复杂度$O(n\log^2 n)$。</p>
+
+<p>其实可以不用树链剖分。考虑一个玩家从u跑到v，u和v的最近公共祖先为w。那么其实可以把它拆成u向上跑到w和w向下跑到v两部分。把上面的$j\pm w_j$改成$dep_j\pm w_j$就可以用类似的方法来做了。</p>
+
+<p>此时需要一个数据结构，支持链上加一个数以及单点查询，可以树上差分再用树状数组来维护。这样时间复杂度是$O(n\log n)$的。</p>
+
+<p>这个算法经测试是95分，最后一个点TLE应该是倍增求lca常数太大的原因，晚点优化一下试试看。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#define ele long long
+using namespace std;
+#define maxn 300008
+#define maxk 20
+#define INF 1000000000
+struct edge{
+	ele v;
+	edge *nxt;
+}ep[maxn&lt;&lt;1];
+struct BIT{
+	inline void alloc(ele n){
+		this-&gt;n=n;
+		memset(a,0,sizeof(a));
+	}
+	inline void add(ele i,ele k){
+		for (int j=i; j&lt;=n; j+=j&amp;(-j))
+			a[j]+=k;
+	}
+	inline ele query(ele i){
+		ele ans=0;
+		for (int j=i; j&gt;0; j-=j&amp;(-j))
+			ans+=a[j];
+		return ans;
+	}
+	inline ele query(ele l,ele r){
+		if (l&gt;r) return 0;
+		return query(r)-query(l-1);
+	}
+	ele n,a[maxn];
+};
+struct ASK{
+	ele u,v,w;
+	inline bool operator&lt;(ASK b)const{
+		if (w!=b.w) return w&lt;b.w;
+		if (u!=b.u) return u&lt;b.u;
+		return v&lt;b.v;
+	}
+};
+ele n,m,ecnt,scnt,ans[maxn],tmp[maxn],w[maxn],s[maxn],t[maxn],size[maxn],fa[maxn][maxk],dep[maxn],seq[maxn],pos[maxn];
+edge *h[maxn];
+ASK q[maxn],q1[maxn];
+BIT b;
+inline void addedge(ele u,ele v){
+	edge *p=&amp;ep[ecnt++];
+	p-&gt;v=v; p-&gt;nxt=h[u];
+	h[u]=p;
+}
+void dfs(ele p,ele i){
+	pos[i]=scnt;
+	seq[scnt++]=i;
+	size[i]=1;
+	fa[i][0]=p;
+	for (edge *j=h[i]; j; j=j-&gt;nxt)
+		if (j-&gt;v!=p){
+			dep[j-&gt;v]=dep[i]+1;
+			dfs(i,j-&gt;v);
+			size[i]+=size[j-&gt;v];
+		}
+}
+inline ele lca(ele u,ele v){
+	if (dep[u]&gt;dep[v]) swap(u,v);
+	ele k=dep[v]-dep[u];
+	for (int i=0; k; k&gt;&gt;=1,++i)
+		if (k&amp;1)
+			v=fa[v][i];
+	if (u==v) return u;
+	for (int i=maxk-1; i&gt;=0; --i)
+		if (fa[u][i]!=fa[v][i])
+			u=fa[u][i],v=fa[v][i];
+	return fa[u][0];
+}
+inline bool cmp1(ele i,ele j){
+	return w[i]+dep[i]&lt;w[j]+dep[j];
+}
+inline bool cmp2(ele i,ele j){
+	return dep[i]-w[i]&lt;dep[j]-w[j];
+}
+int main(){
+	scanf(&quot;%lld%lld&quot;,&amp;n,&amp;m);
+	ecnt=0;
+	memset(h,0,sizeof(h));
+	for (int i=0; i&lt;n-1; ++i){
+		ele u,v;
+		scanf(&quot;%lld%lld&quot;,&amp;u,&amp;v);
+		--u,--v;
+		addedge(u,v); addedge(v,u);
+	}
+	for (int i=0; i&lt;n; ++i)
+		scanf(&quot;%lld&quot;,w+i);
+	for (int i=0; i&lt;m; ++i)
+		scanf(&quot;%lld%lld&quot;,s+i,t+i),--s[i],--t[i];
+	dep[0]=0;
+	scnt=0;
+	dfs(-1,0);
+	for (int i=1; i&lt;maxk; ++i)
+		for (int j=0; j&lt;maxn; ++j)
+			if (fa[j][i-1]==-1)
+				fa[j][i]=-1;
+			else fa[j][i]=fa[fa[j][i-1]][i-1];
+	memset(ans,0,sizeof(ans));
+	for (int i=0; i&lt;m; ++i){
+		ele p=lca(s[i],t[i]);
+		q[i].u=p;
+		q[i].v=s[i];
+		q[i].w=dep[s[i]];
+		if (p==t[i])
+			q1[i].w=-INF;
+		else{
+			q1[i].v=t[i];
+			ele u=t[i],k=dep[t[i]]-dep[p]-1;
+			for (int j=0; k; k&gt;&gt;=1,++j)
+				if (k&amp;1)
+					u=fa[u][j];
+			q1[i].u=u;
+			q1[i].w=dep[u]-(dep[s[i]]-dep[p]+1);
+		}
+	}
+	sort(q,q+m);
+	for (int i=0; i&lt;n; ++i)
+		tmp[i]=i;
+	sort(tmp,tmp+n,cmp1);
+	ele j=0;
+	b.alloc(n);
+	for (int i=0; i&lt;n; ++i){
+		ele t1=w[tmp[i]]+dep[tmp[i]];
+		for (; j&lt;m &amp;&amp; q[j].w&lt;t1; ++j)
+			;
+		ele k=j;
+		for (; k&lt;m &amp;&amp; q[k].w==t1; ++k)
+			;
+		for (int p=j; p&lt;k; ++p){
+			b.add(pos[q[p].v]+1,1);
+			if (fa[q[p].u][0]!=-1)
+				b.add(pos[fa[q[p].u][0]]+1,-1);
+		}
+		for (; i&lt;n &amp;&amp; w[tmp[i]]+dep[tmp[i]]==t1; ++i){
+			ele t2=b.query(pos[tmp[i]]+1,pos[tmp[i]]+size[tmp[i]]);
+			ans[tmp[i]]+=t2;
+		}
+		for (int p=j; p&lt;k; ++p){
+			b.add(pos[q[p].v]+1,-1);
+			if (fa[q[p].u][0]!=-1)
+				b.add(pos[fa[q[p].u][0]]+1,1);
+		}
+		--i;
+		j=k;
+	}
+	sort(q1,q1+m);
+	for (int i=0; i&lt;n; ++i)
+		tmp[i]=i;
+	sort(tmp,tmp+n,cmp2);
+	j=0;
+	b.alloc(n);
+	for (int i=0; i&lt;n; ++i){
+		ele t1=dep[tmp[i]]-w[tmp[i]];
+		for (; j&lt;m &amp;&amp; q1[j].w&lt;t1; ++j)
+			;
+		ele k=j;
+		for (; k&lt;m &amp;&amp; q1[k].w==t1; ++k)
+			;
+		for (int p=j; p&lt;k; ++p){
+			b.add(pos[q1[p].v]+1,1);
+			if (fa[q1[p].u][0]!=-1)
+				b.add(pos[fa[q1[p].u][0]]+1,-1);
+		}
+		for (; i&lt;n &amp;&amp; dep[tmp[i]]-w[tmp[i]]==t1; ++i){
+			ele t2=b.query(pos[tmp[i]]+1,pos[tmp[i]]+size[tmp[i]]);
+			ans[tmp[i]]+=t2;
+		}
+		for (int p=j; p&lt;k; ++p){
+			b.add(pos[q1[p].v]+1,-1);
+			if (fa[q1[p].u][0]!=-1)
+				b.add(pos[fa[q1[p].u][0]]+1,1);
+		}
+		--i;
+		j=k;
+	}
+	for (int i=0; i&lt;n-1; ++i)
+		printf(&quot;%lld &quot;,ans[i]);
+	printf(&quot;%lld\n&quot;,ans[n-1]);
+	return 0;
+}
+</code></pre>
+
+<p>###D1T3</p>
+
+<p>坑着</p>
+
+<p>###D2T1</p>
+
+<p>坑着</p>
+
+<p>###D2T2</p>
+
+<p>坑着</p>
+
+<p>###D2T3</p>
+
+<p>坑着</p>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

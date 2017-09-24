@@ -1,0 +1,147 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj1025题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj1025题解
+                    </h1>
+                    <h2 class="headline">
+                    May 26, 2017 10:02
+                    · 86 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/dp">DP</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E6%95%B0%E5%AD%A6">数学</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=26304168&auto=0&height=66"></iframe></p>
+
+<p>题意可以简化为：把n拆成若干个正整数，它们的lcm有多少种不同的可能。</p>
+
+<p>直接考虑有多少种可能比较困难，考虑判断一个A是否是某一个拆分的lcm。</p>
+
+<p>设$A=\prod p_i^{a_i}$，易证它是某一拆分的lcm当且仅当$\sum p_i^{a_i}\le n$。</p>
+
+<p>让f[i][j]表示只考虑前i种素数，满足$\sum p_i^{a_i}\le j$的${a_i}$有多少个。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#define ele long long
+using namespace std;
+#define maxn 1010
+ele n,pcnt,plst[maxn],f[maxn][maxn];
+bool flag[maxn];
+int main(){
+	scanf(&quot;%lld&quot;,&amp;n);
+	pcnt=0;
+	memset(flag,0,sizeof(flag));
+	for (int i=2; i&lt;=n; ++i){
+		if (!flag[i]) plst[pcnt++]=i;
+		for (int j=0; j&lt;pcnt &amp;&amp; i*plst[j]&lt;=n; ++j){
+			flag[i*plst[j]]=true;
+			if (i%plst[j]==0) break;
+		}
+	}
+	for (int j=0; j&lt;=n; ++j) f[0][j]=1;
+	for (int i=0; i&lt;pcnt; ++i)
+		for (int j=0; j&lt;=n; ++j){
+			f[i+1][j]=f[i][j];
+			for (int k=plst[i]; k&lt;=j; k*=plst[i]) f[i+1][j]+=f[i][j-k];
+		}
+	printf(&quot;%lld\n&quot;,f[pcnt][n]);
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

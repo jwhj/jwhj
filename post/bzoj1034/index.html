@@ -1,0 +1,156 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj1034题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj1034题解
+                    </h1>
+                    <h2 class="headline">
+                    Aug 6, 2017 10:02
+                    · 101 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E8%B4%AA%E5%BF%83">贪心</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=475277165&auto=0&height=66"></iframe></p>
+
+<p>每次找出对手中最强的一个，用己方能赢的最弱的人去打，如果都不能赢，暂不分配对手。接下来，对于剩下的对手，能打平尽量打平。这样一定能得到最多的分数。</p>
+
+<p>大概说一下为什么是对的。考虑当前某个对手a，按当前策略选出的对手是b。如果存在某个最优策略，己方输给了a，那么把a的对手调成b，一定不会更差。如果存在某个最优策略，己方与a打平，假设己方派出的是c，那么c比a弱且与b相当。考虑b，如果b输了或者平了，那么把a的对手改成b一定不会更差；如果b赢了，考虑b的对手d，如果d比a弱或者与a相当，同样可以把a的对手调成b，如果d比a强，由算法流程，为a挑对手的时候不可能调到b，矛盾。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#include &lt;set&gt;
+#define ele int
+using namespace std;
+#define maxn 100010
+ele n,a[maxn],b[maxn];
+bool vis[maxn];
+multiset&lt;ele&gt; s;
+inline ele calc(ele *a,ele *b){
+	ele ans=0;
+	s.clear();
+	memset(vis,0,sizeof(vis));
+	for (int i=0; i&lt;n; ++i) s.insert(a[i]);
+	for (int i=n-1; ~i; --i){
+		multiset&lt;ele&gt;::iterator it=s.upper_bound(b[i]);
+		if (it!=s.end()){
+			vis[i]=true;
+			ans+=2;
+			s.erase(it);
+		}
+	}
+	for (int i=n-1; ~i; --i){
+		if (vis[i]) continue;
+		multiset&lt;ele&gt;::iterator it=s.find(b[i]);
+		if (it!=s.end()){
+			vis[i]=true;
+			ans+=1;
+			s.erase(it);
+		}
+	}
+	return ans;
+}
+int main(){
+	scanf(&quot;%d&quot;,&amp;n);
+	for (int i=0; i&lt;n; ++i) scanf(&quot;%d&quot;,a+i);
+	for (int i=0; i&lt;n; ++i) scanf(&quot;%d&quot;,b+i);
+	sort(a,a+n); sort(b,b+n);
+	printf(&quot;%d %d\n&quot;,calc(a,b),2*n-calc(b,a));
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

@@ -1,0 +1,193 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj3563题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj3563题解
+                    </h1>
+                    <h2 class="headline">
+                    Oct 21, 2016 10:02
+                    · 190 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86">并查集</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=142647&auto=0&height=66"></iframe></p>
+
+<p>注意到，k也要异或之前连通的个数，但总共读进来多少条边，也就是k实际的取值是知道的，因此对于前q-1个询问，均可以把k与实际边数异或一下得到答案。</p>
+
+<p>至于最后一个询问，用并查集求一下就可以了。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#define ele int
+using namespace std;
+#define maxn 100010
+#define maxm 500010
+#define maxq 50010
+#define maxk 25
+struct ASK{
+	ele n,a[maxk];
+};
+struct edge{
+	ele u,v;
+};
+ele getf(ele *u,ele x){
+	return (x==u[x])?(x):(u[x]=getf(u,u[x]));
+}
+inline void uni(ele *u,ele x,ele y){
+	ele a=getf(u,x),b=getf(u,y);
+	if (a!=b)
+		u[a]=b;
+}
+inline void getl(char *s){
+	char c;
+	ele i=0;
+	while ((c=getchar())!='\n' &amp;&amp; c!='\r')
+		s[i++]=c;
+	s[i++]=0;
+}
+ele n,m,q,u[maxn];
+bool flag[maxm];
+char s[1010];
+edge e[maxm];
+ASK a[maxq];
+int main(){
+	scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+	for (int i=0; i&lt;m; ++i)
+		scanf(&quot;%d%d&quot;,&amp;e[i].u,&amp;e[i].v),--e[i].u,--e[i].v;
+	scanf(&quot;%d&quot;,&amp;q);
+	for (int i=0; i&lt;q; ++i){
+		getl(s);
+		while (!s[0]) getl(s);
+		ele len=strlen(s)+1,k=0;
+		a[i].a[0]=0;
+		for (int j=0; j&lt;len; ++j)
+			if (s[j]&gt;='0' &amp;&amp; s[j]&lt;='9')
+				a[i].a[k]*=10,a[i].a[k]+=s[j]-'0';
+			else if (s[j-1]&gt;='0' &amp;&amp; s[j-1]&lt;='9') ++k,a[i].a[k]=0;
+		a[i].n=k;
+	}
+	ele tmp=0;
+	for (int i=1; i&lt;q; ++i){
+		ele tmp1=a[i].a[0]^(a[i].n-1);
+		if (tmp1-tmp)
+			puts(&quot;Connected&quot;);
+		else puts(&quot;Disconnected&quot;);
+		tmp=tmp1;
+		for (int j=1; j&lt;a[i].n; ++j)
+			a[i].a[j]^=tmp;
+	}
+	memset(flag,0,sizeof(flag));
+	for (int i=1; i&lt;a[q-1].n; ++i)
+		flag[a[q-1].a[i]-1]=true;
+	for (int i=0; i&lt;n; ++i)
+		u[i]=i;
+	for (int i=0; i&lt;m; ++i)
+		if (!flag[i]) uni(u,e[i].u,e[i].v);
+	memset(flag,0,sizeof(flag));
+	for (int i=0; i&lt;n; ++i)
+		flag[getf(u,i)]=true;
+	tmp=0;
+	for (int i=0; i&lt;n; ++i)
+		if (flag[i])
+			++tmp;
+	if (tmp&gt;1)
+		puts(&quot;Disconnected&quot;);
+	else puts(&quot;Connected&quot;);
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

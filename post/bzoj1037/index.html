@@ -1,0 +1,152 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj1037题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj1037题解
+                    </h1>
+                    <h2 class="headline">
+                    Aug 9, 2017 10:02
+                    · 108 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E8%AE%B0%E5%BF%86%E5%8C%96%E6%90%9C%E7%B4%A2">记忆化搜索</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=28854176&auto=0&height=66"></iframe></p>
+
+<p>去掉一个合法排列的最后一个人（假设是男孩），剩下的人也应该满足题目条件，即对于任意连续的一段，男孩与女孩的数目之
+差不超过k。除了这之外，剩下的人还应该满足一个额外的条件，即对于任意一个后缀，男孩数减女孩数在-k到k-1之间。</p>
+
+<p>所以我们可以这样表示状态：(i,j,s,t)代表i个男孩，j个女孩排成一排，满足题目条件，并且对于任意一个后缀，男孩数减女孩数在s到t之间的方案数。转移挺简单的，看代码吧。</p>
+
+<p>直接这么dp还是不行的，因为会MLE。但是注意到很多状态实际上是用不到的，所以可以改成记忆化搜索并用散列表/map来保存状态。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#include &lt;map&gt;
+#define ele int
+using namespace std;
+#define maxn 155
+#define maxk 25
+#define MOD 12345678
+struct st{
+	ele i,j,s,t;
+	inline bool operator&lt;(st b)const{
+		if (i!=b.i) return i&lt;b.i;
+		if (j!=b.j) return j&lt;b.j;
+		if (s!=b.s) return s&lt;b.s;
+		return t&lt;b.t;
+	}
+};
+ele n,m,k;
+map&lt;st,ele&gt; f;
+ele solve(ele i,ele j,ele s,ele t){
+	if (f.find((st){i,j,s,t})!=f.end()) return f[(st){i,j,s,t}];
+	ele ans=0;
+	if (i &amp;&amp; s&lt;=1 &amp;&amp; 1&lt;=t) (ans+=solve(i-1,j,max(s-1,-k),max(t-1,-k)))%=MOD;
+	if (j &amp;&amp; s&lt;=-1 &amp;&amp; -1&lt;=t) (ans+=solve(i,j-1,min(s+1,k),min(t+1,k)))%=MOD;
+	f[(st){i,j,s,t}]=ans;
+	return ans;
+}
+int main(){
+	scanf(&quot;%d%d%d&quot;,&amp;n,&amp;m,&amp;k);
+	for (int i=-k; i&lt;=0; ++i)
+		for (int j=0; j&lt;=k; ++j) f[(st){0,0,i,j}]=1;
+	printf(&quot;%d\n&quot;,solve(n,m,-k,k));
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

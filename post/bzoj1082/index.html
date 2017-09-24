@@ -1,0 +1,190 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj1082题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj1082题解
+                    </h1>
+                    <h2 class="headline">
+                    Sep 11, 2017 10:02
+                    · 158 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E8%B4%AA%E5%BF%83">贪心</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E4%B9%B1%E6%90%9E">乱搞</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E4%BA%8C%E5%88%86">二分</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=468490562&auto=0&height=66"></iframe></p>
+
+<p>怎么评价这道题好呢……</p>
+
+<p>首先一个显然的想法是，如果某个最优方案得到k块木板，那么一定有一种最优方案的到的是最小的k块木板。于是我们可以二分答案k再想办法判断可行性。</p>
+
+<p>判断可行性，我一开始的想法是网络流，结果建图建了半天发现是错的，感觉并不可做。后来看了一眼题解发现是爆搜+剪枝？？？</p>
+
+<p>我搜索的思路是，对于每块提供的木材，枚举它被分成哪些需要的木材，然后用以下的一些思路来优化：</p>
+
+<ul>
+<li>提供的木材从小到大枚举，需要的木材从大到小枚举</li>
+<li>每块提供的木材被用到不能再分出一块需要的木材时，才枚举下一块</li>
+<li>统计当前浪费的木材长度，如果超过提供木材总量减去所需木材长度，直接剪枝</li>
+<li>直接忽略大于提供木材最大长度的所需木材</li>
+</ul>
+
+<p>最大一组数据开了O2在本机还是跑了1.74s，在bzoj上勉强A了。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#define ele int
+using namespace std;
+#define maxn 1010
+#define maxm 55
+ele n,m,p,wst,mxw,a[maxn],b[maxm],c[maxm];
+bool flag[maxn];
+bool dfs(ele x,ele i){
+	if (wst&gt;mxw) return false;
+	if (!p) return true;
+	ele tmp=c[i];
+	bool f=false,f1=true;
+	for (--c[i]; ~c[i] &amp;&amp; !f; --c[i])
+		if (!flag[c[i]] &amp;&amp; b[i]&gt;=a[c[i]]){
+			f1=false;
+			flag[c[i]]=true;
+			b[i]-=a[c[i]];
+			--p;
+			if (dfs(x,i)) f=true;
+			flag[c[i]]=false;
+			b[i]+=a[c[i]];
+			++p;
+		}
+	if (f1){
+		wst+=b[i];
+		if (dfs(x,i+1)) f=true;
+		wst-=b[i];
+	}
+	c[i]=tmp;
+	return f;
+}
+inline bool test(ele x){
+	p=x; memset(flag,0,sizeof(bool)*x);
+	for (int i=0; i&lt;m; ++i) c[i]=x;
+	mxw=wst=0;
+	for (int i=0; i&lt;m; ++i) mxw+=b[i];
+	for (int i=0; i&lt;x; ++i) mxw-=a[i];
+	if (mxw&lt;0) return false;
+	return dfs(x,0);
+}
+int main(){
+	scanf(&quot;%d&quot;,&amp;m);
+	ele mx=0;
+	for (int i=0; i&lt;m; ++i) scanf(&quot;%d&quot;,b+i),mx=max(mx,b[i]);
+	sort(b,b+m);
+	scanf(&quot;%d&quot;,&amp;n);
+	for (int i=0; i&lt;n; ++i) scanf(&quot;%d&quot;,a+i);
+	sort(a,a+n);
+	while (n &amp;&amp; a[n-1]&gt;mx) --n;
+	ele L=0,R=n+1;
+	while (R-L&gt;1){
+		ele mid=(L+R)&gt;&gt;1;
+		if (test(mid)) L=mid; else R=mid;
+	}
+	printf(&quot;%d\n&quot;,L);
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

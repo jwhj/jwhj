@@ -1,0 +1,178 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj2440题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj2440题解
+                    </h1>
+                    <h2 class="headline">
+                    Jun 7, 2016 10:02
+                    · 110 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E4%BA%8C%E5%88%86">二分</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E6%95%B0%E5%AD%A6">数学</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/mobius">mobius</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=3950015&auto=0&height=66"></iframe></p>
+
+<p>先吐槽一下题意，所有的整数都是$1^2$的倍数。</p>
+
+<p>然而这题显然是不算$1^2$的。所以一个数不被讨厌当且仅当它没有平方因子。</p>
+
+<p>可以二分答案x，统计1~x中有多少个数无平方因子，然后调整二分的左右端点。</p>
+
+<p>这就留下来两个问题：如何统计、如何确定二分上界。</p>
+
+<p>统计的话可以用容斥，1~x中无平方因子的数的个数为：$$\sum_{i=1}^{\sqrt{n}}\mu(i)\lfloor\frac{x}{i^2}\rfloor$$</p>
+
+<p>至于为什么使劲想一想就明白了吧。</p>
+
+<p>如何确定二分上界呢？先让上界是1，用上面的方法检查一下，如果发现1~1中无平方因子的数不到k，就把上界乘2，反复进行这个操作即可。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#define ele long long
+using namespace std;
+#define maxn 100010
+ele pcnt,plist[maxn],mu[maxn];
+bool flag[maxn];
+inline ele calc(ele n)
+{
+	ele ans=0;
+	for (int i=1; (long long)i*i&lt;=n; ++i)
+		ans+=mu[i]*(n/((long long)i*i));
+	return ans;
+}
+int main()
+{
+	pcnt=0;
+	mu[1]=1;
+	memset(flag,0,sizeof(flag));
+	for (int i=2; i&lt;maxn; ++i)
+	{
+		if (!flag[i]) plist[pcnt++]=i,mu[i]=-1;
+		for (int j=0; j&lt;pcnt &amp;&amp; i*plist[j]&lt;maxn; ++j)
+		{
+			flag[i*plist[j]]=true;
+			if (i%plist[j])
+				mu[i*plist[j]]=-mu[i];
+			else
+			{
+				mu[i*plist[j]]=0;
+				break;
+			}
+		}
+	}
+	ele T,k;
+	scanf(&quot;%lld&quot;,&amp;T);
+	while (T--)
+	{
+		scanf(&quot;%lld&quot;,&amp;k);
+		ele L=0,R=1,mid;
+		while (calc(R)&lt;k) R&lt;&lt;=1;
+		while (R-L&gt;1)
+		{
+			ele mid=(L+R)&gt;&gt;1;
+			if (calc(mid)&gt;=k) R=mid; else L=mid;
+		}
+		printf(&quot;%lld\n&quot;,R);
+	}
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

@@ -1,0 +1,219 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj2741题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj2741题解
+                    </h1>
+                    <h2 class="headline">
+                    Dec 5, 2016 10:02
+                    · 216 words
+                    · 2 minutes read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E5%88%86%E5%9D%97">分块</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/trie">trie</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script></p>
+
+<p>首先求出每个前缀的异或值，那么询问就可以转化为，在区间中找两个值，使它们异或起来最大。</p>
+
+<p>考虑在线莫队，如果不会的话看一下<a href="http://blog.eleele.gq/bzoj3744ti-jie.html">这篇题解</a>。</p>
+
+<p>把区间中的数的二进制用一个trie维护起来，对于一个新的数x，可以$O(\log x)$地找到x与区间中某个数异或的最大值。</p>
+
+<p>令f1[i]表示[0,i]中的数组成的trie，用可持久化的方法把他们维护起来，就可以用在线莫队来做了。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cmath&gt;
+#include &lt;algorithm&gt;
+#define ele int
+using namespace std;
+#define maxn 12010
+#define maxs 120
+#define maxk 31
+struct node{
+    ele cnt;
+    node *c[2];
+}np[5000010];
+ele n,m,S,ncnt,a[maxn],a1[maxn],f[maxs][maxn];
+node *f1[maxn];
+inline node* newnode(){
+    node *p=&amp;np[ncnt++];
+    p-&gt;cnt=0;
+    p-&gt;c[0]=p-&gt;c[1]=NULL;
+    return p;
+}
+inline ele rev(ele x){
+    ele ans=0;
+    for (int i=0; i&lt;maxk; ++i,x&gt;&gt;=1)
+        ans&lt;&lt;=1,ans|=(x&amp;1);
+    return ans;
+}
+node* ins(node *x,ele k,ele d){
+    if (d&lt;0) return NULL;
+    ele y=k&amp;1;
+    node *p=newnode();
+    if (x)
+        *p=*x;
+    else p-&gt;cnt=1;
+    p-&gt;c[y]=ins(p-&gt;c[y],k&gt;&gt;1,d-1);
+    if (p-&gt;c[0])
+        p-&gt;cnt+=p-&gt;c[0]-&gt;cnt;
+    if (p-&gt;c[1])
+        p-&gt;cnt+=p-&gt;c[1]-&gt;cnt;
+    return p;
+}
+inline ele query(node *l,node *r,ele k){
+    ele ans=0;
+    for (int i=0; i&lt;maxk; ++i,k&gt;&gt;=1){
+        ele y=(k&amp;1)^1;
+        ans&lt;&lt;=1;
+        ele rc=(r-&gt;c[y])?(r-&gt;c[y]-&gt;cnt):(0);
+        ele lc=(l &amp;&amp; l-&gt;c[y])?(l-&gt;c[y]-&gt;cnt):(0);
+        if (rc-lc)
+            ans|=1;
+        else y^=1;
+        if (l)
+            l=l-&gt;c[y];
+        r=r-&gt;c[y];
+    }
+    return ans;
+}
+int main(){
+    scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+    for (int i=0; i&lt;n; ++i)
+        scanf(&quot;%d&quot;,a1+i);
+    a[0]=0;
+    for (int i=1; i&lt;=n; ++i)
+        a[i]=a[i-1]^a1[i-1];
+    ++n;
+    S=sqrt(n);
+    ncnt=0;
+    f1[0]=ins(NULL,0,maxk);
+    for (int i=1; i&lt;n; ++i)
+        f1[i]=ins(f1[i-1],rev(a[i]),maxk);
+    for (int i=0; i*S&lt;n; ++i){
+        ele j=i*S;
+        f[i][j]=0;
+        for (int k=j+1; k&lt;n; ++k)
+            if (i==0)
+                f[i][k]=max(f[i][k-1],query(NULL,f1[k-1],rev(a[k])));
+            else f[i][k]=max(f[i][k-1],query(f1[i*S-1],f1[k-1],rev(a[k])));
+    }
+    ele ans=0;
+    while (m--){
+        long long u,v;
+        scanf(&quot;%lld%lld&quot;,&amp;u,&amp;v);
+        u=(u+ans)%(n-1)+1; v=(v+ans)%(n-1)+1;
+        ele l=min(u,v),r=max(u,v);
+        --l;
+        if (l/S==r/S){
+            ans=0;
+            for (int j=r-1; j&gt;=l; --j)
+                ans=max(ans,query(f1[j],f1[r],rev(a[j])));
+        }
+        else{
+            ele i1=l/S;
+            ans=f[i1+1][r];
+            for (int j=i1*S+S-1; j&gt;=l; --j)
+                ans=max(ans,query(f1[j],f1[r],rev(a[j])));
+        }
+        printf(&quot;%d\n&quot;,ans);
+    }
+    return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

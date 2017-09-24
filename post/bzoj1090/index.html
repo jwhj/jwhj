@@ -1,0 +1,156 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj1090题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj1090题解
+                    </h1>
+                    <h2 class="headline">
+                    Aug 28, 2017 10:02
+                    · 129 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/hash">hash</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/dp">dp</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=410654864&auto=0&height=66"></iframe></p>
+
+<p>用f[i][j]表示i到j的最短折叠长度，转移的时候考虑两种情况，一个是枚举k，分成f[i][k]+f[k+1][j]，另一个则要枚举循环节长度，用hash判断可行性。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#define ele int
+#define ull unsigned long long
+using namespace std;
+#define maxn 110
+#define seed 10007
+ele n,f[maxn][maxn];
+ull xl[maxn],h[maxn];
+char s[maxn];
+inline ull hsh(ele i,ele L){
+	return h[i]-h[i+L]*xl[L];
+}
+inline ele calc(ele x){
+	if (x&lt;10) return 1;
+	if (x&lt;100) return 2;
+	return 3;
+}
+int main(){
+	scanf(&quot;%s&quot;,s); n=strlen(s);
+	xl[0]=1;
+	for (int i=1; i&lt;=n; ++i) xl[i]=xl[i-1]*seed;
+	h[n-1]=s[n-1];
+	for (int i=n-2; ~i; --i) h[i]=h[i+1]*seed+s[i];
+	for (int i=0; i&lt;n; ++i) f[i][i]=1;
+	for (int L=2; L&lt;=n; ++L)
+		for (int i=0; i+L&lt;=n; ++i){
+			ele j=i+L-1;
+			f[i][j]=L;
+			for (int k=i; k&lt;j; ++k) f[i][j]=min(f[i][j],f[i][k]+f[k+1][j]);
+			for (int p=1; p&lt;=L; ++p)
+				if (L%p==0){
+					bool flag=true;
+					for (int k=i+p; k&lt;=j; k+=p)
+						if (hsh(i,p)!=hsh(k,p)){ flag=false; break; }
+					if (flag) f[i][j]=min(f[i][j],f[i][i+p-1]+2+calc(L/p));
+				}
+		}
+	printf(&quot;%d\n&quot;,f[0][n-1]);
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

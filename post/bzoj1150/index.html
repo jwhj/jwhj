@@ -1,0 +1,184 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj1150题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj1150题解
+                    </h1>
+                    <h2 class="headline">
+                    May 6, 2016 10:02
+                    · 112 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E8%B4%AA%E5%BF%83">贪心</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E4%B9%B1%E6%90%9E">乱搞</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97">优先队列</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=27228821&auto=0&height=66"></iframe></p>
+
+<p>考虑有1，2，3，4四栋楼，与其这样：</p>
+
+<pre><code>1-----4
+  2-3
+</code></pre>
+
+<p>不如这样:</p>
+
+<pre><code>1-2 3-4
+</code></pre>
+
+<p>所以可以得到，最优解只能把相邻的楼配对。于是可以把n栋楼看成n-1条边，从中取k条，而且任意两条不能紧挨着。</p>
+
+<p>数据小的话，dp肯定是能做的。</p>
+
+<p>可以想到一个贪心策略：每次取最小边。但这是错的。</p>
+
+<p>于是就有一种奇怪的乱搞：把所有边排成一行<del>（它们貌似本来就是一行）</del>，每次取最小边，假设它的权为b，左右的权为a和c。删除左右的两边，把这条边的权改为a+c-b。</p>
+
+<p>这是什么意思呢？可以发现，如果以后再次选了这条权为a+c-b边，就相当于放弃原来的b去选择a和c。</p>
+
+<p>所以这么做的意义在于允许之前的某次贪心选择是错误的，可以在后面的某次选择中改正。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;queue&gt;
+#define ele int
+using namespace std;
+#define maxn 100010
+#define INF 1000000001
+struct st{
+	ele p,i;
+	inline bool operator&lt;(st b)const{
+		if (p&gt;b.p) return true;
+		if (p&lt;b.p) return false;
+		return i&gt;b.i;
+	}
+};
+ele n,k,l[maxn],r[maxn],a[maxn];
+bool flag[maxn];
+priority_queue&lt;st&gt; q;
+int main(){
+	ele x,y;
+	scanf(&quot;%d%d%d&quot;,&amp;n,&amp;k,&amp;x);
+	for (int i=1; i&lt;n; ++i){
+		scanf(&quot;%d&quot;,&amp;y);
+		a[i]=y-x;
+		q.push((st){y-x,i});
+		x=y;
+	}
+	a[0]=a[n]=INF;
+	q.push((st){INF,0}); q.push((st){INF,n});
+	for (int i=0; i&lt;=n; ++i) l[i]=i-1,r[i]=i+1;
+	l[0]=0; r[n]=n;
+	memset(flag,0,sizeof(flag));
+	ele tmp=0,ans=0;
+	while (tmp!=k){
+		st p=q.top(); q.pop();
+		if (flag[p.i]) continue;
+		ans+=p.p;
+		flag[l[p.i]]=flag[r[p.i]]=true;
+		a[p.i]=a[l[p.i]]+a[r[p.i]]-a[p.i];
+		q.push((st){a[p.i],p.i});
+		l[p.i]=l[l[p.i]]; r[l[p.i]]=p.i;
+		r[p.i]=r[r[p.i]]; l[r[p.i]]=p.i;
+		++tmp;
+	}
+	printf(&quot;%d\n&quot;,ans);
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

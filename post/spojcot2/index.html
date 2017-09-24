@@ -1,0 +1,472 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj2589&amp;&amp;spojcot2题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj2589&amp;&amp;spojcot2题解
+                    </h1>
+                    <h2 class="headline">
+                    May 5, 2017 10:02
+                    · 676 words
+                    · 4 minutes read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/spoj">spoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/cot">COT</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E6%A0%91%E4%B8%8A%E8%8E%AB%E9%98%9F">树上莫队</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E6%A0%91%E5%88%86%E6%B2%BB">树分治</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E7%82%B9%E5%88%86%E6%A0%91">点分树</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bitset">bitset</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script></p>
+
+<p>把根节点设成关键点，然后对于每个关键点，如果它的子数里有某个点跟它的距离等于K，那么把那个节点也设成关键点。据说这样关键点个数至多为$O(\frac{n}{K})$。</p>
+
+<p>接下来预处理出每个关键点到所有点的答案，用可持久化数组保存每个点到根的路径上每种权值的出现次数。然后每个询问就可以从预处理出的答案加上不超过K个点得出。</p>
+
+<p>本来这么写是为了做bzoj上那道强制在线的版本的……结果时限卡得太紧了……优化了好几天之后只AC了spoj上那个……</p>
+
+<p>比较有效的优化大概是下面几个：</p>
+
+<ul>
+<li>用函数式块状数组而不是主席树来实现可持久化数组</li>
+<li>用1～2次dfs来预处理每个关键点到所有点的答案，而不是$O(\frac{n}{K})$次</li>
+<li>回答询问的时候，需要计算一些路径上某个值出现的次数，求这个的时候要计算lca，而每个询问所需要计算的多条路径所需的lca是一样的。</li>
+<li><del>凭感觉乱</del>调整K的大小</li>
+</ul>
+
+<p>UPD：最近在uoj上看到了另外一种做法，如下。</p>
+
+<p>考虑点分的过程，每个点作为重心的时候，用bitset维护它到下面每一个点路径上的权值构成的集合。这样，询问跨过这个点的某条路径（设为u-&gt;v）的时候，就可以用这个点到u的权值集合按位或这个点到v的权值集合，然后统计结果中1的个数。</p>
+
+<p>为了支持在线，维护每个点上一层的分治重心。对于每个询问u,v，暴力找到u,v过的那个重心，因为分治至多$\log n$层，所以这一步的复杂度为$O(\log n)$。</p>
+
+<p>注意到，将某个点作为分治重心的时候，只有它代表的那一棵子树中的权值是有用的，因此可以离散化一下。考虑到每向下一层，子树大小减半，复杂度就降到了$O(\frac{n^2}{w})$。</p>
+
+<p>这个做法的常数似乎比树上莫队小很多，跑得飞快，总算是过了……</p>
+
+<p>bzoj上那题最后一行不能换行，否则会PE。</p>
+
+<p>代码（树上莫队）：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cmath&gt;
+#include &lt;cctype&gt;
+#include &lt;algorithm&gt;
+#define ele int
+using namespace std;
+#define maxn 40010
+#define maxs 500
+#define K 300
+#define S 200
+struct edge{
+	ele v;
+	edge *nxt;
+}ep[maxn&lt;&lt;1];
+ele *last,*a[maxn][maxs];
+ele bcnt,s[maxs],pool[10000000];
+inline void build(ele n,ele x){
+	memset(pool,0,sizeof(ele)*n);
+	pool[x]=1;
+	bcnt=0;
+	for (int i=0; i&lt;n; i+=S,++bcnt){
+		s[bcnt]=min(n-i,S);
+		a[0][bcnt]=pool+i;
+	}
+	last=pool+n;
+}
+inline void add(ele i,ele from,ele to){
+	ele i1=i/S;
+	memcpy(a[to],a[from],sizeof(ele**)*bcnt);
+	a[to][i1]=last;
+	last+=s[i1];
+	memcpy(a[to][i1],a[from][i1],sizeof(ele*)*s[i1]);
+	++a[to][i1][i%S];
+}
+ele n,q,len,ecnt,pcnt,ans,tmp,pt[2],w[maxn],arr[maxn],size[maxn],dep[maxn],r[maxn],r1[maxn],p[maxs],cnt[maxn],fa[maxn],f[maxs][maxn];
+edge *h[maxn],*hc[maxn];
+inline void get(ele&amp;a){
+	char c;
+	while (!isdigit(c=getchar()))
+		;
+	a=c-'0';
+	while (isdigit(c=getchar()))
+		a*=10,a+=c-'0';
+}
+inline void addedge(ele u,ele v){
+	edge *p=&amp;ep[ecnt++];
+	p-&gt;v=v; p-&gt;nxt=h[u];
+	h[u]=p;
+}
+inline ele lca(ele u,ele v){
+	while (r1[u]!=r1[v]){
+		if (dep[r1[u]]&gt;dep[r1[v]])
+			swap(u,v);
+		v=fa[r1[v]];
+	}
+	return (dep[u]&lt;dep[v])?(u):(v);
+}
+inline ele query(ele u,ele v,ele x){
+	return a[u][x/S][x%S]+a[v][x/S][x%S]-(a[tmp][x/S][x%S]&lt;&lt;1)+(x==w[tmp]);
+}
+void dfs1(ele prv,ele i){
+	fa[i]=prv;
+	size[i]=1;
+	hc[i]=NULL;
+	for (edge *j=h[i]; j; j=j-&gt;nxt)
+		if (j-&gt;v!=prv){
+			dep[j-&gt;v]=dep[i]+1;
+			if (dep[j-&gt;v]-dep[r[i]]&lt;K)
+				r[j-&gt;v]=r[i];
+			else{
+				r[j-&gt;v]=j-&gt;v;
+				cnt[j-&gt;v]=pcnt;
+				p[pcnt++]=j-&gt;v;
+			}
+			add(w[j-&gt;v],i,j-&gt;v);
+			dfs1(i,j-&gt;v);
+			size[i]+=size[j-&gt;v];
+			if (hc[i]==NULL || size[j-&gt;v]&gt;size[hc[i]-&gt;v])
+				hc[i]=j;
+		}
+}
+void dfs2(ele p,ele i){
+	if (hc[i])
+		r1[hc[i]-&gt;v]=r1[i],dfs2(i,hc[i]-&gt;v);
+	for (edge *j=h[i]; j; j=j-&gt;nxt)
+		if (j-&gt;v!=p &amp;&amp; j!=hc[i]){
+			r1[j-&gt;v]=j-&gt;v;
+			dfs2(i,j-&gt;v);
+		}
+}
+void dfs3(ele prv,ele i){
+	for (int j=0; j&lt;pcnt; ++j)
+		if (!~f[j][i] &amp;&amp; ~prv &amp;&amp; ~f[j][prv]){
+			f[j][i]=f[j][prv];
+			tmp=lca(p[j],prv);
+			if (query(p[j],prv,w[i])==0)
+				++f[j][i];
+		}
+	for (edge *j=h[i]; j; j=j-&gt;nxt)
+		if (j-&gt;v!=prv)
+			dfs3(i,j-&gt;v);
+}
+inline void func(ele u,ele d,ele i){
+	static ele rt[maxn];
+	ele rcnt=0;
+	while (u!=d)
+		rt[rcnt++]=u,u=fa[u];
+	for (int j=rcnt-1; j&gt;=0; --j){
+		ans+=(query(pt[0],pt[1],w[rt[j]])==0);
+		pt[i]=rt[j];
+	}
+}
+int main(){
+	get(n); get(q);
+	for (int i=0; i&lt;n; ++i)
+		get(w[i]),arr[i]=w[i];
+	sort(arr,arr+n);
+	len=unique(arr,arr+n)-arr;
+	for (int i=0; i&lt;n; ++i)
+		w[i]=lower_bound(arr,arr+len,w[i])-arr;
+	ecnt=0;
+	memset(h,0,sizeof(h));
+	for (int i=0; i&lt;n-1; ++i){
+		ele u,v;
+		get(u); get(v);
+		--u,--v;
+		addedge(u,v); addedge(v,u);
+	}
+	dep[0]=0; r[0]=0; p[0]=0; cnt[0]=0;
+	pcnt=1;
+	build(len,w[0]);
+	dfs1(-1,0);
+	dfs2(-1,0);
+	memset(f,-1,sizeof(f));
+	for (int j=0; j&lt;pcnt; ++j){
+		f[j][p[j]]=1;
+		for (int i=p[j]; ~fa[i]; i=fa[i]){
+			f[j][fa[i]]=f[j][i];
+			tmp=i;
+			if (query(p[j],i,w[fa[i]])==0)
+				++f[j][fa[i]];
+		}
+	}
+	dfs3(-1,0);
+	ans=0;
+	while (q--){
+		ele u,v;
+		get(u); get(v);
+		//u^=ans;
+		--u,--v;
+		if (r[u]!=r[v]){
+			if (dep[r[u]]&gt;dep[r[v]])
+				swap(u,v);
+			ans=f[cnt[r[v]]][u];
+			pt[0]=u; pt[1]=r[v];
+			tmp=lca(u,r[v]);
+			func(v,pt[1],1);
+		}
+		else{
+			pt[0]=pt[1]=tmp=lca(u,v);
+			ans=1;
+			func(u,pt[0],0);
+			func(v,pt[1],1);
+		}
+		printf(q?&quot;%d\n&quot;:&quot;%d&quot;,ans);
+	}
+	return 0;
+}
+</code></pre>
+
+<p>代码（点分树+bitset）：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#include &lt;vector&gt;
+#define ele int
+#define U unsigned int
+using namespace std;
+#define maxn 40010
+#define W 32
+#define W1 11
+ele cnt[1&lt;&lt;W1];
+U *pcnt,pl[50000000];
+inline ele count(U x){
+	ele ans=0;
+	while (x){
+		ans+=cnt[x&amp;((1&lt;&lt;W1)-1)];
+		x&gt;&gt;=W1;
+	}
+	return ans;
+}
+struct bs{
+	ele n,L;
+	U *a;
+	inline void init(ele n){
+		this-&gt;n=n; L=n/W; L+=(L*W==n)?0:1;
+		a=pcnt; pcnt+=L;
+		memset(a,0,sizeof(U)*L);
+	}
+	inline ele get(ele i){
+		return (a[i/W]&gt;&gt;(i%W))&amp;1;
+	}
+	inline void set(ele i,ele k){
+		ele i1=i/W,j1=i%W;
+		a[i1]=a[i1]&amp;~(1&lt;&lt;j1);
+		a[i1]=a[i1]|(k&lt;&lt;j1);
+	}
+	inline ele count(){
+		ele ans=0;
+		for (int i=0; i&lt;L; ++i) ans+=::count(a[i]);
+		return ans;
+	}
+	inline void set(bs rhs){
+		n=rhs.n; L=rhs.L;
+		if (!a) a=pcnt,pcnt+=L;
+		memcpy(a,rhs.a,sizeof(U)*L);
+	}
+};
+struct edge{
+	ele v;
+	edge *nxt;
+}ep[maxn&lt;&lt;1],*ecnt;
+ele n,m,len,a[maxn],size[maxn],w[maxn],pv[maxn],dd[maxn],arr[maxn];
+bs d[maxn],tmp;
+edge *h[maxn];
+vector&lt;bs&gt; b[maxn];
+bool flag[maxn];
+inline void addedge(ele u,ele v){
+	edge *p=ecnt++;
+	p-&gt;v=v; p-&gt;nxt=h[u];
+	h[u]=p;
+}
+void getsize(ele p,ele i){
+	size[i]=1;
+	for (edge *j=h[i]; j; j=j-&gt;nxt)
+		if (j-&gt;v!=p &amp;&amp; !flag[j-&gt;v]){
+			getsize(i,j-&gt;v);
+			size[i]+=size[j-&gt;v];
+		}
+}
+ele getg(ele p,ele i,ele s){
+	w[i]=s-size[i];
+	ele ans=-1;
+	for (edge *j=h[i]; j; j=j-&gt;nxt)
+		if (j-&gt;v!=p &amp;&amp; !flag[j-&gt;v]){
+			ele t=getg(i,j-&gt;v,s);
+			if (!~ans || w[t]&lt;w[ans]) ans=t;
+			w[i]=max(w[i],size[j-&gt;v]);
+		}
+	if (!~ans || w[i]&lt;w[ans]) ans=i;
+	return ans;
+}
+void dfs1(ele p,ele i){
+	arr[len++]=a[i];
+	for (edge *j=h[i]; j; j=j-&gt;nxt)
+		if (j-&gt;v!=p &amp;&amp; !flag[j-&gt;v]) dfs1(i,j-&gt;v);
+}
+inline ele idx(ele x){
+	return lower_bound(arr,arr+len,x)-arr;
+}
+void dfs2(ele p,ele i){
+	b[i].push_back(d[i]);
+	for (edge *j=h[i]; j; j=j-&gt;nxt)
+		if (j-&gt;v!=p &amp;&amp; !flag[j-&gt;v]){
+			d[j-&gt;v].a=NULL;
+			d[j-&gt;v].set(d[i]);
+			d[j-&gt;v].set(idx(a[j-&gt;v]),1);
+			dfs2(i,j-&gt;v);
+		}
+}
+ele build(ele p,ele i){
+	getsize(-1,i);
+	ele k=getg(-1,i,size[i]);
+	flag[k]=true;
+	pv[k]=p;
+	dd[k]=(!~p)?0:(dd[p]+1);
+	for (edge *j=h[k]; j; j=j-&gt;nxt)
+		if (!flag[j-&gt;v]){
+			build(k,j-&gt;v);
+		}
+	len=0;
+	dfs1(-1,k);
+	sort(arr,arr+len);
+	len=unique(arr,arr+len)-arr;
+	d[k].init(len);
+	d[k].set(idx(a[k]),1);
+	dfs2(-1,k);
+	flag[k]=false;
+	return k;
+}
+inline ele qry(ele u,ele v){
+	ele x=u,y=v;
+	if (dd[x]&gt;dd[y]) swap(x,y),swap(u,v);
+	ele i=0,j=0;
+	while (dd[x]&lt;dd[y]) y=pv[y],++j;
+	while (x!=y) x=pv[x],y=pv[y],++i,++j;
+	tmp.set(b[u][i]);
+	for (int k=0; k&lt;tmp.L; ++k) tmp.a[k]=tmp.a[k]|b[v][j].a[k];
+	return tmp.count();
+}
+int main(){
+	pcnt=pl;
+	cnt[0]=0;
+	for (int i=1; i&lt;(1&lt;&lt;W1); ++i) cnt[i]=cnt[i&gt;&gt;1]+(i&amp;1);
+	scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+	for (int i=0; i&lt;n; ++i) scanf(&quot;%d&quot;,a+i);
+	ecnt=ep; memset(h,0,sizeof(h));
+	for (int i=0; i&lt;n-1; ++i){
+		ele u,v;
+		scanf(&quot;%d%d&quot;,&amp;u,&amp;v); --u,--v;
+		addedge(u,v); addedge(v,u);
+	}
+	memset(flag,0,sizeof(flag));
+	build(-1,0);
+	ele ans;
+	while (m--){
+		ele u,v;
+		scanf(&quot;%d%d&quot;,&amp;u,&amp;v);
+		u^=ans;
+		--u,--v;
+		printf(m?&quot;%d\n&quot;:&quot;%d&quot;,ans=qry(u,v));
+	}
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

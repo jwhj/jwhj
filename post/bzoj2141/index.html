@@ -1,0 +1,252 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj2141题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj2141题解
+                    </h1>
+                    <h2 class="headline">
+                    Jul 2, 2016 10:02
+                    · 296 words
+                    · 2 minutes read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E5%88%86%E5%9D%97">分块</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=347230&auto=0&height=66"></iframe></p>
+
+<p>感觉数据好小啊……考虑使用分块，每块里面排好序。</p>
+
+<p>交换hi和hj的时候，只有i,j之间的数会对答案造成影响。具体来讲，对于每个$p \in(i,j)$，如果$hp \gt hi$，答案+1，如果$h_p \lt h_i$，答案-1。对于$h_j$有类似的讨论。每个块排了序，两边的块暴力计算，中间的二分。</p>
+
+<p>如果块的大小为$O(\sqrt n)$，那么每次的复杂度是$O(\sqrt n\log n)$的，但是注意到，对于每次询问，修改要花$O(\sqrt n)$，计算答案要花$O(\sqrt n\log n)$的时间，不是很均衡。如果把块的大小增大到$O(\sqrt{n\log n})$，时间复杂度就能降下来一点。</p>
+
+<p>最后这个算法时间复杂度为$O(n\sqrt{n\log n})$。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cmath&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#define ele long long
+using namespace std;
+#define maxn 20010
+#define maxs 550
+#define maxc 100
+#define S 140
+struct BIT
+{
+	inline void alloc(ele n)
+	{
+		this-&gt;n=n;
+		memset(a,0,sizeof(a));
+	}
+	inline void add(ele i,ele x)
+	{
+		while (i&lt;=n)
+		{
+			a[i]+=x;
+			i+=i&amp;(-i);
+		}
+	}
+	inline ele prefix(ele i)
+	{
+		ele ans=0;
+		while (i&gt;0)
+		{
+			ans+=a[i];
+			i-=i&amp;(-i);
+		}
+		return ans;
+	}
+	inline ele sum(ele l,ele r)
+	{
+		if (l&gt;r) return 0;
+		return prefix(r)-prefix(l-1);
+	}
+	ele n,a[maxn];
+};
+struct block
+{
+	ele n,a[maxs],b[maxs];
+};
+ele n,m,len,B,ans,h[maxn],arr[maxn];
+BIT bit;
+block a[maxc];
+inline void build(ele n,ele *a,block *b)
+{
+	for (int i=0,j=0; i&lt;n; i+=B,++j)
+	{
+		int k;
+		for (k=0; k&lt;B &amp;&amp; i+k&lt;n; ++k)
+			b[j].a[k]=b[j].b[k]=a[i+k];
+		b[j].n=k;
+		sort(b[j].b,b[j].b+b[j].n);
+	}
+}
+inline void scan(ele l,ele r,ele x,ele k)
+{
+	if (l&gt;r) return;
+	ele i1=l/B,j1=l%B,i2=r/B,j2=r%B;
+	if (i1==i2)
+	{
+		for (int j=j1; j&lt;=j2; ++j)
+			if (a[i1].a[j]&lt;x) ans-=k;
+			else if (a[i1].a[j]&gt;x) ans+=k;
+		return;
+	}
+	for (int j=j1; j&lt;a[i1].n; ++j)
+		if (a[i1].a[j]&lt;x) ans-=k;
+		else if (a[i1].a[j]&gt;x) ans+=k;
+	for (int j=0; j&lt;=j2; ++j)
+		if (a[i2].a[j]&lt;x) ans-=k;
+		else if (a[i2].a[j]&gt;x) ans+=k;
+	for (int i=i1+1; i&lt;i2; ++i)
+	{
+		ele p=lower_bound(a[i].b,a[i].b+a[i].n,x)-a[i].b;
+		ans-=p*k;
+		p=upper_bound(a[i].b,a[i].b+a[i].n,x)-a[i].b;
+		ans+=(a[i].n-p)*k;
+	}
+}
+inline void upd(ele k,ele x)
+{
+	ele i=k/B,j=k%B;
+	ele p=lower_bound(a[i].b,a[i].b+a[i].n,a[i].a[j])-a[i].b;
+	a[i].b[p]=x;
+	ele q=p;
+	while (q&gt;0 &amp;&amp; a[i].b[q-1]&gt;a[i].b[q])
+		swap(a[i].b[q-1],a[i].b[q]),--q;
+	q=p;
+	while (q+1&lt;a[i].n &amp;&amp; a[i].b[q]&gt;a[i].b[q+1])
+		swap(a[i].b[q],a[i].b[q+1]),++q;
+	a[i].a[j]=x;
+}
+int main()
+{
+	scanf(&quot;%lld&quot;,&amp;n);
+	B=sqrt((double)n*log(n)/log(2.0));
+	for (int i=0; i&lt;n; ++i) scanf(&quot;%lld&quot;,h+i),arr[i]=h[i];
+	sort(arr,arr+n);
+	len=unique(arr,arr+n)-arr;
+	for (int i=0; i&lt;n; ++i)
+		h[i]=lower_bound(arr,arr+len,h[i])-arr+1;
+	ans=0;
+	bit.alloc(len);
+	for (int i=0; i&lt;n; ++i)
+	{
+		ans+=bit.sum(h[i]+1,len);
+		bit.add(h[i],1);
+	}
+	printf(&quot;%lld\n&quot;,ans);
+	build(n,h,a);
+	scanf(&quot;%lld&quot;,&amp;m);
+	while (m--)
+	{
+		ele i,j;
+		scanf(&quot;%lld%lld&quot;,&amp;i,&amp;j);
+		--i,--j;
+		if (i&gt;j) swap(i,j);
+		if (h[i]&gt;h[j]) --ans;
+		else if (h[i]&lt;h[j]) ++ans;
+		scan(i+1,j-1,h[i],1);
+		scan(i+1,j-1,h[j],-1);
+		upd(i,h[j]);
+		upd(j,h[i]);
+		swap(h[i],h[j]);
+		printf(&quot;%lld\n&quot;,ans);
+	}
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

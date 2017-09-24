@@ -1,0 +1,208 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>hdu5869题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        hdu5869题解
+                    </h1>
+                    <h2 class="headline">
+                    Jan 27, 2017 10:02
+                    · 222 words
+                    · 2 minutes read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/hdu">hdu</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84">树状数组</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E4%BA%8C%E5%88%86">二分</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script></p>
+
+<p>首先，固定右端点的话，不同的gcd至多有$\log\mathrm{max}\{a_i\}$个。这是因为，不断左移左端点的时候，只要gcd变化了，一定是原来的因数，所以至少会除以2。</p>
+
+<p>预处理出一个类似st表的东西，就可以在$O(\log n)$的时间里求出一个区间的gcd。这样通过二分就可以求出固定右端点之后所有的gcd。</p>
+
+<p>这道题可以使用类似于SPOJ DQUERY的一个思路：把询问按右端点排序，把序列中的数一个个加入，如果出现重复的数，保留最靠右的一个。加入第k个数之后回答所有右端点为k的询问。这道题也是一样，出现重复的gcd则保留最靠右的一个。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#define ele int
+using namespace std;
+#define maxn 100010
+#define maxa 1000010
+#define maxk 18
+struct ASK{
+	ele l,r,id;
+	inline bool operator&lt;(ASK b)const{
+		return r&lt;b.r;
+	}
+};
+struct BIT{
+	inline void alloc(ele n){
+		this-&gt;n=n;
+		memset(a,0,sizeof(a));
+	}
+	inline void add(ele i,ele k){
+		for (int j=i; j&lt;=n; j+=j&amp;(-j))
+			a[j]+=k;
+	}
+	inline ele q(ele i){
+		ele ans=0;
+		for (int j=i; j; j-=j&amp;(-j))
+			ans+=a[j];
+		return ans;
+	}
+	inline ele q(ele l,ele r){
+		if (l&gt;r) return 0;
+		return q(r)-q(l-1);
+	}
+	ele n,a[maxn];
+};
+ele n,Q,a[maxn],f[maxn][maxk],p[maxa],res[maxn];
+ASK q[maxn];
+BIT b;
+ele gcd(ele a,ele b){
+	if (!b) return a;
+	return gcd(b,a%b);
+}
+inline ele qgcd(ele l,ele r){
+	ele L=r-l+1,ans=0;
+	for (int i=0; L; ++i,L&gt;&gt;=1)
+		if (L&amp;1)
+			ans=gcd(ans,f[l][i]),l+=1&lt;&lt;i;
+	return ans;
+}
+inline ele nxt(ele i,ele j){
+	ele l=0,r=i,tmp=qgcd(i,j);
+	while (r-l&gt;1){
+		ele mid=(l+r)&gt;&gt;1;
+		if (qgcd(mid,j)&lt;tmp)
+			l=mid;
+		else r=mid;
+	}
+	if (qgcd(l,j)==tmp)
+		return -1;
+	else return l;
+}
+int main(){
+	while (~scanf(&quot;%d%d&quot;,&amp;n,&amp;Q)){
+		for (int i=0; i&lt;n; ++i)
+			scanf(&quot;%d&quot;,a+i),f[i][0]=a[i];
+		for (int i=1; i&lt;maxk; ++i)
+			for (int j=0; j&lt;n; ++j)
+				f[j][i]=gcd(f[j][i-1],f[j+(1&lt;&lt;i-1)][i-1]);
+		for (int i=0; i&lt;Q; ++i)
+			scanf(&quot;%d%d&quot;,&amp;q[i].l,&amp;q[i].r),--q[i].l,--q[i].r,q[i].id=i;
+		sort(q,q+Q);
+		memset(p,-1,sizeof(p));
+		ele now=0;
+		b.alloc(n);
+		for (int i=0; i&lt;Q; ++i){
+			for (int j=now; j&lt;=q[i].r; ++j)
+				for (int k=j; k&gt;=0; k=nxt(k,j)){
+					ele tmp=qgcd(k,j);
+					if (p[tmp]!=-1)
+						b.add(p[tmp]+1,-1);
+					p[tmp]=k;
+					b.add(k+1,1);
+				}
+			now=q[i].r+1;
+			res[q[i].id]=b.q(q[i].l+1,q[i].r+1);
+		}
+		for (int i=0; i&lt;Q; ++i)
+			printf(&quot;%d\n&quot;,res[i]);
+	}
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

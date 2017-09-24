@@ -1,0 +1,157 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj1193题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj1193题解
+                    </h1>
+                    <h2 class="headline">
+                    Jul 31, 2017 10:02
+                    · 88 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E6%95%B0%E5%AD%A6">数学</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=2920947&auto=0&height=66"></iframe></p>
+
+<p>网上最多见的做法好像都挺玄学的……感觉我的做法比较靠谱而且高效。</p>
+
+<p>一开始的思路跟<a href="http://blog.eleele.gq/bzoj2299ti-jie.html">这道题</a>一样，得到方程：
+$$(t_1+t_2)+2(t_3+t_4)=x$$
+$$(t_3-t_4)+2(t_1-t_2)=y$$</p>
+
+<p>要求$|t_1|+|t_2|+|t_3|+|t_4|$的最小值。</p>
+
+<p>x，y的正负是无关紧要的，所以不妨把x，y都取绝对值。</p>
+
+<p>注意到$|t_1|+|t_2|=\mathrm{max}\{|t_1+t_2|,|t_1-t_2|\}$，即要求$\mathrm{max}\{|x-2p|,|q|\}+\mathrm{max}\{|y-2q|,|p|\}$的最小值，保证x与q同奇偶，y与p同奇偶。（这里假设$t_3+t_4=p,t_1-t_2=q$）</p>
+
+<p>用调整法容易证明，取得最小值的时候x-2p,y-2q,p,q可以都是非负的。讨论一下x-2p与q，y-2q与p的大小关系，像做高中线性规划题那样画一个p，q的图像，可以发现，最小值在2p+q=x,p+2q=y的交点及它们与坐标轴的交点附近取到。</p>
+
+<p>这里是交点附近而不是交点处，是因为p，q只能取整数。其实这个也很好处理，枚举交点处$\pm 3$的所有点就可以了。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#define ele int
+using namespace std;
+#define K 3
+const ele INF=1e9;
+ele xp,yp,xs,ys,x,y,ans;
+inline ele _abs(ele x){
+	return (x&lt;0)?-x:x;
+}
+inline ele calc(ele p,ele q){
+	return max(_abs(x-2*p),_abs(q))+max(_abs(y-2*q),_abs(p));
+}
+inline void solve(ele p0,ele q0){
+	for (int p=p0-K; p&lt;=p0+K; ++p)
+		for (int q=q0-K; q&lt;=q0+K; ++q)
+			if ((!((x-q)&amp;1)) &amp;&amp; (!((y-p)&amp;1)))
+				ans=min(ans,calc(p,q));
+}
+int main(){
+	scanf(&quot;%d%d%d%d&quot;,&amp;xp,&amp;yp,&amp;xs,&amp;ys);
+	x=_abs(xp-xs); y=_abs(yp-ys);
+	ele p0=(2*x-y)/3,q0=(2*y-x)/3;
+	ans=INF;
+	solve(p0,q0);
+	solve(x/2,0); solve(0,x);
+	solve(y,0); solve(0,y/2);
+	printf(&quot;%d\n&quot;,ans);
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

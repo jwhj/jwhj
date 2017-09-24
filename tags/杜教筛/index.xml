@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>杜教筛 on 蒟蒻的博客</title>
+    <link>http://blog.eleele.gq/tags/%E6%9D%9C%E6%95%99%E7%AD%9B/</link>
+    <description>Recent content in 杜教筛 on 蒟蒻的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 03 Apr 2017 10:02:43 +0000</lastBuildDate>
+    
+	<atom:link href="http://blog.eleele.gq/tags/%E6%9D%9C%E6%95%99%E7%AD%9B/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>bzoj4805题解</title>
+      <link>http://blog.eleele.gq/post/bzoj4805/</link>
+      <pubDate>Mon, 03 Apr 2017 10:02:43 +0000</pubDate>
+      
+      <guid>http://blog.eleele.gq/post/bzoj4805/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

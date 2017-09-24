@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>置换群 on 蒟蒻的博客</title>
+    <link>http://blog.eleele.gq/tags/%E7%BD%AE%E6%8D%A2%E7%BE%A4/</link>
+    <description>Recent content in 置换群 on 蒟蒻的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 23 Dec 2016 10:02:43 +0000</lastBuildDate>
+    
+	<atom:link href="http://blog.eleele.gq/tags/%E7%BD%AE%E6%8D%A2%E7%BE%A4/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>bzoj1004题解</title>
+      <link>http://blog.eleele.gq/post/bzoj1004/</link>
+      <pubDate>Fri, 23 Dec 2016 10:02:43 +0000</pubDate>
+      
+      <guid>http://blog.eleele.gq/post/bzoj1004/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

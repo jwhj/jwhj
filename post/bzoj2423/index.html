@@ -1,0 +1,153 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj2423题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj2423题解
+                    </h1>
+                    <h2 class="headline">
+                    Sep 9, 2016 10:02
+                    · 89 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/dp">DP</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=3950060&auto=0&height=66"></iframe></p>
+
+<p>DP硬上，细节看代码。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#define ele int
+using namespace std;
+#define MOD 100000000
+#define maxn 5010
+ele n,m,f[2][maxn],g[2][maxn];
+char s1[maxn],s2[maxn];
+int main()
+{
+	scanf(&quot;%s%s&quot;,s1,s2);
+	n=strlen(s1); m=strlen(s2);
+	--n,--m;
+	memset(f[0],0,sizeof(f[0]));
+	for (int i=0; i&lt;=m; ++i) g[0][i]=1;
+	ele p=0;
+	for (int i=1; i&lt;=n; ++i)
+	{
+		p^=1;
+		f[p][0]=0; g[p][0]=1;
+		for (int j=1; j&lt;=m; ++j)
+			if (s1[i-1]==s2[j-1])
+			{
+				f[p][j]=f[p^1][j-1]+1;
+				g[p][j]=g[p^1][j-1];
+				if (f[p][j]==f[p^1][j]) g[p][j]+=g[p^1][j],g[p][j]%=MOD;
+				if (f[p][j]==f[p][j-1]) g[p][j]+=g[p][j-1],g[p][j]%=MOD;
+			}
+			else
+			{
+				f[p][j]=max(f[p^1][j],f[p][j-1]);
+				g[p][j]=0;
+				if (f[p][j]==f[p^1][j]) g[p][j]+=g[p^1][j],g[p][j]%=MOD;
+				if (f[p][j]==f[p][j-1]) g[p][j]+=g[p][j-1],g[p][j]%=MOD;
+				if (f[p][j]==f[p^1][j-1]) g[p][j]-=g[p^1][j-1],g[p][j]=(g[p][j]+MOD)%MOD;
+			}
+	}
+	printf(&quot;%d\n%d\n&quot;,f[p][m],g[p][m]);
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

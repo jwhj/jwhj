@@ -1,0 +1,228 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj3333题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj3333题解
+                    </h1>
+                    <h2 class="headline">
+                    Jul 3, 2016 10:02
+                    · 226 words
+                    · 2 minutes read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91">线段树</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E7%BB%9F%E8%AE%A1">统计</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=5120885&auto=0&height=66"></iframe></p>
+
+<p>注意到这样一个性质：</p>
+
+<blockquote>
+<p>每次选定一个位置P后，减少的逆序对数量就是p~n中满足要求的人原来构成的逆序对——而且当操作完成之后，这些人将永远不会产生逆序对了。</p>
+</blockquote>
+
+<p>于是可以先求出以i开头的逆序对fi以及开始时的逆序对总数，对于一个询问p，选出p~n中所有使hj&lt;=hp的j，在答案中减去fj，最后把j这个人删掉。</p>
+
+<p>为了找出所有使hj&lt;=hp的j，维护一个线段树，每次查询p~n中hj最小的位置j，答案中减去fj之后，把hj置为无穷，相当于把这个人删掉。重复此操作直到身高不超过hp的人都被删掉为止。</p>
+
+<p>细节还是有点多的。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#define ele long long
+using namespace std;
+#define INF 1000000001
+#define maxn 500010
+const ele size=1&lt;&lt;20;
+const ele M=size&gt;&gt;1;
+struct ZKW
+{
+	inline void maintain(ele i)
+	{
+		a[i]=min(a[i&lt;&lt;1],a[i&lt;&lt;1|1]);
+		if (a[i&lt;&lt;1]&lt;a[i&lt;&lt;1|1]) id[i]=id[i&lt;&lt;1]; else id[i]=id[i&lt;&lt;1|1];
+	}
+	inline void alloc(ele n,ele *b)
+	{
+		memset(a,0,sizeof(a));
+		for (int i=0; i&lt;n; ++i) a[i+1+M]=b[i],id[i+1+M]=i;
+		for (int i=M-1; i&gt;0; --i) maintain(i);
+	}
+	inline void upd(ele i,ele x)
+	{
+		i+=M+1;
+		a[i]=x;
+		while (i&gt;1) maintain(i&gt;&gt;=1);
+	}
+	inline ele minidx(ele l,ele r)
+	{
+		ele _min=INF,ans;
+		++l,++r;
+		for (l=l-1+M,r=r+1+M; l^r^1; l&gt;&gt;=1,r&gt;&gt;=1)
+		{
+			if (~l&amp;1)
+				if (a[l^1]&lt;_min) _min=a[l^1],ans=id[l^1];
+			if (r&amp;1)
+				if (a[r^1]&lt;_min) _min=a[r^1],ans=id[r^1];
+		}
+		return ans;
+	}
+	ele a[size],id[size];
+};
+struct BIT
+{
+	inline void alloc(ele n)
+	{
+		this-&gt;n=n;
+		memset(a,0,sizeof(a));
+	}
+	inline void add(ele i,ele x)
+	{
+		while (i&lt;=n)
+			a[i]+=x,i+=i&amp;(-i);
+	}
+	inline ele prefix(ele i)
+	{
+		ele ans=0;
+		while (i&gt;0)
+			ans+=a[i],i-=i&amp;(-i);
+		return ans;
+	}
+	inline ele sum(ele l,ele r)
+	{
+		if (l&gt;r) return 0;
+		return prefix(r)-prefix(l-1);
+	}
+	ele n,a[maxn];
+};
+ele n,m,len,h[maxn],arr[maxn],f[maxn];
+ZKW z;
+BIT b;
+int main()
+{
+	scanf(&quot;%lld%lld&quot;,&amp;n,&amp;m);
+	for (int i=0; i&lt;n; ++i) scanf(&quot;%lld&quot;,h+i),arr[i]=h[i];
+	sort(arr,arr+n);
+	len=unique(arr,arr+n)-arr;
+	for (int i=0; i&lt;n; ++i)
+		h[i]=lower_bound(arr,arr+len,h[i])-arr+1;
+	h[n]=INF-1;
+	b.alloc(len);
+	ele ans=0;
+	for (int i=n-1; i&gt;=0; --i)
+		b.add(h[i],1),f[i]=b.sum(0,h[i]-1),ans+=f[i];
+	printf(&quot;%lld\n&quot;,ans);
+	z.alloc(n+1,h);
+	while (m--)
+	{
+		ele p;
+		scanf(&quot;%lld&quot;,&amp;p);
+		--p;
+		if (z.a[p+1+M]&lt;INF)
+			while (1)
+			{
+				ele i=z.minidx(p,n);
+				if (h[i]&gt;h[p] || i==n) break;
+				ans-=f[i];
+				z.upd(i,INF);
+			}
+		printf(&quot;%lld\n&quot;,ans);
+	}
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

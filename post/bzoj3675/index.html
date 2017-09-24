@@ -1,0 +1,162 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj3675题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj3675题解
+                    </h1>
+                    <h2 class="headline">
+                    Mar 15, 2017 10:02
+                    · 105 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/dp">DP</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E6%96%9C%E7%8E%87%E4%BC%98%E5%8C%96">斜率优化</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script></p>
+
+<p>容易证明顺序是无关紧要的，而且允许出现长度为0的序列的话，答案不受影响。</p>
+
+<p>那么可以写出一个$O(n^2k)$的DP方程：</p>
+
+<p>$$dp[i][p]=\max{dp[j][k-1]+s[j](s[i]-s[j])}$$</p>
+
+<p>然后用斜率优化可以优化到$O(nk)$。</p>
+
+<p>这里有一个小问题，斜率优化的时候，斜率函数$\mathrm{slope}(i,j)=\frac{f[j]-f[k]}{s[k]-s[j]}+s[k]+s[j]$在$s[j]=s[k]$时会出现分母为0的情况。不过我们注意到，序列中的0对答案是没有贡献的，所以我们只需要把序列中的0去掉就可以了。注意此时必须允许出现长度为0的序列。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#define ele long long
+using namespace std;
+#define maxn 100010
+ele n,m,k,a[maxn],b[maxn],s[maxn],Q[maxn],buf1[maxn],buf2[maxn],*f,*g;
+inline double slope(ele *f,ele j,ele k){
+	return (double)(f[j]-f[k])/(s[k]-s[j])+s[k]+s[j];
+}
+int main(){
+	scanf(&quot;%lld%lld&quot;,&amp;m,&amp;k);
+	for (int i=0; i&lt;m; ++i)
+		scanf(&quot;%lld&quot;,b+i);
+	n=0;
+	for (int i=0; i&lt;m; ++i)
+		if (b[i]) a[n++]=b[i];
+	s[0]=a[0];
+	for (int i=1; i&lt;n; ++i)
+		s[i]=s[i-1]+a[i];
+	f=buf1; g=buf2;
+	for (int i=0; i&lt;n; ++i)
+		f[i]=0;
+	for (int p=2; p&lt;=k+1; ++p){
+		Q[0]=0;
+		ele qh=0,qt=0;
+		g[0]=0;
+		for (int i=1; i&lt;n; ++i){
+			while (qh&lt;qt &amp;&amp; slope(f,Q[qh],Q[qh+1])&lt;=s[i])
+				++qh;
+			ele t=Q[qh];
+			g[i]=f[t]+(s[i]-s[t])*s[t];
+			while (qh&lt;qt &amp;&amp; slope(f,Q[qt-1],Q[qt])&gt;=slope(f,Q[qt],i))
+				--qt;
+			Q[++qt]=i;
+		}
+		swap(f,g);
+	}
+	printf(&quot;%lld\n&quot;,f[n-1]);
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

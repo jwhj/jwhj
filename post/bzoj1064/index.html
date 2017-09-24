@@ -1,0 +1,182 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj1064题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj1064题解
+                    </h1>
+                    <h2 class="headline">
+                    Aug 27, 2017 10:02
+                    · 153 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E5%9B%BE%E8%AE%BA">图论</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=461544119&auto=0&height=66"></iframe></p>
+
+<p>注意到，虽然题目中给出a能看到b的关系是有向的，但因为面具种类可以顺着这个边正推和倒推，所以其实具有一些无向的边的性质。</p>
+
+<p>把(a,b)拆成a-&gt;b，边权为1的边和b-&gt;a，边权为-1的边，那么如果图中有环，k一定是环长的因数。</p>
+
+<p>如果整个图都没有环，那么k最大值就是每个联通块最长链的长度之和，这里一条链的长度定义为边权和+1。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#include &lt;set&gt;
+#define ele int
+using namespace std;
+#define maxn 100010
+#define maxm 1000010
+#define fi first
+#define se second
+struct edge{
+	ele v,w;
+	edge *nxt;
+}ep[maxm&lt;&lt;1],*ecnt;
+ele n,m,ans,d[maxn],mx,mn;
+bool vis[maxn];
+edge *h[maxn];
+set&lt;pair&lt;ele,ele&gt; &gt; S;
+inline void addedge(ele u,ele v,ele w){
+	edge *p=ecnt++;
+	p-&gt;v=v; p-&gt;w=w; p-&gt;nxt=h[u];
+	h[u]=p;
+}
+inline ele _abs(ele x){
+	return (x&lt;0)?-x:x;
+}
+ele gcd(ele a,ele b){
+	return b?gcd(b,a%b):a;
+}
+void dfs(ele p,ele i){
+	vis[i]=true;
+	mx=max(mx,d[i]); mn=min(mn,d[i]);
+	for (edge *j=h[i]; j; j=j-&gt;nxt)
+		if (!vis[j-&gt;v]){
+			d[j-&gt;v]=d[i]+j-&gt;w;
+			dfs(i,j-&gt;v);
+		}
+	else ans=gcd(ans,_abs(d[i]-d[j-&gt;v]+j-&gt;w));
+}
+int main(){
+	scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+	ecnt=ep; memset(h,0,sizeof(h));
+	while (m--){
+		ele u,v;
+		scanf(&quot;%d%d&quot;,&amp;u,&amp;v); --u,--v;
+		if (S.count(make_pair(u,v))) continue;
+		S.insert(make_pair(u,v));
+		addedge(u,v,1); addedge(v,u,-1);
+	}
+	ans=0;
+	memset(vis,0,sizeof(vis));
+	ele s=0;
+	for (int i=0; i&lt;n; ++i)
+		if (!vis[i]){
+			d[i]=0; mx=mn=0;
+			dfs(-1,i);
+			s+=mx-mn+1;
+		}
+	ele ans1=3;
+	if (ans)
+		for (; ans1&lt;=ans &amp;&amp; ans%ans1; ++ans1);
+	else ans=s;
+	if (ans&gt;=3) printf(&quot;%d %d\n&quot;,ans,ans1);
+	else puts(&quot;-1 -1&quot;);
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

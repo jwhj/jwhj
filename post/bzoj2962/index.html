@@ -1,0 +1,268 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj2962题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj2962题解
+                    </h1>
+                    <h2 class="headline">
+                    Dec 8, 2016 10:02
+                    · 304 words
+                    · 2 minutes read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91">线段树</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=434974661&auto=0&height=66"></iframe></p>
+
+<p>操作3看上去很可怕，但是其实这个操作是可以区间合并的。用$f_i$表示选i个数的所有乘积的和，那么有$f_i=\sum \mathrm{lc.}f<em>j\times\mathrm{rc.}f</em>{i-j}$。</p>
+
+<p>操作2也很容易，对于所有奇的i，给$f_i$取相反数就可以了。</p>
+
+<p>操作1自己推一下可以得到，如果加上x，那么$f&rsquo;_i=\sum f_{i-j}C_{\mathrm{len}-i+j}^{j}x^j$这里len代表区间的长度。</p>
+
+<p>这么一道题我调了一晚上，最近代码能力大幅下降啊。以后一定要记住，给线段树打标记的时候一定要弄清楚各个标记之间、标记和维护的信息之间的先后顺序。</p>
+
+<p>另外数组好像要开大一点才能过？</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#define ele int
+#define ll long long
+using namespace std;
+#define MOD 19940417
+#define maxn 60010
+#define maxc 21
+struct ANS{
+	ele f[maxc];
+};
+struct node{
+	ANS a;
+	ele add;
+	bool neg;
+	node *l,*r;
+}np[maxn&lt;&lt;2];
+ele n,q,ncnt,a[maxn],C[maxn][maxc];
+node *root;
+inline ANS operator+(ANS a,ANS b){
+	ANS c;
+	for (int i=0; i&lt;maxc; ++i){
+		c.f[i]=0;
+		for (int j=0; j&lt;=i; ++j){
+			c.f[i]+=(ll)a.f[j]*b.f[i-j]%MOD;
+			c.f[i]%=MOD;
+		}
+	}
+	return c;
+}
+inline void pushdown(node *x,ele a,ele b){
+	if (x-&gt;neg){
+		for (int i=1; i&lt;maxc; i+=2)
+			x-&gt;a.f[i]=(MOD-x-&gt;a.f[i])%MOD;
+		if (x-&gt;l)
+			x-&gt;l-&gt;neg=!x-&gt;l-&gt;neg,x-&gt;r-&gt;neg=!x-&gt;r-&gt;neg,
+			x-&gt;l-&gt;add=(MOD-x-&gt;l-&gt;add)%MOD,
+			x-&gt;r-&gt;add=(MOD-x-&gt;r-&gt;add)%MOD;
+		x-&gt;neg=false;
+	}
+	if (x-&gt;add){
+		for (int i=maxc-1; i&gt;=0; --i){
+			ele tmp=x-&gt;add;
+			for (int j=1; j&lt;=i; ++j,tmp=(ll)tmp*x-&gt;add%MOD){
+				x-&gt;a.f[i]+=(ll)tmp*x-&gt;a.f[i-j]%MOD*C[b-a+1-i+j][j]%MOD;
+				x-&gt;a.f[i]%=MOD;
+			}
+		}
+		if (x-&gt;l)
+			x-&gt;l-&gt;add+=x-&gt;add,x-&gt;r-&gt;add+=x-&gt;add,
+			x-&gt;l-&gt;add%=MOD,x-&gt;r-&gt;add%=MOD;
+		x-&gt;add=0;
+	}
+}
+inline void maintain(node *x,ele a,ele b){
+	if (x-&gt;l){
+		ele mid=a+b&gt;&gt;1;
+		pushdown(x,a,b);
+		pushdown(x-&gt;l,a,mid);
+		pushdown(x-&gt;r,mid+1,b);
+		x-&gt;a=x-&gt;l-&gt;a+x-&gt;r-&gt;a;
+	}
+}
+node* build(ele l,ele r){
+	node *p=&amp;np[ncnt++];
+	p-&gt;add=0; p-&gt;neg=false;
+	if (l==r){
+		memset(p-&gt;a.f,0,sizeof(p-&gt;a.f));
+		p-&gt;a.f[0]=1; p-&gt;a.f[1]=(a[l-1]%MOD+MOD)%MOD;
+		p-&gt;l=p-&gt;r=NULL;
+	}
+	else{
+		ele mid=l+r&gt;&gt;1;
+		p-&gt;l=build(l,mid);
+		p-&gt;r=build(mid+1,r);
+		maintain(p,l,r);
+	}
+	return p;
+}
+void upd1(node *x,ele a,ele b,ele l,ele r,ele k){
+	pushdown(x,a,b);
+	if (l&lt;=a &amp;&amp; b&lt;=r)
+		x-&gt;add=k,pushdown(x,a,b);
+	else{
+		ele mid=a+b&gt;&gt;1;
+		if (l&lt;=mid)
+			upd1(x-&gt;l,a,mid,l,r,k);
+		if (mid&lt;r)
+			upd1(x-&gt;r,mid+1,b,l,r,k);
+		maintain(x,a,b);
+	}
+}
+void upd2(node *x,ele a,ele b,ele l,ele r){
+	pushdown(x,a,b);
+	if (l&lt;=a &amp;&amp; b&lt;=r)
+		x-&gt;neg=true,pushdown(x,a,b);
+	else{
+		ele mid=a+b&gt;&gt;1;
+		if (l&lt;=mid)
+			upd2(x-&gt;l,a,mid,l,r);
+		if (mid&lt;r)
+			upd2(x-&gt;r,mid+1,b,l,r);
+		maintain(x,a,b);
+	}
+}
+ANS query(node *x,ele a,ele b,ele l,ele r){
+	pushdown(x,a,b);
+	if (l&lt;=a &amp;&amp; b&lt;=r)
+		return x-&gt;a;
+	else{
+		ele mid=a+b&gt;&gt;1;
+		if (r&lt;=mid)
+			return query(x-&gt;l,a,mid,l,r);
+		if (mid&lt;l)
+			return query(x-&gt;r,mid+1,b,l,r);
+		ANS lans=query(x-&gt;l,a,mid,l,r);
+		ANS rans=query(x-&gt;r,mid+1,b,l,r);
+		return lans+rans;
+	}
+}
+int main(){
+	scanf(&quot;%d%d&quot;,&amp;n,&amp;q);
+	for (int i=0; i&lt;n; ++i)
+		scanf(&quot;%d&quot;,a+i);
+	memset(C,0,sizeof(C));
+	for (int i=0; i&lt;=n; ++i){
+		C[i][0]=C[i][i]=1;
+		for (int j=1; j&lt;i &amp;&amp; j&lt;maxc; ++j)
+			C[i][j]=(C[i-1][j-1]+C[i-1][j])%MOD;
+	}
+	ncnt=0;
+	root=build(1,n);
+	while (q--){
+		char s[10];
+		ele u,v,w;
+		scanf(&quot;%s%d%d&quot;,s,&amp;u,&amp;v);
+		if (s[0]!='R')
+			scanf(&quot;%d&quot;,&amp;w);
+		if (s[0]=='I')
+			upd1(root,1,n,u,v,(w%MOD+MOD)%MOD);
+		else if (s[0]=='R')
+			upd2(root,1,n,u,v);
+		else if (s[0]=='Q'){
+			printf(&quot;%d\n&quot;,query(root,1,n,u,v).f[w]%MOD);
+		}
+	}
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

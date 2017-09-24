@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Stuffs on 蒟蒻的博客</title>
+    <link>http://blog.eleele.gq/tags/stuffs/</link>
+    <description>Recent content in Stuffs on 蒟蒻的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 22 Feb 2017 10:02:43 +0000</lastBuildDate>
+    
+	<atom:link href="http://blog.eleele.gq/tags/stuffs/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>WC2017&amp;GDKOI2017酱油记</title>
+      <link>http://blog.eleele.gq/post/wc2017gdkoi2017/</link>
+      <pubDate>Wed, 22 Feb 2017 10:02:43 +0000</pubDate>
+      
+      <guid>http://blog.eleele.gq/post/wc2017gdkoi2017/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>git使用总结</title>
+      <link>http://blog.eleele.gq/post/git/</link>
+      <pubDate>Sat, 13 Aug 2016 10:02:43 +0000</pubDate>
+      
+      <guid>http://blog.eleele.gq/post/git/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>About me</title>
+      <link>http://blog.eleele.gq/about/</link>
+      <pubDate>Sat, 28 May 2016 10:02:43 +0000</pubDate>
+      
+      <guid>http://blog.eleele.gq/about/</guid>
+      <description>GD的沙茶OIER
+常用ID：jwhj,iamplm,plmoknijbuhv26,eleele
+不过用这几个ID的人未必是我……
+因为这个博客是从pelican搬迁过来的，以前的博文写作时间全都是10:02……</description>
+    </item>
+    
+    <item>
+      <title>Orz!</title>
+      <link>http://blog.eleele.gq/orz/</link>
+      <pubDate>Sat, 28 May 2016 10:02:43 +0000</pubDate>
+      
+      <guid>http://blog.eleele.gq/orz/</guid>
+      <description>orz pyx
+orz yjq
+orz dwj
+orz claris
+orz del
+orz oceaneye</description>
+    </item>
+    
+    <item>
+      <title>Just A Test</title>
+      <link>http://blog.eleele.gq/post/test/</link>
+      <pubDate>Fri, 01 Jan 2016 10:02:43 +0000</pubDate>
+      
+      <guid>http://blog.eleele.gq/post/test/</guid>
+      <description>MathJax.Hub.Config({tex2jax: {inlineMath: [[&amp;lsquo;$&amp;rsquo;,&amp;lsquo;$&amp;rsquo;], [&amp;rsquo;\(&amp;lsquo;,&amp;rsquo;\)&amp;lsquo;]]}}); Test mathjax. $$E=mc^2$$
+Test code:
+print(&#39;Hello, world!&#39;)  </description>
+    </item>
+    
+  </channel>
+</rss>

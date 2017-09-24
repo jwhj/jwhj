@@ -1,0 +1,222 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj2120题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj2120题解
+                    </h1>
+                    <h2 class="headline">
+                    Jun 1, 2016 10:02
+                    · 224 words
+                    · 2 minutes read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E7%BB%9F%E8%AE%A1">统计</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E8%8E%AB%E9%98%9F">莫队</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=18538630&auto=0&height=66"></iframe></p>
+
+<p>五月刚过，然而BGM歌名的直译貌似是“十一月过了”……</p>
+
+<p>跟<a href="http://www.lydsy.com/JudgeOnline/problem.php?id=1878">bzoj1878</a>很像，但区别在于这道题有修改。</p>
+
+<p>没有修改的话可以用莫队来做，其实有修改也可以。</p>
+
+<p>没有修改的时候，提出询问的时间对询问的结果没有影响，但是现在有修改，所以我们要考虑询问的时间，每个询问要用一个三元组$(l,r,t)$来表示。</p>
+
+<p>没有修改的时候，我们会移动左端点和右端点，其实时间也是可以像移动左右端点那样移动的。</p>
+
+<p>把整个序列每S个分成一块，以左端点所在块为第一关键字，右端点所在块为第二关键字，时间为第三关键字排序，然后跑莫队。</p>
+
+<p>方便起见，我们假设n和q同阶，可得时间复杂度为$O(n(S+(\frac{n}{S})^2))$，所以我们应该让$S=n^\frac{2}{3}$，此时算法的时间复杂度是$O(n^\frac{5}{3})$。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cmath&gt;
+#include &lt;algorithm&gt;
+#define ele int
+using namespace std;
+#define maxn 10010
+#define maxa 1000010
+ele S;
+struct ASK
+{
+	ele l,r,t;
+	inline bool operator&lt;(ASK b)const
+	{
+		if (l/S&lt;b.l/S) return true;
+		if (l/S&gt;b.l/S) return false;
+		if (r/S&lt;b.r/S) return true;
+		if (r/S&gt;b.r/S) return false;
+		return t&lt;b.t;
+	}
+};
+struct EVENT
+{
+	ele i,p,n;
+};
+ele n,m,ans,res[maxn],a[maxn],b[maxa],tmp[maxn];
+ASK q[maxn];
+EVENT e[maxn];
+inline void add(ele x)
+{
+	if (!b[x]) ++ans;
+	++b[x];
+}
+inline void rem(ele x)
+{
+	if (b[x]==1) --ans;
+	--b[x];
+}
+int main()
+{
+	scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+	for (int i=0; i&lt;n; ++i) scanf(&quot;%d&quot;,a+i),tmp[i]=a[i];
+	char s[10];
+	ele x,y;
+	for (int i=0; i&lt;m; ++i)
+	{
+		scanf(&quot;%s%d%d&quot;,s,&amp;x,&amp;y);
+		q[i].t=i;
+		if (s[0]=='Q')
+		{
+			q[i].l=x-1; q[i].r=y-1;
+			e[i].i=-1;
+		}
+		else
+		{
+			q[i].l=-1;
+			--x;
+			e[i].i=x;
+			e[i].p=tmp[x];
+			e[i].n=y;
+			tmp[x]=y;
+		}
+	}
+	S=exp(log(n)*2/3);
+	sort(q,q+m);
+	memset(b,0,sizeof(b));
+	ele l=0,r=0,t=-1;
+	b[a[0]]=1; ans=1;
+	memset(res,0,sizeof(res));
+	for (int i=0; i&lt;m; ++i)
+	{
+		if (q[i].l==-1) continue;
+		for (int j=l; j&lt;q[i].l; ++j) rem(a[j]);
+		for (int j=l-1; j&gt;=q[i].l; --j) add(a[j]);
+		for (int j=r; j&gt;q[i].r; --j) rem(a[j]);
+		for (int j=r+1; j&lt;=q[i].r; ++j) add(a[j]);
+		l=q[i].l; r=q[i].r;
+		for (int j=t+1; j&lt;=q[i].t; ++j)
+		{
+			if (e[j].i==-1) continue;
+			a[e[j].i]=e[j].n;
+			if (l&lt;=e[j].i &amp;&amp; e[j].i&lt;=r) rem(e[j].p),add(e[j].n);
+		}
+		for (int j=t; j&gt;q[i].t; --j)
+		{
+			if (e[j].i==-1) continue;
+			a[e[j].i]=e[j].p;
+			if (l&lt;=e[j].i &amp;&amp; e[j].i&lt;=r) rem(e[j].n),add(e[j].p);
+		}
+		res[q[i].t]=ans;
+		t=q[i].t;
+	}
+	for (int i=0; i&lt;m; ++i)
+		if (res[i]) printf(&quot;%d\n&quot;,res[i]);
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

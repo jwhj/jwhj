@@ -1,0 +1,205 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj3944题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj3944题解
+                    </h1>
+                    <h2 class="headline">
+                    May 22, 2016 10:02
+                    · 171 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E6%95%B0%E5%AD%A6">数学</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/mobius">mobius</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=72396&auto=0&height=66"></iframe></p>
+
+<p>假设有函数$f(n)$和$g(n)$，满足：
+$$g(n)=\sum<em>{d|n}f(d)$$
+$$F(n)=\sum</em>{i=1}^n f(i)$$
+$$G(n)=\sum<em>{i=1}^n g(i)$$
+那么有：
+$$G(n)=\sum</em>{i=1}^n\sum<em>{d|i}f(i)$$
+考虑$f(i)$对$G(n)$的贡献，得到
+$$G(n)=\sum</em>{i=1}^n F(\lfloor\frac{n}{i}\rfloor)$$
+于是有
+$$F(n)=G(n)-\sum_{i=2}^n F(\lfloor\frac{n}{i}\rfloor)$$。
+假设$G(n)$可以在$O(1)$时间内求出，使用散列表记忆化来求$F(n)$，时间复杂度是多少呢？
+考虑到$\lfloor\frac{n}{i}\rfloor$至多有$O(\sqrt{n})$种取值，所以转移时间是$O(\sqrt{n})$的。</p>
+
+<p>状态总数其实也只有$O(\sqrt{n})$个，因为只有$F(\lfloor\frac{n}{k}\rfloor)$会被递归计算到。</p>
+
+<p>所以总的时间复杂度为
+$$\sum_{i=1}^n\sqrt{\frac{n}{i}}=O(n^\frac{3}{4})$$</p>
+
+<p>然而这还是太慢了。</p>
+
+<p>考虑给定一个阀值S，用$O(S)$的时间处理出$i\le S$的$F(i)$，只有当$i\gt S$时才递归计算，使用类似上面的方法分析，可以得到S应取$n^\frac{2}{3}$，此时算法的时间复杂度为$O(n^\frac{2}{3})$。</p>
+
+<p>然而这道题还是很卡常数。</p>
+
+<p>实际上，S稍微开大一点，算法似乎运行得更快。本题有多组数据，每组数据算完之后不清空用来记忆化的散列表，程序运行会快很多。加上这些优化之后我才勉强A掉。</p>
+
+<p>这道题如果用map而不是散列表来记忆化，似乎也不会慢。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cmath&gt;
+#include &lt;map&gt;
+#define ele long long
+using namespace std;
+#define maxs 4000010
+#define S 4000000
+ele n,pcnt,plist[maxs],phi[maxs],mu[maxs];
+bool flag[maxs];
+map&lt;ele,ele&gt; m1,m2;
+ele phisum(ele i){
+    if (i&lt;=S) return phi[i];
+    if (m1.find(i)!=m1.end()) return m1[i];
+    ele ans=i*(i+1)/2;
+    for (int j=i; j&gt;1;){
+        ele r=i/(i/j+1);
+        ele tmp=phisum(i/j)*(j-r);
+        ans-=tmp;
+        j=r;
+    }
+    m1[i]=ans;
+    return ans;
+}
+ele musum(ele i){
+    if (i&lt;=S) return mu[i];
+    if (m2.find(i)!=m2.end()) return m2[i];
+    ele ans=1;
+    for (int j=i; j&gt;1;){
+        ele r=i/(i/j+1);
+        ele tmp=musum(i/j)*(j-r);
+        ans-=tmp;
+        j=r;
+    }
+    m2[i]=ans;
+    return ans;
+}
+int main(){
+    memset(flag,0,sizeof(flag));
+    pcnt=0;
+    mu[1]=1; phi[1]=1;
+    for (int i=2; i&lt;maxs; ++i){
+        if (!flag[i]) plist[pcnt++]=i,mu[i]=-1,phi[i]=i-1;
+        for (int j=0; j&lt;pcnt &amp;&amp; i*plist[j]&lt;maxs; ++j){
+            flag[i*plist[j]]=true;
+            if (i%plist[j])
+                mu[i*plist[j]]=-mu[i],
+                phi[i*plist[j]]=phi[i]*(plist[j]-1);
+            else{
+                mu[i*plist[j]]=0;
+                phi[i*plist[j]]=phi[i]*plist[j];
+                break;
+            }
+        }
+    }
+    for (int i=2; i&lt;maxs; ++i) mu[i]+=mu[i-1];
+    for (int i=2; i&lt;maxs; ++i) phi[i]+=phi[i-1];
+    ele T;
+    scanf(&quot;%lld&quot;,&amp;T);
+    while (T--){
+        scanf(&quot;%lld&quot;,&amp;n);
+        printf(&quot;%lld %lld\n&quot;,phisum(n),musum(n));
+    }
+    return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

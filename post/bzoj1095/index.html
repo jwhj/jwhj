@@ -1,0 +1,312 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj1095题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj1095题解
+                    </h1>
+                    <h2 class="headline">
+                    Nov 6, 2016 10:02
+                    · 389 words
+                    · 2 minutes read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E6%A0%91%E5%88%86%E6%B2%BB">树分治</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97">优先队列</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=2069470&auto=0&height=66"></iframe></p>
+
+<p>先考虑静态的情况，显然点剖一下就做完了。</p>
+
+<p>动态也是一个道理，但是要用优先队列来维护信息，每个点维护两个堆：</p>
+
+<ul>
+<li>以该点为重心的分治结构中所有关灯的点到上一层分治结构重心的距离</li>
+<li>以该点为重心的分治结构中所有子树的堆顶，如果该点关灯，还有一个0</li>
+</ul>
+
+<p>用一个全局的堆维护每个点的第二个堆的最大值+次大值，那么全局堆的堆顶就是答案。</p>
+
+<p>修改自己想吧，知道要维护什么堆应该不难想……</p>
+
+<p>空间复杂度分析类似树套树，可以得到是$O(n\log n)$的。</p>
+
+<p>发现一个实现删除任意已知元素的优先队列的实现方法，详情看代码。</p>
+
+<p>写了句<code>char s[10],u;</code>调了几个小时……惨啊</p>
+
+<p>现在是时候思考<code>动态树 分治</code>的可行性了233</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#include &lt;queue&gt;
+#define ele int
+using namespace std;
+#define maxn 100010
+#define maxk 17
+struct heap{
+	priority_queue&lt;ele&gt; a,b;
+	inline void push(ele x){
+		a.push(x);
+	}
+	inline void del(ele x){
+		b.push(x);
+	}
+	inline ele top(){
+		while (!a.empty() &amp;&amp; !b.empty() &amp;&amp; a.top()==b.top())
+			a.pop(),b.pop();
+		return a.top();
+	}
+	inline ele sec(){
+		ele tmp=top(); del(tmp);
+		ele ans=top(); push(tmp);
+		return ans;
+	}
+	inline ele size(){
+		return a.size()-b.size();
+	}
+};
+struct data{
+	heap h1,h2;
+};
+struct edge{
+	ele v;
+	edge *nxt;
+}ep[maxn&lt;&lt;1];
+ele n,m,cnt,ecnt,size[maxn],w[maxn],pv[maxn],dep[maxn],fa[maxn][maxk];
+bool flag[maxn],c[maxn];
+edge *h[maxn];
+data a[maxn];
+heap gh;
+inline void addedge(ele u,ele v){
+	edge *p=&amp;ep[ecnt++];
+	p-&gt;v=v; p-&gt;nxt=h[u];
+	h[u]=p;
+}
+void dfs0(ele p,ele i){
+	fa[i][0]=p;
+	for (edge *j=h[i]; j; j=j-&gt;nxt)
+		if (j-&gt;v!=p)
+			dep[j-&gt;v]=dep[i]+1,dfs0(i,j-&gt;v);
+}
+ele dfs1(ele p,ele i,ele s){
+	size[i]=1;
+	w[i]=0;
+	ele k=-1;
+	for (edge *j=h[i]; j; j=j-&gt;nxt)
+		if (j-&gt;v!=p &amp;&amp; !flag[j-&gt;v]){
+			ele tmp=dfs1(i,j-&gt;v,s);
+			size[i]+=size[j-&gt;v];
+			w[i]=max(w[i],size[j-&gt;v]);
+			if (k==-1 || w[tmp]&lt;w[k])
+				k=tmp;
+		}
+	w[i]=max(w[i],s-size[i]);
+	if (k==-1 || w[i]&lt;w[k])
+		k=i;
+	return k;
+}
+ele get_size(ele p,ele i){
+	ele ans=1;
+	for (edge *j=h[i]; j; j=j-&gt;nxt)
+		if (j-&gt;v!=p &amp;&amp; !flag[j-&gt;v])
+			ans+=get_size(i,j-&gt;v);
+	return ans;
+}
+void dfs2(ele p,ele i,ele d,heap&amp;H){
+	H.push(d);
+	for (edge *j=h[i]; j; j=j-&gt;nxt)
+		if (j-&gt;v!=p &amp;&amp; !flag[j-&gt;v])
+			dfs2(i,j-&gt;v,d+1,H);
+}
+inline void maintain(heap&amp;H,ele k){
+	if (H.size()&gt;=2){
+		ele tmp=H.top()+H.sec();
+		if (k&gt;0) gh.push(tmp); else gh.del(tmp);
+	}
+}
+ele build(ele p,ele i){
+	ele s=get_size(-1,i);
+	ele k=dfs1(-1,i,s);
+	dfs2(-1,i,1,a[k].h1);
+	flag[k]=true;
+	pv[k]=p;
+	for (edge *j=h[k]; j; j=j-&gt;nxt)
+		if (!flag[j-&gt;v]){
+			ele q=build(k,j-&gt;v);
+			a[k].h2.push(a[q].h1.top());
+		}
+	a[k].h2.push(0);
+	maintain(a[k].h2,1);
+	return k;
+}
+inline ele lca(ele u,ele v){
+	if (dep[u]&gt;dep[v]) swap(u,v);
+	ele k=dep[v]-dep[u];
+	for (int i=0; k; ++i,k&gt;&gt;=1)
+		if (k&amp;1)
+			v=fa[v][i];
+	if (u==v) return u;
+	for (int i=maxk-1; i&gt;=0; --i)
+		if (fa[u][i]!=fa[v][i])
+			u=fa[u][i],v=fa[v][i];
+	return fa[u][0];
+}
+inline ele dis(ele u,ele v){
+	ele w=lca(u,v);
+	return dep[u]+dep[v]-2*dep[w];
+}
+inline void upd(ele x){
+	ele i=x;
+	maintain(a[x].h2,-1);
+	if (c[x])
+		a[x].h2.push(0);
+	else a[x].h2.del(0);
+	maintain(a[x].h2,1);
+	while (pv[i]!=-1){
+		maintain(a[pv[i]].h2,-1);
+		if (a[i].h1.size())
+			a[pv[i]].h2.del(a[i].h1.top());
+		if (c[x])
+			a[i].h1.push(dis(pv[i],x));
+		else a[i].h1.del(dis(pv[i],x));
+		if (a[i].h1.size())
+			a[pv[i]].h2.push(a[i].h1.top());
+		maintain(a[pv[i]].h2,1);
+		i=pv[i];
+	}
+	if (c[x]) ++cnt; else --cnt;
+	c[x]=!c[x];
+}
+int main(){
+	scanf(&quot;%d&quot;,&amp;n);
+	ecnt=0;
+	memset(h,0,sizeof(h));
+	for (int i=0; i&lt;n-1; ++i){
+		ele u,v;
+		scanf(&quot;%d%d&quot;,&amp;u,&amp;v);
+		--u,--v;
+		addedge(u,v); addedge(v,u);
+	}
+	dep[0]=0;
+	dfs0(-1,0);
+	for (int i=1; i&lt;maxk; ++i)
+		for (int j=0; j&lt;n; ++j)
+			if (fa[j][i-1]==-1)
+				fa[j][i]=-1;
+			else fa[j][i]=fa[fa[j][i-1]][i-1];
+	memset(c,0,sizeof(c));
+	build(-1,0);
+	scanf(&quot;%d&quot;,&amp;m);
+	cnt=n;
+	while (m--){
+		char s[10];
+		ele u;
+		scanf(&quot;%s&quot;,s);
+		if (s[0]=='C'){
+			scanf(&quot;%d&quot;,&amp;u);
+			--u;
+			upd(u);
+		}
+		else
+			if (cnt&lt;=1)
+				printf(&quot;%d\n&quot;,cnt-1);
+			else printf(&quot;%d\n&quot;,gh.top());
+	}
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

@@ -1,0 +1,175 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj2435题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj2435题解
+                    </h1>
+                    <h2 class="headline">
+                    Jun 8, 2016 10:02
+                    · 126 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=167837&auto=0&height=66"></iframe></p>
+
+<p>理论上来讲dfs一下就好了，然而我写的dfs一直RE，换成bfs就过了，大概是爆栈了吧。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;queue&gt;
+#define ele long long
+using namespace std;
+#define maxn 1000010
+struct edge
+{
+	ele v,w;
+	edge *nxt;
+}pool[maxn&lt;&lt;1];
+ele n,ecnt,scnt,f[maxn],f1[maxn],size[maxn],seq[maxn];
+edge *h[maxn];
+queue&lt;ele&gt; q;
+inline void addedge(ele u,ele v,ele w)
+{
+	edge *p=&amp;pool[ecnt++];
+	p-&gt;v=v; p-&gt;w=w;
+	p-&gt;nxt=h[u];
+	h[u]=p;
+}
+inline ele abs(ele x)
+{
+	return (x&gt;0)?(x):(-x);
+}
+int main()
+{
+	scanf(&quot;%lld&quot;,&amp;n);
+	ecnt=0;
+	memset(h,0,sizeof(h));
+	for (int i=0; i&lt;n-1; ++i)
+	{
+		ele x,y,z;
+		scanf(&quot;%lld%lld%lld&quot;,&amp;x,&amp;y,&amp;z);
+		--x,--y;
+		addedge(x,y,z); addedge(y,x,z);
+	}
+	for (edge *j=h[0]; j; j=j-&gt;nxt)
+	{
+		q.push(j-&gt;v);
+		f[j-&gt;v]=0;
+		f1[j-&gt;v]=j-&gt;w;
+	}
+	scnt=0;
+	while (!q.empty())
+	{
+		ele p=seq[scnt++]=q.front();
+		q.pop();
+		size[p]=1;
+		for (edge *j=h[p]; j; j=j-&gt;nxt)
+			if (j-&gt;v!=f[p])
+			{
+				q.push(j-&gt;v);
+				f[j-&gt;v]=p;
+				f1[j-&gt;v]=j-&gt;w;
+			}
+	}
+	for (int i=scnt-1; i&gt;=0; --i)
+		size[f[seq[i]]]+=size[seq[i]];
+	ele ans=0;
+	for (int i=1; i&lt;n; ++i)
+		ans+=f1[i]*abs(n-size[i]*2);
+	printf(&quot;%lld\n&quot;,ans);
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

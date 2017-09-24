@@ -1,0 +1,223 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj3676题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj3676题解
+                    </h1>
+                    <h2 class="headline">
+                    Jan 27, 2017 10:02
+                    · 210 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E5%90%8E%E7%BC%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84">后缀数据结构</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/manacher">manacher</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script></p>
+
+<p>首先，串中至多有n种本质上不同的回文子串，即manacher执行过程中，每次回文子串向右延伸的最远位置变化的时候，才会出现本质上不同的回文子串。</p>
+
+<p>于是我们可以枚举这些子串，并求出它们出现的次数。</p>
+
+<p>使用后缀自动机来解决这个问题。通过dp可以求出后缀自动机每个节点对应的字符串的出现次数。所以对于某个子串，只需求出它在后缀自动机里面对应的节点就可以了。假设这个子串是s[l~r]，首先求出s[0~r]对应的子串，然后沿着后缀边走。我不知道这个做法时间复杂度对不对，反正AC了……</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#define ele int
+#define ll long long
+using namespace std;
+#define maxn 300010
+#define alpha 26
+struct node{
+    ele len,c;
+    node *nxt,*f,*l[alpha];
+    inline void alloc(){
+        f=NULL;
+        memset(l,0,sizeof(l));
+    }
+}np[maxn&lt;&lt;1];
+ele ncnt;
+node *h[maxn];
+struct SAM{
+    inline void onnewnode(node *x){
+        x-&gt;nxt=h[x-&gt;len];
+        h[x-&gt;len]=x;
+    }
+    inline void alloc(){
+        ncnt=0;
+        root=&amp;np[ncnt++];
+        root-&gt;alloc();
+        root-&gt;len=0;
+        root-&gt;c=1;
+        onnewnode(root);
+        end=root;
+    }
+    inline node* add(ele c){
+        node *p=&amp;np[ncnt++],*q;
+        p-&gt;alloc(); p-&gt;len=end-&gt;len+1; p-&gt;c=1;
+        onnewnode(p);
+        for (q=end; q &amp;&amp; !q-&gt;l[c]; q=q-&gt;f)
+            q-&gt;l[c]=p;
+        if (!q)
+            p-&gt;f=root;
+        else if (q-&gt;len+1==q-&gt;l[c]-&gt;len)
+            p-&gt;f=q-&gt;l[c];
+        else{
+            node *r=&amp;np[ncnt++],*buf=q-&gt;l[c];
+            *r=*buf;
+            r-&gt;len=q-&gt;len+1;
+            r-&gt;c=0;
+            onnewnode(r);
+            buf-&gt;f=p-&gt;f=r;
+            for (; q &amp;&amp; q-&gt;l[c]==buf; q=q-&gt;f)
+                q-&gt;l[c]=r;
+        }
+        return end=p;
+    }
+    node *root,*end;
+};
+ele n,p[maxn&lt;&lt;1];
+char s[maxn&lt;&lt;1],s1[maxn];
+SAM sam;
+node *seq[maxn];
+int main(){
+    scanf(&quot;%s&quot;,s1);
+    n=strlen(s1);
+    memset(h,0,sizeof(h));
+    sam.alloc();
+    for (int i=0; i&lt;n; ++i)
+        seq[i]=sam.add(s1[i]-'a');
+    for (int i=sam.end-&gt;len; i&gt;0; --i)
+        for (node *j=h[i]; j; j=j-&gt;nxt)
+            j-&gt;f-&gt;c+=j-&gt;c;
+    ele m=0;
+    s[m++]='!';
+    for (int i=0; i&lt;n; ++i){
+        s[m++]='#';
+        s[m++]=s1[i];
+    }
+    s[m++]='#';
+    s[m++]='@';
+    ele mx=0,id=0;
+    p[0]=0;
+    ll ans=0;
+    for (int i=1; i&lt;m; ++i){
+        if (i&gt;mx)
+            p[i]=0;
+        else p[i]=min(mx-i,p[id*2-i]);
+        for (; s[i-p[i]-1]==s[i+p[i]+1]; ++p[i])
+            ;
+        if (i+p[i]&gt;mx){
+            for (int j=mx+1; j&lt;=i+p[i]; ++j)
+                if ('a'&lt;=s[j] &amp;&amp; s[j]&lt;='z'){
+                    ele k=i*2-j;
+                    ele j1=j/2-1;
+                    k=k/2-1;
+                    ele L=j1-k+1;
+                    node *p=seq[j1];
+                    while (L&lt;=p-&gt;f-&gt;len)
+                        p=p-&gt;f;
+                    ans=max(ans,(ll)p-&gt;c*L);
+                }
+            mx=i+p[i];
+            id=i;
+        }
+    }
+    printf(&quot;%lld\n&quot;,ans);
+    return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

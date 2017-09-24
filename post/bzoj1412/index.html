@@ -1,0 +1,197 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj1412题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj1412题解
+                    </h1>
+                    <h2 class="headline">
+                    Mar 3, 2017 10:02
+                    · 216 words
+                    · 2 minutes read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E7%BD%91%E7%BB%9C%E6%B5%81">网络流</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script></p>
+
+<p>就是一个最小割，但建图的时候还是有一些细节的，看代码吧……</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#define ele int
+using namespace std;
+#define maxn 10010
+#define INF 1000000000
+const ele di[]={-1,1,0,0};
+const ele dj[]={0,0,-1,1};
+struct edge{
+	ele v,r;
+	edge *nxt,*rev;
+}ep[4000000];
+ele n,m,ecnt,dep[maxn],a[110][110];
+edge *g[maxn],*cur[maxn];
+inline void addedge1(ele u,ele v,ele w){
+	edge *p=&amp;ep[ecnt++];
+	p-&gt;v=v; p-&gt;r=w; p-&gt;nxt=g[u]; p-&gt;rev=ep+((ecnt-1)^1);
+	g[u]=p;
+}
+inline void addedge(ele u,ele v,ele w){
+	addedge1(u,v,w); addedge1(v,u,0);
+}
+inline bool bfs(ele s,ele t){
+	static ele Q[maxn];
+	ele qh=0,qt=1;
+	Q[0]=s;
+	memset(dep,0,sizeof(dep));
+	dep[s]=1;
+	while (qh&lt;qt){
+		for (edge *j=g[Q[qh]]; j; j=j-&gt;nxt)
+			if (!dep[j-&gt;v] &amp;&amp; j-&gt;r){
+				dep[j-&gt;v]=dep[Q[qh]]+1;
+				Q[qt++]=j-&gt;v;
+				if (j-&gt;v==t) return true;
+			}
+		++qh;
+	}
+	return false;
+}
+ele dfs(ele i,ele t,ele p){
+	if (i==t || !p) return p;
+	ele f=0;
+	for (edge*&amp;j=cur[i]; j; j=j-&gt;nxt)
+		if (dep[i]+1==dep[j-&gt;v] &amp;&amp; j-&gt;r){
+			ele tmp=dfs(j-&gt;v,t,min(p,j-&gt;r));
+			if (tmp){
+				j-&gt;r-=tmp;
+				j-&gt;rev-&gt;r+=tmp;
+				f+=tmp;
+				p-=tmp;
+				if (!p) break;
+			}
+		}
+	if (!p) dep[i]=-1;
+	return f;
+}
+inline ele dinic(ele s,ele t){
+	ele ans=0;
+	while (bfs(s,t)){
+		memcpy(cur,g,sizeof(edge*)*(2+n*m));
+		ans+=dfs(s,t,INF);
+	}
+	return ans;
+}
+int main(){
+	scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+	ecnt=0;
+	memset(g,0,sizeof(g));
+	for (int i=0; i&lt;n; ++i)
+		for (int j=0; j&lt;m; ++j){
+			scanf(&quot;%d&quot;,&amp;a[i][j]);
+			if (a[i][j]==1) addedge(0,2+i*m+j,INF);
+			else if (a[i][j]==2) addedge(2+i*m+j,1,INF);
+		}
+	for (int i=0; i&lt;n; ++i)
+		for (int j=0; j&lt;m; ++j)
+			if (a[i][j]!=2)
+				for (int w=0; w&lt;4; ++w){
+					ele ni=i+di[w],nj=j+dj[w];
+					if (0&lt;=ni &amp;&amp; ni&lt;n &amp;&amp; 0&lt;=nj &amp;&amp; nj&lt;m &amp;&amp; (a[i][j]!=1 || a[ni][nj]!=1))
+						addedge(2+i*m+j,2+ni*m+nj,1);
+				}
+	printf(&quot;%d\n&quot;,dinic(0,1));
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

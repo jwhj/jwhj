@@ -1,0 +1,299 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj1857题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj1857题解
+                    </h1>
+                    <h2 class="headline">
+                    Jan 14, 2017 10:02
+                    · 429 words
+                    · 3 minutes read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E4%B8%89%E5%88%86">三分</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E5%88%86%E5%9D%97%E6%90%9C%E7%B4%A2%E6%B3%95">分块搜索法</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script></p>
+
+<p>三分套三分就可以了。</p>
+
+<p>至于外层三分为什么是对的，我不知道……晚点看心情试着证一下吧。</p>
+
+<p>UPD：可以用分块搜索法，这样不需要证明是单峰函数。</p>
+
+<p>UPD：内层肯定是单峰函数所以可以内层三分外层分块搜索，这样不需要证明外层是不是单峰，而且效率也提高了。</p>
+
+<p>代码（分块搜索套三分）：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cmath&gt;
+#include &lt;algorithm&gt;
+#define ele int
+using namespace std;
+#define eps 1e-6
+#define K 27
+#define M 3
+double ax,ay,bx,by,cx,cy,dx,dy,ex,ey,p,q,r;
+inline void func(double ax,double ay,double bx,double by,double&amp;cx,double&amp;cy,double lambda){
+	double x=(bx-ax)*lambda,y=(by-ay)*lambda;
+	cx=ax+x; cy=ay+y;
+}
+inline double dis(double a,double b,double c,double d){
+	return sqrt((a-c)*(a-c)+(b-d)*(b-d));
+}
+inline double f2(double lambda){
+	double fx,fy;
+	func(cx,cy,dx,dy,fx,fy,lambda);
+	return dis(ex,ey,fx,fy)/r+dis(fx,fy,dx,dy)/q;
+}
+inline double s2(double l,double r){
+	if (r-l&lt;eps) return f2(l);
+	double L=(r-l)/3;
+	double m1=l+L,m2=r-L;
+	if (f2(m1)&lt;=f2(m2)) return s2(l,m2); else return s2(m1,r);
+}
+inline double f1(double lambda){
+	func(ax,ay,bx,by,ex,ey,lambda);
+	return dis(ax,ay,ex,ey)/p+s2(0,1);
+}
+inline double s1(double l,double r){
+	if (r-l&lt;eps) return f1(l);
+	pair&lt;double,int&gt; f[K];
+	double L=(r-l)/K;
+	for (int i=0; i&lt;K; ++i) f[i]=make_pair(f1(l+i*L),i);
+	sort(f,f+K);
+	double ans=1e9;
+	for (int i=0; i&lt;M; ++i)
+		ans=min(ans,s1(l+f[i].second*L,l+f[i].second*L+L));
+	return ans;
+}
+int main(){
+	scanf(&quot;%lf%lf%lf%lf%lf%lf%lf%lf%lf%lf%lf&quot;,&amp;ax,&amp;ay,&amp;bx,&amp;by,&amp;cx,&amp;cy,&amp;dx,&amp;dy,&amp;p,&amp;q,&amp;r);
+	printf(&quot;%.2lf\n&quot;,s1(0,1));
+	return 0;
+}
+</code></pre>
+
+<p>代码（三分套三分）：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cmath&gt;
+#define ele int
+#define real double
+using namespace std;
+#define eps 1e-6
+ele ax,ay,bx,by,cx,cy,dx,dy,p,q,r;
+real ex,ey;
+inline void func(real ax,real ay,real bx,real by,real lambda,real&amp;cx,real&amp;cy){
+	cx=ax+lambda*(bx-ax);
+	cy=ay+lambda*(by-ay);
+}
+inline real sqr(real x){
+	return x*x;
+}
+inline real dis(real ax,real ay,real bx,real by){
+	return sqrt(sqr(ax-bx)+sqr(ay-by));
+}
+inline real f2(real lambda){
+	real x,y;
+	func(cx,cy,dx,dy,lambda,x,y);
+	return dis(ex,ey,x,y)/r+dis(x,y,dx,dy)/q;
+}
+inline real s2(real l,real r,real fl,real fr){
+	if (r-l&lt;eps) return fl;
+	real L=(r-l)/3;
+	real m1=l+L,m2=r-L;
+	real fm1=f2(m1),fm2=f2(m2);
+	if (fm1&lt;=fm2)
+		return s2(l,m2,fl,fm2);
+	else return s2(m1,r,fm1,fr);
+}
+inline real f1(real lambda){
+	func(ax,ay,bx,by,lambda,ex,ey);
+	return dis(ax,ay,ex,ey)/p+s2(0,1,f2(0),f2(1));
+}
+inline real s1(real l,real r,real fl,real fr){
+	if (r-l&lt;eps) return fl;
+	real L=(r-l)/3;
+	real m1=l+L,m2=r-L;
+	real fm1=f1(m1),fm2=f1(m2);
+	if (fm1&lt;=fm2)
+		return s1(l,m2,fl,fm2);
+	else return s1(m1,r,fm1,fr);
+}
+int main(){
+	scanf(&quot;%d%d%d%d%d%d%d%d%d%d%d&quot;,&amp;ax,&amp;ay,&amp;bx,&amp;by,&amp;cx,&amp;cy,&amp;dx,&amp;dy,&amp;p,&amp;q,&amp;r);
+	printf(&quot;%.2lf\n&quot;,s1(0,1,f1(0),f1(1)));
+	return 0;
+}
+</code></pre>
+
+<p>代码（分块搜索套分块搜索）：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cmath&gt;
+#include &lt;algorithm&gt;
+#define ele int
+using namespace std;
+#define M 1
+#define K 27
+#define eps 1e-5
+ele ax,ay,bx,by,cx,cy,dx,dy,p,q,r;
+double ex,ey;
+inline void func(double ax,double ay,double bx,double by,double lambda,double&amp;cx,double&amp;cy){
+    cx=ax+lambda*(bx-ax);
+    cy=ay+lambda*(by-ay);
+}
+inline double sqr(double x){
+    return x*x;
+}
+inline double dis(double ax,double ay,double bx,double by){
+    return sqrt(sqr(ax-bx)+sqr(ay-by));
+}
+inline double f2(double lambda){
+    double x,y;
+    func(cx,cy,dx,dy,lambda,x,y);
+    return dis(ex,ey,x,y)/r+dis(x,y,dx,dy)/q;
+}
+inline double s2(double l,double r){
+    if (r-l&lt;eps) return f2(l);
+    double d=(r-l)/K;
+    ele j=0;
+    double ans=f2(l);
+    for (int i=1; i&lt;K; ++i){
+    	double tmp=f2(l+d*i);
+    	if (tmp&lt;ans){
+    		j=i;
+    		ans=tmp;
+    	}
+    }
+    for (int i=-M; i&lt;=M; ++i)
+    	if (0&lt;=j+i &amp;&amp; j+i&lt;K){
+    		double tmp=s2(l+d*(j+i),l+d*(j+i+1));
+    		ans=min(ans,tmp);
+    	}
+    return ans;
+}
+inline double f1(double lambda){
+    func(ax,ay,bx,by,lambda,ex,ey);
+    return dis(ax,ay,ex,ey)/p+s2(0,1);
+}
+inline double s1(double l,double r){
+    if (r-l&lt;eps) return f1(l);
+    double d=(r-l)/K;
+    ele j=0;
+    double ans=f1(l);
+    for (int i=1; i&lt;K; ++i){
+    	double tmp=f1(l+d*i);
+    	if (tmp&lt;ans){
+    		j=i;
+    		ans=tmp;
+    	}
+    }
+    for (int i=-M; i&lt;=M; ++i)
+    	if (0&lt;=j+i &amp;&amp; j+i&lt;K){
+    		double tmp=s1(l+d*(j+i),l+d*(j+i+1));
+    		ans=min(ans,tmp);
+    	}
+    return ans;
+}
+int main(){
+    scanf(&quot;%d%d%d%d%d%d%d%d%d%d%d&quot;,&amp;ax,&amp;ay,&amp;bx,&amp;by,&amp;cx,&amp;cy,&amp;dx,&amp;dy,&amp;p,&amp;q,&amp;r);
+    printf(&quot;%.2lf\n&quot;,s1(0,1));
+    return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

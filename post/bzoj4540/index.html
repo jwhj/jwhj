@@ -1,0 +1,216 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj4540题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj4540题解
+                    </h1>
+                    <h2 class="headline">
+                    Feb 12, 2017 10:02
+                    · 221 words
+                    · 2 minutes read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E7%BB%9F%E8%AE%A1">统计</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E8%8E%AB%E9%98%9F">莫队</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E5%88%86%E5%9D%97">分块</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91">线段树</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script></p>
+
+<p>记a[i]左边第一个比a[i]小的数的位置为prv[i]。</p>
+
+<p>考虑莫队，将[l,r-1]变为[l,r]的时候，对于$i\in [\mathrm{prv}[r]+1,r]$，[i,r]的最小值为a[r]。对于$i\in [\mathrm{prv}[\mathrm{prv}[r]]+1,\mathrm{prv}[r]]$，[i,r]的最小值为a[prv[r]]……</p>
+
+<p>在左边加入一个数的情况类似。</p>
+
+<p>我比较懒就写了个在线莫队，不需要考虑删除的情况。</p>
+
+<p>为了快速算出这个东西，我一开始写了一个倍增，结果复杂度比较劲，是$O(n\sqrt{n}\log n)$，我写了一个交上去TLE了。接下来我玩了很长一段时间的常数，感觉不大可能卡过去，就开始想怎么把那个log消掉。</p>
+
+<p>注意到，从r开始，按照prv往前跳，设跳到l前面之前的最后一个位置为i，那么a[i]为[l,r]上的最小值。</p>
+
+<p>这样处理一个类似前缀和的东西，再用st表把i找出来，就可以做到$O(n\sqrt{n})$。</p>
+
+<p>据说有线段树的做法，晚点去研究一下。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cmath&gt;
+#include &lt;cctype&gt;
+#include &lt;algorithm&gt;
+#define ele int
+#define ll long long
+using namespace std;
+#define maxn 100010
+#define maxk 17
+#define maxs 320
+ele n,q,S,top,a[maxn],prv[maxn],nxt[maxn],stk[maxn],st[maxn][maxk],LOG[maxn];
+ll f[maxs][maxn],s1[maxn],s2[maxn];
+inline void get(ele&amp;a){
+	char c;
+	while (c!='-' &amp;&amp; !isdigit(c=getchar()));
+	bool flag=(c=='-');
+	a=(flag)?(0):(c-'0');
+	while (isdigit(c=getchar())) a=(a&lt;&lt;3)+(a&lt;&lt;1)+c-'0';
+	a*=(flag)?(-1):(1);
+}
+inline ele rmq(ele l,ele r){
+	ele L=LOG[r-l+1];
+	return (a[st[l][L]]&lt;a[st[r-(1&lt;&lt;L)+1][L]])?(st[l][L]):(st[r-(1&lt;&lt;L)+1][L]);
+}
+inline ll addl(ele i,ele j){
+	ele k=rmq(j,i);
+	return s2[j]-s2[k]+(ll)a[k]*(i-k+1);
+}
+inline ll addr(ele i,ele j){
+	ele k=rmq(i,j);
+	return s1[j]-s1[k]+(ll)a[k]*(k-i+1);
+}
+int main(){
+	get(n); get(q);
+	S=sqrt(n);
+	for (int i=0; i&lt;n; ++i) get(a[i]);
+	stk[0]=0; top=1; prv[0]=-1; s1[0]=a[0];
+	for (int i=1; i&lt;n; ++i){
+		while (top &amp;&amp; a[stk[top-1]]&gt;a[i]) --top;
+		prv[i]=(top)?(stk[top-1]):(-1);
+		s1[i]=(ll)a[i]*(i-prv[i]);
+		s1[i]+=(top)?(s1[prv[i]]):(0);
+		stk[top++]=i;
+	}	
+	stk[0]=n-1; top=1; nxt[n-1]=n; s2[n-1]=a[n-1];
+	for (int i=n-2; i&gt;=0; --i){
+		while (top &amp;&amp; a[stk[top-1]]&gt;a[i]) --top;
+		nxt[i]=(top)?(stk[top-1]):(n);
+		s2[i]=(ll)a[i]*(nxt[i]-i);
+		s2[i]+=(top)?(s2[nxt[i]]):(0);
+		stk[top++]=i;
+	}
+	LOG[1]=0;
+	for (int i=2; i&lt;=n; ++i) LOG[i]=LOG[i&gt;&gt;1]+1;
+	for (int i=0; i&lt;n; ++i) st[i][0]=i;
+	for (int j=1; j&lt;maxk; ++j)
+		for (int i=0; i&lt;n; ++i)
+			if (i+(1&lt;&lt;j-1)&gt;=n || a[st[i][j-1]]&lt;a[st[i+(1&lt;&lt;j-1)][j-1]])
+				st[i][j]=st[i][j-1];
+			else st[i][j]=st[i+(1&lt;&lt;j-1)][j-1];
+	for (int i=0,j=0; i&lt;n; i+=S,++j){
+		f[j][i]=a[i];
+		for (int k=i+1; k&lt;n; ++k)
+			f[j][k]=f[j][k-1]+addr(i,k);
+	}
+	while (q--){
+		ele l,r;
+		ll ans;
+		get(l); get(r);
+		--l,--r;
+		if (l/S==r/S){
+			ans=a[l];
+			for (int i=l+1; i&lt;=r; ++i)
+				ans+=addr(l,i);
+		}
+		else{
+			ans=f[l/S+1][r];
+			for (int i=(l/S+1)*S-1; i&gt;=l; --i)
+				ans+=addl(r,i);
+		}
+		printf(&quot;%lld\n&quot;,ans);
+	}
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

@@ -1,0 +1,175 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj2186题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj2186题解
+                    </h1>
+                    <h2 class="headline">
+                    May 5, 2016 10:02
+                    · 139 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E6%95%B0%E5%AD%A6">数学</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=25650032&auto=0&height=66"></iframe></p>
+
+<p>当$n=m$时，答案显然是$\phi(m!)$。</p>
+
+<p>由于gcd(a+b,b)=gcd(a,b)，当$n&gt;m$时，由于$m!|n!$，我们可以把$n!$分成若干组：
+$$1,2,\ldots,m!$$
+$$m!+1,m!+2,\ldots,2\times m!$$
+$$\ldots$$</p>
+
+<p>每一组中，显然都有$\phi(m!)$种真货币。</p>
+
+<p>所以答案为$\phi(m!)\times\frac{n!}{m!}=n!\times \Pi\frac{p_i-1}{p_i}$，这里$p_i$是小于$m$的质数。</p>
+
+<p>这道题相当卡常，我用了读入优化，没用long long才过。</p>
+
+<p>似乎求逆元ex_gcd比快速幂更快。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#define ele int
+using namespace std;
+#define maxn 10000010
+ele T,R,n,m,fac[maxn],pcnt,plist[maxn],a[maxn];
+bool flag[maxn];
+inline void get(ele &amp;a){
+    char c;
+    while ((c=getchar())&lt;'0' || c&gt;'9');
+    a=c-'0';
+    while ((c=getchar())&gt;='0' &amp;&amp; c&lt;='9')
+        a*=10,a+=c-'0';
+}
+void exgcd(ele a,ele b,ele &amp;x,ele &amp;y){
+    if(b==0){x=1;y=0;return;}
+    exgcd(b,a%b,x,y);
+    ele t=x;x=y;y=t-a/b*y;
+}
+inline ele inv(ele t){
+    ele x,y;
+    exgcd(t,R,x,y);
+    return (x%R+R)%R;
+}
+int main(){
+    get(T); get(R);
+    fac[0]=1;
+    for (int i=1; i&lt;maxn; ++i) fac[i]=(long long)fac[i-1]*i%R;
+    pcnt=0;
+    memset(flag,0,sizeof(flag));
+    for (int i=2; i&lt;maxn; ++i){
+        if (!flag[i]) plist[pcnt++]=i;
+        for (int j=0; j&lt;pcnt &amp;&amp; (long long)i*plist[j]&lt;maxn; ++j){
+            flag[(long long)i*plist[j]]=true;
+            if (i%plist[j]==0) break;
+        }
+    }
+    a[1]=1; a[2]=inv(2);
+    for (int i=1; i&lt;pcnt; ++i){
+        ele k=plist[i];
+        a[k]=((long long)a[k-1]*(k-1)%R)*inv(k)%R;
+        ele r=(i==pcnt-1)?(maxn):(plist[i+1]);
+        for (int j=k+1; j&lt;r; ++j) a[j]=a[k];
+    }
+    while (T--){
+        get(n); get(m);
+        printf(&quot;%d\n&quot;,(long long)fac[n]*a[m]%R);
+    }
+    return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

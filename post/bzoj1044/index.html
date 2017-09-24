@@ -1,0 +1,174 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj1044题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj1044题解
+                    </h1>
+                    <h2 class="headline">
+                    Aug 12, 2017 10:02
+                    · 138 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/dp">dp</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E4%BA%8C%E5%88%86">二分</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=490895842&auto=0&height=66"></iframe></p>
+
+<p>本来是道水题的，可是智商下线走了好多弯路。</p>
+
+<p>一开始我通过dp+二分优化来计算最大长度的最小值，并且顺便求出方案数，后来发现写起来非常麻烦，调了半天调不动了。</p>
+
+<p>接下来发现分两次dp，第一次求出最大长度的最小值，第二次求出方案数，写起来会清晰很多。这回大概是写对了，可是$O(nm\log n)$的复杂度实在是过不了。不过分两次dp来降低代码复杂度这个思想应该还是很有用的。</p>
+
+<p>后来我发现求出最大长度最小值只需要二分+贪心就可以了，而且跟NOIP2015D2T1长得几乎一样。计算方案数的dp可以用双指针来优化。</p>
+
+<p>这道题我一上来就在想dp，这种习惯是不对的，因为实际上有的时候可能还有更简单、更高效的方法。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#define ele int
+using namespace std;
+#define maxn 50010
+#define MOD 10007
+const ele INF=1e9;
+ele n,m,a[maxn],s[maxn],s1[maxn],f[maxn],g[maxn];
+inline bool check(ele x){
+	ele r=m,now=0;
+	for (int i=0; i&lt;n; ++i){
+		if (now+a[i]&gt;x){
+			if (!r) return false;
+			--r;
+			now=0;
+		}
+		now+=a[i];
+	}
+	if (now&gt;x &amp;&amp; !r) return false;
+	return true;
+}
+int main(){
+	scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+	s[0]=0;
+	ele L=0;
+	for (int i=0; i&lt;n; ++i) scanf(&quot;%d&quot;,a+i),L=max(L,a[i]),s[i+1]=s[i]+a[i];
+	--L;
+	ele R=s[n];
+	while (R-L&gt;1){
+		ele mid=(L+R)&gt;&gt;1;
+		if (check(mid)) R=mid; else L=mid;
+	}
+	ele ans=R,ans1=0;
+	s1[0]=g[0]=1;
+	for (int i=1; i&lt;=n; ++i) g[i]=(s[i]&lt;=ans),s1[i]=(s1[i-1]+g[i])%MOD;
+	ans1+=g[n];
+	for (int j=1; j&lt;=m; ++j){
+		for (int i=0; i&lt;=j; ++i) f[i]=0;
+		ele p=1;
+		for (int i=j+1; i&lt;=n; ++i){
+			while (s[i]-s[p]&gt;ans) ++p;
+			f[i]=((s1[i-1]-s1[p-1])%MOD+MOD)%MOD;
+		}
+		memcpy(g,f,sizeof(ele)*(n+1));
+		(ans1+=g[n])%=MOD;
+		s1[0]=g[0];
+		for (int i=1; i&lt;=n; ++i) s1[i]=(s1[i-1]+g[i])%MOD;
+	}
+	printf(&quot;%d %d\n&quot;,ans,ans1);
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

@@ -1,0 +1,197 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj3238题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj3238题解
+                    </h1>
+                    <h2 class="headline">
+                    May 26, 2016 10:02
+                    · 161 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2">字符串</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E5%90%8E%E7%BC%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84">后缀数据结构</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=4172882&auto=0&height=66"></iframe></p>
+
+<p>网上题解大多数使用后缀数组来做，可是我的后缀数组写出来是$O(n\log^2 n)$的，肯定过不了。</p>
+
+<p>观察以下题目要求的式子，$\sum_{1\le i\lt j\le n}len(T_i)+len(T_j)=\frac{n(n-1)(n+1)}{2}$。</p>
+
+<p>对于后缀树上每一个节点，假设它的长度为L，那么在它的两个<strong>不同</strong>子树中选出两个节点，这两个节点对应的后缀的lcp为L。所以要求剩下的那一项，可以在后缀树上dp一下，转移方程还是比较好想的。</p>
+
+<p>可是后缀树要怎么构造呢？后缀树标准的构造算法太复杂了，我太弱不会写。不过后缀自动机有一个很好的性质：把所有节点和后缀链拿出来，得到的树就是反串的后缀树。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#define ele long long
+using namespace std;
+#define sigma 27
+#define maxn 500010
+struct node
+{
+    ele len,s,ss;
+    node *f,*l[sigma],*nxt;
+    inline void init()
+    {
+        s=ss=0;
+        f=NULL;
+        memset(l,0,sizeof(l));
+    }
+}pool[maxn&lt;&lt;1];
+ele ncnt;
+node *h[maxn];
+struct SAM
+{
+    inline void onnewnode(node *p)
+    {
+        p-&gt;nxt=h[p-&gt;len];
+        h[p-&gt;len]=p;
+    }
+    inline void init()
+    {
+        memset(h,0,sizeof(h));
+        ncnt=0;
+        root=&amp;pool[ncnt++];
+        root-&gt;init();
+        root-&gt;len=0;
+        onnewnode(root);
+        end=root;
+    }
+    inline void add(ele c)
+    {
+        node *p=&amp;pool[ncnt++],*q;
+        p-&gt;init(); p-&gt;len=end-&gt;len+1; onnewnode(p);
+        for (q=end; q &amp;&amp; !q-&gt;l[c]; q=q-&gt;f) q-&gt;l[c]=p;
+        if (!q) p-&gt;f=root;
+        else if (q-&gt;len+1==q-&gt;l[c]-&gt;len) p-&gt;f=q-&gt;l[c];
+        else
+        {
+            node *r=&amp;pool[ncnt++],*buf=q-&gt;l[c];
+            *r=*buf;
+            r-&gt;len=q-&gt;len+1;
+            onnewnode(r);
+            buf-&gt;f=p-&gt;f=r;
+            for (; q &amp;&amp; q-&gt;l[c]==buf; q=q-&gt;f) q-&gt;l[c]=r;
+        }
+        end=p;
+    }
+    node *root,*end;
+};
+ele n;
+char s[maxn];
+SAM sam;
+int main()
+{
+    scanf(&quot;%s&quot;,s);
+    n=strlen(s);
+    sam.init();
+    sam.add(26);
+    for (int i=n-1; i&gt;=0; --i) sam.add(s[i]-'a');
+    ele ans=n*(n-1)*(n+1)/2;
+    for (int i=sam.end-&gt;len; i&gt;0; --i)
+        for (node *j=h[i]; j; j=j-&gt;nxt)
+        {
+            if (!j-&gt;s) j-&gt;s=j-&gt;ss=1;
+            else ans-=j-&gt;len*(j-&gt;s*j-&gt;s-j-&gt;ss);
+            j-&gt;f-&gt;s+=j-&gt;s,j-&gt;f-&gt;ss+=j-&gt;s*j-&gt;s;
+        }
+    printf(&quot;%lld\n&quot;,ans);
+    return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

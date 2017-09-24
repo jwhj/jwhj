@@ -1,0 +1,221 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj3720题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj3720题解
+                    </h1>
+                    <h2 class="headline">
+                    Jan 21, 2017 10:02
+                    · 215 words
+                    · 2 minutes read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E5%9D%97%E7%8A%B6%E6%A0%91">块状树</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script></p>
+
+<p>用块状树来做，每次加入一个点的时候，如果父节点所在的块已经满了，就新开一个块，否则把这个节点加到父节点所在的块里面。</p>
+
+<p>每个块维护块中的所有权值排好序的列表。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+#define ele int
+using namespace std;
+#define maxn 60010
+#define B 250
+struct edge{
+    ele v;
+    edge *nxt;
+}ep[maxn*3];
+ele n,q,ecnt,w[maxn],fa[maxn],r[maxn],s[maxn];
+edge *h[maxn],*h1[maxn];
+vector&lt;ele&gt; lst[maxn];
+inline void addedge(edge *h[],ele u,ele v){
+    edge *p=&amp;ep[ecnt++];
+    p-&gt;v=v; p-&gt;nxt=h[u];
+    h[u]=p;
+}
+inline void insert(ele i){
+    ele j=r[i];
+    lst[j].push_back(w[i]);
+    for (int p=lst[j].size()-1; p &amp;&amp; lst[j][p-1]&gt;lst[j][p]; --p)
+        swap(lst[j][p-1],lst[j][p]);
+}
+inline void erase(ele i){
+    ele j=r[i],p=lower_bound(lst[j].begin(),lst[j].end(),w[i])-lst[j].begin();
+    for (; p+1&lt;lst[j].size(); ++p)
+        swap(lst[j][p],lst[j][p+1]);
+    lst[j].erase(lst[j].end()-1);
+}
+void dfs(ele p,ele i){
+    fa[i]=p;
+    for (edge *j=h[i]; j; j=j-&gt;nxt)
+        if (j-&gt;v!=p){
+            if (s[r[i]]==B){
+                r[j-&gt;v]=j-&gt;v;
+                addedge(h1,r[i],j-&gt;v);
+            }
+            else r[j-&gt;v]=r[i];
+            ++s[r[j-&gt;v]];
+            dfs(i,j-&gt;v);
+        }
+    insert(i);
+}
+ele dfs1(ele i,ele x){
+    ele ans=lst[i].end()-upper_bound(lst[i].begin(),lst[i].end(),x);
+    for (edge *j=h1[i]; j; j=j-&gt;nxt)
+        ans+=dfs1(j-&gt;v,x);
+    return ans;
+}
+ele dfs2(ele p,ele i,ele x){
+    if (i==r[i]) return dfs1(i,x);
+    ele ans=(w[i]&gt;x)?(1):(0);
+    for (edge *j=h[i]; j; j=j-&gt;nxt)
+        if (j-&gt;v!=p)
+            ans+=dfs2(i,j-&gt;v,x);
+    return ans;
+}
+int main(){
+    scanf(&quot;%d&quot;,&amp;n);
+    ecnt=0;
+    memset(h,0,sizeof(h)); memset(h1,0,sizeof(h1));
+    for (int i=0; i&lt;n-1; ++i){
+        ele u,v;
+        scanf(&quot;%d%d&quot;,&amp;u,&amp;v);
+        --u,--v;
+        addedge(h,u,v); addedge(h,v,u);
+    }
+    for (int i=0; i&lt;n; ++i)
+        scanf(&quot;%d&quot;,w+i);
+    memset(s,0,sizeof(s));
+    s[0]=1;
+    r[0]=0;
+    dfs(-1,0);
+    scanf(&quot;%d&quot;,&amp;q);
+    ele ans=0;
+    while (q--){
+        ele op,u,x;
+        scanf(&quot;%d%d%d&quot;,&amp;op,&amp;u,&amp;x);
+        u^=ans; x^=ans;
+        --u;
+        if (op==0){
+            ans=dfs2(fa[u],u,x);
+            printf(&quot;%d\n&quot;,ans);
+        }
+        else if (op==1){
+            erase(u);
+            w[u]=x;
+            insert(u);
+        }
+        else if (op==2){
+            addedge(h,n,u); addedge(h,u,n);
+            fa[n]=u;
+            if (s[r[u]]==B){
+                addedge(h1,r[u],n);
+                r[n]=n;
+            }
+            else r[n]=r[u];
+            ++s[r[n]];
+            w[n]=x;
+            insert(n);
+            ++n;
+        }
+    }
+    return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

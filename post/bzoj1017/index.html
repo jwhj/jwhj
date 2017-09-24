@@ -1,0 +1,223 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj1017题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj1017题解
+                    </h1>
+                    <h2 class="headline">
+                    May 12, 2017 10:02
+                    · 247 words
+                    · 2 minutes read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/dp">DP</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script></p>
+
+<p>让f[i][j][k]代表只考虑以i为根的子树，i至少造j个，花费不超过k的最大收益。</p>
+
+<p>转移的时候需要枚举每一棵子树分到多少金币，直接暴力枚举肯定是不可以的，观察一下会发现，这个子问题其实就是一个类似背包问题的的东西，可以让g[i][j]代表前i棵子树，花费不超过j的最大收益，然后DP。</p>
+
+<p>细节还是比较多的……需要仔细调一下。</p>
+
+<p>似乎还需要想办法卡一下常数才能AC。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#define ele int
+using namespace std;
+#define maxn 55
+#define maxm 2010
+#define maxl 110
+const ele INF=1e9;
+struct edge{
+	ele v,w;
+	edge *nxt;
+}ep[maxn],*ecnt;
+ele n,m,scnt,a[maxn],b[maxn],p[maxn],ind[maxn],seq[maxn],f[maxn][maxl][maxm],g[maxm],delta[maxn];
+bool lf[maxn];
+edge *h[maxn];
+inline void addedge(ele u,ele v,ele w){
+	edge *p=ecnt++;
+	p-&gt;v=v; p-&gt;w=w; p-&gt;nxt=h[u];
+	h[u]=p;
+}
+void dfs(ele i){
+	seq[scnt++]=i;
+	delta[i]=p[i];
+	if (h[i]) b[i]=INF;
+	for (edge *j=h[i]; j; j=j-&gt;nxt){
+		dfs(j-&gt;v);
+		delta[i]-=p[j-&gt;v]*j-&gt;w;
+		a[i]+=a[j-&gt;v]*j-&gt;w;
+		b[i]=min(b[i],b[j-&gt;v]/j-&gt;w);
+	}
+	b[i]=min(b[i],m/a[i]);
+}
+int main(){
+	scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+	ecnt=ep;
+	memset(ind,0,sizeof(ind));
+	bool flag=false;
+	for (int i=0; i&lt;n; ++i){
+		char s[10];
+		scanf(&quot;%d%s&quot;,p+i,s);
+		if (s[0]=='B') scanf(&quot;%d%d&quot;,a+i,b+i),lf[i]=true,b[i]=min(b[i],m/a[i]);
+		else{
+			ele c;
+			scanf(&quot;%d&quot;,&amp;c);
+			for (int j=0; j&lt;c; ++j){
+				ele v,w;
+				scanf(&quot;%d%d&quot;,&amp;v,&amp;w); --v;
+				addedge(i,v,w);
+				++ind[v];
+			}
+			b[i]=maxl-1;
+			lf[i]=false;
+			flag=true;
+		}
+	}
+	if (flag){
+		scnt=0;
+		ele r;
+		for (int i=0; i&lt;n; ++i)
+			if (!ind[i]) dfs(r=i);
+		for (int i=0; i&lt;n; ++i)
+			for (int j=0; j&lt;maxl; ++j)
+				for (int k=0; k&lt;maxm; ++k) f[i][j][k]=-INF;
+		for (int i=n-1; ~i; --i){
+			ele x=seq[i];
+			if (lf[x]){
+				for (int j=0; j&lt;=b[x]; ++j) f[x][j][j*a[x]]=p[x]*j;
+			}
+			else{
+				for (int j=0; j&lt;=b[x]; ++j){
+					memset(g,0,sizeof(g));
+					for (edge *p=h[x]; p; p=p-&gt;nxt){
+						for (int k=0; k&lt;=m; ++k){
+							f[x][j][k]=-INF;
+							for (int r=0; r&lt;=k; ++r)
+								if (j*p-&gt;w&lt;maxl)
+									f[x][j][k]=max(f[x][j][k],g[k-r]+f[p-&gt;v][j*p-&gt;w][r]);
+						}
+						memcpy(g,f[x][j],sizeof(ele)*(m+1));
+					}
+					for (int k=0; k&lt;=m; ++k) f[x][j][k]+=delta[x]*j;
+				}
+			}
+			for (int k=0; k&lt;=m; ++k)	
+				for (int j=b[x]-1; ~j; --j) f[x][j][k]=max(f[x][j][k],f[x][j+1][k]);
+		}
+		printf(&quot;%d\n&quot;,f[r][0][m]);
+	}
+	else{
+		static ele f[maxm],g[maxm];
+		memset(g,0,sizeof(g));
+		for (int i=0; i&lt;n; ++i){
+			for (int j=0; j&lt;=m; ++j){
+				f[j]=-INF;
+				for (int k=0; k&lt;=j; ++k){
+					ele c=min(b[i],k/a[i]);
+					f[j]=max(f[j],g[j-k]+p[i]*c);
+				}
+			}
+			memcpy(g,f,sizeof(ele)*(m+1));
+		}
+		printf(&quot;%d\n&quot;,f[m]);
+	}
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

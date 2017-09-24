@@ -1,0 +1,192 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj4325题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj4325题解
+                    </h1>
+                    <h2 class="headline">
+                    Nov 8, 2016 10:02
+                    · 153 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=1696840&auto=0&height=66"></iframe></p>
+
+<p>以前一直认为是码农题，今天打了一下感觉还是比较好打的，码量绝对比前几天的一些题少……</p>
+
+<p>显然出牌顺序是无关紧要的，所以先用dfs枚举怎么出顺子。对于剩下的牌，牌的点数大小已经不重要了，所以可以用(a,b,c,d)来表示状态，指的是有a张单牌，b种两张的牌，c种三张的牌，d种4张的牌。</p>
+
+<p>然后记忆化搜索一下就可以得到答案了。</p>
+
+<p>不过这道题被认为是码农题也不是没道理的，有好些细节要考虑一下，比如说两张鬼不能当成对子放在三带二里面，出王炸不一定是最优的。有些地方写起来比较麻烦，比如出三带一的时候，如果没有单牌，一样有可能需要从多张一样的牌里抽一张出来用。因此状态转移的时候要考虑非常多种情况，可以看着我的代码感受一下……</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#define ele int
+using namespace std;
+#define maxc 15
+#define INF 1000000000
+ele n,a[maxc],b[5],f[maxc][maxc][maxc][maxc];
+ele g(ele a,ele b,ele c,ele d){
+	if (a&lt;0 || b&lt;0 || c&lt;0 || d&lt;0) return INF;
+	if (f[a][b][c][d]!=-1) return f[a][b][c][d];
+	f[a][b][c][d]=a+b+c+d;
+	f[a][b][c][d]=min(f[a][b][c][d],1+g(a-1,b,c-1,d));
+	f[a][b][c][d]=min(f[a][b][c][d],1+g(a+1,b-1,c-1,d));
+	f[a][b][c][d]=min(f[a][b][c][d],1+g(a,b+1,c-2,d));
+	f[a][b][c][d]=min(f[a][b][c][d],1+g(a,b,c,d-1));
+
+	f[a][b][c][d]=min(f[a][b][c][d],1+g(a,b-1,c-1,d));
+	f[a][b][c][d]=min(f[a][b][c][d],1+g(a+1,b,c-2,d));
+	f[a][b][c][d]=min(f[a][b][c][d],1+g(a,b+1,c-1,d-1));
+
+	f[a][b][c][d]=min(f[a][b][c][d],1+g(a-2,b,c,d-1));
+	f[a][b][c][d]=min(f[a][b][c][d],1+g(a,b-1,c,d-1));
+	f[a][b][c][d]=min(f[a][b][c][d],1+g(a-1,b+1,c-1,d-1));
+	f[a][b][c][d]=min(f[a][b][c][d],1+g(a-1,b,c+1,d-2));
+	f[a][b][c][d]=min(f[a][b][c][d],1+g(a+1,b,c-1,d-1));
+	f[a][b][c][d]=min(f[a][b][c][d],1+g(a,b-1,c+1,d-2));
+	f[a][b][c][d]=min(f[a][b][c][d],1+g(a,b+1,c,d-2));
+
+	f[a][b][c][d]=min(f[a][b][c][d],1+g(a,b-2,c,d-1));
+	f[a][b][c][d]=min(f[a][b][c][d],1+g(a+1,b-1,c-1,d));
+	f[a][b][c][d]=min(f[a][b][c][d],1+g(a,b,c,d-2));
+	f[a][b][c][d]=min(f[a][b][c][d],1+g(a+1,b+1,c-1,d-2));
+	return f[a][b][c][d];
+}
+ele dfs(){
+	memset(b,0,sizeof(b));
+	for (int i=0; i&lt;maxc; ++i)
+		++b[a[i]];
+	ele ans=g(b[1],b[2],b[3],b[4]);
+	if (a[0] &amp;&amp; a[1])
+		ans=min(ans,1+g(b[1]-2,b[2],b[3],b[4]));
+	for (int t=1; t&lt;=3; ++t)
+		for (int i=3; i&lt;maxc-1; ++i)
+			if (a[i]&gt;=t){
+				ele j;
+				for (j=i; j&lt;maxc &amp;&amp; a[j]&gt;=t; ++j){
+					a[j]-=t;
+					if ((j-i+1)*t&gt;=5)
+						ans=min(ans,1+dfs());
+				}
+				for (--j; j&gt;=i; --j)
+					a[j]+=t;
+			}
+	return ans;
+}
+int main(){
+	ele T;
+	scanf(&quot;%d%d&quot;,&amp;T,&amp;n);
+	memset(f,-1,sizeof(f));
+	f[0][0][0][0]=0;
+	while (T--){
+		memset(a,0,sizeof(a));
+		for (int i=0; i&lt;n; ++i){
+			ele u,v;
+			scanf(&quot;%d%d&quot;,&amp;u,&amp;v);
+			if (u==0 &amp;&amp; v==2)
+				++a[14];
+			else
+				++a[u];
+		}
+		swap(a[1],a[14]);
+		printf(&quot;%d\n&quot;,dfs());
+	}
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

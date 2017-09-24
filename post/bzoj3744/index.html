@@ -1,0 +1,238 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj3744题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj3744题解
+                    </h1>
+                    <h2 class="headline">
+                    Dec 1, 2016 10:02
+                    · 244 words
+                    · 2 minutes read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E5%88%86%E5%9D%97">分块</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84">树状数组</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=3254416&auto=0&height=66"></iframe></p>
+
+<p>如果这道题没有强制在线，那么用莫队算法就能水过去了。</p>
+
+<p>不过莫队也是可以在线的。</p>
+
+<p>先把整个序列离散化一下。</p>
+
+<p>把整个序列分成$O(\sqrt{n})$块，维护一个f[i][j]，代表第i块到第j块的答案，一会再说这个怎么求。</p>
+
+<p>对于每个询问[l,r]，考虑两种情况：</p>
+
+<ul>
+<li><p>l，r在同一块或相邻的块中，暴力求答案就可以了</p></li>
+
+<li><p>否则，l，r中间整块的答案可以通过f数组直接知道，只需暴力考虑两边不超过$2\sqrt{n}$个数的贡献。</p></li>
+</ul>
+
+<p>如果已经知道某个区间的答案，现在只需考虑如何在区间边上再加一个数。加上一个数x，对答案的贡献为原区间中大于/小于x的数的个数。于是可以维护$\sqrt{n}$个树状数组，f1[i]代表一个树状数组，储存0~i这i个块中每个元素出现多少次。每次加一个数x，中间块里面比x大/小的数的个数就可以$O(\log n)$求出来。再用一个树状数组维护边上的数的出现次数就可以了。</p>
+
+<p>我之前的写法内存消耗太大，结果在bzoj上总是0ms TLE，调了一整晚才发现是内存问题。以后得记住bzoj上0ms TLE是MLE导致的。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cmath&gt;
+#include &lt;algorithm&gt;
+#define ele int
+using namespace std;
+#define maxn 50010
+#define maxs 250
+struct BIT{
+	inline void alloc(ele n){
+		this-&gt;n=n;
+		memset(a,0,sizeof(a));
+	}
+	inline void add(ele i,ele k){
+		for (int j=i; j&lt;=n; j+=j&amp;(-j))
+			a[j]+=k;
+	}
+	inline ele query(ele i){
+		ele ans=0;
+		for (int j=i; j&gt;0; j-=j&amp;(-j))
+			ans+=a[j];
+		return ans;
+	}
+	inline ele query(ele l,ele r){
+		if (l&gt;r) return 0;
+		return query(r)-query(l-1);
+	}
+	ele n,a[maxn];
+};
+ele n,m,len,S,a[maxn],arr[maxn],f[maxs][maxs];
+BIT b,f1[maxs];
+inline void get(ele&amp;a){
+	char c;
+	while ((c=getchar())&lt;'0' || c&gt;'9')
+		;
+	a=c-'0';
+	while ((c=getchar())&gt;='0' &amp;&amp; c&lt;='9')
+		a*=10,a+=c-'0';
+}
+int main(){
+	get(n);
+	for (int i=0; i&lt;n; ++i)
+		get(a[i]),arr[i]=a[i];
+	get(m);
+	sort(arr,arr+n);
+	len=unique(arr,arr+n)-arr;
+	for (int i=0; i&lt;n; ++i)
+		a[i]=lower_bound(arr,arr+len,a[i])-arr+1;
+	S=sqrt(n);
+	for (int i=0; i*S&lt;n; ++i){
+		ele j=i*S;
+		ele tmp=0;
+		b.alloc(n);
+		for (int k=j; k&lt;n; ++k){
+			b.add(a[k],1);
+			tmp+=b.query(a[k]+1,n);
+			if ((k+1)%S==0 || k==n-1)
+				f[i][k/S]=tmp;
+		}
+		f1[i].alloc(n);
+		for (int k=j; k&lt;n &amp;&amp; k&lt;j+S; ++k)
+			f1[i].add(a[k],1);
+	}
+	for (int i=1; i*S&lt;n; ++i)
+		for (int j=1; j&lt;=n; ++j)
+			f1[i].a[j]+=f1[i-1].a[j];
+	ele ans=0;
+	b.alloc(n);
+	while (m--){
+		ele l,r;
+		get(l); get(r);
+		l^=ans; r^=ans;
+		--l,--r;
+		ans=0;
+		if (l/S+1&gt;=r/S){
+			for (int i=l; i&lt;=r; ++i){
+				b.add(a[i],1);
+				ans+=b.query(a[i]+1,n);
+			}
+			for (int i=l; i&lt;=r; ++i)
+				b.add(a[i],-1);
+		}
+		else{
+			ele i1=l/S,i2=r/S;
+			ans+=f[i1+1][i2-1];
+			for (int i=i2*S; i&lt;=r; ++i){
+				ans+=f1[i2-1].query(a[i]+1,n);
+				ans-=f1[i1].query(a[i]+1,n);
+				b.add(a[i],1);
+				ans+=b.query(a[i]+1,n);
+			}
+			for (int i=i1*S+S-1; i&gt;=l; --i){
+				ans+=f1[i2-1].query(1,a[i]-1);
+				ans-=f1[i1].query(1,a[i]-1);
+				b.add(a[i],1);
+				ans+=b.query(1,a[i]-1);
+			}
+			for (int i=i2*S; i&lt;=r; ++i)
+				b.add(a[i],-1);
+			for (int i=i1*S+S-1; i&gt;=l; --i)
+				b.add(a[i],-1);
+		}
+		printf(&quot;%d\n&quot;,ans);
+	}
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

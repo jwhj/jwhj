@@ -1,0 +1,240 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj2242题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj2242题解
+                    </h1>
+                    <h2 class="headline">
+                    Jun 10, 2016 10:02
+                    · 260 words
+                    · 2 minutes read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E6%95%B0%E5%AD%A6">数学</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/exgcd">exgcd</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bsgs">BSGS</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=25714082&auto=0&height=66"></iframe></p>
+
+<p>做道数学题给明天高联初赛求RP。</p>
+
+<p>第一问用快速幂，第二问用拓展欧几里得，第三问用BSGS。</p>
+
+<p>注意一大堆特判。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cmath&gt;
+#define ele long long
+using namespace std;
+#define R 100007
+struct HASH
+{
+	const ele null;
+	HASH():null(-1){}
+	inline void clear()
+	{
+		for (int i=0; i&lt;R; ++i)
+			a[i]=null;
+	}
+	inline ele f2(ele x)
+	{
+		return R-x%R;
+	}
+	inline ele probe(ele x,ele i)
+	{
+		return (x%R+i*f2(x))%R;
+	}
+	inline ele find(ele x)
+	{
+		for (int i=0; i&lt;R; ++i)
+		{
+			ele j=probe(x,i);
+			if (a[j]==null) return null;
+			if (a[j]==x) return j;
+		}
+		return null;
+	}
+	inline void ins(ele x,ele s)
+	{
+		for (int i=0; i&lt;R; ++i)
+		{
+			ele j=probe(x,i);
+			if (a[j]==null)
+			{
+				a[j]=x;
+				b[j]=s;
+				return;
+			}
+		}
+	}
+	ele a[R],b[R];
+};
+inline ele pow(ele a,ele x,ele p)
+{
+	ele ans=1,tmp=a;
+	for (; x; x&gt;&gt;=1,tmp=tmp*tmp%p)
+		if (x&amp;1)
+			ans=ans*tmp%p;
+	return ans;
+}
+void exgcd(ele a,ele b,ele&amp;x,ele&amp;y)
+{
+	if (!b)
+	{
+		x=1; y=0;
+		return;
+	}
+	exgcd(b,a%b,y,x);
+	y-=x*(a/b);
+}
+inline ele rev(ele y,ele p)
+{
+	ele x1,y1;
+	exgcd(y,p,x1,y1);
+	return (x1%p+p)%p;
+}
+inline ele bsgs(ele y,ele z,ele p)
+{
+	if (z==1) return 0;
+	if (!y) return -1;
+	ele c=(ele)(sqrt(p)+0.5)+1;
+	ele u=1;
+	static HASH m;
+	m.clear();
+	ele j;
+	for (int i=0; i&lt;c; ++i,u=u*y%p)
+		if ((j=m.find(u))==m.null)
+			m.ins(u,i);
+	ele v=1;
+	for (int i=0; i&lt;c; ++i)
+	{
+		ele tmp=z*rev(v,p)%p,j;
+		if ((j=m.find(tmp))!=m.null)
+		{
+			ele ans=i*c+m.b[j];
+			return ans;
+		}
+		v=v*u%p;
+	}
+	return -1;
+}
+int main()
+{
+	ele t,k;
+	scanf(&quot;%lld%lld&quot;,&amp;t,&amp;k);
+	while (t--)
+	{
+		ele y,z,p;
+		scanf(&quot;%lld%lld%lld&quot;,&amp;y,&amp;z,&amp;p);
+		y%=p;
+		if (k==1) printf(&quot;%lld\n&quot;,pow(y,z,p));
+		else if (k==2)
+			if (!y)
+				puts(&quot;Orz, I cannot find x!&quot;);
+			else printf(&quot;%lld\n&quot;,rev(y,p)*z%p);
+		else if (k==3)
+		{
+			ele ans=bsgs(y,z,p);
+			if (ans==-1) puts(&quot;Orz, I cannot find x!&quot;);
+			else printf(&quot;%lld\n&quot;,ans);
+		}
+	}
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

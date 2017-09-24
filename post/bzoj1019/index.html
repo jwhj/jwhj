@@ -1,0 +1,148 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj1019题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj1019题解
+                    </h1>
+                    <h2 class="headline">
+                    May 16, 2017 10:02
+                    · 71 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/dp">DP</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script></p>
+
+<p>让f[i][j]表示在i号柱上有j个盘子，要多少补步才能把它们移到另一个柱子上，g[i][j]表示移到的柱子的编号。</p>
+
+<p>那么f[i][1]和g[i][1]是可以马上确定的。</p>
+
+<p>对于f[i][j]，不妨设x=g[i][j-1]，y=0+1+2-i-x，那么首先经过f[i][j-1]步，上方的j-1个盘子被移动到x号柱上。因为最小的那个盘子刚刚被移动过，接下来必然是最大的那一个盘子被移到y号柱上。</p>
+
+<p>若g[x][j-1]=y，那么接下来f[x][j-1]步就会把那j-1个盘子移动到y号柱上。</p>
+
+<p>若g[x][j-1]=i，那么接下来f[x][j-1]步把j-1个盘子移动到i号柱上，然后最大的盘子被移动到x号柱上，最后经过f[i][j-1]步，所有盘子移动到x号柱上。</p>
+
+<p>发现自己现在非常智障……求第一个xxx的时候要么从前往后扫找到就break，要么从后往前扫。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#define ele long long
+using namespace std;
+#define maxn 35
+ele n,f[3][maxn],g[3][maxn];
+char s[10];
+bool vis[3];
+int main(){
+	scanf(&quot;%lld&quot;,&amp;n);
+	f[0][1]=f[1][1]=f[2][1]=1;
+	for (int i=0; i&lt;6; ++i){
+		scanf(&quot;%s&quot;,s);
+		if (vis[s[0]-'A']) continue;
+		vis[s[0]-'A']=true;
+		g[s[0]-'A'][1]=s[1]-'A';
+	}
+	for (int i=2; i&lt;=n; ++i)
+		for (int j=0; j&lt;3; ++j){
+			ele x=g[j][i-1],y=3-j-x;
+			if (g[x][i-1]==y) f[j][i]=f[j][i-1]+1+f[x][i-1],g[j][i]=y;
+			else f[j][i]=f[j][i-1]+1+f[x][i-1]+1+f[j][i-1],g[j][i]=x;
+		}
+	printf(&quot;%lld\n&quot;,f[0][n]);
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

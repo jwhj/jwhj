@@ -1,0 +1,186 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj3732题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj3732题解
+                    </h1>
+                    <h2 class="headline">
+                    Dec 24, 2016 10:02
+                    · 131 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E5%9B%BE%E8%AE%BA">图论</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86">并查集</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E4%B9%B1%E6%90%9E">乱搞</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script></p>
+
+<p>题目其实就是要求最小瓶颈路，而最小瓶颈路一定在最小生成树上面，所以就可以转换为求树上两点间的最大边权。</p>
+
+<p>求树上两点间的最大边权有很多种做法，比如倍增、lct（我不明白为什么会有人用这个）等。</p>
+
+<p>然而其实这题有一种更简单的方法。</p>
+
+<p>考虑kruskal算法求最小生成树的过程，每次加入一条边，连接两个联通块A、B。因为这条边的边权比已加入的任何一条边都要大，所以可以改变这条边的两个端点，只要端点仍然分别在A、B中，对结果就没有影响。</p>
+
+<p>于是可以考虑像按大小合并、不路径压缩的并查集那样连边，这样最后得到的树高是$O(\log n)$的，所以暴力查询就可以了。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#define ele int
+using namespace std;
+#define maxn 15010
+#define maxm 30010
+#define INF 1000000000
+struct edge{
+	ele u,v,w;
+	inline bool operator&lt;(edge b)const{
+		return w&lt;b.w;
+	}
+};
+ele n,m,q,u[maxn],size[maxn],f[maxn],dep[maxn];
+edge e[maxm];
+ele getf(ele *u,ele x){
+	return (x==u[x])?(x):(getf(u,u[x]));
+}
+ele d(ele *u,ele x){
+	if (x==u[x])
+		return dep[x]=0;
+	if (dep[x]!=-1)
+		return dep[x];
+	return dep[x]=d(u,u[x])+1;
+}
+int main(){
+	scanf(&quot;%d%d%d&quot;,&amp;n,&amp;m,&amp;q);
+	for (int i=0; i&lt;m; ++i){
+		scanf(&quot;%d%d%d&quot;,&amp;e[i].u,&amp;e[i].v,&amp;e[i].w);
+		--e[i].u,--e[i].v;
+	}
+	sort(e,e+m);
+	for (int i=0; i&lt;n; ++i)
+		u[i]=i,size[i]=1;
+	for (int i=0; i&lt;m; ++i){
+		ele a=getf(u,e[i].u),b=getf(u,e[i].v);
+		if (a==b) continue;
+		if (size[a]&gt;size[b])
+			swap(a,b);
+		u[a]=b;
+		size[b]+=size[a];
+		f[a]=e[i].w;
+	}
+	memset(dep,-1,sizeof(dep));
+	while (q--){
+		ele x,y;
+		scanf(&quot;%d%d&quot;,&amp;x,&amp;y);
+		--x,--y;
+		ele ans=0;
+		if (d(u,x)&gt;d(u,y))
+			swap(x,y);
+		while (dep[x]&lt;dep[y])
+			ans=max(ans,f[y]),y=u[y];
+		while (x!=y){
+			ans=max(ans,f[x]);
+			ans=max(ans,f[y]);
+			x=u[x],y=u[y];
+		}
+		printf(&quot;%d\n&quot;,ans);
+	}
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

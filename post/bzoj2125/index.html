@@ -1,0 +1,254 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj2125题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj2125题解
+                    </h1>
+                    <h2 class="headline">
+                    May 22, 2017 10:02
+                    · 265 words
+                    · 2 minutes read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E4%BB%99%E4%BA%BA%E6%8E%8C">仙人掌</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E5%9C%86%E6%96%B9%E6%A0%91">圆方树</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=171530&auto=0&height=66"></iframe></p>
+
+<p>圆方树太神啦！</p>
+
+<p>对于仙人掌中原来的点，建立一个圆点。对于每一个环，建立一个方点，然后把环上所有的点对应的圆点连到这个方点上面。对于其它的边，连接端点对应的圆点。这样就得到了仙人掌对应的圆方树。</p>
+
+<p>圆方树有一些很好的性质，比如说：</p>
+
+<ul>
+<li><del>它是一棵树</del></li>
+<li>不管怎么换根，圆方树的形态不变化</li>
+</ul>
+
+<p>对于树中所有圆圆边，边权为其在仙人掌中对应的边的边权。对于方圆/圆方边，边权为圆点对应的点到它所在环的最高点的最短路的长度。</p>
+
+<p>考虑求u，v之间的最短路长度。若u，v在圆方树中的lca为圆点，两点在仙人掌中最短路的长度即为它们在圆方树中的路径长度。若u，v的lca为方点，说明它们在仙人掌上的lca是一个环。<del>上一句话意会一下就可以了。</del>那么就要考虑一下在lca那个环上怎么走。对于每条方圆边，还要保存一下它在仙人掌上对应的路径是顺时针还是逆时针的。</p>
+
+<p><code>if (od[pu]!=od[pv])</code>打成了<code>if (od[pu]==od[pv])</code>结果调了好久……我太弱了……</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#define ele int
+using namespace std;
+#define maxn 20010
+struct edge{
+	ele v,w;
+	edge *nxt;
+}ep[maxn&lt;&lt;3],*ecnt;
+ele n,m,Q,tcnt,top,scnt,sqcnt,stk[maxn],dfn[maxn],low[maxn],
+d[maxn],D[maxn],tmp[maxn],size[maxn],seq[maxn],fa[maxn],dep[maxn],pos[maxn],r[maxn];
+bool od[maxn];
+edge *h[maxn],*h1[maxn],*hc[maxn];
+inline ele _abs(ele x){
+	return (x&lt;0)?-x:x;
+}
+inline void addedge1(edge **h,ele u,ele v,ele w){
+	edge *p=ecnt++;
+	p-&gt;v=v; p-&gt;w=w; p-&gt;nxt=h[u];
+	h[u]=p;
+}
+inline void addedge(edge **h,ele u,ele v,ele w){
+	addedge1(h,u,v,w); addedge1(h,v,u,w);
+}
+void tarjan(ele p,ele i){
+	low[i]=dfn[i]=tcnt++;
+	stk[top++]=i;
+	for (edge *j=h[i]; j; j=j-&gt;nxt){
+		if (!~dfn[j-&gt;v]){
+			d[j-&gt;v]=d[i]+j-&gt;w;
+			tarjan(i,j-&gt;v);
+			low[i]=min(low[i],low[j-&gt;v]);
+			if (dfn[i]==low[j-&gt;v]){
+				D[sqcnt]=d[stk[top-1]]-d[i]+tmp[stk[top-1]];
+				addedge(h1,i,sqcnt,0);
+				ele k;
+				do{
+					k=stk[top-1];
+					--top;
+					addedge(h1,sqcnt,k,min(d[k]-d[i],D[sqcnt]-d[k]+d[i]));
+					od[k]=((d[k]-d[i])*2&lt;=D[sqcnt])?0:1;
+				}while (k!=j-&gt;v);
+				sqcnt++;
+			}
+			else if (dfn[i]&lt;low[j-&gt;v]) addedge(h1,i,j-&gt;v,j-&gt;w),--top;
+		}
+		else if (j-&gt;v!=p)
+			if (dfn[j-&gt;v]&lt;low[i]){
+				low[i]=dfn[j-&gt;v];
+				tmp[i]=j-&gt;w;
+			}
+	}
+}
+void dfs1(ele p,ele i){
+	fa[i]=p;
+	hc[i]=NULL;
+	size[i]=1;
+	for (edge *j=h1[i]; j; j=j-&gt;nxt)
+		if (j-&gt;v!=p){
+			d[j-&gt;v]=d[i]+j-&gt;w;
+			dep[j-&gt;v]=dep[i]+1;
+			dfs1(i,j-&gt;v);
+			size[i]+=size[j-&gt;v];
+			if (!hc[i] || size[hc[i]-&gt;v]&lt;size[j-&gt;v]) hc[i]=j;
+		}
+}
+void dfs2(ele p,ele i){
+	pos[i]=scnt;
+	seq[scnt++]=i;
+	if (hc[i]) r[hc[i]-&gt;v]=r[i],dfs2(i,hc[i]-&gt;v);
+	for (edge *j=h1[i]; j; j=j-&gt;nxt)
+		if (j-&gt;v!=p &amp;&amp; j!=hc[i]){
+			r[j-&gt;v]=j-&gt;v;
+			dfs2(i,j-&gt;v);
+		}
+}
+inline ele lca(ele u,ele v){
+	while (r[u]!=r[v]){
+		if (dep[r[u]]&gt;dep[r[v]]) swap(u,v);
+		v=fa[r[v]];
+	}
+	return (dep[u]&lt;dep[v])?u:v;
+}
+inline ele calc(ele x,ele w){
+	while (fa[x]!=w){
+		if (dep[w]&lt;dep[r[x]]){
+			x=r[x];
+			if (fa[x]!=w) x=fa[x];
+		}
+		else x=seq[pos[w]+1];
+	}
+	return x;
+}
+inline ele qry(ele u,ele v){
+	ele w=lca(u,v);
+	if (w&lt;n) return d[u]+d[v]-(d[w]&lt;&lt;1);
+	ele pu=calc(u,w),pv=calc(v,w);
+	ele l1=d[pu]-d[w],l2=d[pv]-d[w],L=d[u]+d[v]-(d[w]&lt;&lt;1)-l1-l2;;
+	if (od[pu]!=od[pv]) return L+min(l1+l2,D[w]-l1-l2);
+	else return L+min(_abs(l2-l1),D[w]-_abs(l2-l1));
+}
+int main(){
+	scanf(&quot;%d%d%d&quot;,&amp;n,&amp;m,&amp;Q);
+	ecnt=ep; memset(h,0,sizeof(h)); memset(h1,0,sizeof(h1));
+	for (int i=0; i&lt;m; ++i){
+		ele u,v,w;
+		scanf(&quot;%d%d%d&quot;,&amp;u,&amp;v,&amp;w); --u,--v;
+		addedge(h,u,v,w);
+	}
+	sqcnt=n; top=0; tcnt=0;
+	d[0]=0;
+	memset(dfn,-1,sizeof(dfn));
+	tarjan(-1,0);
+	d[0]=0; dep[0]=0;
+	dfs1(-1,0);
+	scnt=0;
+	dfs2(-1,0);
+	while (Q--){
+		ele u,v;
+		scanf(&quot;%d%d&quot;,&amp;u,&amp;v); --u,--v;
+		printf(&quot;%d\n&quot;,qry(u,v));
+	}
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

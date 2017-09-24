@@ -1,0 +1,233 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>luogu1979题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        luogu1979题解
+                    </h1>
+                    <h2 class="headline">
+                    Nov 13, 2016 10:02
+                    · 290 words
+                    · 2 minutes read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/luogu">luogu</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/spfa">spfa</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=31738121&auto=0&height=66"></iframe></p>
+
+<p>贴个代码题解晚点再写吧……头疼得连堆优化的dijkstra都不想打了……</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#include &lt;queue&gt;
+#define ele int
+using namespace std;
+#define maxn 40
+#define maxnode 6400
+#define INF 1000000000
+const ele di[]={-1,1,0,0};
+const ele dj[]={0,0,-1,1};
+struct qn{
+	ele x,y,d;
+};
+struct edge{
+	ele v,w;
+	edge *nxt;
+}ep[maxnode&lt;&lt;2];
+ele n,m,q,ecnt;
+bool map[maxn][maxn];
+edge *g[maxnode];
+inline bool valid(ele i,ele j){
+	return 0&lt;=i &amp;&amp; i&lt;n &amp;&amp; 0&lt;=j &amp;&amp; j&lt;m &amp;&amp; map[i][j];
+}
+inline bool valid(ele i,ele j,ele d){
+	ele ni=i+di[d],nj=j+dj[d];
+	return valid(i,j) &amp;&amp; valid(ni,nj);
+}
+inline ele bfs(ele x1,ele y1,ele x2,ele y2){
+	if (x1==x2 &amp;&amp; y1==y2) return 0;
+	static qn Q[maxn*maxn];
+	static bool vis[maxn][maxn];
+	Q[0]={x1,y1,0};
+	memset(vis,0,sizeof(vis));
+	ele h=-1,t=0;
+	while (h&lt;t){
+		++h;
+		for (int w=0; w&lt;4; ++w){
+			ele ni=Q[h].x+di[w],nj=Q[h].y+dj[w];
+			if (valid(ni,nj) &amp;&amp; !vis[ni][nj]){
+				vis[ni][nj]=true;
+				++t;
+				Q[t]={ni,nj,Q[h].d+1};
+				if (ni==x2 &amp;&amp; nj==y2)
+					return Q[t].d;
+			}
+		}
+	}
+	return INF;
+}
+inline ele idx(ele i,ele j,ele d){
+	return (i*m+j&lt;&lt;2)+d;
+}
+inline void addedge(ele u,ele v,ele w){
+	edge *p=&amp;ep[ecnt++];
+	p-&gt;v=v; p-&gt;w=w; p-&gt;nxt=g[u];
+	g[u]=p;
+}
+int main(){
+	scanf(&quot;%d%d%d&quot;,&amp;n,&amp;m,&amp;q);
+	for (int i=0; i&lt;n; ++i)
+		for (int j=0; j&lt;m; ++j)
+			scanf(&quot;%d&quot;,&amp;map[i][j]);
+	ecnt=0;
+	memset(g,0,sizeof(g));
+	for (int i=0; i&lt;n; ++i)
+		for (int j=0; j&lt;m; ++j)
+			for (int d=0; d&lt;4; ++d)
+				if (valid(i,j,d)){
+					ele ni=i+di[d],nj=j+dj[d];
+					addedge(idx(i,j,d),idx(ni,nj,d^1),1);
+					for (int w=0; w&lt;4; ++w)
+						if (d!=w &amp;&amp; valid(i,j,w)){
+							ele mi=i+di[w],mj=j+dj[w];
+							map[i][j]=false;
+							ele tmp=bfs(ni,nj,mi,mj);
+							map[i][j]=true;
+							if (tmp&lt;INF)
+								addedge(idx(i,j,d),idx(i,j,w),tmp);
+						}
+				}
+	while (q--){
+		ele ex,ey,sx,sy,tx,ty;
+		scanf(&quot;%d%d%d%d%d%d&quot;,&amp;ex,&amp;ey,&amp;sx,&amp;sy,&amp;tx,&amp;ty);
+		--ex,--ey,--sx,--sy,--tx,--ty;
+		if (sx==tx &amp;&amp; sy==ty){
+			puts(&quot;0&quot;);
+			continue;
+		}
+		ele ans=INF;
+		for (int d=0; d&lt;4; ++d)
+			if (valid(sx,sy,d)){
+				ele ni=sx+di[d],nj=sy+dj[d];
+				map[sx][sy]=false;
+				ele t1=bfs(ex,ey,ni,nj);
+				map[sx][sy]=true;
+				static ele dis[maxnode];
+				for (int i=0; i&lt;=idx(n-1,m-1,3); ++i)
+					dis[i]=INF;
+				ele s=idx(sx,sy,d);
+				dis[s]=0;
+				static queue&lt;ele&gt; Q;
+				Q.push(s);
+				while (!Q.empty()){
+					ele k=Q.front(); Q.pop();
+					for (edge *j=g[k]; j; j=j-&gt;nxt)
+						if (dis[k]+j-&gt;w&lt;dis[j-&gt;v]){
+							dis[j-&gt;v]=dis[k]+j-&gt;w;
+							Q.push(j-&gt;v);
+						}
+				}
+				for (int w=0; w&lt;4; ++w)
+					if (valid(tx,ty,w))
+						ans=min(ans,t1+dis[idx(tx,ty,w)]);
+			}
+		if (ans&lt;INF)
+			printf(&quot;%d\n&quot;,ans);
+		else puts(&quot;-1&quot;);
+	}
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

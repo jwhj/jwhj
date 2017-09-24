@@ -1,0 +1,231 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>UOJ34题解（快速傅立叶变换） &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        UOJ34题解（快速傅立叶变换）
+                    </h1>
+                    <h2 class="headline">
+                    Apr 19, 2016 10:02
+                    · 204 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/uoj">uoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/fft">FFT</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=3950127&auto=0&height=66"></iframe></p>
+
+<p>题意大概就是给两个多项式，把它们乘起来。</p>
+
+<p>暴力肯定是不行的。</p>
+
+<p>假设多项式共有$n$项，$n$是2的整数次幂：</p>
+
+<p>$$A(x)=a_0+a_1  x+a<em>2 x^2+\ldots+a</em>{n-1}x^{n-1}$$</p>
+
+<p>我们称向量$a$为多项式$A(x)$的系数表示。下面定义向量$y$（$\omega_n$为n次单位根）：</p>
+
+<p>$$y_k=A(\omega_n^{k})=\Sigma a_j\omega_n^{jk}$$</p>
+
+<p>那么称$y$为$A(x)$的点值表示，由$a$求$y$的过程称为离散傅立叶变换，即DFT。</p>
+
+<p>直接计算显然是$O(n^2)$的。</p>
+
+<p>定义两个多项式$A^{[0]}(x)$和$A^{[1]}(x)$，它们的系数表示分别为$a^{[0]}$和$a^{[1]}$。有：</p>
+
+<p>$$a^{[0]}=(a_0,a_2,\ldots)$$</p>
+
+<p>$$a^{[1]}=(a_1,a_3,\ldots)$$</p>
+
+<p>$$A(x)=A^{[0]}(x^2)+xA^{[1]}(x^2)$$</p>
+
+<p>递归地对$a^{[0]}$和$a^{[1]}$进行FFT，得到$y^{[0]}$和$y^{[1]}$。</p>
+
+<p>那么对于$0\le k\le\frac{n}{2}-1$，就有</p>
+
+<p>$$y_k=A^{[0]}(\omega_n^{2k})+\omega_n^{k}A^{[1]}(\omega<em>n^{2k})=A^{[0]}(\omega</em>{n/2}^{k})+\omega<em>n^{k}A^{[1]}(\omega</em>{n/2}^{k})=y^{[0]}_k+\omega_n^{k}y^{[1]}_k$$</p>
+
+<p>$$y_{k+\frac{n}{2}}=y^{[0]}_k-\omega_n^{k}y^{[1]}_k$$</p>
+
+<p>于是就可以高效地完成DFT了。</p>
+
+<p>DFT的逆变换称为IDFT，有：</p>
+
+<p>$$a_k=\frac{1}{n} \Sigma y_j\omega_n^{-jk}$$</p>
+
+<p>最后一个问题：如何求n次单位根？有以下的式子：</p>
+
+<p>$$\omega_n=e^{\frac{2\pi i}{n}}=cos(\frac{2\pi}{n})+isin(\frac{2\pi}{n})$$</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cmath&gt;
+#include &lt;complex&gt;
+#define ele int
+using namespace std;
+#define maxn 400010
+#define pn complex&lt;double&gt;
+const double pi=3.1415926535897;
+struct POOL{
+	pn a[10000000];
+	ele cnt;
+	inline pn* alloc(ele n){
+		cnt+=n;
+		return a+cnt-n;
+	}
+};
+ele n,m,a[maxn],b[maxn];
+pn a1[maxn],a2[maxn],b1[maxn],b2[maxn];
+POOL p;
+pn* DFT(ele n,pn *a,pn *b){
+	if (n==1){
+		b[0]=a[0];
+		return b;
+	}
+	pn *a1=p.alloc(n&gt;&gt;1),*a2=p.alloc(n&gt;&gt;1);
+	for (int i=0; i&lt;(n&gt;&gt;1); ++i)
+		a1[i]=a[i&lt;&lt;1],a2[i]=a[i&lt;&lt;1|1];
+	pn *b1=p.alloc(n&gt;&gt;1),*b2=p.alloc(n&gt;&gt;1);
+	DFT(n&gt;&gt;1,a1,b1); DFT(n&gt;&gt;1,a2,b2);
+	pn o=1,o1=(pn){cos(pi*2/n),sin(pi*2/n)};
+	for (int i=0; i&lt;(n&gt;&gt;1); ++i){
+		b[i]=b1[i]+o*b2[i];
+		b[i+(n&gt;&gt;1)]=b1[i]-o*b2[i];
+		o*=o1;
+	}
+	return b;
+}
+pn* IDFT(ele n,pn *a,pn *b){
+	if (n==1){
+		b[0]=a[0];
+		return b;
+	}
+	pn *a1=p.alloc(n&gt;&gt;1),*a2=p.alloc(n&gt;&gt;1);
+	for (int i=0; i&lt;(n&gt;&gt;1); ++i)
+		a1[i]=a[i&lt;&lt;1],a2[i]=a[i&lt;&lt;1|1];
+	pn *b1=p.alloc(n&gt;&gt;1),*b2=p.alloc(n&gt;&gt;1);
+	IDFT(n&gt;&gt;1,a1,b1); IDFT(n&gt;&gt;1,a2,b2);
+	pn o=1,o1=(pn){cos(-pi*2/n),sin(-pi*2/n)};
+	for (int i=0; i&lt;(n&gt;&gt;1); ++i){
+		b[i]=b1[i]+o*b2[i];
+		b[i+(n&gt;&gt;1)]=b1[i]-o*b2[i];
+		o*=o1;
+	}
+	return b;
+}
+int main(){
+	scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+	ele tmp=1;
+	while (tmp&lt;=n || tmp&lt;=m) tmp&lt;&lt;=1;
+	tmp&lt;&lt;=1;
+	ele x;
+	memset(a,0,sizeof(a));
+	for (int i=0; i&lt;=n; ++i) scanf(&quot;%d&quot;,&amp;x),a1[i]=x;
+	memset(b,0,sizeof(b));
+	for (int i=0; i&lt;=m; ++i) scanf(&quot;%d&quot;,&amp;x),a2[i]=x;
+	ele tmp1=n+m+1;
+	n=tmp;
+	p.cnt=0;
+	DFT(n,a1,b1);
+	p.cnt=0;
+	DFT(n,a2,b2);
+	for (int i=0; i&lt;n; ++i) b1[i]*=b2[i];
+	p.cnt=0;
+	IDFT(n,b1,a1);
+	for (int i=0; i&lt;tmp1; ++i) printf(&quot;%d &quot;,(ele)(a1[i].real()/n+0.5));
+	puts(&quot;&quot;);
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

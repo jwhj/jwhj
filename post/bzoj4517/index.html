@@ -1,0 +1,165 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj4517题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj4517题解
+                    </h1>
+                    <h2 class="headline">
+                    Sep 8, 2016 10:02
+                    · 100 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E7%BB%84%E5%90%88">组合</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E6%95%B0%E5%AD%A6">数学</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=20707397&auto=0&height=66"></iframe></p>
+
+<p>令$f_n$为n个数错排的个数，那么$f<em>n=(n-1)(f</em>{n-1}+f<em>{n-2})$，且有$\textrm{ans}=\textrm{C}_n^mf</em>{n-m}$。</p>
+
+<p>预处理出$x!和(x!)^{-1}(\mod 10^9+7)$，就可以快速地算出组合数。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#define ele long long
+using namespace std;
+#define maxn 1000010
+#define MOD 1000000007
+ele n,m,fac[maxn],ifac[maxn],f[maxn];
+void exgcd(ele a,ele b,ele&amp;x,ele&amp;y)
+{
+    if (!b)
+    {
+        x=1; y=0;
+        return;
+    }
+    exgcd(b,a%b,y,x);
+    y-=a/b*x;
+}
+inline ele inv(ele x)
+{
+    ele u,v;
+    exgcd(x,MOD,u,v);
+    return (u+MOD)%MOD;
+}
+inline ele C(ele m,ele n)
+{
+    return (fac[n]*ifac[m]%MOD)*ifac[n-m]%MOD;
+}
+int main()
+{
+    ele T;
+    fac[0]=ifac[0]=1;
+    for (int i=1; i&lt;maxn; ++i)
+    {
+        fac[i]=fac[i-1]*i%MOD;
+        ifac[i]=inv(fac[i]);
+    }
+    f[0]=1; f[1]=0; f[2]=1;
+    for (int i=3; i&lt;maxn; ++i)
+        f[i]=(i-1)*(f[i-1]+f[i-2])%MOD;
+    scanf(&quot;%lld&quot;,&amp;T);
+    while (T--)
+    {
+        scanf(&quot;%lld%lld&quot;,&amp;n,&amp;m);
+        if (m&lt;=n)
+            printf(&quot;%lld\n&quot;,C(m,n)*f[n-m]%MOD);
+        else puts(&quot;0&quot;);
+    }
+    return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

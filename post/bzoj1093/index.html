@@ -1,0 +1,202 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj1093题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj1093题解
+                    </h1>
+                    <h2 class="headline">
+                    Aug 16, 2017 10:02
+                    · 203 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/tarjan">tarjan</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E5%8D%8A%E8%81%94%E9%80%9A%E5%9B%BE">半联通图</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=484057003&auto=0&height=66"></iframe></p>
+
+<p>首先要知道一个性质：任何一个半联通的DAG一定存在一条链遍历所有点。</p>
+
+<p>把原图强联通缩点之后，就是要在DAG上求带全最长链及其条数，dp就可以了。</p>
+
+<p>缩点完了要注意处理重边的问题。注意seq[i]不要打成i。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#include &lt;set&gt;
+#define ele int
+using namespace std;
+#define maxn 100010
+#define maxm 1000010
+struct edge{
+	ele v;
+	edge *nxt;
+}ep[maxm&lt;&lt;1],*ecnt;
+ele n,m,MOD,bcnt,top,tcnt,scnt,blg[maxn],stk[maxn],dfn[maxn],low[maxn],
+seq[maxn],w[maxn],f[maxn],g[maxn];
+bool instack[maxn],vis[maxn];
+edge *h[maxn],*h1[maxn];
+set&lt;pair&lt;ele,ele&gt; &gt; S;
+inline void addedge(edge **h,ele u,ele v){
+	edge *p=ecnt++;
+	p-&gt;v=v; p-&gt;nxt=h[u];
+	h[u]=p;
+}
+void tarjan(ele p,ele i){
+	dfn[i]=low[i]=tcnt++;
+	instack[i]=true; stk[top++]=i;
+	for (edge *j=h[i]; j; j=j-&gt;nxt)
+		if (!~dfn[j-&gt;v]){
+			tarjan(i,j-&gt;v);
+			low[i]=min(low[i],low[j-&gt;v]);
+		}
+		else if (instack[j-&gt;v]) low[i]=min(low[i],dfn[j-&gt;v]);
+	if (dfn[i]==low[i]){
+		do{
+			blg[stk[top-1]]=bcnt;
+			instack[stk[--top]]=false;
+		}while (stk[top]!=i);
+		++bcnt;
+	}
+}
+void dfs(ele p,ele i){
+	vis[i]=true;
+	for (edge *j=h1[i]; j; j=j-&gt;nxt)
+		if (!vis[j-&gt;v]) dfs(i,j-&gt;v);
+	seq[scnt--]=i;
+}
+int main(){
+	scanf(&quot;%d%d%d&quot;,&amp;n,&amp;m,&amp;MOD);
+	ecnt=ep; memset(h,0,sizeof(h));
+	for (int i=0; i&lt;m; ++i){
+		ele u,v;
+		scanf(&quot;%d%d&quot;,&amp;u,&amp;v); --u,--v;
+		addedge(h,u,v);
+	}
+	top=tcnt=bcnt=0; memset(dfn,-1,sizeof(dfn)); memset(instack,0,sizeof(instack));
+	for (int i=0; i&lt;n; ++i)
+		if (!~dfn[i]) tarjan(-1,i);
+	memset(h1,0,sizeof(h1)); memset(w,0,sizeof(w));
+	for (int i=0; i&lt;n; ++i){
+		++w[blg[i]];
+		for (edge *j=h[i]; j; j=j-&gt;nxt)
+			if (blg[i]!=blg[j-&gt;v] &amp;&amp; !S.count(make_pair(blg[i],blg[j-&gt;v])))
+				addedge(h1,blg[i],blg[j-&gt;v]),S.insert(make_pair(blg[i],blg[j-&gt;v]));
+	}
+	memset(vis,0,sizeof(vis));
+	scnt=bcnt-1;
+	for (int i=0; i&lt;bcnt; ++i)
+		if (!vis[i]) dfs(-1,i);
+	for (int i=bcnt-1; ~i; --i){
+		f[seq[i]]=0; S.clear();
+		for (edge *j=h1[seq[i]]; j; j=j-&gt;nxt)
+			f[seq[i]]=max(f[seq[i]],f[j-&gt;v]);
+		g[seq[i]]=0; S.clear();
+		for (edge *j=h1[seq[i]]; j; j=j-&gt;nxt)
+			if (f[seq[i]]==f[j-&gt;v]) (g[seq[i]]+=g[j-&gt;v])%=MOD;
+		f[seq[i]]+=w[seq[i]];
+		(g[seq[i]]+=(!h1[seq[i]]))%=MOD;
+	}
+	ele mx=0,cnt=0;
+	for (int i=0; i&lt;bcnt; ++i)
+		if (f[i]&gt;mx) mx=f[i],cnt=g[i];
+		else if (f[i]==mx) (cnt+=g[i])%=MOD;
+	printf(&quot;%d\n%d\n&quot;,mx,cnt);
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

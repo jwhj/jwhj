@@ -1,0 +1,208 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj3295题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj3295题解
+                    </h1>
+                    <h2 class="headline">
+                    Feb 1, 2017 10:02
+                    · 221 words
+                    · 2 minutes read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E5%88%86%E5%9D%97">分块</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E5%9D%97%E7%8A%B6%E9%93%BE%E8%A1%A8">块状链表</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script></p>
+
+<p>网上题解似乎都是树套树&amp;cdq分治。我感觉可以用块状链表水过去，于是就写了一下，没开long long结果WA了一次,然后就A了。</p>
+
+<p>块的大小要设为$\sqrt{n\log n}$。这道题只有删除，所以可以不考虑块的合并/块状链表重构，把每$\sqrt{n}$次操作后重构的代码删了以后程序快了很多……</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cmath&gt;
+#include &lt;algorithm&gt;
+#define ele int
+#define ll long long
+using namespace std;
+#define maxn 100010
+#define maxs 1300
+struct blk{
+	ele n,a[maxs],b[maxs];
+};
+struct BIT{
+	inline void init(ele n){
+		this-&gt;n=n;
+		memset(a,0,sizeof(a));
+	}
+	inline void add(ele i,ele k){
+		for (int j=i; j&lt;=n; j+=j&amp;(-j))
+			a[j]+=k;
+	}
+	inline ele q(ele i){
+		ele ans=0;
+		for (int j=i; j&gt;0; j-=j&amp;(-j))
+			ans+=a[j];
+		return ans;
+	}
+	ele n,a[maxn];
+};
+ele n,m,bcnt,a[maxn],pos[maxn];
+blk b[maxs];
+BIT bit;
+inline ele build(ele n,ele *a,blk *b){
+	ele j=0,S=sqrt(n*log(n)/log(2));
+	for (int i=0; i&lt;n; i+=S,++j){
+		b[j].n=min(n-i,S);
+		for (int k=0; k&lt;b[j].n; ++k){
+			b[j].a[k]=b[j].b[k]=a[i+k];
+			pos[a[i+k]]=j;
+		}
+		sort(b[j].b,b[j].b+b[j].n);
+	}
+	return j;
+}
+inline ele expt(ele bcnt,blk *b,ele *a){
+	ele j=0;
+	for (int i=0; i&lt;bcnt; ++i)
+		for (int k=0; k&lt;b[i].n; ++k)
+			a[j++]=b[i].a[k];
+	return j;
+}
+int main(){
+	scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+	for (int i=0; i&lt;n; ++i)
+		scanf(&quot;%d&quot;,a+i),--a[i];
+	bcnt=build(n,a,b);
+	ll ans=0;
+	bit.init(n);
+	for (int i=n-1; i&gt;=0; --i){
+		ans+=bit.q(a[i]);
+		bit.add(a[i]+1,1);
+	}
+	for (int p=0; p&lt;m; ++p){
+		printf(&quot;%lld\n&quot;,ans);
+		ele x;
+		scanf(&quot;%d&quot;,&amp;x);
+		--x;
+		ele i1=pos[x],j1=0;
+		while (b[i1].a[j1]!=x)
+			++j1;
+		for (int i=0; i&lt;i1; ++i){
+			ele p=upper_bound(b[i].b,b[i].b+b[i].n,x)-b[i].b;
+			ans-=b[i].n-p;
+		}
+		for (int j=0; j&lt;j1; ++j)
+			if (b[i1].a[j]&gt;x)
+				--ans;
+		for (int i=i1+1; i&lt;bcnt; ++i){
+			ele p=lower_bound(b[i].b,b[i].b+b[i].n,x)-b[i].b;
+			ans-=p;
+		}
+		for (int j=j1+1; j&lt;b[i1].n; ++j)
+			if (b[i1].a[j]&lt;x)
+				--ans;
+		for (int j=j1; j&lt;b[i1].n-1; ++j)
+			b[i1].a[j]=b[i1].a[j+1];
+		ele p1=lower_bound(b[i1].b,b[i1].b+b[i1].n,x)-b[i1].b;
+		for (int j=p1; j&lt;b[i1].n-1; ++j)
+			b[i1].b[j]=b[i1].b[j+1];
+		--b[i1].n;
+	}
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

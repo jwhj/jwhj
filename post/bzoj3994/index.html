@@ -1,0 +1,189 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj3994题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj3994题解
+                    </h1>
+                    <h2 class="headline">
+                    Jun 6, 2016 10:02
+                    · 134 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E6%95%B0%E5%AD%A6">数学</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/mobius">mobius</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=357279&auto=0&height=66"></iframe></p>
+
+<p>首先有一条神奇的式子：$$d(nm)=\sum<em>{i|n}\sum</em>{j|m}[gcd(i,j)=1]$$</p>
+
+<p>为什么呢？考虑使用归纳法。如果$gcd(n,m)=1$，那么上面那个式子显然是成立的。否则取一个质数$p$使得$p|n$且$p|m$，让$n=n&rsquo;\times p^{k1}$，$m=m&rsquo;\times p^{k2}$，就有$d(nm)=(k1+k2+1)d(n&rsquo;m&rsquo;)$。</p>
+
+<p>考虑右式，假设原来有一个互质的数对$(i,j)$，当$n$,$m$分别乘上$p^{k1}$和$p^{k2}$时，就多了数对$(ip,j)(ip^2,j)\ldots(ip^{k1},j)(i,jp)(i,jp^2)\ldots(i,jp^{k2})$，右式的值会乘上$(k1+k2+1)$。</p>
+
+<p>所以就有$d(nm)=\sum<em>{i|n}\sum</em>{j|m}[gcd(i,j)=1]$。</p>
+
+<p>那么就有$$\sum<em>{i=1}^n\sum</em>{j=1}^md(ij)=\sum<em>{i=1}^n\sum</em>{j=1}^m\lfloor\frac n i\rfloor\lfloor\frac m j\rfloor[\gcd(i,j)==1]$$</p>
+
+<p>下面进行一些变换：
+$$\sum<em>{i=1}^n\sum</em>{j=1}^md(ij)=\sum<em>{i=1}^n\sum</em>{j=1}^m\lfloor\frac n i\rfloor\lfloor\frac m j\rfloor\sum_{d|gcd(i,j)}\mu(d)$$</p>
+
+<p>$$\sum<em>{i=1}^n\sum</em>{j=1}^md(ij)=\sum<em>{i=1}^n\sum</em>{j=1}^m\lfloor\frac n i\rfloor\lfloor\frac m j\rfloor\sum_{d|i,d|j}\mu(d)$$</p>
+
+<p>枚举d：
+$$\sum<em>{d}^{min(n,m)}\sum</em>{i=1}^{n}\sum_{j=1}^{m}\lfloor\frac{n}{i}\rfloor\lfloor\frac{m}{j}\rfloor[d|i][d|j]\mu(d)$$</p>
+
+<p>显然$i$，$j$得是d的倍数：</p>
+
+<p>$$\sum<em>{d}^{min(n,m)}\sum</em>{p=1}^{\lfloor\frac{n}{d}\rfloor}\sum_{q=1}^{\lfloor\frac{m}{d}\rfloor}\lfloor\frac{n}{pd}\rfloor\lfloor\frac{m}{qd}\rfloor\mu(d)$$</p>
+
+<p>预处理出$f(x)=\sum_{i=1}^{x}\lfloor\frac{x}{i}\rfloor$就可以做了。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#define ele long long
+using namespace std;
+#define maxn 50010
+ele pcnt,plist[maxn],mu[maxn],f[maxn];
+bool flag[maxn];
+int main()
+{
+    pcnt=0; mu[0]=0; mu[1]=1;
+    memset(flag,0,sizeof(flag));
+    for (int i=2; i&lt;maxn; ++i)
+    {
+        if (!flag[i]) plist[pcnt++]=i,mu[i]=-1;
+        for (int j=0; j&lt;pcnt &amp;&amp; i*plist[j]&lt;maxn; ++j)
+        {
+            flag[i*plist[j]]=true;
+            if (i%plist[j])
+                mu[i*plist[j]]=-mu[i];
+            else
+            {
+                mu[i*plist[j]]=0;
+                break;
+            }
+        }
+    }
+    for (int i=2; i&lt;maxn; ++i) mu[i]+=mu[i-1];
+    memset(f,0,sizeof(f));
+    for (int i=1; i&lt;maxn; ++i)
+        for (int j=i; j&gt;0;)
+        {
+            ele p=i/(i/j+1);
+            f[i]+=(i/j)*(j-p);
+            j=p;
+        }
+    ele T,n,m;
+    scanf(&quot;%lld&quot;,&amp;T);
+    while (T--)
+    {
+        scanf(&quot;%lld%lld&quot;,&amp;n,&amp;m);
+        ele ans=0;
+        for (int i=min(m,n); i&gt;0;)
+        {
+            ele p=m/(m/i+1),p1=n/(n/i+1);
+            p=max(p,p1);
+            ans+=f[n/i]*f[m/i]*(mu[i]-mu[p]);
+            i=p;
+        }
+        printf(&quot;%lld\n&quot;,ans);
+    }
+    return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

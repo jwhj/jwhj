@@ -1,0 +1,175 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj1061题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj1061题解
+                    </h1>
+                    <h2 class="headline">
+                    Jun 3, 2016 10:02
+                    · 163 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E7%BD%91%E7%BB%9C%E6%B5%81">网络流</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92">线性规划</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=28590262&auto=0&height=66"></iframe></p>
+
+<p>正解是网络流，然而我智商下线不会建图，所以就写了线性规划。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cmath&gt;
+#define ele int
+using namespace std;
+#define maxn 1010
+#define maxm 10010
+#define eps 1e-7
+#define inf 1e19
+namespace LP
+{
+	double a[maxm][maxn],b[maxm],c[maxn],v;
+	ele n,m;
+	inline void pivot(ele p,ele k)
+	{
+		double tmp=a[p][k]; a[p][k]=1;
+		b[p]/=tmp;
+		for (int i=0; i&lt;m; ++i) a[p][i]/=tmp;
+		tmp=c[k]; c[k]=0;
+		v+=tmp*b[p];
+		for (int i=0; i&lt;m; ++i) c[i]-=tmp*a[p][i];
+		for (int i=0; i&lt;n; ++i)
+			if (i!=p &amp;&amp; fabs(a[i][k])&gt;eps)
+			{
+				tmp=a[i][k]; a[i][k]=0;
+				b[i]-=tmp*b[p];
+				for (int j=0; j&lt;m; ++j) a[i][j]-=tmp*a[p][j];
+			}
+	}
+	inline double simplex()
+	{
+		while (1)
+		{
+			ele k;
+			for (k=0; k&lt;m; ++k)
+				if (c[k]&gt;eps) break;
+			if (k==m) return v;
+			double tmp=inf;
+			ele p;
+			for (int i=0; i&lt;n; ++i)
+				if (a[i][k]&gt;eps &amp;&amp; tmp&gt;b[i]/a[i][k])
+					tmp=b[i]/a[i][k],p=i;
+			if (tmp+eps&gt;=inf) return inf;
+			pivot(p,k);
+		}
+	}
+}
+ele n,m,a[maxn],s[maxm],t[maxm],c[maxm];
+int main()
+{
+	scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+	for (int i=0; i&lt;n; ++i) scanf(&quot;%d&quot;,a+i),LP::c[i]=a[i];
+	for (int i=0; i&lt;m; ++i)
+		scanf(&quot;%d%d%d&quot;,s+i,t+i,c+i),--s[i],--t[i],LP::b[i]=c[i];
+	LP::n=m; LP::m=n; LP::v=0;
+	memset(LP::a,0,sizeof(LP::a));
+	for (int i=0; i&lt;m; ++i)
+		for (int j=s[i]; j&lt;=t[i]; ++j) LP::a[i][j]=1;
+	printf(&quot;%lld\n&quot;,(long long)(LP::simplex()+0.5));
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

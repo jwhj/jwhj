@@ -1,0 +1,184 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj1028题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj1028题解
+                    </h1>
+                    <h2 class="headline">
+                    May 27, 2017 10:02
+                    · 161 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E8%AE%B0%E5%BF%86%E5%8C%96%E6%90%9C%E7%B4%A2">记忆化搜索</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=436514312&auto=0&height=66"></iframe></p>
+
+<p>大水题……</p>
+
+<p>先枚举等候牌的序号，然后判断是否是和牌。</p>
+
+<p>状态(i,a,b,p)表示只考虑前i种牌，第i-1种牌被钦定用掉了a张，第i种牌被钦定用掉了b张，p为是否存在一个对子。然后记忆化搜索就可以了。</p>
+
+<p>状态总数很多，但有很多状态实际上是达不到的，所以用set记忆化。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#include &lt;queue&gt;
+#include &lt;set&gt;
+#define ele int
+using namespace std;
+#define maxn 410
+struct st{
+	ele i,a,b,p;
+	inline bool operator&lt;(st rhs)const{
+		if (i!=rhs.i) return i&lt;rhs.i;
+		if (a!=rhs.a) return a&lt;rhs.a;
+		if (b!=rhs.b) return b&lt;rhs.b;
+		return p&lt;rhs.p;
+	}
+};
+ele n,m,acnt,cnt[maxn],ans[maxn];
+set&lt;st&gt; S;
+queue&lt;st&gt; Q;
+inline void add(st k){
+	if (!S.count(k)){
+		S.insert(k);
+		Q.push(k);
+	}
+}
+inline bool dp(){
+	S.clear();
+	Q.push((st){n,0,0,1});
+	bool ans=false;
+	while (!Q.empty()){
+		st k=Q.front(); Q.pop();
+		if (k.i==1){
+			if (k.a) continue;
+			if (!k.p &amp;&amp; (cnt[1]-k.b)%3!=0) continue;
+			if (k.p &amp;&amp; (cnt[1]-k.b)%3!=2) continue;
+			ans=true;
+			continue;
+		}
+		if (k.p &amp;&amp; cnt[k.i]-k.b&gt;=2) add((st){k.i,k.a,k.b+2,0});
+		for (int i=0; i+k.b&lt;=cnt[k.i] &amp;&amp; i+k.a&lt;=cnt[k.i-1] &amp;&amp; i&lt;=cnt[k.i-2]; ++i)
+			if ((cnt[k.i]-i-k.b)%3==0) add((st){k.i-1,i,i+k.a,k.p});
+	}
+	return ans;
+}
+int main(){
+	scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+	memset(cnt,0,sizeof(cnt));
+	for (int i=0; i&lt;3*m+1; ++i){
+		ele x;
+		scanf(&quot;%d&quot;,&amp;x);
+		++cnt[x];
+	}
+	acnt=0;
+	for (int i=1; i&lt;=n; ++i){
+		++cnt[i];
+		if (dp()) ans[acnt++]=i;
+		--cnt[i];
+	}
+	if (!acnt) puts(&quot;NO&quot;);
+	else{
+		for (int i=0; i&lt;acnt-1; ++i) printf(&quot;%d &quot;,ans[i]);
+		printf(&quot;%d\n&quot;,ans[acnt-1]);
+	}
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

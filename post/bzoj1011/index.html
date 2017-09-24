@@ -1,0 +1,143 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj1011题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj1011题解
+                    </h1>
+                    <h2 class="headline">
+                    May 2, 2017 10:02
+                    · 78 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E6%95%B0%E5%AD%A6">数学</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script></p>
+
+<p>这题真是玄妙无比……</p>
+
+<p>题目描述不是很清楚，应该是要求$f_i=\sum_{j=1}^{A\times i} \frac{m_i m_j}{i-j}$</p>
+
+<p>考虑到A很小，$i$和$i-A\times i$之间的差是很小的，特别是对于比较大的i来说。计算$f_i$的时候，把j分成M段，每一段的i-j当成同一个值来算。这样对于小的i就分得细一些，对于大的i分得粗略一些。<del>M的值看着时限调一调就好了。</del></p>
+
+<p>要注意计算$A\times i$的时候要加上一个eps以免精度误差。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#define ele int
+using namespace std;
+#define maxn 100010
+#define M 2000
+#define eps 1e-8
+ele n;
+double A,m[maxn],a[maxn];
+int main(){
+	scanf(&quot;%d%lf&quot;,&amp;n,&amp;A);
+	for (int i=0; i&lt;n; ++i) scanf(&quot;%lf&quot;,m+i);
+	a[0]=0;
+	for (int i=1; i&lt;=n; ++i) a[i]=a[i-1]+m[i-1];
+	for (int i=0; i&lt;n; ++i){
+		ele l=1,r=A*(i+1)+eps,L=(i+1)/M+1;
+		double ans=0;
+		for (int j=l; j&lt;=r; j+=L){
+			ele k=min(j+L,r+1);
+			ans+=(a[k-1]-a[j-1])/((double)(i+1)-(double)(j+k-1)/2);
+		}
+		printf(&quot;%lf\n&quot;,ans*m[i]);
+	}
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

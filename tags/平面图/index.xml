@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>平面图 on 蒟蒻的博客</title>
+    <link>http://blog.eleele.gq/tags/%E5%B9%B3%E9%9D%A2%E5%9B%BE/</link>
+    <description>Recent content in 平面图 on 蒟蒻的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 12 Dec 2016 10:02:43 +0000</lastBuildDate>
+    
+	<atom:link href="http://blog.eleele.gq/tags/%E5%B9%B3%E9%9D%A2%E5%9B%BE/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>bzoj1001题解</title>
+      <link>http://blog.eleele.gq/post/bzoj1001/</link>
+      <pubDate>Mon, 12 Dec 2016 10:02:43 +0000</pubDate>
+      
+      <guid>http://blog.eleele.gq/post/bzoj1001/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

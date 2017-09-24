@@ -1,0 +1,192 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>hdu6017题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        hdu6017题解
+                    </h1>
+                    <h2 class="headline">
+                    Feb 25, 2017 10:02
+                    · 173 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/hdu">hdu</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/dp">DP</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/st%E8%A1%A8">st表</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=20201419&auto=0&height=66"></iframe></p>
+
+<p>比赛的时候没调出来，我还是太弱……</p>
+
+<p>首先，其实就是要移动序列中的2，使得移动次数不超过$\lfloor\frac{m}{2}\rfloor$，且后面接着至少两个3的2的数量尽可能多。</p>
+
+<p>让f[i][j][k]表示将前i个2分散在前j-1位里，且下一个2在第j位，移动次数上限为k时，后面接着至少两个3的2的数量的最大值。</p>
+
+<p>考虑i的位置，如果p[i]&gt;=j-3，那么不应该将其移动到j-3的左边，这是因为从j-3继续往左移的话，移动次数增多，左边留有的空间变小，答案不会变得更优。</p>
+
+<p>如果p[i]&lt;j-3，那么不应该将其左移。如果i被移到j-1或j-2，单独计算一下，否则假设其右移t位，此时的个数为f[i-1][p[i]+t][k-t]+1。</p>
+
+<p>如果按照上面的方法转移，时间复杂度是四次的。注意到在f[i-1][p[i]+t][k-t]中，p[i]+t和k-t的和是一个定值，所以可以对f[i-1][j][k]中的每一个j+k维护一个st表，转移的时候就能$O(1)$地查到[i-1][p[i]+t][k-t]的最大值。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#define ele int
+using namespace std;
+#define maxn 210
+#define maxk 9
+#define INF 1000000000
+ele LOG[maxn];
+struct ST{
+	inline void init(ele n){
+		for (int i=0; i&lt;n; ++i) f[i][0]=a[i];
+		for (int j=1; j&lt;maxk; ++j)
+			for (int i=0; i&lt;n; ++i)
+				f[i][j]=max(f[i][j-1],f[min(n-1,i+(1&lt;&lt;j-1))][j-1]);
+	}
+	inline ele qry(ele l,ele r){
+		ele L=LOG[r-l+1];
+		return max(f[l][L],f[r-(1&lt;&lt;L)+1][L]);
+	}
+	ele a[maxn],f[maxn][maxk];
+};
+ele n,m,n1,p[maxn],f[maxn][maxn][maxn];
+char s[maxn];
+ST st[maxn&lt;&lt;1];
+inline ele ABS(ele x){
+	return (x&lt;0)?(-x):(x);
+}
+int main(){
+	ele T;
+	scanf(&quot;%d&quot;,&amp;T);
+	LOG[1]=0;
+	for (int i=2; i&lt;maxn; ++i) LOG[i]=LOG[i&gt;&gt;1]+1;
+	while (T--){
+		scanf(&quot;%d%d%s&quot;,&amp;n,&amp;m,s);
+		m&gt;&gt;=1;
+		n1=0;
+		for (int i=0; i&lt;n; ++i)
+			if (s[i]=='2') p[++n1]=i;
+		memset(f[0],0,sizeof(f[0]));
+		for (int i=1; i&lt;=n1; ++i){
+			for (int p=0; p&lt;=n+m; ++p){
+				for (int k=max(0,p-n); k&lt;=p &amp;&amp; k&lt;=m; ++k)
+					st[p].a[k]=f[i-1][p-k][k];
+				st[p].init(p+1);
+			}
+			for (int j=0; j&lt;=n; ++j)
+				for (int k=0; k&lt;=m; ++k){
+					f[i][j][k]=-INF;
+					if (j-1&gt;=0 &amp;&amp; ABS(j-1-p[i])&lt;=k)
+						f[i][j][k]=max(f[i][j][k],f[i-1][j-1][k-ABS(j-1-p[i])]);
+					if (j-2&gt;=0 &amp;&amp; ABS(j-2-p[i])&lt;=k)
+						f[i][j][k]=max(f[i][j][k],f[i-1][j-2][k-ABS(j-2-p[i])]);
+					if (p[i]&gt;=j-3){
+						if (j-3&gt;=0 &amp;&amp; ABS(j-3-p[i])&lt;=k)
+							f[i][j][k]=max(f[i][j][k],f[i-1][j-3][k-ABS(j-3-p[i])]+1);
+					}
+					else{
+						ele t=p[i]+k;
+						ele L=0,R=min(k,j-3-p[i]);
+						f[i][j][k]=max(f[i][j][k],st[t].qry(k-R,k-L)+1);
+					}
+				}
+		}
+		printf(&quot;%d\n&quot;,f[n1][n][m]);
+	}
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

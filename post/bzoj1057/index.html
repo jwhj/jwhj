@@ -1,0 +1,148 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj1057题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj1057题解
+                    </h1>
+                    <h2 class="headline">
+                    Aug 10, 2017 10:02
+                    · 102 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/dp">dp</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=16686627&auto=0&height=66"></iframe></p>
+
+<p>从左上到右下枚举正方形/矩形的右下角。维护f[j]代表当前行第j列之多向上多少格满足黑白相间。若存在i<j，f[i]>f[j]，那么这个f[i]实际上是毫无意义的。维护f[i]向左严格递减的序列，对每个右下角，在每个最大高度降低的点计算一次最大面积就可以了。</p>
+
+<p>这个dp看上去非常暴力，时间复杂度像是$O(nm^2)$，然而它却A了，原因是，一个长度为k的序列的递增/递减子序列长度的期望是$O(\log k)$，也就是说，算法的期望复杂度是$O(nm\log m)$。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#define ele int
+using namespace std;
+#define maxn 2010
+ele n,m,a[maxn][maxn],f[maxn];
+pair&lt;ele,ele&gt; Q[maxn];
+inline ele _sqr(ele x){
+	return x*x;
+}
+int main(){
+	scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+	for (int i=0; i&lt;n; ++i)
+		for (int j=0; j&lt;m; ++j) scanf(&quot;%d&quot;,&amp;a[i][j]);
+	memset(f,0,sizeof(f));
+	ele ans1=0,ans2=0;
+	for (int i=0; i&lt;n; ++i){
+		ele qh=0,qt=0;
+		for (int j=0; j&lt;m; ++j){
+			if (!i || a[i-1][j]!=a[i][j]) ++f[j]; else f[j]=1;
+			pair&lt;ele,ele&gt; tmp=make_pair(j,f[j]);
+			if (!j || a[i][j-1]!=a[i][j])
+				while (qh&lt;qt &amp;&amp; Q[qt-1].second&gt;f[j]) tmp.first=Q[qt-1].first,--qt;
+			else qt=qh;
+			if (qh==qt || Q[qt-1].second&lt;f[j]) Q[qt++]=tmp;
+			for (int k=qh; k&lt;qt; ++k)
+				ans1=max(ans1,_sqr(min(j-Q[k].first+1,Q[k].second))),
+				ans2=max(ans2,(j-Q[k].first+1)*Q[k].second);
+		}
+	}
+	printf(&quot;%d\n%d\n&quot;,ans1,ans2);
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

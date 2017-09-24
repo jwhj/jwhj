@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Noip on 蒟蒻的博客</title>
+    <link>http://blog.eleele.gq/tags/noip/</link>
+    <description>Recent content in Noip on 蒟蒻的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 21 Nov 2016 10:02:43 +0000</lastBuildDate>
+    
+	<atom:link href="http://blog.eleele.gq/tags/noip/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>noip2016题解</title>
+      <link>http://blog.eleele.gq/post/noip2016/</link>
+      <pubDate>Mon, 21 Nov 2016 10:02:43 +0000</pubDate>
+      
+      <guid>http://blog.eleele.gq/post/noip2016/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

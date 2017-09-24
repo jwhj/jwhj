@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>单调栈/队列 on 蒟蒻的博客</title>
+    <link>http://blog.eleele.gq/tags/%E5%8D%95%E8%B0%83%E6%A0%88/%E9%98%9F%E5%88%97/</link>
+    <description>Recent content in 单调栈/队列 on 蒟蒻的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 03 Aug 2017 10:02:43 +0000</lastBuildDate>
+    
+	<atom:link href="http://blog.eleele.gq/tags/%E5%8D%95%E8%B0%83%E6%A0%88/%E9%98%9F%E5%88%97/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>bzoj1047题解</title>
+      <link>http://blog.eleele.gq/post/bzoj1047/</link>
+      <pubDate>Thu, 03 Aug 2017 10:02:43 +0000</pubDate>
+      
+      <guid>http://blog.eleele.gq/post/bzoj1047/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>bzoj1023&amp;4316题解</title>
+      <link>http://blog.eleele.gq/post/bzoj10234316/</link>
+      <pubDate>Wed, 24 May 2017 10:02:43 +0000</pubDate>
+      
+      <guid>http://blog.eleele.gq/post/bzoj10234316/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>bzoj3956题解</title>
+      <link>http://blog.eleele.gq/post/bzoj3956/</link>
+      <pubDate>Sun, 04 Sep 2016 10:02:43 +0000</pubDate>
+      
+      <guid>http://blog.eleele.gq/post/bzoj3956/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

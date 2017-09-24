@@ -1,0 +1,196 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj3527题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj3527题解
+                    </h1>
+                    <h2 class="headline">
+                    Apr 22, 2016 10:02
+                    · 208 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/fft">FFT</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=17177324&auto=0&height=66"></iframe></p>
+
+<p>由题,$E<em>i=\sum</em>{j&lt;i}\frac{q<em>j}{(i-j)^2}-\sum</em>{j&gt;i}\frac{q_j}{(i-j)^2}$。</p>
+
+<p>假设$A<em>i=\sum</em>{j&lt;i}\frac{q_j}{(i-j)^2},B<em>i=\sum</em>{j&gt;i}\frac{q_j}{(i-j)^2}$，则$E_i=A_i-B_i$。</p>
+
+<p>如果让$f(i)=q_i,g(i)=\frac{1}{i^2}$，那么有$A<em>i=\sum</em>{j&lt;i} f(i)g(i-j)$，这是一个典型的卷积，直接用FFT求就可以了。</p>
+
+<p>如果把q倒过来，就可以用类似的方法求出B。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;complex&gt;
+#include &lt;algorithm&gt;
+#define ele int
+using namespace std;
+#define maxn 400010
+#define pn complex&lt;double&gt;
+const double pi=3.1415926535897;
+inline void DFT(ele n,pn *a,pn *b){
+	for (int i=0; i&lt;n; ++i){
+		ele tmp=0,k=i;
+		for (int j=1; j&lt;n; j&lt;&lt;=1){
+			tmp&lt;&lt;=1;
+			tmp|=(k&amp;1);
+			k&gt;&gt;=1;
+		}
+		b[tmp]=a[i];
+	}
+	for (int i=1; i&lt;n; i&lt;&lt;=1){
+		pn o1=(pn){cos(pi/i),sin(pi/i)};
+		for (int j=0; j&lt;n; j+=(i&lt;&lt;1)){
+			pn o=1;
+			for (int k=j; k&lt;j+i; ++k){
+				pn u=b[k],t=o*b[k+i];
+				b[k]=u+t;
+				b[k+i]=u-t;
+				o*=o1;
+			}
+		}
+	}
+}
+inline void IDFT(ele n,pn *a,pn *b){
+	for (int i=0; i&lt;n; ++i){
+		ele tmp=0,k=i;
+		for (int j=1; j&lt;n; j&lt;&lt;=1){
+			tmp&lt;&lt;=1;
+			tmp|=(k&amp;1);
+			k&gt;&gt;=1;
+		}
+		b[tmp]=a[i];
+	}
+	for (int i=1; i&lt;n; i&lt;&lt;=1){
+		pn o1=(pn){cos(-pi/i),sin(-pi/i)};
+		for (int j=0; j&lt;n; j+=(i&lt;&lt;1)){
+			pn o=1;
+			for (int k=j; k&lt;j+i; ++k){
+				pn u=b[k],t=o*b[k+i];
+				b[k]=u+t;
+				b[k+i]=u-t;
+				o*=o1;
+			}
+		}
+	}
+	for (int i=0; i&lt;n; ++i) b[i]/=n;
+}
+ele n;
+double q[maxn];
+pn a1[maxn],a2[maxn],b1[maxn],b2[maxn],A[maxn],B[maxn];
+int main(){
+	scanf(&quot;%d&quot;,&amp;n);
+	for (int i=0; i&lt;n; ++i) scanf(&quot;%lf&quot;,q+i);
+	ele tmp=1;
+	while (tmp&lt;n) tmp&lt;&lt;=1;
+	tmp&lt;&lt;=1;
+	for (int i=0; i&lt;tmp; ++i) a1[i]=q[i];
+	for (int i=1; i&lt;n; ++i) a2[i]=1.0/i/i;
+	DFT(tmp,a1,b1); DFT(tmp,a2,b2);
+	for (int i=0; i&lt;tmp; ++i) b1[i]*=b2[i];
+	IDFT(tmp,b1,A);
+	for (int i=0; i&lt;n; ++i) a1[i]=q[n-i-1];
+	DFT(tmp,a1,b1);
+	for (int i=0; i&lt;tmp; ++i) b1[i]*=b2[i];
+	IDFT(tmp,b1,B);
+	for (int i=0; i&lt;n; ++i)
+		printf(&quot;%.6lf\n&quot;,A[i].real()-B[n-i-1].real());
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

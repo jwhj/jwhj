@@ -1,0 +1,296 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj2243题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj2243题解
+                    </h1>
+                    <h2 class="headline">
+                    Jan 27, 2017 10:02
+                    · 369 words
+                    · 2 minutes read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E6%A0%91%E5%89%96">树剖</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script></p>
+
+<p>树剖一眼题……不过码量还是挺大的……</p>
+
+<p>我标记下传都打不熟了，药丸啊……</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#define ele int
+using namespace std;
+#define maxn 100010
+#define maxk 18
+struct ANS{
+	ele x,l,r;
+};
+struct node{
+	ANS a;
+	ele tag;
+	node *l,*r;
+}np[maxn&lt;&lt;2];
+struct edge{
+	ele v;
+	edge *nxt;
+}ep[maxn&lt;&lt;1];
+ele n,q,ecnt,ncnt,scnt,c[maxn],r[maxn],dep[maxn],size[maxn],seq[maxn],pos[maxn],fa[maxn][maxk];
+edge *h[maxn],*hc[maxn];
+node *root;
+inline void addedge(ele u,ele v){
+	edge *p=&amp;ep[ecnt++];
+	p-&gt;v=v; p-&gt;nxt=h[u];
+	h[u]=p;
+}
+inline ANS operator+(ANS a,ANS b){
+	if (b.x==-1) return a;
+	ANS c=(ANS){a.x+b.x,a.l,b.r};
+	if (a.r==b.l)
+		--c.x;
+	return c;
+}
+inline void pushdown(node *x){
+	if (x-&gt;tag!=-1){
+		x-&gt;a.x=1;
+		x-&gt;a.l=x-&gt;a.r=x-&gt;tag;
+		if (x-&gt;l)
+			x-&gt;l-&gt;tag=x-&gt;r-&gt;tag=x-&gt;tag;
+		x-&gt;tag=-1;
+	}
+}
+node* build(ele l,ele r){
+	node *p=&amp;np[ncnt++];
+	p-&gt;tag=-1;
+	if (l==r){
+		p-&gt;a=(ANS){1,c[seq[l-1]],c[seq[l-1]]};
+		p-&gt;l=p-&gt;r=NULL;
+	}
+	else{
+		ele mid=(l+r)&gt;&gt;1;
+		p-&gt;l=build(l,mid);
+		p-&gt;r=build(mid+1,r);
+		p-&gt;a=p-&gt;l-&gt;a+p-&gt;r-&gt;a;
+	}
+	return p;
+}
+void upd(node *x,ele a,ele b,ele l,ele r,ele c){
+	pushdown(x);
+	if (l&lt;=a &amp;&amp; b&lt;=r)
+		x-&gt;tag=c,pushdown(x);
+	else{
+		ele mid=(a+b)&gt;&gt;1;
+		if (l&lt;=mid)
+			upd(x-&gt;l,a,mid,l,r,c);
+		if (mid&lt;r)
+			upd(x-&gt;r,mid+1,b,l,r,c);
+		pushdown(x-&gt;l); pushdown(x-&gt;r);
+		x-&gt;a=x-&gt;l-&gt;a+x-&gt;r-&gt;a;
+	}
+}
+ANS query(node *x,ele a,ele b,ele l,ele r){
+	pushdown(x);
+	if (l&lt;=a &amp;&amp; b&lt;=r)
+		return x-&gt;a;
+	else{
+		ele mid=(a+b)&gt;&gt;1;
+		if (r&lt;=mid)
+			return query(x-&gt;l,a,mid,l,r);
+		else if (l&gt;mid)
+			return query(x-&gt;r,mid+1,b,l,r);
+		else return query(x-&gt;l,a,mid,l,r)+query(x-&gt;r,mid+1,b,l,r);
+	}
+}
+void dfs1(ele p,ele i){
+	fa[i][0]=p;
+	size[i]=1;
+	for (edge *j=h[i]; j; j=j-&gt;nxt)
+		if (j-&gt;v!=p){
+			dep[j-&gt;v]=dep[i]+1;
+			dfs1(i,j-&gt;v);
+			size[i]+=size[j-&gt;v];
+		}
+	hc[i]=NULL;
+	for (edge *j=h[i]; j; j=j-&gt;nxt)
+		if (j-&gt;v!=p)
+			if (hc[i]==NULL || size[j-&gt;v]&gt;size[hc[i]-&gt;v])
+				hc[i]=j;
+}
+void dfs2(ele p,ele i){
+	pos[i]=scnt;
+	seq[scnt++]=i;
+	if (hc[i])
+		r[hc[i]-&gt;v]=r[i],dfs2(i,hc[i]-&gt;v);
+	for (edge *j=h[i]; j; j=j-&gt;nxt)
+		if (j-&gt;v!=p &amp;&amp; j!=hc[i])
+			r[j-&gt;v]=j-&gt;v,dfs2(i,j-&gt;v);
+}
+inline ele lca(ele u,ele v){
+	if (dep[u]&gt;dep[v])
+		swap(u,v);
+	ele k=dep[v]-dep[u];
+	for (int i=0; k; ++i,k&gt;&gt;=1)
+		if (k&amp;1)
+			v=fa[v][i];
+	if (u==v) return u;
+	for (int i=maxk-1; i&gt;=0; --i)
+		if (fa[u][i]!=fa[v][i])
+			u=fa[u][i],v=fa[v][i];
+	return fa[u][0];
+}
+inline void upd(ele x,ele d,ele p,ele c){
+	while (x!=-1 &amp;&amp; dep[x]&gt;=d){
+		ele y=r[x];
+		upd(root,1,n,max(p,pos[y])+1,pos[x]+1,c);
+		x=fa[y][0];
+	}
+}
+inline ANS query(ele x,ele d,ele p){
+	ANS ans=(ANS){-1,0,0};
+	while (x!=-1 &amp;&amp; dep[x]&gt;=d){
+		ele y=r[x];
+		ans=query(root,1,n,max(p,pos[y])+1,pos[x]+1)+ans;
+		x=fa[y][0];
+	}
+	return ans;
+}
+int main(){
+	scanf(&quot;%d%d&quot;,&amp;n,&amp;q);
+	for (int i=0; i&lt;n; ++i)
+		scanf(&quot;%d&quot;,c+i);
+	ecnt=0;
+	memset(h,0,sizeof(h));
+	for (int i=0; i&lt;n-1; ++i){
+		ele u,v;
+		scanf(&quot;%d%d&quot;,&amp;u,&amp;v);
+		--u,--v;
+		addedge(u,v); addedge(v,u);
+	}
+	dep[0]=0;
+	dfs1(-1,0);
+	for (int i=1; i&lt;maxk; ++i)
+		for (int j=0; j&lt;maxn; ++j)
+			if (fa[j][i-1]==-1)
+				fa[j][i]=-1;
+			else fa[j][i]=fa[fa[j][i-1]][i-1];
+	scnt=0;
+	r[0]=0;
+	dfs2(-1,0);
+	ncnt=0;
+	root=build(1,n);
+	while (q--){
+		char s[5];
+		ele u,v,w,c;
+		scanf(&quot;%s%d%d&quot;,s,&amp;u,&amp;v);
+		--u,--v;
+		w=lca(u,v);
+		if (s[0]=='C'){
+			scanf(&quot;%d&quot;,&amp;c);
+			upd(u,dep[w],pos[w],c);
+			upd(v,dep[w],pos[w],c);
+		}
+		else{
+			ANS a=query(u,dep[w],pos[w]);
+			ANS b=query(v,dep[w],pos[w]);
+			swap(a.l,a.r);
+			a=a+b;
+			printf(&quot;%d\n&quot;,a.x);
+		}
+	}
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

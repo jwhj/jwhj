@@ -1,0 +1,199 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj2152题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj2152题解
+                    </h1>
+                    <h2 class="headline">
+                    Nov 6, 2016 10:02
+                    · 195 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E6%A0%91%E5%88%86%E6%B2%BB">树分治</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=1698391&auto=0&height=66"></iframe></p>
+
+<p>点剖裸题……</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#define ele long long
+using namespace std;
+#define maxn 20010
+#define func(x) ((x)*((x)-1)/2)
+struct edge{
+	ele v,w;
+	edge *nxt;
+}ep[maxn&lt;&lt;1];
+ele n,ecnt;
+bool flag[maxn];
+edge *h[maxn];
+inline void addedge(ele u,ele v,ele w){
+	edge *p=&amp;ep[ecnt++];
+	p-&gt;v=v; p-&gt;w=w; p-&gt;nxt=h[u];
+	h[u]=p;
+}
+ele gcd(ele a,ele b){
+	if (!b) return a;
+	return gcd(b,a%b);
+}
+ele getsize(ele p,ele i){
+	ele ans=1;
+	for (edge *j=h[i]; j; j=j-&gt;nxt)
+		if (j-&gt;v!=p &amp;&amp; !flag[j-&gt;v])
+			ans+=getsize(i,j-&gt;v);
+	return ans;
+}
+ele dfs1(ele p,ele i,ele s,ele&amp;k){
+	ele ans=1;
+	bool f=true;
+	for (edge *j=h[i]; j; j=j-&gt;nxt)
+		if (j-&gt;v!=p &amp;&amp; !flag[j-&gt;v]){
+			ele tmp=dfs1(i,j-&gt;v,s,k);
+			if (tmp&lt;&lt;1&gt;s)
+				f=false;
+			ans+=tmp;
+		}
+	if (s-ans&lt;&lt;1&gt;s)
+		f=false;
+	if (f)
+		k=i;
+	return ans;
+}
+void dfs2(ele p,ele i,ele d,ele *c){
+	++c[d%3];
+	for (edge *j=h[i]; j; j=j-&gt;nxt)
+		if (j-&gt;v!=p &amp;&amp; !flag[j-&gt;v])
+			dfs2(i,j-&gt;v,d+j-&gt;w,c);
+}
+ele divide_and_conquer(ele p,ele i){
+	ele s=getsize(-1,i);
+	ele k; dfs1(-1,i,s,k);
+	ele c[3],ans=0;
+	memset(c,0,sizeof(c));
+	flag[k]=true;
+	for (edge *j=h[k]; j; j=j-&gt;nxt)
+		if (!flag[j-&gt;v]){
+			ele c1[3];
+			memset(c1,0,sizeof(c1));
+			dfs2(k,j-&gt;v,j-&gt;w,c1);
+			for (int w=0; w&lt;3; ++w)
+				c[w]+=c1[w];
+			ans-=func(c1[0])+c1[1]*c1[2];
+			ans+=divide_and_conquer(k,j-&gt;v);
+		}
+	++c[0];
+	ans+=func(c[0])+c[1]*c[2];
+	return ans;
+}
+int main(){
+	scanf(&quot;%lld&quot;,&amp;n);
+	ecnt=0;
+	memset(h,0,sizeof(h));
+	for (int i=0; i&lt;n-1; ++i){
+		ele u,v,w;
+		scanf(&quot;%lld%lld%lld&quot;,&amp;u,&amp;v,&amp;w);
+		--u,--v;
+		addedge(u,v,w); addedge(v,u,w);
+	}
+	memset(flag,0,sizeof(flag));
+	ele t1=n+2*divide_and_conquer(-1,0),t2=n*n,t3=gcd(t1,t2);
+	printf(&quot;%lld/%lld\n&quot;,t1/t3,t2/t3);
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

@@ -1,0 +1,259 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj2329题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj2329题解
+                    </h1>
+                    <h2 class="headline">
+                    Feb 13, 2017 10:02
+                    · 250 words
+                    · 2 minutes read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E6%8B%AC%E5%8F%B7%E5%BA%8F%E5%88%97">括号序列</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/treap">treap</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E7%BB%9F%E8%AE%A1">统计</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script></p>
+
+<p>跟bzoj2209是差不多的，<a href="http://blog.eleele.gq/bzoj2209ti-jie.html">这里</a>有那道题的题解。</p>
+
+<p>不同的地方在于要多打一个标记，下传标记的时候要考虑一些细节。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cstdlib&gt;
+#include &lt;algorithm&gt;
+#define ele int
+using namespace std;
+#define maxn 100010
+struct ANS{
+	ele pmn,pmx,smn,smx,sum;
+};
+inline ANS operator+(ANS a,ANS b){
+	ANS c;
+	c.sum=a.sum+b.sum;
+	c.pmn=min(a.pmn,a.sum+b.pmn);
+	c.pmx=max(a.pmx,a.sum+b.pmx);
+	c.smn=min(b.smn,a.smn+b.sum);
+	c.smx=max(b.smx,a.smx+b.sum);
+	return c;
+}
+struct node{
+	ANS a;
+	ele s,p,st,x;
+	bool flip,neg;
+	node *l,*r;
+}np[maxn];
+inline void pushdown(node *x){
+	if (!x) return;
+	if (x-&gt;flip){
+		swap(x-&gt;l,x-&gt;r);
+		if (x-&gt;l) x-&gt;l-&gt;flip^=1;
+		if (x-&gt;r) x-&gt;r-&gt;flip^=1;
+		swap(x-&gt;a.pmn,x-&gt;a.smn);
+		swap(x-&gt;a.pmx,x-&gt;a.smx);
+		x-&gt;flip=false;
+	}
+	if (x-&gt;neg){
+		swap(x-&gt;a.pmn,x-&gt;a.pmx);
+		x-&gt;a.pmn*=-1; x-&gt;a.pmx*=-1;
+		swap(x-&gt;a.smn,x-&gt;a.smx);
+		x-&gt;a.smn*=-1; x-&gt;a.smx*=-1;
+		x-&gt;a.sum*=-1; x-&gt;x*=-1;
+		if (x-&gt;l) x-&gt;l-&gt;neg^=1,x-&gt;l-&gt;st*=-1;
+		if (x-&gt;r) x-&gt;r-&gt;neg^=1,x-&gt;r-&gt;st*=-1;
+		x-&gt;neg=false;
+	}
+	if (x-&gt;st){
+		x-&gt;x=x-&gt;st;
+		ele u=x-&gt;x,v=x-&gt;x*x-&gt;s;
+		ele t1=min(u,v),t2=max(u,v);
+		x-&gt;a=(ANS){t1,t2,t1,t2,v};
+		if (x-&gt;l) x-&gt;l-&gt;st=x-&gt;st;
+		if (x-&gt;r) x-&gt;r-&gt;st=x-&gt;st;
+		x-&gt;st=0;
+	}
+}
+inline void maintain(node *x){
+	if (!x) return;
+	x-&gt;a=(ANS){x-&gt;x,x-&gt;x,x-&gt;x,x-&gt;x,x-&gt;x};
+	x-&gt;s=1;
+	if (x-&gt;l) pushdown(x-&gt;l),x-&gt;a=x-&gt;l-&gt;a+x-&gt;a,x-&gt;s+=x-&gt;l-&gt;s;
+	if (x-&gt;r) pushdown(x-&gt;r),x-&gt;a=x-&gt;a+x-&gt;r-&gt;a,x-&gt;s+=x-&gt;r-&gt;s;
+}
+node* merge(node *a,node *b){
+	if (!b) return a;
+	if (!a) return b;
+	pushdown(a); pushdown(b);
+	if (a-&gt;p&gt;b-&gt;p){
+		a-&gt;r=merge(a-&gt;r,b);
+		maintain(a);
+		return a;
+	}
+	else{
+		b-&gt;l=merge(a,b-&gt;l);
+		maintain(b);
+		return b;
+	}
+}
+void split(node *x,ele k,node*&amp;a,node*&amp;b){
+	if (!x){ a=b=NULL; return; }
+	pushdown(x);
+	ele s=(x-&gt;l)?(x-&gt;l-&gt;s+1):(1);
+	if (k&lt;s){
+		split(x-&gt;l,k,a,b);
+		x-&gt;l=b;
+		maintain(x);
+		b=x;
+	}
+	else if (k&gt;s){
+		split(x-&gt;r,k-s,a,b);
+		x-&gt;r=a;
+		maintain(x);
+		a=x;
+	}
+	else{
+		b=x-&gt;r;
+		x-&gt;r=NULL;
+		maintain(x);
+		a=x;
+	}
+}
+ele n,q;
+char s[maxn];
+node *root;
+int main(){
+	srand(2333);
+	scanf(&quot;%d%d%s&quot;,&amp;n,&amp;q,s);
+	root=NULL;
+	for (int i=0; i&lt;n; ++i){
+		np[i].x=(s[i]=='(')?(-1):(1);
+		np[i].l=np[i].r=NULL;
+		np[i].st=0;
+		np[i].flip=np[i].neg=false;
+		maintain(np+i);
+		np[i].p=rand();
+		root=merge(root,np+i);
+	}
+	while (q--){
+		char op[10],s1[5];
+		ele l,r;
+		scanf(&quot;%s%d%d&quot;,op,&amp;l,&amp;r);
+		node *a,*b,*c;
+		split(root,r,b,c);
+		split(b,l-1,a,b);
+		pushdown(b);
+		if (op[0]=='R'){
+			scanf(&quot;%s&quot;,s1);
+			b-&gt;st=(s1[0]=='(')?(-1):(1);
+		}
+		else if (op[0]=='S')
+			b-&gt;flip^=1;
+		else if (op[0]=='I')
+			b-&gt;neg^=1;
+		else{
+			ele x=max(b-&gt;a.pmx,0);
+			ele y=max(-b-&gt;a.smn,0);
+			printf(&quot;%d\n&quot;,(x&amp;1)?(((x+y)&gt;&gt;1)+1):((x+y)&gt;&gt;1));
+		}
+		root=merge(a,b);
+		root=merge(root,c);
+	}
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

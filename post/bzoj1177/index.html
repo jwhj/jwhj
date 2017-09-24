@@ -1,0 +1,182 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj1177题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj1177题解
+                    </h1>
+                    <h2 class="headline">
+                    Jul 30, 2017 10:02
+                    · 199 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/dp">dp</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=25714275&auto=0&height=66"></iframe></p>
+
+<p>先考虑最简单的情况：取一个k×k的矩形。这个……不用考虑了吧……</p>
+
+<p>再考虑一个复杂一些的情况：取两个k×k的矩形。易知，两个矩形投影到行上或投影到列上，至少有一种情况，两个矩形的投影是不重合的。那么只需要枚举一下行或列上的分界线就可以分别dp出来了。</p>
+
+<p>最后考虑原题的情况：取三个k×k的矩形。可以证明，投影到行上或投影到列上，至少有一种情况，其中一个矩形的投影与其它矩形不重合。枚举这个分界线，然后一边可以看成两个矩形的情况，一边可以看成一个矩形的情况。</p>
+
+<p>要写一大堆dp挺麻烦的。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#define ele int
+using namespace std;
+#define maxn 1510
+ele n,m,k,ans,a[maxn][maxn],b[maxn][maxn],f[4][maxn],g[4][maxn][maxn];
+inline ele sum(ele i,ele j){
+	return b[i][j]-b[i-k][j]-b[i][j-k]+b[i-k][j-k];
+}
+int main(){
+	scanf(&quot;%d%d%d&quot;,&amp;n,&amp;m,&amp;k);
+	memset(b,0,sizeof(b));
+	for (int i=0; i&lt;n; ++i)
+		for (int j=0; j&lt;m; ++j) scanf(&quot;%d&quot;,&amp;a[i][j]),b[i+1][j+1]=a[i][j];
+	for (int i=1; i&lt;=n; ++i){
+		for (int j=1; j&lt;=m; ++j) b[i][j]+=b[i][j-1];
+		for (int j=0; j&lt;=m; ++j) b[i][j]+=b[i-1][j];
+	}
+	ans=0;
+	memset(f,0,sizeof(f));
+	for (int p=1; p&lt;=3; ++p)
+		for (int i=1; i&lt;=n; ++i){
+			f[p][i]=f[p][i-1];
+			if (i&gt;=k)
+				for (int j=k; j&lt;=m; ++j)
+					f[p][i]=max(f[p][i],f[p-1][i-k]+sum(i,j));
+		}
+	ans=max(ans,f[3][n]);
+	memset(f,0,sizeof(f));
+	for (int p=1; p&lt;=3; ++p)
+		for (int j=1; j&lt;=m; ++j){
+			f[p][j]=f[p][j-1];
+			if (j&gt;=k)
+				for (int i=k; i&lt;=n; ++i)
+					f[p][j]=max(f[p][j],f[p-1][j-k]+sum(i,j));
+		}
+	ans=max(ans,f[3][m]);
+	for (int i=1; i&lt;=n; ++i)
+		for (int j=1; j&lt;=m; ++j)
+			if (i&lt;k || j&lt;k) g[0][i][j]=0;
+			else g[0][i][j]=max(max(g[0][i-1][j],g[0][i][j-1]),sum(i,j));
+	for (int i=1; i&lt;=n; ++i)
+		for (int j=m; j; --j)
+			if (i&lt;k || m-j+1&lt;k) g[1][i][j]=0;
+			else g[1][i][j]=max(max(g[1][i-1][j],g[1][i][j+1]),sum(i,j+k-1));
+	for (int i=n; i; --i)
+		for (int j=1; j&lt;=m; ++j)
+			if (n-i+1&lt;k || j&lt;k) g[2][i][j]=0;
+			else g[2][i][j]=max(max(g[2][i+1][j],g[2][i][j-1]),sum(i+k-1,j));
+	for (int i=n; i; --i)
+		for (int j=m; j; --j)
+			if (n-i+1&lt;k || m-j+1&lt;k) g[3][i][j]=0;
+			else g[3][i][j]=max(max(g[3][i+1][j],g[3][i][j+1]),sum(i+k-1,j+k-1));
+	for (int i=k; i&lt;=n-k; ++i)
+		for (int j=k; j&lt;=m-k; ++j){
+			ans=max(ans,g[0][i][j]+g[1][i][j+1]+g[2][i+1][m]);
+			ans=max(ans,g[2][i+1][j]+g[3][i+1][j+1]+g[0][i][m]);
+			ans=max(ans,g[0][i][j]+g[2][i+1][j]+g[1][n][j+1]);
+			ans=max(ans,g[0][n][j]+g[1][i][j+1]+g[3][i+1][j+1]);
+		}
+	printf(&quot;%d\n&quot;,ans);
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

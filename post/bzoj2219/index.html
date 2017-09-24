@@ -1,0 +1,220 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>bzoj2219题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj2219题解
+                    </h1>
+                    <h2 class="headline">
+                    Feb 15, 2017 10:02
+                    · 245 words
+                    · 2 minutes read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E6%95%B0%E5%AD%A6">数学</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bsgs">BSGS</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E5%8E%9F%E6%A0%B9">原根</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[&lsquo;$&rsquo;,&lsquo;$&rsquo;], [&rsquo;\(&lsquo;,&rsquo;\)&lsquo;]]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script></p>
+
+<p>如果2k+1存在原根，直接用原根来做就可以了。</p>
+
+<p>不过，大多数情况下2k+1都是不存在原根的。</p>
+
+<p>将2k+1分解质因数，设$2k+1=p_1^{a_1} p_2^{a_2}\ldots p_s^{a_s}$。我们对于每个$\mod p_i^{a_i}$分别用原根做一遍，然后乘起来就是答案，这个可以用中国剩余定理证明。</p>
+
+<p>细节比较多，可以看一下<a href="http://blog.csdn.net/regina8023/article/details/44863519">这个题解</a>。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cmath&gt;
+#include &lt;algorithm&gt;
+#include &lt;map&gt;
+#define ele long long
+using namespace std;
+inline void exgcd(ele a,ele b,ele&amp;x,ele&amp;y){
+	if (!b){ x=1; y=0; return; }
+	exgcd(b,a%b,y,x);
+	y-=a/b*x;
+}
+inline ele inv(ele k,ele MOD){
+	ele x,y;
+	exgcd(k,MOD,x,y);
+	return (x%MOD+MOD)%MOD;
+}
+inline ele bsgs(ele a,ele b,ele MOD){
+	ele m=(ele)(sqrt(MOD)+1),t1=1;
+	static map&lt;ele,ele&gt; h;
+	h.clear();
+	for (int i=0; i&lt;m; ++i,t1=t1*a%MOD) h[t1]=i;
+	ele t2=1;
+	for (int i=0; i&lt;m; ++i,t2=t2*t1%MOD){
+		ele t3=b*inv(t2,MOD)%MOD;
+		if (h.find(t3)!=h.end()) return m*i+h[t3];
+	}
+}
+inline ele pow(ele a,ele x){
+	ele ans=1,tmp=a;
+	for (; x; x&gt;&gt;=1,tmp=tmp*tmp)
+		if (x&amp;1) ans=ans*tmp;
+	return ans;
+}
+inline ele pow(ele a,ele x,ele MOD){
+	ele ans=1,tmp=a;
+	for (; x; x&gt;&gt;=1,tmp=tmp*tmp%MOD)
+		if (x&amp;1) ans=ans*tmp%MOD;
+	return ans;
+}
+inline ele calcg(ele MOD,ele phi){
+	static ele f[100000];
+	ele cnt=0;
+	for (int i=2; i*i&lt;=phi; ++i)
+		if (phi%i==0)
+			f[cnt++]=i,f[cnt++]=phi/i;
+	for (int g=2; g&lt;MOD; ++g){
+		bool flag=true;
+		for (int i=0; i&lt;cnt; ++i)
+			if (pow(g,f[i],MOD)==1){
+				flag=false;
+				break;
+			}
+		if (flag) return g;
+	}
+}
+ele gcd(ele a,ele b){
+	return (b)?(gcd(b,a%b)):(a);
+}
+inline ele func(ele a,ele b,ele MOD){
+	ele tmp=gcd(a,MOD);
+	return (b%tmp)?(0):(tmp);
+}
+int main(){
+	int T;
+	scanf(&quot;%d&quot;,&amp;T);
+	while (T--){
+		ele a,b,k;
+		scanf(&quot;%lld%lld%lld&quot;,&amp;a,&amp;b,&amp;k);
+		k=k&lt;&lt;1|1;
+		ele ans=1,tmp=k;
+		for (int i=2; ans &amp;&amp; i*i&lt;=tmp; ++i){
+			ele t1=1,t2=0;
+			while (k%i==0) k/=i,t1*=i,++t2;
+			if (!t2) continue;
+			if (b%t1==0)
+				ans*=pow(i,t2-(t2-1)/a-1);
+			else{
+				ele t3=b,t4=0;
+				while (t3%i==0 &amp;&amp; t1%i==0)
+					t3/=i,t1/=i,++t4;
+				if (t4%a)
+					ans=0;
+				else{
+					ele g=calcg(t1,t1/i*(i-1));
+					ele b1=bsgs(g,t3,t1);
+					ans*=func(a,b1,t1/i*(i-1))*pow(i,t4-t4/a);
+				}
+			}
+		}
+		if (k&gt;1){
+			ele g=calcg(k,k-1);
+			ele b1=bsgs(g,b,k);
+			ans*=func(a,b1,k-1);
+		}
+		printf(&quot;%lld\n&quot;,ans);
+	}
+	return 0;
+}
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>
