@@ -72,12 +72,13 @@
 
 <p>自从去北欧旅游以后A了题都不写题解了……写点东西拯救一下。</p>
 
-<p>##git是什么
-自己去看<a href="https://en.wikipedia.org/wiki/Git_(software)">wiki</a>。</p>
+<h2 id="git是什么">git是什么</h2>
+
+<p>自己去看<a href="https://en.wikipedia.org/wiki/Git_(software)">wiki</a>。</p>
 
 <p>需要提一下，git与github是两个不同的东西，你可以认为github是一个支持git的网站，当然这样的网站还有很多，如<a href="http://coding.net">coding</a>，<a href="http://bitbucket.org">bitbucket</a>。</p>
 
-<p>##安装git</p>
+<h2 id="安装git">安装git</h2>
 
 <p>Windows</p>
 
@@ -94,13 +95,15 @@
 <pre><code class="language-bash">sudo pacman -S git
 </code></pre>
 
-<p>##使用git</p>
+<h2 id="使用git">使用git</h2>
 
-<p>###创建软件仓库
-自己在网页端建吧……</p>
+<h3 id="创建软件仓库">创建软件仓库</h3>
 
-<p>###把git仓库下载到本地
-网页端项目页上应该有一个clone的按钮，可以得到项目的https地址，如<code>https://github.com/jwhj/jwhj.git</code>。执行下面的命令。</p>
+<p>自己在网页端建吧……</p>
+
+<h3 id="把git仓库下载到本地">把git仓库下载到本地</h3>
+
+<p>网页端项目页上应该有一个clone的按钮，可以得到项目的https地址，如<code>https://github.com/jwhj/jwhj.git</code>。执行下面的命令。</p>
 
 <pre><code class="language-bash">git clone https://github.com/jwhj/jwhj.git
 </code></pre>
@@ -110,8 +113,9 @@
 <pre><code class="language-bash">git clone -b gh-pages https://github.com/jwhj/jwhj.git
 </code></pre>
 
-<p>###上传本地的项目
-如果是第一次使用，需要说清楚你是谁：</p>
+<h3 id="上传本地的项目">上传本地的项目</h3>
+
+<p>如果是第一次使用，需要说清楚你是谁：</p>
 
 <pre><code class="language-bash">git config --global user.email &quot;your email&quot;
 git config --global user.name &quot;your name&quot;
@@ -128,8 +132,9 @@ git commit -m '此次提交的备注，不能为空，想不到的话可以随�
 git push
 </code></pre>
 
-<p>##讲个好玩的东西
-刚刚说了有些东西要在网页端操作，可如果我用linux，而且没装图形界面，只用tty的话，该怎么办呢？</p>
+<h2 id="讲个好玩的东西">讲个好玩的东西</h2>
+
+<p>刚刚说了有些东西要在网页端操作，可如果我用linux，而且没装图形界面，只用tty的话，该怎么办呢？</p>
 
 <pre><code class="language-bash">sudo pacman -S w3m
 w3m github.com
