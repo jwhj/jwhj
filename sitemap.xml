@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://blog.eleele.gq/post/yali2017/</loc>
+    <lastmod>2017-10-22T02:23:28+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.eleele.gq/post/bzoj1052/</loc>
     <lastmod>2017-09-13T10:02:43+00:00</lastmod>
   </url>
@@ -924,7 +929,7 @@
   
   <url>
     <loc>http://blog.eleele.gq/tags/noip/</loc>
-    <lastmod>2016-11-21T10:02:43+00:00</lastmod>
+    <lastmod>2017-10-22T02:23:28+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -942,7 +947,7 @@
   
   <url>
     <loc>http://blog.eleele.gq/post/</loc>
-    <lastmod>2017-09-13T10:02:43+00:00</lastmod>
+    <lastmod>2017-10-22T02:23:28+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -960,7 +965,7 @@
   
   <url>
     <loc>http://blog.eleele.gq/tags/stuffs/</loc>
-    <lastmod>2017-02-22T10:02:43+00:00</lastmod>
+    <lastmod>2017-10-22T02:23:28+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -1320,7 +1325,7 @@
   
   <url>
     <loc>http://blog.eleele.gq/</loc>
-    <lastmod>2017-09-13T10:02:43+00:00</lastmod>
+    <lastmod>2017-10-22T02:23:28+00:00</lastmod>
     <priority>0</priority>
   </url>
   

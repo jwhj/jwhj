@@ -1,0 +1,398 @@
+<script type="text/x-mathjax-config;">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" id=""></script>
+
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.29" />
+		<title>2017国庆雅礼集训总结 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        2017国庆雅礼集训总结
+                    </h1>
+                    <h2 class="headline">
+                    Oct 22, 2017 02:23
+                    · 579 words
+                    · 3 minutes read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/stuffs">stuffs</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/noip">noip</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=32234985&auto=0&height=66"></iframe>
+
+<p>外省的dalao都好强啊……长跪不起啊……</p>
+
+<p>湖南的菜好辣啊……只能靠外卖度日啊……</p>
+
+<p>应该会断断续续地写完……吧？</p>
+
+<h2 id="d4">D4</h2>
+
+<h3 id="t3">T3</h3>
+
+<p>模板题……可惜我太弱没写出来……</p>
+
+<p>f[i][j]表示a只考虑0~i，b只考虑0~j，且b[j]必须选的最长长度。</p>
+
+<p>如果a[i]!=b[j]，f[i][j]=f[i-1][j]</p>
+
+<p>否则可以证明一定是a[i]与b[j]配对。如果直接暴力寻找转移点，最后的复杂度是立方的。可以维护一个max，每次外层循环置0，内层循环中，如果a[i]&gt;b[j]，用f[i-1][j]来更新max，a[i]=b[j]进行转移的时候，f[i][j]=max+1就可以了。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#define ele int
+using namespace std;
+#define maxn 5010
+ele n,m,len,a[maxn],b[maxn],f[maxn][maxn],g[maxn][maxn];
+void put(ele i,ele j){
+	if (!i || !j) return;
+	put(i-1,g[i][j]);
+	printf((i==n)?&quot;%d\n&quot;:&quot;%d &quot;,b[j]);
+}
+int main(){
+	len=0;
+	scanf(&quot;%d&quot;,&amp;n);
+	for (int i=0; i&lt;n; ++i) scanf(&quot;%d&quot;,a+i+1);
+	scanf(&quot;%d&quot;,&amp;m);
+	for (int i=0; i&lt;m; ++i) scanf(&quot;%d&quot;,b+i+1);
+	memset(f,0,sizeof(f));
+	for (int i=1; i&lt;=n; ++i){
+		ele mx=0,p=0;
+		for (int j=1; j&lt;=m; ++j){
+			if (a[i]==b[j]) f[i][j]=mx+1,g[i][j]=p;
+			else f[i][j]=f[i-1][j],g[i][j]=g[i-1][j];
+			if (a[i]&gt;b[j] &amp;&amp; f[i-1][j]&gt;mx) mx=f[i-1][j],p=j;
+		}
+	}
+	ele ans=0,p;
+	for (int i=1; i&lt;=m; ++i)
+		if (f[n][i]&gt;ans) ans=f[n][i],p=i;
+	printf(&quot;%d\n&quot;,ans);
+	put(n,p);
+	return 0;
+}
+</code></pre>
+
+<h2 id="d6">D6</h2>
+
+<h3 id="t1">T1</h3>
+
+<p>本来是道大水题我居然没有A……</p>
+
+<p>先考虑二分答案x，然后判断是否可行。实际上就是把每一个点看成一个半径为x的圆，上下边界分别向内移动x，然后看有没有一条从左到右的通路。如果两个圆/圆和上下边界有交点，在它们之间连一条边，只需判断上边界与下边界是否联通。</p>
+
+<p>结果我就很智障地写了这个$O(k^2\log k)$的80分做法，最后还MLE了……</p>
+
+<p>仔细观察就会发现，二分答案其实挺傻的，有了上面的思路之后，直接做上边界到下边界的最小瓶颈路就可以了。</p>
+
+<p>需要注意的是，kruskal会超时，要用prim才能过。听说有个dalao用kruskal+基数排序卡过去了？orzzzzz</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cmath&gt;
+#include &lt;algorithm&gt;
+#define ele int
+using namespace std;
+#define maxn 6010
+struct edge{
+	ele v;
+	double w;
+	edge *nxt;
+}ep[maxn&lt;&lt;1],*ecnt;
+ele n,m,k,x[maxn],y[maxn],p[maxn];
+double f[maxn];
+bool vis[maxn];
+edge *h[maxn];
+inline void addedge(ele u,ele v,double w){
+	edge *p=ecnt++;
+	p-&gt;v=v; p-&gt;w=w; p-&gt;nxt=h[u];
+	h[u]=p;
+}
+inline double _sqr(double x){ return x*x; }
+inline double dis(ele i,ele j){
+	if (i&gt;j) swap(i,j);
+	if (j&lt;k) return sqrt(_sqr(x[i]-x[j])+_sqr(y[i]-y[j]));
+	if (j==k) return y[i];
+	if (j==k+1) return m-y[i];
+}
+double dfs(ele p,ele i){
+	if (i==k+1) return 0;
+	double ans=1e9;
+	for (edge *j=h[i]; j; j=j-&gt;nxt)
+		if (j-&gt;v!=p) ans=min(ans,max(j-&gt;w,dfs(i,j-&gt;v)));
+	return ans;
+}
+int main(){
+	scanf(&quot;%d%d%d&quot;,&amp;n,&amp;m,&amp;k);
+	for (int i=0; i&lt;k; ++i) scanf(&quot;%d%d&quot;,x+i,y+i);
+	memset(vis,0,sizeof(vis));
+	vis[0]=true;
+	f[0]=0;
+	for (int i=1; i&lt;k+2; ++i) f[i]=dis(0,i),p[i]=0;
+	ecnt=ep; memset(h,0,sizeof(h));
+	for (int i=1; i&lt;k+2; ++i){
+		int r=-1;
+		for (int j=0; j&lt;k+2; ++j)
+			if (!vis[j] &amp;&amp; (!~r || f[j]&lt;f[r])) r=j;
+		addedge(r,p[r],f[r]); addedge(p[r],r,f[r]);
+		f[r]=0; vis[r]=true;
+		for (int j=0; j&lt;k+2; ++j)
+			if (dis(j,r)&lt;f[j]){
+				f[j]=dis(j,r);
+				p[j]=r;
+			}
+	}
+	printf(&quot;%.9lf\n&quot;,dfs(-1,k)/2);
+	return 0;
+}
+</code></pre>
+
+<h3 id="t2">T2</h3>
+
+<p>妙啊……</p>
+
+<p>注意到p的任何一个极长上升子序列都是可以消去所有边的。这是因为，考虑这个子序列中的任意相邻两项pi，pj，在i，j之间的边要么与i相交，要么与j相交（否则就与极长矛盾）。</p>
+
+<p>另一方面，任何一个最优的方案必然不包含相交的边，所以其对应的p的序列一定是上升的子序列，进而一定是极长上升子序列。所以只需要求出权值和最小的极长上升子序列就可以了。</p>
+
+<p>在序列末尾加一个pn=INF,cn=0，记fi为只考虑0~i，以i结尾的极长上升子序列的最小权值和，那么答案就是fn。转移的时候，寻找可以与i构成极长上升子序列的j进行转移，找的方法有点像我之前做过的一道题，就是要找i左边第一个使得pj&lt;pi的j，j左边第一个使得pj&lt;pk&lt;pi的k，k左边第一个使得pk&lt;pt&lt;pi的t……</p>
+
+<p>期望复杂度$O(n\log^2 n)$。我不知道怎么卡，而且也过了，说不定这就是最坏复杂度？</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#define ele int
+using namespace std;
+#define maxn 200010
+const ele M=1&lt;&lt;18;
+const ele size=M&lt;&lt;1;
+const ele INF=2e9;
+struct ZKW{
+	ele a[size];
+	inline void init(){
+		memset(a,-1,sizeof(a));
+	}
+	inline void maintain(ele i){
+		a[i]=max(a[i&lt;&lt;1],a[i&lt;&lt;1|1]);
+	}
+	inline void upd(ele i,ele k){
+		i+=M;
+		a[i]=max(a[i],k);
+		while (i&gt;1) maintain(i&gt;&gt;=1);
+	}
+	inline ele qry(ele l,ele r){
+		if (l&gt;r) return -1;
+		ele ans=-1;
+		for (l=l+M-1,r=r+M+1; l^r^1; l&gt;&gt;=1,r&gt;&gt;=1){
+			if (~l&amp;1) ans=max(ans,a[l^1]);
+			if (r&amp;1) ans=max(ans,a[r^1]);
+		}
+		return ans;
+	}
+};
+ele n,p[maxn],c[maxn],f[maxn];
+ZKW z;
+int main(){
+	scanf(&quot;%d&quot;,&amp;n);
+	for (int i=0; i&lt;n; ++i) scanf(&quot;%d&quot;,p+i);
+	for (int i=0; i&lt;n; ++i) scanf(&quot;%d&quot;,c+i);
+	p[n]=n+1; c[n]=0;
+	++n;
+	f[0]=c[0];
+	z.init(); z.upd(p[0],0);
+	for (int i=1; i&lt;n; ++i){
+		ele j=z.qry(1,p[i]-1);
+		if (!~j) f[i]=0; else f[i]=INF;
+		while (~j){
+			f[i]=min(f[i],f[j]);
+			j=z.qry(p[j]+1,p[i]-1);
+		}
+		f[i]+=c[i];
+		z.upd(p[i],i);
+	}
+	printf(&quot;%d\n&quot;,f[n-1]);
+	return 0;
+}
+</code></pre>
+
+<h3 id="t3-1">T3</h3>
+
+<p>把每个节点u看成坐标系里的一个点(dep[u],c[u])，那其实就是要求每个点u与它祖先中某个点v构成的直线斜率的最大值的相反数。</p>
+
+<p>使得斜率最大的点一定在下凸壳上，所以只需要在对树dfs的过程中用一个可持久化栈来维护下凸壳。</p>
+
+<p>可持久化栈怎么写呢？用pv[i][j]表示i在栈中向下走2^j步达到的元素，然后各种倍增就可以了。</p>
+
+<p>细节一大堆，但实际上代码不长。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#define ele long long
+using namespace std;
+#define maxn 500010
+#define maxk 20
+const ele INF=1e9;
+struct pt{
+	ele x,y;
+};
+#define vec pt
+inline vec operator-(pt a,pt b){
+	return (vec){a.x-b.x,a.y-b.y};
+}
+inline ele cross(vec a,vec b){
+	return a.x*b.y-a.y*b.x;
+}
+struct edge{
+	ele v;
+	edge *nxt;
+}ep[maxn],*ecnt;
+ele n,q,c[maxn],dep[maxn],pv[maxn][maxk];
+double ans[maxn];
+pt p[maxn];
+edge *h[maxn];
+inline void addedge(ele u,ele v){
+	edge *p=ecnt++;
+	p-&gt;v=v; p-&gt;nxt=h[u];
+	h[u]=p;
+}
+void dfs(ele i){
+	ele r=q;
+	for (int j=maxk-1; ~j; --j)
+		if (~pv[r][j] &amp;&amp; ~pv[pv[r][j]][0]){
+			ele r1=pv[r][j];
+			if (cross(p[r1]-p[pv[r1][0]],p[i]-p[r1])&lt;0) r=r1;
+		}
+	if (~pv[r][0] &amp;&amp; cross(p[r]-p[pv[r][0]],p[i]-p[r])&lt;0) r=pv[r][0];
+	pv[i][0]=r; q=i;
+	for (int j=1; j&lt;maxk; ++j)
+		if (!~pv[i][j-1]) pv[i][j]=-1;
+		else pv[i][j]=pv[pv[i][j-1]][j-1];
+	for (edge *j=h[i]; j; j=j-&gt;nxt){
+		dep[j-&gt;v]=dep[i]+1;
+		p[j-&gt;v]=(pt){dep[j-&gt;v],c[j-&gt;v]};
+		ele r=q;
+		for (int k=maxk-1; ~k; --k)
+			if (~pv[r][k] &amp;&amp; ~pv[pv[r][k]][0]){
+				ele r1=pv[r][k];
+				if (cross(p[r1]-p[pv[r1][0]],p[j-&gt;v]-p[r1])&lt;0) r=r1;
+			}
+		if (~pv[r][0] &amp;&amp; cross(p[r]-p[pv[r][0]],p[j-&gt;v]-p[r])&lt;0) r=pv[r][0];
+		ans[j-&gt;v]=(double)(c[r]-c[j-&gt;v])/(dep[j-&gt;v]-dep[r]);
+		dfs(j-&gt;v);
+		q=i;
+	}
+}
+int main(){
+	scanf(&quot;%lld&quot;,&amp;n);
+	for (int i=0; i&lt;n; ++i) scanf(&quot;%lld&quot;,c+i);
+	ecnt=ep; memset(h,0,sizeof(h));
+	for (int i=1; i&lt;n; ++i){
+		ele x;
+		scanf(&quot;%lld&quot;,&amp;x); --x;
+		addedge(x,i);
+	}
+	memset(pv,-1,sizeof(pv));
+	dep[0]=0; p[0]=(pt){0,c[0]};
+	p[n]={-1,INF}; q=n;
+	dfs(0);
+	for (int i=1; i&lt;n; ++i) printf(&quot;%.10lf\n&quot;,ans[i]);
+	return 0;
+}
+</code></pre>
+
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>
