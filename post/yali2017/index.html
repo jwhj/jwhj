@@ -49,8 +49,8 @@
                     </h1>
                     <h2 class="headline">
                     Oct 22, 2017 02:23
-                    · 579 words
-                    · 3 minutes read
+                    · 956 words
+                    · 5 minutes read
                       <span class="tags">
                       
                       
@@ -357,6 +357,198 @@ int main(){
 	p[n]={-1,INF}; q=n;
 	dfs(0);
 	for (int i=1; i&lt;n; ++i) printf(&quot;%.10lf\n&quot;,ans[i]);
+	return 0;
+}
+</code></pre>
+
+<h2 id="d7">D7</h2>
+
+<h3 id="t1-1">T1</h3>
+
+<p>我好菜啊……</p>
+
+<p>$$\mathrm{ans}=1+\sum [i在1之前]$$</p>
+
+<p>$$E[\mathrm{ans}]=1+\sum E[i在1之前]=1+\sum Pr[i在1之前]=1+\sum \frac{a_i}{a_1+a_i}$$</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#define ele int
+using namespace std;
+#define maxn 100010
+ele n,a[maxn];
+int main(){
+	scanf(&quot;%d&quot;,&amp;n);
+	for (int i=0; i&lt;n; ++i) scanf(&quot;%d&quot;,a+i);
+	double ans=0;
+	for (int i=1; i&lt;n; ++i) ans+=(double)a[i]/(a[0]+a[i]);
+	printf(&quot;%.12lf\n&quot;,ans+1);
+	return 0;
+}
+</code></pre>
+
+<h2 id="d8">D8</h2>
+
+<h3 id="t1-2">T1</h3>
+
+<p>可以证明每个联通块之多浪费一条边。</p>
+
+<p>考虑在dfs树上从下往上做。对于每个节点，除了连向它父亲的边以外，没有被用的边如果有偶数条，则两两配对，否则把剩下来的那条边跟连向它父亲的边配对。这样最多在根节点那里浪费一条边。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#include &lt;vector&gt;
+#define ele int
+using namespace std;
+#define maxn 100010
+#define maxm 200010
+#define fi first
+#define se second
+struct edge{
+	ele v;
+	bool flag;
+	edge *nxt,*rev;
+}ep[maxm&lt;&lt;1],*ecnt;
+ele n,m;
+bool vis[maxn];
+edge *h[maxn];
+vector&lt;pair&lt;ele,pair&lt;ele,ele&gt; &gt; &gt; ans;
+vector&lt;ele&gt; lst[maxn];
+inline void addedge(ele u,ele v){
+	edge *p=ecnt++;
+	p-&gt;v=v; p-&gt;flag=false; p-&gt;nxt=h[u]; p-&gt;rev=ep+((ecnt-ep-1)^1);
+	h[u]=p;
+}
+void dfs(ele p,ele i){
+	vis[i]=true;
+	edge *k=NULL;
+	for (edge *j=h[i]; j; j=j-&gt;nxt){
+		if (!vis[j-&gt;v]) dfs(i,j-&gt;v);
+		if (j-&gt;v!=p &amp;&amp; !j-&gt;flag) lst[i].push_back(j-&gt;v),j-&gt;flag=j-&gt;rev-&gt;flag=true;
+		if (j-&gt;v==p) k=j;
+	}
+	for (int j=0; j+1&lt;lst[i].size(); j+=2)
+		ans.push_back(make_pair(i,make_pair(lst[i][j],lst[i][j+1])));
+	if (k &amp;&amp; (lst[i].size()&amp;1)){
+		k-&gt;flag=k-&gt;rev-&gt;flag=true;
+		ans.push_back(make_pair(i,make_pair(p,lst[i][lst[i].size()-1])));
+	}
+}
+int main(){
+	freopen(&quot;graph.in&quot;,&quot;r&quot;,stdin);
+	freopen(&quot;graph.out&quot;,&quot;w&quot;,stdout);
+	scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+	ecnt=ep; memset(h,0,sizeof(h));
+	for (int i=0; i&lt;m; ++i){
+		ele x,y;
+		scanf(&quot;%d%d&quot;,&amp;x,&amp;y); --x,--y;
+		addedge(x,y); addedge(y,x);
+	}
+	memset(vis,0,sizeof(vis));
+	for (int i=0; i&lt;n; ++i)
+		if (!vis[i]) dfs(-1,i);
+	printf(&quot;%d\n&quot;,ans.size());
+	for (int i=0; i&lt;ans.size(); ++i)
+		printf(&quot;%d %d %d\n&quot;,ans[i].se.fi+1,ans[i].fi+1,ans[i].se.se+1);
+	return 0;
+}
+</code></pre>
+
+<h3 id="t2-1">T2</h3>
+
+<p>记i在P中的位置为Qi，那么要使P字典序最小，只需使Q的字典序最小，而交换操作转变为，对Q中两个相邻元素，如果它们的差&gt;=k，则可以交换。</p>
+
+<p>这样的话，对Q中任意两个元素，如果它们的差小于k，那么它们的相对位置不变，否则相对位置任意。在相对位置确定的两点间连一条有向边，其实就是要求字典序最小的拓扑序。</p>
+
+<p>边数最坏情况下是$O(n^2)$级别的，但事实上，对于每个Qi,考虑它右边在[Qi-k+1,Qi-1]和[Qi+1,Qi+k-1]之间的数，只需要分别取一个最靠左的连边就可以了。这样边数就降到了$O(n)$级别。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#include &lt;set&gt;
+#include &lt;queue&gt;
+#define ele int
+using namespace std;
+#define maxn 500010
+const ele M=1&lt;&lt;19;
+const ele size=M&lt;&lt;1;
+ele n;
+struct ZKW{
+	inline void init(){
+		memset(a,-1,sizeof(a));
+	}
+	inline void maintain(ele i){
+		a[i]=max(a[i&lt;&lt;1],a[i&lt;&lt;1|1]);
+	}
+	inline void upd(ele i,ele k){
+		i+=M+1;
+		a[i]=max(a[i],k);
+		while (i&gt;1) maintain(i&gt;&gt;=1);
+	}
+	inline ele qry(ele l,ele r){
+		ele ans=-1;
+		if (l&gt;r) return ans;
+		l=max(0,l); r=min(n-1,r);
+		++l,++r;
+		for (l=l+M-1,r=r+M+1; l^r^1; l&gt;&gt;=1,r&gt;&gt;=1){
+			if (~l&amp;1) ans=max(ans,a[l^1]);
+			if (r&amp;1) ans=max(ans,a[r^1]);
+		}
+		return ans;
+	}
+	ele a[size];
+};
+struct edge{
+	ele v;
+	edge *nxt;
+}ep[maxn&lt;&lt;1],*ecnt;
+ele k,p[maxn],q[maxn],ind[maxn];
+edge *h[maxn];
+ZKW z;
+priority_queue&lt;ele&gt; Q;
+inline void addedge(ele u,ele v){
+	edge *p=ecnt++;
+	p-&gt;v=v; p-&gt;nxt=h[u];
+	h[u]=p;
+}
+int main(){
+	freopen(&quot;permutation.in&quot;,&quot;r&quot;,stdin);
+	freopen(&quot;permutation.out&quot;,&quot;w&quot;,stdout);
+	scanf(&quot;%d%d&quot;,&amp;n,&amp;k);
+	for (int i=0; i&lt;n; ++i){
+		ele x;
+		scanf(&quot;%d&quot;,&amp;x);
+		q[x-1]=i;
+	}
+	ecnt=ep; memset(h,0,sizeof(h));
+	memset(ind,0,sizeof(ind));
+	z.init(); z.upd(q[0],0);
+	for (int i=1; i&lt;n; ++i){
+		ele j=z.qry(q[i]-k+1,q[i]-1);
+		if (~j) addedge(q[j],q[i]),++ind[q[i]];
+		j=z.qry(q[i]+1,q[i]+k-1);
+		if (~j) addedge(q[j],q[i]),++ind[q[i]];
+		z.upd(q[i],i);
+	}
+	for (int i=0; i&lt;n; ++i)
+		if (!ind[i]) Q.push(-i);
+	for (int i=0; i&lt;n; ++i){
+		ele k=-Q.top(); Q.pop();
+		p[k]=i+1;
+		for (edge *j=h[k]; j; j=j-&gt;nxt){
+			--ind[j-&gt;v];
+			if (!ind[j-&gt;v]) Q.push(-j-&gt;v);
+		}
+	}
+	for (int i=0; i&lt;n; ++i) printf(&quot;%d\n&quot;,p[i]);
 	return 0;
 }
 </code></pre>
