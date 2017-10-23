@@ -1,0 +1,181 @@
+<script type="text/x-mathjax-config;">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" id=""></script>
+
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.29" />
+		<title>jzoj5415题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        jzoj5415题解
+                    </h1>
+                    <h2 class="headline">
+                    Oct 23, 2017 13:57
+                    · 121 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/jzoj">jzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/dp">dp</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E5%87%B8%E5%8C%85">凸包</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E5%8D%95%E8%B0%83%E6%A0%88/%E9%98%9F%E5%88%97">单调栈/队列</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=32897947&auto=0&height=66"></iframe>
+
+<p>首先注意到，对于c一样且i%c一样的车站，它们能转移到的车站集合是一样的。考虑这些车站，它们对后面的车站的贡献都可以写成直线v[i]/c<a href="x-i">i</a>+f[i]的形式。在后面转移的时候，其实就是要求在某一个横坐标的位置所有直线的最低点，此时有一个很自然的想法就是维护一个上凸壳。</p>
+
+<p>这个凸壳乍一看很不好维护，但是仔细想一想会发现，每次新加进来一条直线的时候，这条直线在i处的高度肯定不比凸壳上任意一条直线要高（否则就可以用比当前直线低的直线来更新f[i])。那么，如果这条新加进来的直线的斜率小于等于凸壳上某条直线的斜率，凸壳上那条直线就没有用了，可以直接去掉。我觉得这道题最妙的就是这个性质，以前遇到类似的题没想出来，这回做的时候还是没想出来……</p>
+
+<p>利用这个性质，就可以保证直线的斜率单调递增，从而用单调栈来维护上凸壳。</p>
+
+<p>对于本题，总共需要维护maxc*maxc个凸壳，每次查询的时候要考虑maxc个。</p>
+
+<p>时间复杂度$O(n\times\mathrm{maxc})$。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#include &lt;vector&gt;
+#define ele int
+using namespace std;
+#define maxn 1000010
+#define maxc 11
+const ele INF=1e9;
+struct line{
+	double k,b;
+};
+inline double calc(line a,line b){
+	return (b.b-a.b)/(a.k-b.k);
+}
+ele n,mc,c[maxn],v[maxn],f[maxn];
+vector&lt;line&gt; s[maxc][maxc];
+int main(){
+//	freopen(&quot;bus.in&quot;,&quot;r&quot;,stdin);
+//	freopen(&quot;bus.out&quot;,&quot;w&quot;,stdout);
+	scanf(&quot;%d%d&quot;,&amp;n,&amp;mc);
+	for (int i=0; i&lt;n; ++i) scanf(&quot;%d%d&quot;,c+i,v+i);
+	f[0]=0;
+	for (int i=0; i&lt;n; ++i){
+		if (f[i]&lt;INF){
+			line l=(line){(double)v[i]/c[i],-(double)v[i]/c[i]*i+f[i]};
+			while (s[c[i]][i%c[i]].size()&gt;0){
+				line l1=*--s[c[i]][i%c[i]].end();
+				if (l.k&gt;l1.k) break;
+				s[c[i]][i%c[i]].pop_back();
+			}
+			while (s[c[i]][i%c[i]].size()&gt;1){
+				line l1=*--s[c[i]][i%c[i]].end();
+				line l2=*----s[c[i]][i%c[i]].end();
+				if (calc(l,l1)&lt;calc(l1,l2)) break;
+				s[c[i]][i%c[i]].pop_back();
+			}
+			s[c[i]][i%c[i]].push_back(l);
+		}
+		f[i+1]=INF;
+		for (int c=1; c&lt;=mc; ++c){
+			while (s[c][(i+1)%c].size()&gt;1){
+				line l1=*--s[c][(i+1)%c].end();
+				line l2=*----s[c][(i+1)%c].end();
+				if (i+1&lt;calc(l1,l2)) break;
+				s[c][(i+1)%c].pop_back();
+			}
+			if (s[c][(i+1)%c].size()){
+				line l=*--s[c][(i+1)%c].end();
+				f[i+1]=min(f[i+1],(ele)(l.k*(i+1)+l.b+0.5));
+			}
+		}
+		printf((i==n-1)?&quot;%d\n&quot;:&quot;%d &quot;,(f[i+1]&lt;INF)?f[i+1]:-1);
+	}
+	return 0;
+}
+</code></pre>
+
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

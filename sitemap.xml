@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://blog.eleele.gq/post/jzoj5415/</loc>
+    <lastmod>2017-10-23T13:57:08+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.eleele.gq/post/yali2017/</loc>
     <lastmod>2017-10-22T02:23:28+00:00</lastmod>
   </url>
@@ -851,7 +856,7 @@
   
   <url>
     <loc>http://blog.eleele.gq/tags/dp/</loc>
-    <lastmod>2017-08-28T10:02:43+00:00</lastmod>
+    <lastmod>2017-10-23T13:57:08+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -888,6 +893,12 @@
   <url>
     <loc>http://blog.eleele.gq/tags/huffman/</loc>
     <lastmod>2016-05-29T10:02:43+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.eleele.gq/tags/jzoj/</loc>
+    <lastmod>2017-10-23T13:57:08+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -947,7 +958,7 @@
   
   <url>
     <loc>http://blog.eleele.gq/post/</loc>
-    <lastmod>2017-10-22T02:23:28+00:00</lastmod>
+    <lastmod>2017-10-23T13:57:08+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -1055,7 +1066,7 @@
   
   <url>
     <loc>http://blog.eleele.gq/tags/%E5%87%B8%E5%8C%85/</loc>
-    <lastmod>2016-12-16T10:02:43+00:00</lastmod>
+    <lastmod>2017-10-23T13:57:08+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -1091,7 +1102,7 @@
   
   <url>
     <loc>http://blog.eleele.gq/tags/%E5%8D%95%E8%B0%83%E6%A0%88/%E9%98%9F%E5%88%97/</loc>
-    <lastmod>2017-08-03T10:02:43+00:00</lastmod>
+    <lastmod>2017-10-23T13:57:08+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -1325,7 +1336,7 @@
   
   <url>
     <loc>http://blog.eleele.gq/</loc>
-    <lastmod>2017-10-22T02:23:28+00:00</lastmod>
+    <lastmod>2017-10-23T13:57:08+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -1355,7 +1366,7 @@
   
   <url>
     <loc>http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3/</loc>
-    <lastmod>2017-10-22T02:23:28+00:00</lastmod>
+    <lastmod>2017-10-23T13:57:08+00:00</lastmod>
     <priority>0</priority>
   </url>
   

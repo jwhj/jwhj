@@ -6,10 +6,25 @@
     <description>Recent content in Posts on 蒟蒻的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 22 Oct 2017 02:23:28 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 23 Oct 2017 13:57:08 +0000</lastBuildDate>
     
 	<atom:link href="http://blog.eleele.gq/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>jzoj5415题解</title>
+      <link>http://blog.eleele.gq/post/jzoj5415/</link>
+      <pubDate>Mon, 23 Oct 2017 13:57:08 +0000</pubDate>
+      
+      <guid>http://blog.eleele.gq/post/jzoj5415/</guid>
+      <description>首先注意到，对于c一样且i%c一样的车站，它们能转移到的车站集合是一样的。考虑这些车站，它们对后面的车站的贡献都可以写成直线v[i]/ci+f[i]的形式。在后面转移的时候，其实就是要求在某一个横坐标的位置所有直线的最低点，此时有一个很自然的想法就是维护一个上凸壳。
+这个凸壳乍一看很不好维护，但是仔细想一想会发现，每次新加进来一条直线的时候，这条直线在i处的高度肯定不比凸壳上任意一条直线要高（否则就可以用比当前直线低的直线来更新f[i])。那么，如果这条新加进来的直线的斜率小于等于凸壳上某条直线的斜率，凸壳上那条直线就没有用了，可以直接去掉。我觉得这道题最妙的就是这个性质，以前遇到类似的题没想出来，这回做的时候还是没想出来……
+利用这个性质，就可以保证直线的斜率单调递增，从而用单调栈来维护上凸壳。
+对于本题，总共需要维护maxc*maxc个凸壳，每次查询的时候要考虑maxc个。
+时间复杂度$O(n\times\mathrm{maxc})$。
+代码：
+#include &amp;lt;cstdio&amp;gt; #include &amp;lt;cstring&amp;gt; #include &amp;lt;algorithm&amp;gt; #include &amp;lt;vector&amp;gt; #define ele int using namespace std; #define maxn 1000010 #define maxc 11 const ele INF=1e9; struct line{ double k,b; }; inline double calc(line a,line b){ return (b.b-a.b)/(a.k-b.k); } ele n,mc,c[maxn],v[maxn],f[maxn]; vector&amp;lt;line&amp;gt; s[maxc][maxc]; int main(){ //	freopen(&amp;quot;bus.in&amp;quot;,&amp;quot;r&amp;quot;,stdin); //	freopen(&amp;quot;bus.out&amp;quot;,&amp;quot;w&amp;quot;,stdout); scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;mc); for (int i=0; i&amp;lt;n; ++i) scanf(&amp;quot;%d%d&amp;quot;,c+i,v+i); f[0]=0; for (int i=0; i&amp;lt;n; ++i){ if (f[i]&amp;lt;INF){ line l=(line){(double)v[i]/c[i],-(double)v[i]/c[i]*i+f[i]}; while (s[c[i]][i%c[i]].</description>
+    </item>
     
     <item>
       <title>2017国庆雅礼集训总结</title>

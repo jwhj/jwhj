@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>凸包 on 蒟蒻的博客</title>
-    <link>http://blog.eleele.gq/tags/%E5%87%B8%E5%8C%85/</link>
-    <description>Recent content in 凸包 on 蒟蒻的博客</description>
+    <title>Jzoj on 蒟蒻的博客</title>
+    <link>http://blog.eleele.gq/tags/jzoj/</link>
+    <description>Recent content in Jzoj on 蒟蒻的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 23 Oct 2017 13:57:08 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.eleele.gq/tags/%E5%87%B8%E5%8C%85/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://blog.eleele.gq/tags/jzoj/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -24,15 +24,6 @@
 时间复杂度$O(n\times\mathrm{maxc})$。
 代码：
 #include &amp;lt;cstdio&amp;gt; #include &amp;lt;cstring&amp;gt; #include &amp;lt;algorithm&amp;gt; #include &amp;lt;vector&amp;gt; #define ele int using namespace std; #define maxn 1000010 #define maxc 11 const ele INF=1e9; struct line{ double k,b; }; inline double calc(line a,line b){ return (b.b-a.b)/(a.k-b.k); } ele n,mc,c[maxn],v[maxn],f[maxn]; vector&amp;lt;line&amp;gt; s[maxc][maxc]; int main(){ //	freopen(&amp;quot;bus.in&amp;quot;,&amp;quot;r&amp;quot;,stdin); //	freopen(&amp;quot;bus.out&amp;quot;,&amp;quot;w&amp;quot;,stdout); scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;n,&amp;amp;mc); for (int i=0; i&amp;lt;n; ++i) scanf(&amp;quot;%d%d&amp;quot;,c+i,v+i); f[0]=0; for (int i=0; i&amp;lt;n; ++i){ if (f[i]&amp;lt;INF){ line l=(line){(double)v[i]/c[i],-(double)v[i]/c[i]*i+f[i]}; while (s[c[i]][i%c[i]].</description>
-    </item>
-    
-    <item>
-      <title>bzoj1007题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1007/</link>
-      <pubDate>Fri, 16 Dec 2016 10:02:43 +0000</pubDate>
-      
-      <guid>http://blog.eleele.gq/post/bzoj1007/</guid>
-      <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>
