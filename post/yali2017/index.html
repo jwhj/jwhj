@@ -49,8 +49,8 @@
                     </h1>
                     <h2 class="headline">
                     Oct 22, 2017 02:23
-                    · 956 words
-                    · 5 minutes read
+                    · 1112 words
+                    · 6 minutes read
                       <span class="tags">
                       
                       
@@ -77,6 +77,8 @@
 <p>湖南的菜好辣啊……只能靠外卖度日啊……</p>
 
 <p>应该会断断续续地写完……吧？</p>
+
+<p>考场上A了的可能就不写了？</p>
 
 <h2 id="d4">D4</h2>
 
@@ -124,6 +126,88 @@ int main(){
 		if (f[n][i]&gt;ans) ans=f[n][i],p=i;
 	printf(&quot;%d\n&quot;,ans);
 	put(n,p);
+	return 0;
+}
+</code></pre>
+
+<h2 id="d5">D5</h2>
+
+<h3 id="t3-1">T3</h3>
+
+<p>妙啊……</p>
+
+<p>让f[x][k]表示以x为根的子树中，距离恰好为k的灭火器的剩余使用次数，g[x][k]表示x为根的子树中，距离恰好为k的尚未被处理的点的个数。</p>
+
+<p>从下往上，对于每个x，g[x][k]必然要用f[x][0]来处理，f[x][j]和g[x][k-j]匹配一定可以得到最优解（可以用交叉互换来证明）。如果f[x][j]和g[x][k-j]都匹配完了，f[x][j]和g[x][k-1-j]也可以匹配，这样一定能能到最优解。如果它们都被匹配完了，不需要考虑f[x][j]和g[x][k-2-j]，因为它会在x的父亲处被处理。</p>
+
+<p>最后在根做一个简单的贪心就可以了。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#define ele int
+#define ll long long
+using namespace std;
+#define maxn 100010
+#define maxk 25
+struct edge{
+	ele v;
+	edge *nxt;
+}ep[maxn&lt;&lt;1],*ecnt;
+ele n,k,s,ans,f[maxn][maxk],g[maxn][maxk];
+edge *h[maxn];
+inline void addedge(ele u,ele v){
+	edge *p=ecnt++;
+	p-&gt;v=v; p-&gt;nxt=h[u];
+	h[u]=p;
+}
+inline ele calc(ele x){
+	return x?((x-1)/s+1):0;
+}
+void dfs(ele p,ele i){
+	for (edge *j=h[i]; j; j=j-&gt;nxt)
+		if (j-&gt;v!=p){
+			dfs(i,j-&gt;v);
+			for (int k1=1; k1&lt;=k; ++k1)
+				f[i][k1]=min(n,f[i][k1]+f[j-&gt;v][k1-1]),g[i][k1]+=g[j-&gt;v][k1-1];
+		}
+	++g[i][0];
+	if (g[i][k]){
+		ele t=calc(g[i][k]);
+		ans+=t;
+		f[i][0]=min((ll)n,(ll)t*s);
+	}
+	for (int k1=0; k1&lt;=k; ++k1){
+		ele d=min(f[i][k1],g[i][k-k1]);
+		f[i][k1]-=d; g[i][k-k1]-=d;
+	}
+	for (int k1=0; k1&lt;k; ++k1){
+		ele d=min(f[i][k1],g[i][k-1-k1]);
+		f[i][k1]-=d; g[i][k-1-k1]-=d;
+	}
+}
+int main(){
+	scanf(&quot;%d%d%d&quot;,&amp;n,&amp;s,&amp;k);
+	ecnt=ep; memset(h,0,sizeof(h));
+	for (int i=0; i&lt;n-1; ++i){
+		ele u,v;
+		scanf(&quot;%d%d&quot;,&amp;u,&amp;v); --u,--v;
+		addedge(u,v); addedge(v,u);
+	}
+	memset(f,0,sizeof(f)); memset(g,0,sizeof(g));
+	ans=0;
+	dfs(-1,0);
+	for (int i=0; i&lt;=k; ++i)
+		for (int j=k-i; ~j; --j){
+			ele d=min(f[0][i],g[0][j]);
+			f[0][i]-=d; g[0][j]-=d;
+		}
+	ele tmp=0;
+	for (int i=0; i&lt;=k; ++i) tmp+=g[0][i];
+	ans+=calc(tmp);
+	printf(&quot;%d\n&quot;,ans);
 	return 0;
 }
 </code></pre>
@@ -275,7 +359,7 @@ int main(){
 }
 </code></pre>
 
-<h3 id="t3-1">T3</h3>
+<h3 id="t3-2">T3</h3>
 
 <p>把每个节点u看成坐标系里的一个点(dep[u],c[u])，那其实就是要求每个点u与它祖先中某个点v构成的直线斜率的最大值的相反数。</p>
 

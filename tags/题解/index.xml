@@ -20,12 +20,13 @@
       <description>外省的dalao都好强啊……长跪不起啊……
 湖南的菜好辣啊……只能靠外卖度日啊……
 应该会断断续续地写完……吧？
+考场上A了的可能就不写了？
 D4 T3 模板题……可惜我太弱没写出来……
 f[i][j]表示a只考虑0~i，b只考虑0~j，且b[j]必须选的最长长度。
 如果a[i]!=b[j]，f[i][j]=f[i-1][j]
 否则可以证明一定是a[i]与b[j]配对。如果直接暴力寻找转移点，最后的复杂度是立方的。可以维护一个max，每次外层循环置0，内层循环中，如果a[i]&amp;gt;b[j]，用f[i-1][j]来更新max，a[i]=b[j]进行转移的时候，f[i][j]=max+1就可以了。
 代码：
-#include &amp;lt;cstdio&amp;gt; #include &amp;lt;cstring&amp;gt; #include &amp;lt;algorithm&amp;gt; #define ele int using namespace std; #define maxn 5010 ele n,m,len,a[maxn],b[maxn],f[maxn][maxn],g[maxn][maxn]; void put(ele i,ele j){ if (!i || !j) return; put(i-1,g[i][j]); printf((i==n)?&amp;quot;%d\n&amp;quot;:&amp;quot;%d &amp;quot;,b[j]); } int main(){ len=0; scanf(&amp;quot;%d&amp;quot;,&amp;amp;n); for (int i=0; i&amp;lt;n; ++i) scanf(&amp;quot;%d&amp;quot;,a+i+1); scanf(&amp;quot;%d&amp;quot;,&amp;amp;m); for (int i=0; i&amp;lt;m; ++i) scanf(&amp;quot;%d&amp;quot;,b+i+1); memset(f,0,sizeof(f)); for (int i=1; i&amp;lt;=n; ++i){ ele mx=0,p=0; for (int j=1; j&amp;lt;=m; ++j){ if (a[i]==b[j]) f[i][j]=mx+1,g[i][j]=p; else f[i][j]=f[i-1][j],g[i][j]=g[i-1][j]; if (a[i]&amp;gt;b[j] &amp;amp;&amp;amp; f[i-1][j]&amp;gt;mx) mx=f[i-1][j],p=j; } } ele ans=0,p; for (int i=1; i&amp;lt;=m; ++i) if (f[n][i]&amp;gt;ans) ans=f[n][i],p=i; printf(&amp;quot;%d\n&amp;quot;,ans); put(n,p); return 0; }  D6 T1 本来是道大水题我居然没有A……</description>
+#include &amp;lt;cstdio&amp;gt; #include &amp;lt;cstring&amp;gt; #include &amp;lt;algorithm&amp;gt; #define ele int using namespace std; #define maxn 5010 ele n,m,len,a[maxn],b[maxn],f[maxn][maxn],g[maxn][maxn]; void put(ele i,ele j){ if (!i || !j) return; put(i-1,g[i][j]); printf((i==n)?&amp;quot;%d\n&amp;quot;:&amp;quot;%d &amp;quot;,b[j]); } int main(){ len=0; scanf(&amp;quot;%d&amp;quot;,&amp;amp;n); for (int i=0; i&amp;lt;n; ++i) scanf(&amp;quot;%d&amp;quot;,a+i+1); scanf(&amp;quot;%d&amp;quot;,&amp;amp;m); for (int i=0; i&amp;lt;m; ++i) scanf(&amp;quot;%d&amp;quot;,b+i+1); memset(f,0,sizeof(f)); for (int i=1; i&amp;lt;=n; ++i){ ele mx=0,p=0; for (int j=1; j&amp;lt;=m; ++j){ if (a[i]==b[j]) f[i][j]=mx+1,g[i][j]=p; else f[i][j]=f[i-1][j],g[i][j]=g[i-1][j]; if (a[i]&amp;gt;b[j] &amp;amp;&amp;amp; f[i-1][j]&amp;gt;mx) mx=f[i-1][j],p=j; } } ele ans=0,p; for (int i=1; i&amp;lt;=m; ++i) if (f[n][i]&amp;gt;ans) ans=f[n][i],p=i; printf(&amp;quot;%d\n&amp;quot;,ans); put(n,p); return 0; }  D5 T3 妙啊……</description>
     </item>
     
     <item>
