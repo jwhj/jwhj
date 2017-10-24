@@ -6,10 +6,29 @@
     <description>Recent content on 蒟蒻的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 23 Oct 2017 13:57:08 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 24 Oct 2017 13:53:30 +0000</lastBuildDate>
     
 	<atom:link href="http://blog.eleele.gq/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>纪中模拟赛10-24总结</title>
+      <link>http://blog.eleele.gq/post/jz10-24/</link>
+      <pubDate>Tue, 24 Oct 2017 13:53:30 +0000</pubDate>
+      
+      <guid>http://blog.eleele.gq/post/jz10-24/</guid>
+      <description>开考的时候先看了一眼T1，发现题面似乎有点问题，于是跳到T2。
+看T2的时候，马上想到拓扑序列计数，然而并不会做，还忽略了每个点出度不超过1这个条件。
+于是我打了一下T2的暴力，回去看T1，发现题面已经更正了，就打了暴力和正解放在一遍拍着。接着我回去想T2，卡了很久没想出来，最后看到之前忽略了的那个条件，然后……就秒掉了。
+此时只剩下1h，我变得很慌，T3成功5分滚粗。
+最后看成绩0+100+5=105
+T1的话，数据应该是错了，经胡乱修改+测试，数据更正的话我应该能100，这个就没啥可说了。
+T2我读错题这个过于sb。以后看到题，就算有想法，也一定要坚持仔细读完题目，因为这个想法未必是对的，而且这样很容易漏条件，我好像就漏过好几次了。
+T3滚粗主要还是因为太慌没想清楚？中午吃饭的时候随便想想也就会做了。不过挺考码力的，另外如果写成$O(q\log^2 n)$的话需要优化一下才能过。我采取的优化主要是，寻找左右第一个可行位置时，直接在线段树上二分，省去这部分的一个log，再用预编译命令开O2。不知道为什么预编译命令开的O2好像没有直接命令行开O2快？
+题解就不写了，还是挺简单的。
+代码（T1）：
+#include &amp;lt;cstdio&amp;gt; #include &amp;lt;cstring&amp;gt; #include &amp;lt;algorithm&amp;gt; #define ele long long using namespace std; #define maxn 810 #define maxk 10 const ele INF=1e9; ele n,m,q,_log[maxn],a[maxn][maxn],b[maxn][maxn]; struct st{ ele a[maxn][maxn],f[maxn][maxn][maxk]; inline void init(){ for (int i=0; i&amp;lt;n; ++i) for (int j=0; j&amp;lt;m; ++j) f[i][j][0]=a[i][j]; for (int k=1; k&amp;lt;maxk; ++k) for (int i=0; i&amp;lt;n; ++i) for (int j=0; j&amp;lt;m; ++j){ f[i][j][k]=f[i][j][k-1]; ele L=1&amp;lt;&amp;lt;(k-1); if (i+L&amp;lt;n) f[i][j][k]=min(f[i][j][k],f[i+L][j][k-1]); if (j+L&amp;lt;m) f[i][j][k]=min(f[i][j][k],f[i][j+L][k-1]); if (i+L&amp;lt;n &amp;amp;&amp;amp; j+L&amp;lt;m) f[i][j][k]=min(f[i][j][k],f[i+L][j+L][k-1]); } } inline ele qry(ele i,ele j,ele L){ ele k=_log[L],L1=1&amp;lt;&amp;lt;k; ele ans=INF; ans=min(ans,f[i][j][k]); ans=min(ans,f[i+L-L1][j][k]); ans=min(ans,f[i][j+L-L1][k]); ans=min(ans,f[i+L-L1][j+L-L1][k]); return ans; } inline ele qry(ele x1,ele y1,ele x2,ele y2){ ele Lx=x2-x1+1,Ly=y2-y1+1; ele ans=INF; if (Lx&amp;lt;Ly){ for (ele y=y1; y&amp;lt;=y2; y+=Lx) ans=min(ans,qry(x1,min(y,y2-Lx+1),Lx)); } else{ for (ele x=x1; x&amp;lt;=x2; x+=Ly) ans=min(ans,qry(min(x,x2-Ly+1),y1,Ly)); } return ans; } }qmx,qmn; int main(){ //	freopen(&amp;quot;phalanx.</description>
+    </item>
     
     <item>
       <title>jzoj5415题解</title>
