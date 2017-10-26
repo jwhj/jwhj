@@ -1,0 +1,138 @@
+<script type="text/x-mathjax-config;">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" id=""></script>
+
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.29" />
+		<title>jzoj5407题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        jzoj5407题解
+                    </h1>
+                    <h2 class="headline">
+                    Oct 26, 2017 00:20
+                    · 45 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/jzoj">jzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA">博弈论</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>我博弈论好废啊……</p>
+
+<p>归纳证明A，B都不为0的时候，答案是A-B-2.</p>
+
+<p>首先，后手总能不断消耗先手的水晶，直到对方只剩一个，从而达到答案。</p>
+
+<p>先手出了一枚水晶之后，如果后手接着出，相当于先后手互换，本来的先手只要采用相同的策略，不断消耗后手的水晶，最后的结果对后手就已经更为不利，所以后手不可能接着出。</p>
+
+<p>用归纳证一下最优性就可以了。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#define ele int
+using namespace std;
+int main(){
+//	freopen(&quot;deep.in&quot;,&quot;r&quot;,stdin);
+//	freopen(&quot;deep.out&quot;,&quot;w&quot;,stdout);
+	ele T;
+	scanf(&quot;%d&quot;,&amp;T);
+	while (T--){
+		ele a,b;
+		scanf(&quot;%d%d&quot;,&amp;a,&amp;b);
+		if (!a) printf(&quot;%d\n&quot;,-b);
+		else if (!b) printf(&quot;%d\n&quot;,a);
+		else printf(&quot;%d\n&quot;,a-b-2);
+	}
+	return 0;
+}
+</code></pre>
+
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

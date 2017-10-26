@@ -6,10 +6,25 @@
     <description>Recent content on 蒟蒻的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 24 Oct 2017 13:53:30 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 26 Oct 2017 00:20:03 +0000</lastBuildDate>
     
 	<atom:link href="http://blog.eleele.gq/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>jzoj5407题解</title>
+      <link>http://blog.eleele.gq/post/jz5407/</link>
+      <pubDate>Thu, 26 Oct 2017 00:20:03 +0000</pubDate>
+      
+      <guid>http://blog.eleele.gq/post/jz5407/</guid>
+      <description>我博弈论好废啊……
+归纳证明A，B都不为0的时候，答案是A-B-2.
+首先，后手总能不断消耗先手的水晶，直到对方只剩一个，从而达到答案。
+先手出了一枚水晶之后，如果后手接着出，相当于先后手互换，本来的先手只要采用相同的策略，不断消耗后手的水晶，最后的结果对后手就已经更为不利，所以后手不可能接着出。
+用归纳证一下最优性就可以了。
+代码：
+#include &amp;lt;cstdio&amp;gt; #include &amp;lt;cstring&amp;gt; #include &amp;lt;algorithm&amp;gt; #define ele int using namespace std; int main(){ //	freopen(&amp;quot;deep.in&amp;quot;,&amp;quot;r&amp;quot;,stdin); //	freopen(&amp;quot;deep.out&amp;quot;,&amp;quot;w&amp;quot;,stdout); ele T; scanf(&amp;quot;%d&amp;quot;,&amp;amp;T); while (T--){ ele a,b; scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;a,&amp;amp;b); if (!a) printf(&amp;quot;%d\n&amp;quot;,-b); else if (!b) printf(&amp;quot;%d\n&amp;quot;,a); else printf(&amp;quot;%d\n&amp;quot;,a-b-2); } return 0; }  </description>
+    </item>
     
     <item>
       <title>纪中模拟赛10-24总结</title>
