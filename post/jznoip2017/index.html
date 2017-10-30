@@ -10,7 +10,7 @@
 		
 		<meta name="description" content="whatever">
 		<meta name="generator" content="Hugo 0.30.2" />
-		<title>jzoj5407题解 &middot; 蒟蒻的博客</title>
+		<title>纪中noip2017模拟赛总结 &middot; 蒟蒻的博客</title>
 		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
 		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
 		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
@@ -45,11 +45,11 @@
             <article class="post">
                 <header>
                     <h1>
-                        jzoj5407题解
+                        纪中noip2017模拟赛总结
                     </h1>
                     <h2 class="headline">
-                    Oct 26, 2017 00:20
-                    · 45 words
+                    Oct 30, 2017 12:57
+                    · 21 words
                     · 1 minute read
                       <span class="tags">
                       
@@ -59,7 +59,7 @@
                           
                               <a href="http://blog.eleele.gq/tags/jzoj">jzoj</a>
                           
-                              <a href="http://blog.eleele.gq/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA">博弈论</a>
+                              <a href="http://blog.eleele.gq/tags/stuffs">stuffs</a>
                           
                       
                       
@@ -68,38 +68,51 @@
                 </header>
                 
                 <section id="post-body">
-                    <p>我博弈论好废啊……</p>
+                    
 
-<p>归纳证明A，B都不为0的时候，答案是A-B-2.</p>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1696829&auto=0&height=66"></iframe>
 
-<p>首先，后手总能不断消耗先手的水晶，直到对方只剩一个，从而达到答案。</p>
+<p>没什么状态写……慢慢完善吧……</p>
 
-<p>先手出了一枚水晶之后，如果后手接着出，相当于先后手互换，本来的先手只要采用相同的策略，不断消耗后手的水晶，最后的结果对后手就已经更为不利，所以后手不可能接着出。</p>
+<h2 id="10-24">10-24</h2>
 
-<p>用归纳证一下最优性就可以了。</p>
+<p>在前面</p>
 
-<p>代码：</p>
+<h2 id="10-25">10-25</h2>
 
-<pre><code class="language-cpp">#include &lt;cstdio&gt;
-#include &lt;cstring&gt;
-#include &lt;algorithm&gt;
-#define ele int
-using namespace std;
-int main(){
-//	freopen(&quot;deep.in&quot;,&quot;r&quot;,stdin);
-//	freopen(&quot;deep.out&quot;,&quot;w&quot;,stdout);
-	ele T;
-	scanf(&quot;%d&quot;,&amp;T);
-	while (T--){
-		ele a,b;
-		scanf(&quot;%d%d&quot;,&amp;a,&amp;b);
-		if (!a) printf(&quot;%d\n&quot;,-b);
-		else if (!b) printf(&quot;%d\n&quot;,a);
-		else printf(&quot;%d\n&quot;,a-b-2);
-	}
-	return 0;
-}
-</code></pre>
+<p>雅礼原题</p>
+
+<h2 id="10-26">10-26</h2>
+
+<p>A了的2道题都做得比标算复杂……不过rk1了还是不错的。</p>
+
+<p>T1专治像我这样的莫比乌斯反演学傻，直接考虑几何意义就可以了……</p>
+
+<p>T2发现其实就是在dfs序上选若干个不相交的子树，随便做……</p>
+
+<p>T3是一个非常奥妙的dp，我的50分做法虽然比标算复杂，但是可以拓展到100分，思路大概是是把代价转化为到线段中点距离的两倍，再稍微修改一下状态的表示，利用决策单调性进行dp。</p>
+
+<h2 id="10-27">10-27</h2>
+
+<p>T1没什么好说的……码一大段一大段的代码就可以了。</p>
+
+<p>T2我被排列这个条件给干扰了，结果就去想置换群一直没想出来。其实排列这个条件的作用不是很大，原来的问题可以拆成两个相同的问题，然后简单地DP+容斥即可解决。感觉先DP出一个带重复的东西，再容斥掉这个思路挺妙的。</p>
+
+<p>T3我本来想到了分治，可当时模模糊糊地认为过不了就没写……这种题首先应该注意到图很小，可以把所有点对最短路看成区间上的一个信息，这样区间的信息还可以合并。但如果直接写线段树的话，维护的信息远多于每次查询的信息，所以可以用这道题这样的分治的思路。</p>
+
+<h2 id="10-28">10-28</h2>
+
+<p>T1用一棵平衡树乱搞。</p>
+
+<p>T2奇妙的贪心，首先考虑xi=0的情况怎么贪，然后考虑拓展到xi!=0的情况，发现选y的部分和选z的部分同样满足某个性质，从而把做法拓展。</p>
+
+<p>T3我本来的思路是，给每条k-x的边附加一个权值，再做最小生成树，二分这个权值来得到x系数不同的时候对应的最小常数项。但是这个思路是不能用在不保证一定有解的情况下的。正确的思路是考虑由k+x组成的树，随着x增大，向k-x组成的树变化的情况。为什么还要写LCT啊……</p>
+
+<h2 id="10-30">10-30</h2>
+
+<p>T1和T2都是大水题。</p>
+
+<p>T3的差分是一个非常妙的思路。</p>
 
                 </section>
             </article>
