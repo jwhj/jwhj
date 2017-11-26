@@ -1,0 +1,207 @@
+<script type="text/x-mathjax-config;">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" id=""></script>
+
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.30.2" />
+		<title>hdu5307题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        hdu5307题解
+                    </h1>
+                    <h2 class="headline">
+                    Nov 26, 2017 14:17
+                    · 227 words
+                    · 2 minutes read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/hdu">hdu</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/fft">FFT</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>我的思路似乎跟标算不太一样？</p>
+
+<p>我的想法是分治，让a[i]表示第i段的长度，对于a[l]&hellip;a[r]，先分别求出a[l]..a[mid]，a[mid+1]&hellip;a[r]的答案，再考虑跨越中点的答案。</p>
+
+<p>重点在于计算跨越中点的答案。如果要求的是长度和为s的方案数，自然而然地就会想到生成函数+FFT，但是这道题要求的东西有一点不一样……</p>
+
+<p>还是考虑用多项式解决，用数对(a,b)表示包含a段，长度和为b的区间。仿照求长度和为s的方案数的方法，定义多项式$A_l=\sum_{区间[l,mid]的(a,b)} ax^b$，类似定义$A_r$。只需求出$A=\sum_{区间[l,r]的(a,b)} ax^b$。考虑区间[mid+1,b]的每对(a,b)，它对$A$的贡献是($A_l$每项系数加a)*$x^b$。每项系数加a这个操作不容易直接快速地算出来，所以需要额外再定义一个多项式$B_l=\sum_{区间[l,mid]的(a,b)} x^b$，那么贡献就可以写成$x^b(A_l+aB_l)$。于是我们就可以写出：
+$$\begin{align*}A&amp;=\sum_{区间[mid+1,r]的(a,b)}x^b(A_l+aB_l)\\&amp;=(\sum_{区间[mid+1,r]的(a,b)}x^b)A_l+(\sum_{区间[mid+1,r]的(a,b)}ax^b)B_l\\&amp;=A_lB_r+A_rB_l\end{align*}$$</p>
+
+<p>然后就可以用FFT来算了。我觉得复杂度是$O(n\log^2 n)$，常数大得飞起……</p>
+
+<p>据传double会爆精度要用long double</p>
+
+<p>不知道为什么直接%.0Lf输出会WA……我已经避免了输出-0的情况了……改成先强制转化成long long再输出就能过……那我还不如直接用long long数组存答案……</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#include &lt;cmath&gt;
+#define ele int
+#define ll long long
+using namespace std;
+#define maxn 100010
+const long double pi=acos(-1.0);
+struct cd{
+	long double a,b;
+};
+inline cd operator+(cd a,cd b){
+	return (cd){a.a+b.a,a.b+b.b};
+}
+inline cd operator-(cd a,cd b){
+	return (cd){a.a-b.a,a.b-b.b};
+}
+inline cd operator*(cd a,cd b){
+	return (cd){a.a*b.a-a.b*b.b,a.a*b.b+a.b*b.a};
+}
+inline cd&amp; operator*=(cd&amp;a,cd b){
+	return a=a*b;
+}
+ele n,a[maxn];
+ll res[maxn];
+cd b1[maxn],b2[maxn],b3[maxn],b4[maxn],t1[maxn],t2[maxn],t3[maxn],t4[maxn];
+inline void FFT(ele K,ele n,cd *a,cd *y){
+	static ele f[maxn];
+	f[0]=0; y[0]=a[0];
+	for (int i=1; i&lt;n; ++i){
+		f[i]=f[i&gt;&gt;1]&gt;&gt;1;
+		if (i&amp;1) f[i]+=n&gt;&gt;1;
+		y[i]=a[f[i]];
+	}
+	for (int p=1; p&lt;n; p&lt;&lt;=1){
+		cd o=(cd){cos(pi/p*K),sin(pi/p*K)};
+		for (int i=0; i&lt;n; i+=(p&lt;&lt;1)){
+			cd o1=(cd){1,0};
+			for (int j=i; j&lt;i+p; ++j,o1*=o){
+				cd u=y[j],v=y[j+p]*o1;
+				y[j]=u+v;
+				y[j+p]=u-v;
+			}
+		}
+	}
+	if (!~K)
+		for (int i=0; i&lt;n; ++i)
+			y[i].a/=n,y[i].b/=n;
+}
+inline ele solve(ele l,ele r){
+	if (l==r){
+		++res[a[l]];
+		return a[l];
+	}
+	ele mid=(l+r)&gt;&gt;1;
+	ele s=solve(l,mid)+solve(mid+1,r);
+	ele tmp=1;
+	while (tmp&lt;=s) tmp&lt;&lt;=1;
+	for (int i=mid,s1=a[mid]; i&gt;=l; --i,s1+=a[i])
+		b1[s1].a+=mid-i+1,b2[s1].a+=1;
+	for (int i=mid+1,s1=a[mid+1]; i&lt;=r; ++i,s1+=a[i])
+		b3[s1].a+=i-mid,b4[s1].a+=1;
+	FFT(1,tmp,b1,t1); FFT(1,tmp,b2,t2); FFT(1,tmp,b3,t3); FFT(1,tmp,b4,t4);
+	for (int i=0; i&lt;tmp; ++i)
+		t1[i]=t1[i]*t4[i]+t2[i]*t3[i];
+	FFT(-1,tmp,t1,b1);
+	for (int i=0; i&lt;=s; ++i) res[i]+=(ll)(b1[i].a+0.5);
+	for (int i=0; i&lt;tmp; ++i) b1[i]=b2[i]=b3[i]=b4[i]=(cd){0,0};
+	return s;
+}
+int main(){
+	ele T;
+	scanf(&quot;%d&quot;,&amp;T);
+	while (T--){
+		scanf(&quot;%d&quot;,&amp;n);
+		for (int i=0; i&lt;n; ++i) scanf(&quot;%d&quot;,a+i);
+		memset(res,0,sizeof(res));
+		ele s=solve(0,n-1);
+		for (int i=0; i&lt;=s; ++i) printf(&quot;%lld\n&quot;,res[i]);
+	}
+	return 0;
+}
+</code></pre>
+
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

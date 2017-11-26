@@ -6,10 +6,27 @@
     <description>Recent content on 蒟蒻的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 30 Oct 2017 12:57:04 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 26 Nov 2017 14:17:54 +0000</lastBuildDate>
     
 	<atom:link href="http://blog.eleele.gq/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>hdu5307题解</title>
+      <link>http://blog.eleele.gq/post/hdu5307/</link>
+      <pubDate>Sun, 26 Nov 2017 14:17:54 +0000</pubDate>
+      
+      <guid>http://blog.eleele.gq/post/hdu5307/</guid>
+      <description>我的思路似乎跟标算不太一样？
+我的想法是分治，让a[i]表示第i段的长度，对于a[l]&amp;hellip;a[r]，先分别求出a[l]..a[mid]，a[mid+1]&amp;hellip;a[r]的答案，再考虑跨越中点的答案。
+重点在于计算跨越中点的答案。如果要求的是长度和为s的方案数，自然而然地就会想到生成函数+FFT，但是这道题要求的东西有一点不一样……
+还是考虑用多项式解决，用数对(a,b)表示包含a段，长度和为b的区间。仿照求长度和为s的方案数的方法，定义多项式$A_l=\sum_{区间[l,mid]的(a,b)} ax^b$，类似定义$A_r$。只需求出$A=\sum_{区间[l,r]的(a,b)} ax^b$。考虑区间[mid+1,b]的每对(a,b)，它对$A$的贡献是($A_l$每项系数加a)*$x^b$。每项系数加a这个操作不容易直接快速地算出来，所以需要额外再定义一个多项式$B_l=\sum_{区间[l,mid]的(a,b)} x^b$，那么贡献就可以写成$x^b(A_l+aB_l)$。于是我们就可以写出： $$\begin{align*}A&amp;amp;=\sum_{区间[mid+1,r]的(a,b)}x^b(A_l+aB_l)\\&amp;amp;=(\sum_{区间[mid+1,r]的(a,b)}x^b)A_l+(\sum_{区间[mid+1,r]的(a,b)}ax^b)B_l\\&amp;amp;=A_lB_r+A_rB_l\end{align*}$$
+然后就可以用FFT来算了。我觉得复杂度是$O(n\log^2 n)$，常数大得飞起……
+据传double会爆精度要用long double
+不知道为什么直接%.0Lf输出会WA……我已经避免了输出-0的情况了……改成先强制转化成long long再输出就能过……那我还不如直接用long long数组存答案……
+代码：
+#include &amp;lt;cstdio&amp;gt; #include &amp;lt;cstring&amp;gt; #include &amp;lt;algorithm&amp;gt; #include &amp;lt;cmath&amp;gt; #define ele int #define ll long long using namespace std; #define maxn 100010 const long double pi=acos(-1.0); struct cd{ long double a,b; }; inline cd operator+(cd a,cd b){ return (cd){a.a+b.a,a.b+b.b}; } inline cd operator-(cd a,cd b){ return (cd){a.a-b.a,a.b-b.b}; } inline cd operator*(cd a,cd b){ return (cd){a.a*b.a-a.b*b.b,a.a*b.b+a.b*b.a}; } inline cd&amp;amp; operator*=(cd&amp;amp;a,cd b){ return a=a*b; } ele n,a[maxn]; ll res[maxn]; cd b1[maxn],b2[maxn],b3[maxn],b4[maxn],t1[maxn],t2[maxn],t3[maxn],t4[maxn]; inline void FFT(ele K,ele n,cd *a,cd *y){ static ele f[maxn]; f[0]=0; y[0]=a[0]; for (int i=1; i&amp;lt;n; ++i){ f[i]=f[i&amp;gt;&amp;gt;1]&amp;gt;&amp;gt;1; if (i&amp;amp;1) f[i]+=n&amp;gt;&amp;gt;1; y[i]=a[f[i]]; } for (int p=1; p&amp;lt;n; p&amp;lt;&amp;lt;=1){ cd o=(cd){cos(pi/p*K),sin(pi/p*K)}; for (int i=0; i&amp;lt;n; i+=(p&amp;lt;&amp;lt;1)){ cd o1=(cd){1,0}; for (int j=i; j&amp;lt;i+p; ++j,o1*=o){ cd u=y[j],v=y[j+p]*o1; y[j]=u+v; y[j+p]=u-v; } } } if (!</description>
+    </item>
     
     <item>
       <title>纪中noip2017模拟赛总结</title>
