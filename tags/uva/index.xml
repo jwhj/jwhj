@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>原根 on 蒟蒻的博客</title>
-    <link>http://blog.eleele.gq/tags/%E5%8E%9F%E6%A0%B9/</link>
-    <description>Recent content in 原根 on 蒟蒻的博客</description>
+    <title>Uva on 蒟蒻的博客</title>
+    <link>http://blog.eleele.gq/tags/uva/</link>
+    <description>Recent content in Uva on 蒟蒻的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 02 Dec 2017 14:34:17 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.eleele.gq/tags/%E5%8E%9F%E6%A0%B9/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://blog.eleele.gq/tags/uva/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -23,15 +23,6 @@ FFT真的是细节多，到处都要注意清零。
 hdu上实在是卡常数卡不过去了，在uva上面A了。
 代码：
 #include &amp;lt;cstdio&amp;gt; #include &amp;lt;cstring&amp;gt; #include &amp;lt;algorithm&amp;gt; #include &amp;lt;cmath&amp;gt; #define ele int using namespace std; #define maxn 300010 const double pi=acos(-1.0); struct cd{ double a,b; }; inline cd operator+(cd a,cd b){ return (cd){a.a+b.a,a.b+b.b}; } inline cd&amp;amp; operator+=(cd&amp;amp;a,cd b){ return a=a+b; } inline cd operator-(cd a,cd b){ return (cd){a.a-b.a,a.b-b.b}; } inline cd&amp;amp; operator-=(cd&amp;amp;a,cd b){ return a=a-b; } inline cd operator*(cd a,cd b){ return (cd){a.a*b.a-a.b*b.b,a.b*b.a+a.a*b.b}; } inline cd&amp;amp; operator*=(cd&amp;amp;a,cd b){ return a=a*b; } ele n,g,f[maxn]; double a[maxn],b[maxn]; cd a1[maxn],c[maxn],t1[maxn],t2[maxn]; inline void FFT(ele K,ele n,cd *a,cd *y){ static ele f[maxn]; f[0]=0; y[0]=a[0]; for (int i=1; i&amp;lt;n; ++i){ f[i]=f[i&amp;gt;&amp;gt;1]&amp;gt;&amp;gt;1; if (i&amp;amp;1) f[i]+=n&amp;gt;&amp;gt;1; y[i]=a[f[i]]; } for (int p=1; p&amp;lt;n; p&amp;lt;&amp;lt;=1){ cd o=(cd){cos(pi/p*K),sin(pi/p*K)}; for (int i=0; i&amp;lt;n; i+=(p&amp;lt;&amp;lt;1)){ cd o1=(cd){1,0}; for (int j=i; j&amp;lt;i+p; ++j,o1*=o){ cd u=y[j],v=y[j+p]*o1; y[j]=u+v; y[j+p]=u-v; } } } if (!</description>
-    </item>
-    
-    <item>
-      <title>bzoj2219题解</title>
-      <link>http://blog.eleele.gq/post/bzoj2219/</link>
-      <pubDate>Wed, 15 Feb 2017 10:02:43 +0000</pubDate>
-      
-      <guid>http://blog.eleele.gq/post/bzoj2219/</guid>
-      <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>
