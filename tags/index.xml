@@ -41,7 +41,7 @@
     <item>
       <title>Bzoj</title>
       <link>http://blog.eleele.gq/tags/bzoj/</link>
-      <pubDate>Wed, 13 Sep 2017 10:02:43 +0000</pubDate>
+      <pubDate>Sun, 31 Dec 2017 13:25:39 +0000</pubDate>
       
       <guid>http://blog.eleele.gq/tags/bzoj/</guid>
       <description></description>
@@ -140,7 +140,7 @@
     <item>
       <title>Jzoj</title>
       <link>http://blog.eleele.gq/tags/jzoj/</link>
-      <pubDate>Mon, 30 Oct 2017 12:57:04 +0000</pubDate>
+      <pubDate>Sun, 31 Dec 2017 13:25:39 +0000</pubDate>
       
       <guid>http://blog.eleele.gq/tags/jzoj/</guid>
       <description></description>
@@ -161,6 +161,24 @@
       <pubDate>Sun, 18 Dec 2016 10:02:43 +0000</pubDate>
       
       <guid>http://blog.eleele.gq/tags/kmp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Lct</title>
+      <link>http://blog.eleele.gq/tags/lct/</link>
+      <pubDate>Sun, 31 Dec 2017 13:36:49 +0000</pubDate>
+      
+      <guid>http://blog.eleele.gq/tags/lct/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Loj</title>
+      <link>http://blog.eleele.gq/tags/loj/</link>
+      <pubDate>Sun, 31 Dec 2017 13:36:49 +0000</pubDate>
+      
+      <guid>http://blog.eleele.gq/tags/loj/</guid>
       <description></description>
     </item>
     
@@ -413,6 +431,15 @@
       <pubDate>Thu, 03 Nov 2016 10:02:43 +0000</pubDate>
       
       <guid>http://blog.eleele.gq/tags/%E5%88%86%E5%B1%82%E5%9B%BE/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>动态图</title>
+      <link>http://blog.eleele.gq/tags/%E5%8A%A8%E6%80%81%E5%9B%BE/</link>
+      <pubDate>Sun, 31 Dec 2017 13:36:49 +0000</pubDate>
+      
+      <guid>http://blog.eleele.gq/tags/%E5%8A%A8%E6%80%81%E5%9B%BE/</guid>
       <description></description>
     </item>
     
@@ -824,7 +851,7 @@
     <item>
       <title>题解</title>
       <link>http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3/</link>
-      <pubDate>Sat, 02 Dec 2017 14:34:17 +0000</pubDate>
+      <pubDate>Sun, 31 Dec 2017 13:36:49 +0000</pubDate>
       
       <guid>http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3/</guid>
       <description></description>

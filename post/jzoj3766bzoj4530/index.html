@@ -1,0 +1,222 @@
+<script type="text/x-mathjax-config;">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" id=""></script>
+
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.31.1" />
+		<title>jzoj3766&amp;&amp;bzoj4530题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        jzoj3766&amp;&amp;bzoj4530题解
+                    </h1>
+                    <h2 class="headline">
+                    Dec 31, 2017 13:25
+                    · 223 words
+                    · 2 minutes read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/jzoj">jzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/lct">LCT</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>有各种离线的做法，不过我感觉用lct在线做比较优雅。</p>
+
+<p>这道题其实就是要求出子树大小，如果用lct来做的话，其实不需要考虑子树信息的维护，只需要能够维护整棵树的信息，查询的时候cut一下就好了。</p>
+
+<p>lct上存在x-&gt;f为y，但y的左右儿子均不为x的情况，这个时候，我们称x为y的虚儿子。考虑对于每个splay的节点，额外维护一个域vir表示它的所有虚儿子的信息和，那就可以求出整棵树的信息了。而这个vir只会在access和link的时候被修改。</p>
+
+<p>感觉不太会BB……可以看一下<a href="https://www.cnblogs.com/GXZlegend/p/7061458.html">这篇</a>题解。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#define ele int
+using namespace std;
+#define maxn 100010
+namespace LCT{
+	struct node{
+		ele s,vir;
+		bool flip;
+		node *f,*c[2];
+		node(){
+			s=1; vir=0;
+			flip=false;
+			f=c[0]=c[1]=NULL;
+		}
+	}np[maxn];
+	inline bool splayroot(node *x){
+		return (!x-&gt;f || (x-&gt;f-&gt;c[0]!=x &amp;&amp; x-&gt;f-&gt;c[1]!=x));
+	}
+	inline void pushdown(node *x){
+		if (x &amp;&amp; x-&gt;flip){
+			swap(x-&gt;c[0],x-&gt;c[1]);
+			if (x-&gt;c[0]) x-&gt;c[0]-&gt;flip^=1;
+			if (x-&gt;c[1]) x-&gt;c[1]-&gt;flip^=1;
+			x-&gt;flip=false;
+		}
+	}
+	inline void maintain(node *x){
+		x-&gt;s=1+x-&gt;vir;
+		if (x-&gt;c[0]) x-&gt;s+=x-&gt;c[0]-&gt;s;
+		if (x-&gt;c[1]) x-&gt;s+=x-&gt;c[1]-&gt;s;
+	}
+	inline node* rotate(node *x,ele k){
+		if (!x) return NULL;
+		pushdown(x);
+		node *y=x-&gt;c[k];
+		if (!y) return x;
+		pushdown(y);
+		x-&gt;c[k]=y-&gt;c[k^1];
+		if (y-&gt;c[k^1]) y-&gt;c[k^1]-&gt;f=x;
+		y-&gt;c[k^1]=x;
+		if (!splayroot(x))
+			if (x-&gt;f-&gt;c[0]==x) x-&gt;f-&gt;c[0]=y;
+			else x-&gt;f-&gt;c[1]=y;
+		y-&gt;f=x-&gt;f; x-&gt;f=y;
+		maintain(x); maintain(y);
+		return y;
+	}
+	inline void splay(node *x){
+		while (!splayroot(x)){
+			pushdown(x-&gt;f);
+			if (x-&gt;f-&gt;c[0]==x) rotate(x-&gt;f,0); else rotate(x-&gt;f,1);
+		}
+	}
+	inline void access(node *x){
+		node *p=NULL;
+		while (x){
+			splay(x); pushdown(x);
+			if (x-&gt;c[1]) x-&gt;vir+=x-&gt;c[1]-&gt;s;
+			if (p) p-&gt;f=x,x-&gt;vir-=p-&gt;s;
+			x-&gt;c[1]=p; maintain(x);
+			p=x; x=x-&gt;f;
+		}
+	}
+	inline void mkroot(node *x){
+		access(x); splay(x);
+		x-&gt;flip^=1;
+	}
+	inline void link(node *x,node *y){
+		mkroot(x); splay(x);
+		access(y); splay(y);
+		x-&gt;f=y; y-&gt;vir+=x-&gt;s;
+		maintain(y);
+	}
+	inline void cut(node *x,node *y){
+		mkroot(x);
+		access(y); splay(y); pushdown(y);
+		y-&gt;c[0]=NULL; x-&gt;f=NULL;
+		maintain(y);
+	}
+	inline ele getsize(node *x){
+		mkroot(x); splay(x);
+		return x-&gt;s;
+	}
+};
+using namespace LCT;
+ele n,Q;
+int main(){
+	scanf(&quot;%d%d&quot;,&amp;n,&amp;Q);
+	while (Q--){
+		char op[5];
+		ele x,y;
+		scanf(&quot;%s%d%d&quot;,op,&amp;x,&amp;y); --x,--y;
+		if (op[0]=='A') link(np+x,np+y);
+		else{
+			cut(np+x,np+y);
+			printf(&quot;%lld\n&quot;,(long long)getsize(np+x)*getsize(np+y));
+			link(np+x,np+y);
+		}
+	}
+	return 0;
+}
+</code></pre>
+
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>
