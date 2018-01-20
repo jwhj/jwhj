@@ -6,10 +6,23 @@
     <description>Recent content in Dp on 蒟蒻的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 02 Jan 2018 12:59:35 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 20 Jan 2018 14:27:24 +0000</lastBuildDate>
     
 	<atom:link href="http://blog.eleele.gq/tags/dp/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>jzoj5523题解</title>
+      <link>http://blog.eleele.gq/post/jz5523/</link>
+      <pubDate>Sat, 20 Jan 2018 14:27:24 +0000</pubDate>
+      
+      <guid>http://blog.eleele.gq/post/jz5523/</guid>
+      <description>看AC人数来看应该是全场最简单的一道题，可是我就这道题没做出来……sbwhj……
+首先注意到在加号后面加括号是毫无意义的，所以我们可以钦定括号只能加在减号后面。此时括号的作用就是把里面除了第一个数以外的所有数的贡献取负，那我们又可以得到两层以上的括号嵌套总能改成不超过两层的括号嵌套。
+让f[i][0/1/2]表示考虑前i个数，式子最后有0/1/2个右括号的时候的最大值。转移的时候，按运算符分两种情况讨论：
+ 减号。此时这个数可以新开一个括号，即-(A)，贡献为-A；也可以塞到前面的括号里面或者放在前面括号外面，贡献为+A或-A，视塞的层数奇偶性而定。 加号。此时这个数不能新开一个括号，只能塞到前面的括号里面或者放在最外面。  代码：
+#include &amp;lt;cstdio&amp;gt; #include &amp;lt;cstring&amp;gt; #include &amp;lt;algorithm&amp;gt; #define ele long long using namespace std; #define maxn 100010 const ele INF=1e18; ele n,a[maxn],f[maxn][3]; bool b[maxn]; char s[100]; int main(){ //freopen(&amp;quot;calculate.in&amp;quot;,&amp;quot;r&amp;quot;,stdin); freopen(&amp;quot;calculate.out&amp;quot;,&amp;quot;w&amp;quot;,stdout); scanf(&amp;quot;%lld&amp;quot;,&amp;amp;n); for (int i=0; i&amp;lt;n*2-1; ++i){ scanf(&amp;quot;%s&amp;quot;,s); if (i&amp;amp;1) b[(i+1)&amp;gt;&amp;gt;1]=(s[0]==&#39;+&#39;); else{ ele tmp=0,L=strlen(s); for (int i=0; i&amp;lt;L; ++i) tmp=(tmp&amp;lt;&amp;lt;3)+(tmp&amp;lt;&amp;lt;1)+s[i]-&#39;0&#39;; a[i&amp;gt;&amp;gt;1]=tmp; } } f[0][0]=a[0]; f[0][1]=f[0][2]=-INF; for (int i=0; i&amp;lt;n-1; ++i) if (b[i+1]){ f[i+1][0]=max(max(f[i][0],f[i][1]),f[i][2])+a[i+1]; f[i+1][1]=max(f[i][1],f[i][2])-a[i+1]; f[i+1][2]=f[i][2]+a[i+1]; } else{ f[i+1][0]=max(max(f[i][0],f[i][1]),f[i][2])-a[i+1]; f[i+1][1]=max(f[i][1],f[i][2])+a[i+1]; f[i+1][1]=max(f[i+1][1],f[i][0]-a[i+1]); f[i+1][2]=max(f[i][1],f[i][2])+a[i+1]; } printf(&amp;quot;%lld\n&amp;quot;,max(max(f[n-1][0],f[n-1][1]),f[n-1][2])); return 0; }  </description>
+    </item>
     
     <item>
       <title>雅礼集训2018-1</title>
