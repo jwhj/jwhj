@@ -1,0 +1,210 @@
+<script type="text/x-mathjax-config;">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" id=""></script>
+
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.32.4" />
+		<title>jzoj5260题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.gq/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.gq/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.gq/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.gq/post'>Archive</a>
+	<a href='http://blog.eleele.gq/tags'>Tags</a>
+	<a href='http://blog.eleele.gq/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.gq/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        jzoj5260题解
+                    </h1>
+                    <h2 class="headline">
+                    Jan 9, 2018 14:41
+                    · 229 words
+                    · 2 minutes read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.gq/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/jzoj">jzoj</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E5%88%86%E5%9D%97">分块</a>
+                          
+                              <a href="http://blog.eleele.gq/tags/%E8%8E%AB%E9%98%9F">莫队</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>首先不管强制在线，不管数据范围，只考虑设计一个亚二次的算法，显然可以用莫队+值域线段树在$O(n\sqrt{n}\log n)$的时间内解决。但是这个做法会爆0+卡爆机房的奔腾cpu电脑……</p>
+
+<p>注意到在莫队算法中，因端点改变对值域线段树造成的修改有$O(n\sqrt{n})$次，但是对值域线段树的询问只有$O(n)$次，所以可以考虑牺牲询问来加速修改。</p>
+
+<p>考虑对值域也分块，维护每个块里面出现次数&lt;=w的数的总出现次数，以及每个数具体的出现次数，就可以做到$O(n\sqrt{n})$。</p>
+
+<p>最后再把莫队改成强制在线的莫队，预处理出f[i][j][k]表示第i块到第j块中，值在第k块中的，出现次数&lt;=w的数的出现次数，以及g[i][j]表示前i块中j的出现次数。</p>
+
+<p>写的时候因为一个sb错误debug了很久，以后要注意，为了代码简单把几种情况归成一种情况写的时候，需要仔细研究几种情况的不同点。比方说，l，r在同一块的时候，就不要写出g[r/S-1][j]这样优秀的潜在未定义行为（因为r可能在第0块）。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#include &lt;cmath&gt;
+#define ele int
+using namespace std;
+#define maxn 100010
+#define maxb 320
+ele n;
+struct arr{
+	ele t,a[maxn],b[maxn];
+	arr(){
+		t=0; memset(b,0,sizeof(b));
+	}
+	inline ele&amp; operator[](ele i){
+		if (b[i]&lt;t) b[i]=t,a[i]=0;
+		return a[i];
+	}
+};
+ele w,q,ty,S,bcnt,a[maxn],f[maxb][maxb][maxb],g[maxb][maxn],tmp[maxb];
+arr cnt;
+inline ele calc(ele l,ele r,ele x){
+	if (l/S&lt;r/S) return cnt[x]+g[r/S-1][x]-g[l/S][x];
+	else return cnt[x];
+}
+int main(){
+	scanf(&quot;%d%d%d%d&quot;,&amp;n,&amp;w,&amp;q,&amp;ty);
+	for (int i=0; i&lt;n; ++i) scanf(&quot;%d&quot;,a+i);
+	S=sqrt(n); bcnt=0;
+	for (int i=0; i&lt;n; i+=S,++bcnt)
+		for (int j=i; j&lt;n &amp;&amp; j&lt;i+S; ++j) ++g[bcnt][a[j]];
+	for (int i=1; i&lt;bcnt; ++i)
+		for (int j=0; j&lt;n; ++j) g[i][j]+=g[i-1][j];
+	memset(f,0,sizeof(f));
+	for (int i=0; i&lt;bcnt; ++i){
+		++cnt.t;
+		memset(tmp,0,sizeof(tmp));
+		for (int j=i*S; j&lt;n; ++j){
+			if (cnt[a[j]]==w) tmp[a[j]/S]-=w;
+			else if (cnt[a[j]]&lt;w) ++tmp[a[j]/S];
+			++cnt[a[j]];
+			if ((j+1)%S==0 || j==n-1) memcpy(f[i][j/S],tmp,sizeof(tmp));
+		}
+	}
+	ele ans=0;
+	while (q--){
+		ele l,r,k;
+		scanf(&quot;%d%d%d&quot;,&amp;l,&amp;r,&amp;k);
+		l^=ty*ans; r^=ty*ans; k^=ty*ans;
+		--l,--r;
+		if (l/S==r/S){
+			++cnt.t; memset(tmp,0,sizeof(tmp));
+			for (int i=l; i&lt;=r; ++i){
+				if (cnt[a[i]]==w) tmp[a[i]/S]-=w;
+				else if (cnt[a[i]]&lt;w) ++tmp[a[i]/S];
+				++cnt[a[i]];
+			}
+		}
+		else{
+			++cnt.t; memcpy(tmp,f[l/S+1][r/S-1],sizeof(tmp));
+			for (int i=l; i&lt;(l/S+1)*S; ++i){
+				ele t=calc(l,r,a[i]);
+				if (t==w) tmp[a[i]/S]-=w;
+				else if (t&lt;w) ++tmp[a[i]/S];
+				++cnt[a[i]];
+			}
+			for (int i=r/S*S; i&lt;=r; ++i){
+				ele t=calc(l,r,a[i]);
+				if (t==w) tmp[a[i]/S]-=w;
+				else if (t&lt;w) ++tmp[a[i]/S];
+				++cnt[a[i]];
+			}
+		}
+		ele i=0;
+		while (i&lt;bcnt &amp;&amp; k&gt;tmp[i]) k-=tmp[i],++i;
+		if (i==bcnt) ans=n;
+		else{
+			i*=S;
+			for (; i&lt;n; ++i){
+				ele t=calc(l,r,i);
+				if (t&gt;w) continue;
+				if (k&gt;t) k-=t; else break;
+			}
+			ans=i;
+		}
+		printf(&quot;%d\n&quot;,ans);
+	}
+	return 0;
+}
+</code></pre>
+
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2018 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+        </section>
+
+        <script src="http://blog.eleele.gq/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.gq/js/main.js"></script>
+<script src="http://blog.eleele.gq/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>
