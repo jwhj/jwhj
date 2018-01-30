@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>博弈论 on 蒟蒻的博客</title>
-    <link>http://blog.eleele.gq/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA/</link>
+    <link>http://blog.eleele.cf/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA/</link>
     <description>Recent content in 博弈论 on 蒟蒻的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 26 Oct 2017 00:20:03 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.eleele.gq/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://blog.eleele.cf/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>jzoj5407题解</title>
-      <link>http://blog.eleele.gq/post/jz5407/</link>
+      <link>http://blog.eleele.cf/post/jz5407/</link>
       <pubDate>Thu, 26 Oct 2017 00:20:03 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/jz5407/</guid>
+      <guid>http://blog.eleele.cf/post/jz5407/</guid>
       <description>我博弈论好废啊……
 归纳证明A，B都不为0的时候，答案是A-B-2.
 首先，后手总能不断消耗先手的水晶，直到对方只剩一个，从而达到答案。
@@ -28,10 +28,10 @@
     
     <item>
       <title>bzoj2463题解</title>
-      <link>http://blog.eleele.gq/post/bzoj2463/</link>
+      <link>http://blog.eleele.cf/post/bzoj2463/</link>
       <pubDate>Mon, 12 Sep 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj2463/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj2463/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     

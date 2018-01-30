@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>动态图 on 蒟蒻的博客</title>
-    <link>http://blog.eleele.gq/tags/%E5%8A%A8%E6%80%81%E5%9B%BE/</link>
+    <link>http://blog.eleele.cf/tags/%E5%8A%A8%E6%80%81%E5%9B%BE/</link>
     <description>Recent content in 动态图 on 蒟蒻的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 31 Dec 2017 13:36:49 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.eleele.gq/tags/%E5%8A%A8%E6%80%81%E5%9B%BE/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://blog.eleele.cf/tags/%E5%8A%A8%E6%80%81%E5%9B%BE/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>loj122题解</title>
-      <link>http://blog.eleele.gq/post/loj122/</link>
+      <link>http://blog.eleele.cf/post/loj122/</link>
       <pubDate>Sun, 31 Dec 2017 13:36:49 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/loj122/</guid>
+      <guid>http://blog.eleele.cf/post/loj122/</guid>
       <description>写+调了7h+，终于成为AC此题的第四个人+此题目前最短代码+此题目前最慢代码……
 去CA的博客上翻WC2015 xyz的课件来看吧……虽然看懂了但是完全不想写题解……太复杂了……
 代码：

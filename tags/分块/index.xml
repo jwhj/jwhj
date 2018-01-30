@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>分块 on 蒟蒻的博客</title>
-    <link>http://blog.eleele.gq/tags/%E5%88%86%E5%9D%97/</link>
+    <link>http://blog.eleele.cf/tags/%E5%88%86%E5%9D%97/</link>
     <description>Recent content in 分块 on 蒟蒻的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 09 Jan 2018 14:41:56 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.eleele.gq/tags/%E5%88%86%E5%9D%97/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://blog.eleele.cf/tags/%E5%88%86%E5%9D%97/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>jzoj5260题解</title>
-      <link>http://blog.eleele.gq/post/jz5260/</link>
+      <link>http://blog.eleele.cf/post/jz5260/</link>
       <pubDate>Tue, 09 Jan 2018 14:41:56 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/jz5260/</guid>
+      <guid>http://blog.eleele.cf/post/jz5260/</guid>
       <description>首先不管强制在线，不管数据范围，只考虑设计一个亚二次的算法，显然可以用莫队+值域线段树在$O(n\sqrt{n}\log n)$的时间内解决。但是这个做法会爆0+卡爆机房的奔腾cpu电脑……
 注意到在莫队算法中，因端点改变对值域线段树造成的修改有$O(n\sqrt{n})$次，但是对值域线段树的询问只有$O(n)$次，所以可以考虑牺牲询问来加速修改。
 考虑对值域也分块，维护每个块里面出现次数&amp;lt;=w的数的总出现次数，以及每个数具体的出现次数，就可以做到$O(n\sqrt{n})$。
@@ -28,73 +28,73 @@
     
     <item>
       <title>bzoj4540题解</title>
-      <link>http://blog.eleele.gq/post/bzoj4540/</link>
+      <link>http://blog.eleele.cf/post/bzoj4540/</link>
       <pubDate>Sun, 12 Feb 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj4540/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj4540/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj3295题解</title>
-      <link>http://blog.eleele.gq/post/bzoj3295/</link>
+      <link>http://blog.eleele.cf/post/bzoj3295/</link>
       <pubDate>Wed, 01 Feb 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj3295/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj3295/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj3196题解</title>
-      <link>http://blog.eleele.gq/post/bzoj3196/</link>
+      <link>http://blog.eleele.cf/post/bzoj3196/</link>
       <pubDate>Fri, 27 Jan 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj3196/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj3196/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj2741题解</title>
-      <link>http://blog.eleele.gq/post/bzoj2741/</link>
+      <link>http://blog.eleele.cf/post/bzoj2741/</link>
       <pubDate>Mon, 05 Dec 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj2741/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj2741/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj3744题解</title>
-      <link>http://blog.eleele.gq/post/bzoj3744/</link>
+      <link>http://blog.eleele.cf/post/bzoj3744/</link>
       <pubDate>Thu, 01 Dec 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj3744/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj3744/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj2957题解</title>
-      <link>http://blog.eleele.gq/post/bzoj2957/</link>
+      <link>http://blog.eleele.cf/post/bzoj2957/</link>
       <pubDate>Wed, 21 Sep 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj2957/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj2957/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj2141题解</title>
-      <link>http://blog.eleele.gq/post/bzoj2141/</link>
+      <link>http://blog.eleele.cf/post/bzoj2141/</link>
       <pubDate>Sat, 02 Jul 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj2141/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj2141/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj3065题解</title>
-      <link>http://blog.eleele.gq/post/bzoj3065/</link>
+      <link>http://blog.eleele.cf/post/bzoj3065/</link>
       <pubDate>Sun, 29 May 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj3065/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj3065/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     

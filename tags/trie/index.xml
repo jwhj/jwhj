@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Trie on 蒟蒻的博客</title>
-    <link>http://blog.eleele.gq/tags/trie/</link>
+    <link>http://blog.eleele.cf/tags/trie/</link>
     <description>Recent content in Trie on 蒟蒻的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 05 Dec 2016 10:02:43 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.eleele.gq/tags/trie/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://blog.eleele.cf/tags/trie/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>bzoj2741题解</title>
-      <link>http://blog.eleele.gq/post/bzoj2741/</link>
+      <link>http://blog.eleele.cf/post/bzoj2741/</link>
       <pubDate>Mon, 05 Dec 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj2741/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj2741/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     

@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Fft on 蒟蒻的博客</title>
-    <link>http://blog.eleele.gq/tags/fft/</link>
+    <link>http://blog.eleele.cf/tags/fft/</link>
     <description>Recent content in Fft on 蒟蒻的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 02 Dec 2017 14:34:17 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.eleele.gq/tags/fft/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://blog.eleele.cf/tags/fft/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>hdu5958&amp;uva7622题解</title>
-      <link>http://blog.eleele.gq/post/hdu5958uva7622/</link>
+      <link>http://blog.eleele.cf/post/hdu5958uva7622/</link>
       <pubDate>Sat, 02 Dec 2017 14:34:17 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/hdu5958uva7622/</guid>
+      <guid>http://blog.eleele.cf/post/hdu5958uva7622/</guid>
       <description>让$c_{hk\mod p}=r(h,k)$，把下标对mod p的原根取个对数/指数就可以转化为卷积的形式。
 一开始以为这道题要倍长其中一个多项式，后来发现其实不用，这样可以省掉一半的常数。
 FFT真的是细节多，到处都要注意清零。
@@ -27,10 +27,10 @@ hdu上实在是卡常数卡不过去了，在uva上面A了。
     
     <item>
       <title>hdu5307题解</title>
-      <link>http://blog.eleele.gq/post/hdu5307/</link>
+      <link>http://blog.eleele.cf/post/hdu5307/</link>
       <pubDate>Sun, 26 Nov 2017 14:17:54 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/hdu5307/</guid>
+      <guid>http://blog.eleele.cf/post/hdu5307/</guid>
       <description>我的思路似乎跟标算不太一样？
 我的想法是分治，让a[i]表示第i段的长度，对于a[l]&amp;hellip;a[r]，先分别求出a[l]..a[mid]，a[mid+1]&amp;hellip;a[r]的答案，再考虑跨越中点的答案。
 重点在于计算跨越中点的答案。如果要求的是长度和为s的方案数，自然而然地就会想到生成函数+FFT，但是这道题要求的东西有一点不一样……
@@ -44,28 +44,28 @@ hdu上实在是卡常数卡不过去了，在uva上面A了。
     
     <item>
       <title>bzoj3160题解</title>
-      <link>http://blog.eleele.gq/post/bzoj3160/</link>
+      <link>http://blog.eleele.cf/post/bzoj3160/</link>
       <pubDate>Sun, 01 May 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj3160/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj3160/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj3527题解</title>
-      <link>http://blog.eleele.gq/post/bzoj3527/</link>
+      <link>http://blog.eleele.cf/post/bzoj3527/</link>
       <pubDate>Fri, 22 Apr 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj3527/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj3527/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>UOJ34题解（快速傅立叶变换）</title>
-      <link>http://blog.eleele.gq/post/uoj34/</link>
+      <link>http://blog.eleele.cf/post/uoj34/</link>
       <pubDate>Tue, 19 Apr 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/uoj34/</guid>
+      <guid>http://blog.eleele.cf/post/uoj34/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     

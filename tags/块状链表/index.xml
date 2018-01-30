@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>块状链表 on 蒟蒻的博客</title>
-    <link>http://blog.eleele.gq/tags/%E5%9D%97%E7%8A%B6%E9%93%BE%E8%A1%A8/</link>
+    <link>http://blog.eleele.cf/tags/%E5%9D%97%E7%8A%B6%E9%93%BE%E8%A1%A8/</link>
     <description>Recent content in 块状链表 on 蒟蒻的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 01 Feb 2017 10:02:43 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.eleele.gq/tags/%E5%9D%97%E7%8A%B6%E9%93%BE%E8%A1%A8/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://blog.eleele.cf/tags/%E5%9D%97%E7%8A%B6%E9%93%BE%E8%A1%A8/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>bzoj3295题解</title>
-      <link>http://blog.eleele.gq/post/bzoj3295/</link>
+      <link>http://blog.eleele.cf/post/bzoj3295/</link>
       <pubDate>Wed, 01 Feb 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj3295/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj3295/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj3065题解</title>
-      <link>http://blog.eleele.gq/post/bzoj3065/</link>
+      <link>http://blog.eleele.cf/post/bzoj3065/</link>
       <pubDate>Sun, 29 May 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj3065/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj3065/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     

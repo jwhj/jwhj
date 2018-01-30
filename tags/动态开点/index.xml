@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>动态开点 on 蒟蒻的博客</title>
-    <link>http://blog.eleele.gq/tags/%E5%8A%A8%E6%80%81%E5%BC%80%E7%82%B9/</link>
+    <link>http://blog.eleele.cf/tags/%E5%8A%A8%E6%80%81%E5%BC%80%E7%82%B9/</link>
     <description>Recent content in 动态开点 on 蒟蒻的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 11 Feb 2017 10:02:43 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.eleele.gq/tags/%E5%8A%A8%E6%80%81%E5%BC%80%E7%82%B9/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://blog.eleele.cf/tags/%E5%8A%A8%E6%80%81%E5%BC%80%E7%82%B9/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>bzoj4552题解</title>
-      <link>http://blog.eleele.gq/post/bzoj4552/</link>
+      <link>http://blog.eleele.cf/post/bzoj4552/</link>
       <pubDate>Sat, 11 Feb 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj4552/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj4552/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     

@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Bzoj on 蒟蒻的博客</title>
-    <link>http://blog.eleele.gq/tags/bzoj/</link>
+    <link>http://blog.eleele.cf/tags/bzoj/</link>
     <description>Recent content in Bzoj on 蒟蒻的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 31 Dec 2017 13:25:39 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.eleele.gq/tags/bzoj/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://blog.eleele.cf/tags/bzoj/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>jzoj3766&amp;&amp;bzoj4530题解</title>
-      <link>http://blog.eleele.gq/post/jzoj3766bzoj4530/</link>
+      <link>http://blog.eleele.cf/post/jzoj3766bzoj4530/</link>
       <pubDate>Sun, 31 Dec 2017 13:25:39 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/jzoj3766bzoj4530/</guid>
+      <guid>http://blog.eleele.cf/post/jzoj3766bzoj4530/</guid>
       <description>有各种离线的做法，不过我感觉用lct在线做比较优雅。
 这道题其实就是要求出子树大小，如果用lct来做的话，其实不需要考虑子树信息的维护，只需要能够维护整棵树的信息，查询的时候cut一下就好了。
 lct上存在x-&amp;gt;f为y，但y的左右儿子均不为x的情况，这个时候，我们称x为y的虚儿子。考虑对于每个splay的节点，额外维护一个域vir表示它的所有虚儿子的信息和，那就可以求出整棵树的信息了。而这个vir只会在access和link的时候被修改。
@@ -27,1288 +27,1288 @@ lct上存在x-&amp;gt;f为y，但y的左右儿子均不为x的情况，这个时
     
     <item>
       <title>bzoj1052题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1052/</link>
+      <link>http://blog.eleele.cf/post/bzoj1052/</link>
       <pubDate>Wed, 13 Sep 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1052/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1052/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1082题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1082/</link>
+      <link>http://blog.eleele.cf/post/bzoj1082/</link>
       <pubDate>Mon, 11 Sep 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1082/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1082/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1060题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1060/</link>
+      <link>http://blog.eleele.cf/post/bzoj1060/</link>
       <pubDate>Mon, 28 Aug 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1060/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1060/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1090题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1090/</link>
+      <link>http://blog.eleele.cf/post/bzoj1090/</link>
       <pubDate>Mon, 28 Aug 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1090/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1090/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1064题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1064/</link>
+      <link>http://blog.eleele.cf/post/bzoj1064/</link>
       <pubDate>Sun, 27 Aug 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1064/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1064/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1038题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1038/</link>
+      <link>http://blog.eleele.cf/post/bzoj1038/</link>
       <pubDate>Wed, 23 Aug 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1038/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1038/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1086题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1086/</link>
+      <link>http://blog.eleele.cf/post/bzoj1086/</link>
       <pubDate>Mon, 21 Aug 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1086/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1086/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1079题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1079/</link>
+      <link>http://blog.eleele.cf/post/bzoj1079/</link>
       <pubDate>Sat, 19 Aug 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1079/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1079/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1076题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1076/</link>
+      <link>http://blog.eleele.cf/post/bzoj1076/</link>
       <pubDate>Thu, 17 Aug 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1076/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1076/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1093题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1093/</link>
+      <link>http://blog.eleele.cf/post/bzoj1093/</link>
       <pubDate>Wed, 16 Aug 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1093/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1093/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1069题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1069/</link>
+      <link>http://blog.eleele.cf/post/bzoj1069/</link>
       <pubDate>Tue, 15 Aug 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1069/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1069/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1085题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1085/</link>
+      <link>http://blog.eleele.cf/post/bzoj1085/</link>
       <pubDate>Sun, 13 Aug 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1085/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1085/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1044题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1044/</link>
+      <link>http://blog.eleele.cf/post/bzoj1044/</link>
       <pubDate>Sat, 12 Aug 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1044/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1044/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1057题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1057/</link>
+      <link>http://blog.eleele.cf/post/bzoj1057/</link>
       <pubDate>Thu, 10 Aug 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1057/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1057/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1037题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1037/</link>
+      <link>http://blog.eleele.cf/post/bzoj1037/</link>
       <pubDate>Wed, 09 Aug 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1037/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1037/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1042题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1042/</link>
+      <link>http://blog.eleele.cf/post/bzoj1042/</link>
       <pubDate>Tue, 08 Aug 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1042/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1042/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1034题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1034/</link>
+      <link>http://blog.eleele.cf/post/bzoj1034/</link>
       <pubDate>Sun, 06 Aug 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1034/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1034/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1006题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1006/</link>
+      <link>http://blog.eleele.cf/post/bzoj1006/</link>
       <pubDate>Sat, 05 Aug 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1006/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1006/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1047题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1047/</link>
+      <link>http://blog.eleele.cf/post/bzoj1047/</link>
       <pubDate>Thu, 03 Aug 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1047/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1047/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1070题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1070/</link>
+      <link>http://blog.eleele.cf/post/bzoj1070/</link>
       <pubDate>Wed, 02 Aug 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1070/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1070/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1040题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1040/</link>
+      <link>http://blog.eleele.cf/post/bzoj1040/</link>
       <pubDate>Tue, 01 Aug 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1040/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1040/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1193题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1193/</link>
+      <link>http://blog.eleele.cf/post/bzoj1193/</link>
       <pubDate>Mon, 31 Jul 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1193/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1193/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1177题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1177/</link>
+      <link>http://blog.eleele.cf/post/bzoj1177/</link>
       <pubDate>Sun, 30 Jul 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1177/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1177/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1189题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1189/</link>
+      <link>http://blog.eleele.cf/post/bzoj1189/</link>
       <pubDate>Sat, 29 Jul 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1189/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1189/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1202题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1202/</link>
+      <link>http://blog.eleele.cf/post/bzoj1202/</link>
       <pubDate>Fri, 28 Jul 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1202/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1202/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1149题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1149/</link>
+      <link>http://blog.eleele.cf/post/bzoj1149/</link>
       <pubDate>Wed, 12 Jul 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1149/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1149/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj4803题解</title>
-      <link>http://blog.eleele.gq/post/bzoj4803/</link>
+      <link>http://blog.eleele.cf/post/bzoj4803/</link>
       <pubDate>Sat, 08 Jul 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj4803/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj4803/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj2844题解</title>
-      <link>http://blog.eleele.gq/post/bzoj2844/</link>
+      <link>http://blog.eleele.cf/post/bzoj2844/</link>
       <pubDate>Wed, 07 Jun 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj2844/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj2844/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj2115题解</title>
-      <link>http://blog.eleele.gq/post/bzoj2115/</link>
+      <link>http://blog.eleele.cf/post/bzoj2115/</link>
       <pubDate>Tue, 30 May 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj2115/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj2115/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1027题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1027/</link>
+      <link>http://blog.eleele.cf/post/bzoj1027/</link>
       <pubDate>Sat, 27 May 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1027/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1027/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1028题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1028/</link>
+      <link>http://blog.eleele.cf/post/bzoj1028/</link>
       <pubDate>Sat, 27 May 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1028/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1028/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1025题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1025/</link>
+      <link>http://blog.eleele.cf/post/bzoj1025/</link>
       <pubDate>Fri, 26 May 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1025/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1025/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1023&amp;4316题解</title>
-      <link>http://blog.eleele.gq/post/bzoj10234316/</link>
+      <link>http://blog.eleele.cf/post/bzoj10234316/</link>
       <pubDate>Wed, 24 May 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj10234316/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj10234316/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj2125题解</title>
-      <link>http://blog.eleele.gq/post/bzoj2125/</link>
+      <link>http://blog.eleele.cf/post/bzoj2125/</link>
       <pubDate>Mon, 22 May 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj2125/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj2125/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1021题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1021/</link>
+      <link>http://blog.eleele.cf/post/bzoj1021/</link>
       <pubDate>Fri, 19 May 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1021/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1021/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1019题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1019/</link>
+      <link>http://blog.eleele.cf/post/bzoj1019/</link>
       <pubDate>Tue, 16 May 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1019/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1019/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1018题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1018/</link>
+      <link>http://blog.eleele.cf/post/bzoj1018/</link>
       <pubDate>Sun, 14 May 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1018/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1018/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1017题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1017/</link>
+      <link>http://blog.eleele.cf/post/bzoj1017/</link>
       <pubDate>Fri, 12 May 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1017/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1017/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj2589&amp;&amp;spojcot2题解</title>
-      <link>http://blog.eleele.gq/post/spojcot2/</link>
+      <link>http://blog.eleele.cf/post/spojcot2/</link>
       <pubDate>Fri, 05 May 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/spojcot2/</guid>
+      <guid>http://blog.eleele.cf/post/spojcot2/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1011题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1011/</link>
+      <link>http://blog.eleele.cf/post/bzoj1011/</link>
       <pubDate>Tue, 02 May 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1011/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1011/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj3876题解</title>
-      <link>http://blog.eleele.gq/post/bzoj3876/</link>
+      <link>http://blog.eleele.cf/post/bzoj3876/</link>
       <pubDate>Mon, 24 Apr 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj3876/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj3876/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj4802题解</title>
-      <link>http://blog.eleele.gq/post/bzoj4802/</link>
+      <link>http://blog.eleele.cf/post/bzoj4802/</link>
       <pubDate>Mon, 24 Apr 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj4802/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj4802/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj3157题解</title>
-      <link>http://blog.eleele.gq/post/bzoj3157/</link>
+      <link>http://blog.eleele.cf/post/bzoj3157/</link>
       <pubDate>Sat, 22 Apr 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj3157/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj3157/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj4805题解</title>
-      <link>http://blog.eleele.gq/post/bzoj4805/</link>
+      <link>http://blog.eleele.cf/post/bzoj4805/</link>
       <pubDate>Mon, 03 Apr 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj4805/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj4805/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj3675题解</title>
-      <link>http://blog.eleele.gq/post/bzoj3675/</link>
+      <link>http://blog.eleele.cf/post/bzoj3675/</link>
       <pubDate>Wed, 15 Mar 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj3675/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj3675/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1412题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1412/</link>
+      <link>http://blog.eleele.cf/post/bzoj1412/</link>
       <pubDate>Fri, 03 Mar 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1412/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1412/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj3438题解</title>
-      <link>http://blog.eleele.gq/post/bzoj3438/</link>
+      <link>http://blog.eleele.cf/post/bzoj3438/</link>
       <pubDate>Thu, 02 Mar 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj3438/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj3438/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1066题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1066/</link>
+      <link>http://blog.eleele.cf/post/bzoj1066/</link>
       <pubDate>Wed, 01 Mar 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1066/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1066/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj2958题解</title>
-      <link>http://blog.eleele.gq/post/bzoj2958/</link>
+      <link>http://blog.eleele.cf/post/bzoj2958/</link>
       <pubDate>Thu, 23 Feb 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj2958/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj2958/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj2219题解</title>
-      <link>http://blog.eleele.gq/post/bzoj2219/</link>
+      <link>http://blog.eleele.cf/post/bzoj2219/</link>
       <pubDate>Wed, 15 Feb 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj2219/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj2219/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj2329题解</title>
-      <link>http://blog.eleele.gq/post/bzoj2329/</link>
+      <link>http://blog.eleele.cf/post/bzoj2329/</link>
       <pubDate>Mon, 13 Feb 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj2329/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj2329/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj4540题解</title>
-      <link>http://blog.eleele.gq/post/bzoj4540/</link>
+      <link>http://blog.eleele.cf/post/bzoj4540/</link>
       <pubDate>Sun, 12 Feb 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj4540/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj4540/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj4552题解</title>
-      <link>http://blog.eleele.gq/post/bzoj4552/</link>
+      <link>http://blog.eleele.cf/post/bzoj4552/</link>
       <pubDate>Sat, 11 Feb 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj4552/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj4552/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj2209题解</title>
-      <link>http://blog.eleele.gq/post/bzoj2209/</link>
+      <link>http://blog.eleele.cf/post/bzoj2209/</link>
       <pubDate>Wed, 01 Feb 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj2209/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj2209/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj3295题解</title>
-      <link>http://blog.eleele.gq/post/bzoj3295/</link>
+      <link>http://blog.eleele.cf/post/bzoj3295/</link>
       <pubDate>Wed, 01 Feb 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj3295/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj3295/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj2243题解</title>
-      <link>http://blog.eleele.gq/post/bzoj2243/</link>
+      <link>http://blog.eleele.cf/post/bzoj2243/</link>
       <pubDate>Fri, 27 Jan 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj2243/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj2243/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj2671题解</title>
-      <link>http://blog.eleele.gq/post/bzoj2671/</link>
+      <link>http://blog.eleele.cf/post/bzoj2671/</link>
       <pubDate>Fri, 27 Jan 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj2671/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj2671/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj3196题解</title>
-      <link>http://blog.eleele.gq/post/bzoj3196/</link>
+      <link>http://blog.eleele.cf/post/bzoj3196/</link>
       <pubDate>Fri, 27 Jan 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj3196/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj3196/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj3676题解</title>
-      <link>http://blog.eleele.gq/post/bzoj3676/</link>
+      <link>http://blog.eleele.cf/post/bzoj3676/</link>
       <pubDate>Fri, 27 Jan 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj3676/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj3676/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj3731题解</title>
-      <link>http://blog.eleele.gq/post/bzoj3731/</link>
+      <link>http://blog.eleele.cf/post/bzoj3731/</link>
       <pubDate>Mon, 23 Jan 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj3731/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj3731/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj3720题解</title>
-      <link>http://blog.eleele.gq/post/bzoj3720/</link>
+      <link>http://blog.eleele.cf/post/bzoj3720/</link>
       <pubDate>Sat, 21 Jan 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj3720/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj3720/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj2006题解</title>
-      <link>http://blog.eleele.gq/post/bzoj2006/</link>
+      <link>http://blog.eleele.cf/post/bzoj2006/</link>
       <pubDate>Sun, 15 Jan 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj2006/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj2006/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj3110题解</title>
-      <link>http://blog.eleele.gq/post/bzoj3110/</link>
+      <link>http://blog.eleele.cf/post/bzoj3110/</link>
       <pubDate>Sun, 15 Jan 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj3110/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj3110/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1857题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1857/</link>
+      <link>http://blog.eleele.cf/post/bzoj1857/</link>
       <pubDate>Sat, 14 Jan 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1857/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1857/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj2154题解</title>
-      <link>http://blog.eleele.gq/post/bzoj2154/</link>
+      <link>http://blog.eleele.cf/post/bzoj2154/</link>
       <pubDate>Sat, 07 Jan 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj2154/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj2154/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj2729题解</title>
-      <link>http://blog.eleele.gq/post/bzoj2729/</link>
+      <link>http://blog.eleele.cf/post/bzoj2729/</link>
       <pubDate>Sat, 07 Jan 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj2729/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj2729/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1053题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1053/</link>
+      <link>http://blog.eleele.cf/post/bzoj1053/</link>
       <pubDate>Fri, 06 Jan 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1053/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1053/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1024题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1024/</link>
+      <link>http://blog.eleele.cf/post/bzoj1024/</link>
       <pubDate>Sun, 25 Dec 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1024/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1024/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj3732题解</title>
-      <link>http://blog.eleele.gq/post/bzoj3732/</link>
+      <link>http://blog.eleele.cf/post/bzoj3732/</link>
       <pubDate>Sat, 24 Dec 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj3732/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj3732/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1004题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1004/</link>
+      <link>http://blog.eleele.cf/post/bzoj1004/</link>
       <pubDate>Fri, 23 Dec 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1004/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1004/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj2466题解</title>
-      <link>http://blog.eleele.gq/post/bzoj2466/</link>
+      <link>http://blog.eleele.cf/post/bzoj2466/</link>
       <pubDate>Fri, 23 Dec 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj2466/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj2466/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj2654题解</title>
-      <link>http://blog.eleele.gq/post/bzoj2654/</link>
+      <link>http://blog.eleele.cf/post/bzoj2654/</link>
       <pubDate>Mon, 19 Dec 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj2654/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj2654/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1009题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1009/</link>
+      <link>http://blog.eleele.cf/post/bzoj1009/</link>
       <pubDate>Sun, 18 Dec 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1009/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1009/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1059题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1059/</link>
+      <link>http://blog.eleele.cf/post/bzoj1059/</link>
       <pubDate>Sun, 18 Dec 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1059/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1059/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1016题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1016/</link>
+      <link>http://blog.eleele.cf/post/bzoj1016/</link>
       <pubDate>Sat, 17 Dec 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1016/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1016/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1007题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1007/</link>
+      <link>http://blog.eleele.cf/post/bzoj1007/</link>
       <pubDate>Fri, 16 Dec 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1007/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1007/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1003题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1003/</link>
+      <link>http://blog.eleele.cf/post/bzoj1003/</link>
       <pubDate>Wed, 14 Dec 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1003/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1003/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1010题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1010/</link>
+      <link>http://blog.eleele.cf/post/bzoj1010/</link>
       <pubDate>Tue, 13 Dec 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1010/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1010/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1001题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1001/</link>
+      <link>http://blog.eleele.cf/post/bzoj1001/</link>
       <pubDate>Mon, 12 Dec 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1001/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1001/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj2299题解</title>
-      <link>http://blog.eleele.gq/post/bzoj2299/</link>
+      <link>http://blog.eleele.cf/post/bzoj2299/</link>
       <pubDate>Mon, 12 Dec 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj2299/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj2299/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj4373题解</title>
-      <link>http://blog.eleele.gq/post/bzoj4373/</link>
+      <link>http://blog.eleele.cf/post/bzoj4373/</link>
       <pubDate>Sun, 11 Dec 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj4373/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj4373/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj4318题解</title>
-      <link>http://blog.eleele.gq/post/bzoj4318/</link>
+      <link>http://blog.eleele.cf/post/bzoj4318/</link>
       <pubDate>Fri, 09 Dec 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj4318/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj4318/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj2962题解</title>
-      <link>http://blog.eleele.gq/post/bzoj2962/</link>
+      <link>http://blog.eleele.cf/post/bzoj2962/</link>
       <pubDate>Thu, 08 Dec 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj2962/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj2962/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj2741题解</title>
-      <link>http://blog.eleele.gq/post/bzoj2741/</link>
+      <link>http://blog.eleele.cf/post/bzoj2741/</link>
       <pubDate>Mon, 05 Dec 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj2741/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj2741/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj3744题解</title>
-      <link>http://blog.eleele.gq/post/bzoj3744/</link>
+      <link>http://blog.eleele.cf/post/bzoj3744/</link>
       <pubDate>Thu, 01 Dec 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj3744/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj3744/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1452题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1452/</link>
+      <link>http://blog.eleele.cf/post/bzoj1452/</link>
       <pubDate>Tue, 15 Nov 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1452/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1452/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj2783题解</title>
-      <link>http://blog.eleele.gq/post/bzoj2783/</link>
+      <link>http://blog.eleele.cf/post/bzoj2783/</link>
       <pubDate>Tue, 15 Nov 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj2783/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj2783/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1013题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1013/</link>
+      <link>http://blog.eleele.cf/post/bzoj1013/</link>
       <pubDate>Mon, 14 Nov 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1013/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1013/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj2333题解</title>
-      <link>http://blog.eleele.gq/post/bzoj2333/</link>
+      <link>http://blog.eleele.cf/post/bzoj2333/</link>
       <pubDate>Mon, 14 Nov 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj2333/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj2333/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj4401题解</title>
-      <link>http://blog.eleele.gq/post/bzoj4401/</link>
+      <link>http://blog.eleele.cf/post/bzoj4401/</link>
       <pubDate>Fri, 11 Nov 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj4401/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj4401/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj4325题解</title>
-      <link>http://blog.eleele.gq/post/bzoj4325/</link>
+      <link>http://blog.eleele.cf/post/bzoj4325/</link>
       <pubDate>Tue, 08 Nov 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj4325/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj4325/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1095题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1095/</link>
+      <link>http://blog.eleele.cf/post/bzoj1095/</link>
       <pubDate>Sun, 06 Nov 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1095/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1095/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj2152题解</title>
-      <link>http://blog.eleele.gq/post/bzoj2152/</link>
+      <link>http://blog.eleele.cf/post/bzoj2152/</link>
       <pubDate>Sun, 06 Nov 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj2152/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj2152/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj4403题解</title>
-      <link>http://blog.eleele.gq/post/bzoj4403/</link>
+      <link>http://blog.eleele.cf/post/bzoj4403/</link>
       <pubDate>Fri, 04 Nov 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj4403/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj4403/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj2763题解</title>
-      <link>http://blog.eleele.gq/post/bzoj2763/</link>
+      <link>http://blog.eleele.cf/post/bzoj2763/</link>
       <pubDate>Thu, 03 Nov 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj2763/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj2763/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj3083题解</title>
-      <link>http://blog.eleele.gq/post/bzoj3083/</link>
+      <link>http://blog.eleele.cf/post/bzoj3083/</link>
       <pubDate>Wed, 02 Nov 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj3083/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj3083/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj4544题解</title>
-      <link>http://blog.eleele.gq/post/bzoj4544/</link>
+      <link>http://blog.eleele.cf/post/bzoj4544/</link>
       <pubDate>Wed, 02 Nov 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj4544/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj4544/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj3209题解</title>
-      <link>http://blog.eleele.gq/post/bzoj3209/</link>
+      <link>http://blog.eleele.cf/post/bzoj3209/</link>
       <pubDate>Sat, 22 Oct 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj3209/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj3209/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj3563题解</title>
-      <link>http://blog.eleele.gq/post/bzoj3563/</link>
+      <link>http://blog.eleele.cf/post/bzoj3563/</link>
       <pubDate>Fri, 21 Oct 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj3563/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj3563/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj2957题解</title>
-      <link>http://blog.eleele.gq/post/bzoj2957/</link>
+      <link>http://blog.eleele.cf/post/bzoj2957/</link>
       <pubDate>Wed, 21 Sep 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj2957/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj2957/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj3309题解</title>
-      <link>http://blog.eleele.gq/post/bzoj3309/</link>
+      <link>http://blog.eleele.cf/post/bzoj3309/</link>
       <pubDate>Wed, 21 Sep 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj3309/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj3309/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1263题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1263/</link>
+      <link>http://blog.eleele.cf/post/bzoj1263/</link>
       <pubDate>Sat, 17 Sep 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1263/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1263/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1295题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1295/</link>
+      <link>http://blog.eleele.cf/post/bzoj1295/</link>
       <pubDate>Sat, 17 Sep 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1295/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1295/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj2463题解</title>
-      <link>http://blog.eleele.gq/post/bzoj2463/</link>
+      <link>http://blog.eleele.cf/post/bzoj2463/</link>
       <pubDate>Mon, 12 Sep 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj2463/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj2463/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1875题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1875/</link>
+      <link>http://blog.eleele.cf/post/bzoj1875/</link>
       <pubDate>Sun, 11 Sep 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1875/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1875/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj2423题解</title>
-      <link>http://blog.eleele.gq/post/bzoj2423/</link>
+      <link>http://blog.eleele.cf/post/bzoj2423/</link>
       <pubDate>Fri, 09 Sep 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj2423/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj2423/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj2819题解</title>
-      <link>http://blog.eleele.gq/post/bzoj2819/</link>
+      <link>http://blog.eleele.cf/post/bzoj2819/</link>
       <pubDate>Thu, 08 Sep 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj2819/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj2819/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj4517题解</title>
-      <link>http://blog.eleele.gq/post/bzoj4517/</link>
+      <link>http://blog.eleele.cf/post/bzoj4517/</link>
       <pubDate>Thu, 08 Sep 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj4517/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj4517/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj3956题解</title>
-      <link>http://blog.eleele.gq/post/bzoj3956/</link>
+      <link>http://blog.eleele.cf/post/bzoj3956/</link>
       <pubDate>Sun, 04 Sep 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj3956/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj3956/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj3489题解</title>
-      <link>http://blog.eleele.gq/post/bzoj3489/</link>
+      <link>http://blog.eleele.cf/post/bzoj3489/</link>
       <pubDate>Fri, 02 Sep 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj3489/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj3489/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj4066题解</title>
-      <link>http://blog.eleele.gq/post/bzoj4066/</link>
+      <link>http://blog.eleele.cf/post/bzoj4066/</link>
       <pubDate>Thu, 01 Sep 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj4066/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj4066/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj3329题解</title>
-      <link>http://blog.eleele.gq/post/bzoj3329/</link>
+      <link>http://blog.eleele.cf/post/bzoj3329/</link>
       <pubDate>Sat, 27 Aug 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj3329/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj3329/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj4653(noi2016 区间)题解</title>
-      <link>http://blog.eleele.gq/post/bzoj4653/</link>
+      <link>http://blog.eleele.cf/post/bzoj4653/</link>
       <pubDate>Sat, 27 Aug 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj4653/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj4653/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj2653题解</title>
-      <link>http://blog.eleele.gq/post/bzoj2653/</link>
+      <link>http://blog.eleele.cf/post/bzoj2653/</link>
       <pubDate>Fri, 26 Aug 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj2653/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj2653/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj3673&amp;3674题解</title>
-      <link>http://blog.eleele.gq/post/bzoj36733674/</link>
+      <link>http://blog.eleele.cf/post/bzoj36733674/</link>
       <pubDate>Sat, 13 Aug 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj36733674/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj36733674/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj2875题解</title>
-      <link>http://blog.eleele.gq/post/bzoj2875/</link>
+      <link>http://blog.eleele.cf/post/bzoj2875/</link>
       <pubDate>Sat, 09 Jul 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj2875/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj2875/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj2326题解</title>
-      <link>http://blog.eleele.gq/post/bzoj2326/</link>
+      <link>http://blog.eleele.cf/post/bzoj2326/</link>
       <pubDate>Tue, 05 Jul 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj2326/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj2326/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj3333题解</title>
-      <link>http://blog.eleele.gq/post/bzoj3333/</link>
+      <link>http://blog.eleele.cf/post/bzoj3333/</link>
       <pubDate>Sun, 03 Jul 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj3333/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj3333/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj2141题解</title>
-      <link>http://blog.eleele.gq/post/bzoj2141/</link>
+      <link>http://blog.eleele.cf/post/bzoj2141/</link>
       <pubDate>Sat, 02 Jul 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj2141/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj2141/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1087题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1087/</link>
+      <link>http://blog.eleele.cf/post/bzoj1087/</link>
       <pubDate>Wed, 29 Jun 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1087/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1087/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj3289题解</title>
-      <link>http://blog.eleele.gq/post/bzoj3289/</link>
+      <link>http://blog.eleele.cf/post/bzoj3289/</link>
       <pubDate>Sun, 26 Jun 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj3289/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj3289/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj2431题解</title>
-      <link>http://blog.eleele.gq/post/bzoj2431/</link>
+      <link>http://blog.eleele.cf/post/bzoj2431/</link>
       <pubDate>Mon, 20 Jun 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj2431/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj2431/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj2242题解</title>
-      <link>http://blog.eleele.gq/post/bzoj2242/</link>
+      <link>http://blog.eleele.cf/post/bzoj2242/</link>
       <pubDate>Fri, 10 Jun 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj2242/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj2242/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj2435题解</title>
-      <link>http://blog.eleele.gq/post/bzoj2435/</link>
+      <link>http://blog.eleele.cf/post/bzoj2435/</link>
       <pubDate>Wed, 08 Jun 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj2435/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj2435/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj2440题解</title>
-      <link>http://blog.eleele.gq/post/bzoj2440/</link>
+      <link>http://blog.eleele.cf/post/bzoj2440/</link>
       <pubDate>Tue, 07 Jun 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj2440/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj2440/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj3994题解</title>
-      <link>http://blog.eleele.gq/post/bzoj3994/</link>
+      <link>http://blog.eleele.cf/post/bzoj3994/</link>
       <pubDate>Mon, 06 Jun 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj3994/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj3994/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj3884题解</title>
-      <link>http://blog.eleele.gq/post/bzoj3884/</link>
+      <link>http://blog.eleele.cf/post/bzoj3884/</link>
       <pubDate>Sun, 05 Jun 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj3884/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj3884/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1061题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1061/</link>
+      <link>http://blog.eleele.cf/post/bzoj1061/</link>
       <pubDate>Fri, 03 Jun 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1061/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1061/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj3112题解</title>
-      <link>http://blog.eleele.gq/post/bzoj3112/</link>
+      <link>http://blog.eleele.cf/post/bzoj3112/</link>
       <pubDate>Fri, 03 Jun 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj3112/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj3112/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj2120题解</title>
-      <link>http://blog.eleele.gq/post/bzoj2120/</link>
+      <link>http://blog.eleele.cf/post/bzoj2120/</link>
       <pubDate>Wed, 01 Jun 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj2120/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj2120/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj3065题解</title>
-      <link>http://blog.eleele.gq/post/bzoj3065/</link>
+      <link>http://blog.eleele.cf/post/bzoj3065/</link>
       <pubDate>Sun, 29 May 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj3065/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj3065/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj4198题解</title>
-      <link>http://blog.eleele.gq/post/bzoj4198/</link>
+      <link>http://blog.eleele.cf/post/bzoj4198/</link>
       <pubDate>Sun, 29 May 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj4198/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj4198/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj2809题解</title>
-      <link>http://blog.eleele.gq/post/bzoj2809/</link>
+      <link>http://blog.eleele.cf/post/bzoj2809/</link>
       <pubDate>Sat, 28 May 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj2809/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj2809/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj3238题解</title>
-      <link>http://blog.eleele.gq/post/bzoj3238/</link>
+      <link>http://blog.eleele.cf/post/bzoj3238/</link>
       <pubDate>Thu, 26 May 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj3238/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj3238/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj3944题解</title>
-      <link>http://blog.eleele.gq/post/bzoj3944/</link>
+      <link>http://blog.eleele.cf/post/bzoj3944/</link>
       <pubDate>Sun, 22 May 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj3944/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj3944/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj2818题解</title>
-      <link>http://blog.eleele.gq/post/bzoj2818/</link>
+      <link>http://blog.eleele.cf/post/bzoj2818/</link>
       <pubDate>Tue, 17 May 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj2818/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj2818/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj3930题解</title>
-      <link>http://blog.eleele.gq/post/bzoj3930/</link>
+      <link>http://blog.eleele.cf/post/bzoj3930/</link>
       <pubDate>Mon, 16 May 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj3930/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj3930/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1260题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1260/</link>
+      <link>http://blog.eleele.cf/post/bzoj1260/</link>
       <pubDate>Sun, 08 May 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1260/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1260/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1297题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1297/</link>
+      <link>http://blog.eleele.cf/post/bzoj1297/</link>
       <pubDate>Sat, 07 May 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1297/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1297/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1150题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1150/</link>
+      <link>http://blog.eleele.cf/post/bzoj1150/</link>
       <pubDate>Fri, 06 May 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1150/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1150/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj2186题解</title>
-      <link>http://blog.eleele.gq/post/bzoj2186/</link>
+      <link>http://blog.eleele.cf/post/bzoj2186/</link>
       <pubDate>Thu, 05 May 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj2186/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj2186/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj3160题解</title>
-      <link>http://blog.eleele.gq/post/bzoj3160/</link>
+      <link>http://blog.eleele.cf/post/bzoj3160/</link>
       <pubDate>Sun, 01 May 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj3160/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj3160/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj3527题解</title>
-      <link>http://blog.eleele.gq/post/bzoj3527/</link>
+      <link>http://blog.eleele.cf/post/bzoj3527/</link>
       <pubDate>Fri, 22 Apr 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj3527/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj3527/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     

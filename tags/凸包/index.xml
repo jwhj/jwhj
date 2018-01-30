@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>凸包 on 蒟蒻的博客</title>
-    <link>http://blog.eleele.gq/tags/%E5%87%B8%E5%8C%85/</link>
+    <link>http://blog.eleele.cf/tags/%E5%87%B8%E5%8C%85/</link>
     <description>Recent content in 凸包 on 蒟蒻的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 23 Oct 2017 13:57:08 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.eleele.gq/tags/%E5%87%B8%E5%8C%85/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://blog.eleele.cf/tags/%E5%87%B8%E5%8C%85/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>jzoj5415题解</title>
-      <link>http://blog.eleele.gq/post/jzoj5415/</link>
+      <link>http://blog.eleele.cf/post/jzoj5415/</link>
       <pubDate>Mon, 23 Oct 2017 13:57:08 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/jzoj5415/</guid>
+      <guid>http://blog.eleele.cf/post/jzoj5415/</guid>
       <description>首先注意到，对于c一样且i%c一样的车站，它们能转移到的车站集合是一样的。考虑这些车站，它们对后面的车站的贡献都可以写成直线v[i]/ci+f[i]的形式。在后面转移的时候，其实就是要求在某一个横坐标的位置所有直线的最低点，此时有一个很自然的想法就是维护一个上凸壳。
 这个凸壳乍一看很不好维护，但是仔细想一想会发现，每次新加进来一条直线的时候，这条直线在i处的高度肯定不比凸壳上任意一条直线要高（否则就可以用比当前直线低的直线来更新f[i])。那么，如果这条新加进来的直线的斜率小于等于凸壳上某条直线的斜率，凸壳上那条直线就没有用了，可以直接去掉。我觉得这道题最妙的就是这个性质，以前遇到类似的题没想出来，这回做的时候还是没想出来……
 利用这个性质，就可以保证直线的斜率单调递增，从而用单调栈来维护上凸壳。
@@ -28,10 +28,10 @@
     
     <item>
       <title>bzoj1007题解</title>
-      <link>http://blog.eleele.gq/post/bzoj1007/</link>
+      <link>http://blog.eleele.cf/post/bzoj1007/</link>
       <pubDate>Fri, 16 Dec 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj1007/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj1007/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     

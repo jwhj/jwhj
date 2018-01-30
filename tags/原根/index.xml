@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>原根 on 蒟蒻的博客</title>
-    <link>http://blog.eleele.gq/tags/%E5%8E%9F%E6%A0%B9/</link>
+    <link>http://blog.eleele.cf/tags/%E5%8E%9F%E6%A0%B9/</link>
     <description>Recent content in 原根 on 蒟蒻的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 02 Dec 2017 14:34:17 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.eleele.gq/tags/%E5%8E%9F%E6%A0%B9/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://blog.eleele.cf/tags/%E5%8E%9F%E6%A0%B9/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>hdu5958&amp;uva7622题解</title>
-      <link>http://blog.eleele.gq/post/hdu5958uva7622/</link>
+      <link>http://blog.eleele.cf/post/hdu5958uva7622/</link>
       <pubDate>Sat, 02 Dec 2017 14:34:17 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/hdu5958uva7622/</guid>
+      <guid>http://blog.eleele.cf/post/hdu5958uva7622/</guid>
       <description>让$c_{hk\mod p}=r(h,k)$，把下标对mod p的原根取个对数/指数就可以转化为卷积的形式。
 一开始以为这道题要倍长其中一个多项式，后来发现其实不用，这样可以省掉一半的常数。
 FFT真的是细节多，到处都要注意清零。
@@ -27,10 +27,10 @@ hdu上实在是卡常数卡不过去了，在uva上面A了。
     
     <item>
       <title>bzoj2219题解</title>
-      <link>http://blog.eleele.gq/post/bzoj2219/</link>
+      <link>http://blog.eleele.cf/post/bzoj2219/</link>
       <pubDate>Wed, 15 Feb 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.gq/post/bzoj2219/</guid>
+      <guid>http://blog.eleele.cf/post/bzoj2219/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
