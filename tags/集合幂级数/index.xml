@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Loj on 蒟蒻的博客</title>
-    <link>http://blog.eleele.cf/tags/loj/</link>
-    <description>Recent content in Loj on 蒟蒻的博客</description>
+    <title>集合幂级数 on 蒟蒻的博客</title>
+    <link>http://blog.eleele.cf/tags/%E9%9B%86%E5%90%88%E5%B9%82%E7%BA%A7%E6%95%B0/</link>
+    <description>Recent content in 集合幂级数 on 蒟蒻的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 10 Feb 2018 14:20:12 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.eleele.cf/tags/loj/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://blog.eleele.cf/tags/%E9%9B%86%E5%90%88%E5%B9%82%E7%BA%A7%E6%95%B0/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -33,18 +33,6 @@ vfk的论文里面把新增的未知数z的多项式作为了x的系数，现在
 成功1A+成为loj上AC此题的第二个人+成为目前loj上代码最短的提交。
 代码：
 #include &amp;lt;cstdio&amp;gt; #include &amp;lt;cstring&amp;gt; #include &amp;lt;algorithm&amp;gt; #define ele int #define ll long long using namespace std; #define maxs (1&amp;lt;&amp;lt;21) #define maxn 25 #define W 11 #define MOD 998244353 ele n,m,p,_cnt[1&amp;lt;&amp;lt;W],_log[maxs],w[maxn],pp[maxs],ipp[maxs],g[maxn],f[maxn][maxs],h[maxn][maxs],t1[maxs]; bool flag[maxs],cc[maxs]; inline ele getv(ele x,ele i){ return (x&amp;gt;&amp;gt;i)&amp;amp;1; } inline ele setv(ele&amp;amp;x,ele i,ele k){ x=x&amp;amp;~(1&amp;lt;&amp;lt;i); x=x|(k&amp;lt;&amp;lt;i); return x; } inline ele pw(ele a,ele x){ ele ans=1,tmp=a%MOD; for (; x; x&amp;gt;&amp;gt;=1,tmp=(ll)tmp*tmp%MOD) if (x&amp;amp;1) ans=(ll)ans*tmp%MOD; return ans; } inline ele getcnt(ele x){ ele ans=0; while (x){ ans+=_cnt[x&amp;amp;((1&amp;lt;&amp;lt;W)-1)]; x&amp;gt;&amp;gt;=W; } return ans; } void dfs(ele i,ele&amp;amp;s){ setv(s,i,0); ele tmp=g[i]&amp;amp;s; for (int j=tmp&amp;amp;(-tmp); tmp; tmp-=j,j=tmp&amp;amp;(-tmp)){ ele k=_log[j]; if (getv(s,k)) dfs(k,s); } } inline void FWT(ele K,ele n,ele *a,ele *y){ static ele f[maxs]; f[0]=0; y[0]=a[0]; for (int i=1; i&amp;lt;n; ++i){ f[i]=f[i&amp;gt;&amp;gt;1]&amp;gt;&amp;gt;1; if (i&amp;amp;1) f[i]+=n&amp;gt;&amp;gt;1; y[i]=a[f[i]]; } for (int p=1; p&amp;lt;n; p&amp;lt;&amp;lt;=1) for (int i=0; i&amp;lt;n; i+=(p&amp;lt;&amp;lt;1)) for (int j=i; j&amp;lt;i+p; ++j) (y[j+p]+=(~K)?</description>
-    </item>
-    
-    <item>
-      <title>loj122题解</title>
-      <link>http://blog.eleele.cf/post/loj122/</link>
-      <pubDate>Sun, 31 Dec 2017 13:36:49 +0000</pubDate>
-      
-      <guid>http://blog.eleele.cf/post/loj122/</guid>
-      <description>写+调了7h+，终于成为AC此题的第四个人+此题目前最短代码+此题目前最慢代码……
-去CA的博客上翻WC2015 xyz的课件来看吧……虽然看懂了但是完全不想写题解……太复杂了……
-代码：
-#include &amp;lt;cstdio&amp;gt; #include &amp;lt;cstring&amp;gt; #include &amp;lt;algorithm&amp;gt; #include &amp;lt;set&amp;gt; #include &amp;lt;queue&amp;gt; #define ele int using namespace std; #define maxn 5010 #define maxm 500010 #define maxk 15 namespace LCT{ struct node{ ele s,vir; bool flip; node *f,*c[2]; node(){ s=1; vir=0; flip=false; f=c[0]=c[1]=NULL; } }; inline bool splayroot(node *x){ return (!x-&amp;gt;f || (x-&amp;gt;f-&amp;gt;c[0]!=x &amp;amp;&amp;amp; x-&amp;gt;f-&amp;gt;c[1]!=x)); } inline void pushdown(node *x){ if (x &amp;amp;&amp;amp; x-&amp;gt;flip){ swap(x-&amp;gt;c[0],x-&amp;gt;c[1]); if (x-&amp;gt;c[0]) x-&amp;gt;c[0]-&amp;gt;flip^=1; if (x-&amp;gt;c[1]) x-&amp;gt;c[1]-&amp;gt;flip^=1; x-&amp;gt;flip=false; } } inline void maintain(node *x){ x-&amp;gt;s=1+x-&amp;gt;vir; if (x-&amp;gt;c[0]) x-&amp;gt;s+=x-&amp;gt;c[0]-&amp;gt;s; if (x-&amp;gt;c[1]) x-&amp;gt;s+=x-&amp;gt;c[1]-&amp;gt;s; } inline node* rotate(node *x,ele k){ if (!</description>
     </item>
     
   </channel>

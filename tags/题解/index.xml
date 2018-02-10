@@ -6,10 +6,34 @@
     <description>Recent content in 题解 on 蒟蒻的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 20 Jan 2018 14:27:24 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 10 Feb 2018 14:20:12 +0000</lastBuildDate>
     
 	<atom:link href="http://blog.eleele.cf/tags/%E9%A2%98%E8%A7%A3/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>loj2340(wc2018t2)题解</title>
+      <link>http://blog.eleele.cf/post/loj2340/</link>
+      <pubDate>Sat, 10 Feb 2018 14:20:12 +0000</pubDate>
+      
+      <guid>http://blog.eleele.cf/post/loj2340/</guid>
+      <description>我会子集并卷积，我会子集对称差卷积，可惜我没认真看vfk论文所以我不会子集卷积，结果考场上我就没想出来，只打了50分……
+前置技能：子集卷积。不会的可以看一看2015国家集训队论文集里面vfk的那篇。
+首先题面写得非常sb，你可以理解为不存在欧拉回路或者不联通的时候州是合法的。
+让$g_S$表示S中的城市作为一个州是否合法，$W_S$表示S中城市的总人口数，$f_S$代表只考虑S中城市的答案，那么可以很轻松地得到这样一个式子：
+$$f_S=\sum_{U\cup V=S\\U\cap V=\emptyset} f_Ug_V(\frac{W_V}{W_S})^p$$
+然后你可以用一个$O(3^n)$的dp把它算出来，获得50分。
+注意到这个长得很像一个子集卷积的形式，但是左右两边都有f，而且有一边还有一个$W_S$，不方便用多项式求逆的方法解决，如果分治的话，复杂度是$O(n^32^n)$的，还是跑不出剩下的50分。
+设$\sigma$为$f$的集合占位幂级数，为了优化，我们应该直接考虑$\sigma$的递推式。
+$${W_S}^p\sigma_{S,i}=\sum_{U\cup V=S\\j+|V|=i}\sigma_{U,j}g_V{W_V}^p$$
+从小到大枚举i，依次确定$\sigma_{*,i}(i=1,2,3,\ldots)$。对于确定的i，枚举j，然后把$\sum_{S}\sigma_{S,j}$和$\sum_{|S|=i-j}g_S{W_S}^p$做一个子集并卷积就可以了（注意不是子集卷积）。
+vfk的论文里面把新增的未知数z的多项式作为了x的系数，现在这么做就有点像是把x的多项式作为了z的系数。
+可是这样为什么就能优化呢？枚举i，枚举j，再做子集并卷积似乎还是$O(n^32^n)$的，但是注意到我们可以把$\sum_{S}\sigma_{S,j}$，$\sum_{|S|=j}g_S{W_S}^p$的FWT预先处理出来，对每个j，点值对应乘起来之后先不要FWT回去，而是对所有的j，把算出来的点值加起来，最后在FWT回去，这样卷起来那一步就是$O(2^n)$的。
+可是说到底为什么这样会快呢？可能是因为我们直接从$\sigma$的递推式上面入手，而不是直接僵硬地使用子集卷积，所以挖掘到了更多的性质。
+成功1A+成为loj上AC此题的第二个人+成为目前loj上代码最短的提交。
+代码：
+#include &amp;lt;cstdio&amp;gt; #include &amp;lt;cstring&amp;gt; #include &amp;lt;algorithm&amp;gt; #define ele int #define ll long long using namespace std; #define maxs (1&amp;lt;&amp;lt;21) #define maxn 25 #define W 11 #define MOD 998244353 ele n,m,p,_cnt[1&amp;lt;&amp;lt;W],_log[maxs],w[maxn],pp[maxs],ipp[maxs],g[maxn],f[maxn][maxs],h[maxn][maxs],t1[maxs]; bool flag[maxs],cc[maxs]; inline ele getv(ele x,ele i){ return (x&amp;gt;&amp;gt;i)&amp;amp;1; } inline ele setv(ele&amp;amp;x,ele i,ele k){ x=x&amp;amp;~(1&amp;lt;&amp;lt;i); x=x|(k&amp;lt;&amp;lt;i); return x; } inline ele pw(ele a,ele x){ ele ans=1,tmp=a%MOD; for (; x; x&amp;gt;&amp;gt;=1,tmp=(ll)tmp*tmp%MOD) if (x&amp;amp;1) ans=(ll)ans*tmp%MOD; return ans; } inline ele getcnt(ele x){ ele ans=0; while (x){ ans+=_cnt[x&amp;amp;((1&amp;lt;&amp;lt;W)-1)]; x&amp;gt;&amp;gt;=W; } return ans; } void dfs(ele i,ele&amp;amp;s){ setv(s,i,0); ele tmp=g[i]&amp;amp;s; for (int j=tmp&amp;amp;(-tmp); tmp; tmp-=j,j=tmp&amp;amp;(-tmp)){ ele k=_log[j]; if (getv(s,k)) dfs(k,s); } } inline void FWT(ele K,ele n,ele *a,ele *y){ static ele f[maxs]; f[0]=0; y[0]=a[0]; for (int i=1; i&amp;lt;n; ++i){ f[i]=f[i&amp;gt;&amp;gt;1]&amp;gt;&amp;gt;1; if (i&amp;amp;1) f[i]+=n&amp;gt;&amp;gt;1; y[i]=a[f[i]]; } for (int p=1; p&amp;lt;n; p&amp;lt;&amp;lt;=1) for (int i=0; i&amp;lt;n; i+=(p&amp;lt;&amp;lt;1)) for (int j=i; j&amp;lt;i+p; ++j) (y[j+p]+=(~K)?</description>
+    </item>
     
     <item>
       <title>jzoj5523题解</title>

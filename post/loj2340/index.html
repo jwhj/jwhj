@@ -1,0 +1,250 @@
+<script type="text/x-mathjax-config;">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" id=""></script>
+
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.32.4" />
+		<title>loj2340(wc2018t2)题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.cf/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.cf/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.cf/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.cf/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.cf/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.cf/post'>Archive</a>
+	<a href='http://blog.eleele.cf/tags'>Tags</a>
+	<a href='http://blog.eleele.cf/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.cf/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        loj2340(wc2018t2)题解
+                    </h1>
+                    <h2 class="headline">
+                    Feb 10, 2018 14:20
+                    · 293 words
+                    · 2 minutes read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.cf/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.cf/tags/loj">loj</a>
+                          
+                              <a href="http://blog.eleele.cf/tags/fwt">FWT</a>
+                          
+                              <a href="http://blog.eleele.cf/tags/%E7%8A%B6%E5%8E%8B">状压</a>
+                          
+                              <a href="http://blog.eleele.cf/tags/%E9%9B%86%E5%90%88%E5%B9%82%E7%BA%A7%E6%95%B0">集合幂级数</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>我会子集并卷积，我会子集对称差卷积，可惜我没认真看vfk论文所以我不会子集卷积，结果考场上我就没想出来，只打了50分……</p>
+
+<p>前置技能：子集卷积。不会的可以看一看2015国家集训队论文集里面vfk的那篇。</p>
+
+<p>首先题面写得非常sb，你可以理解为不存在欧拉回路或者不联通的时候州是合法的。</p>
+
+<p>让$g_S$表示S中的城市作为一个州是否合法，$W_S$表示S中城市的总人口数，$f_S$代表只考虑S中城市的答案，那么可以很轻松地得到这样一个式子：</p>
+
+<p>$$f_S=\sum_{U\cup V=S\\U\cap V=\emptyset} f_Ug_V(\frac{W_V}{W_S})^p$$</p>
+
+<p>然后你可以用一个$O(3^n)$的dp把它算出来，获得50分。</p>
+
+<p>注意到这个长得很像一个子集卷积的形式，但是左右两边都有f，而且有一边还有一个$W_S$，不方便用多项式求逆的方法解决，如果分治的话，复杂度是$O(n^32^n)$的，还是跑不出剩下的50分。</p>
+
+<p>设$\sigma$为$f$的集合占位幂级数，为了优化，我们应该直接考虑$\sigma$的递推式。</p>
+
+<p>$${W_S}^p\sigma_{S,i}=\sum_{U\cup V=S\\j+|V|=i}\sigma_{U,j}g_V{W_V}^p$$</p>
+
+<p>从小到大枚举i，依次确定$\sigma_{*,i}(i=1,2,3,\ldots)$。对于确定的i，枚举j，然后把$\sum_{S}\sigma_{S,j}$和$\sum_{|S|=i-j}g_S{W_S}^p$做一个子集<strong>并</strong>卷积就可以了（注意不是子集卷积）。</p>
+
+<p>vfk的论文里面把新增的未知数z的多项式作为了x的系数，现在这么做就有点像是把x的多项式作为了z的系数。</p>
+
+<p>可是这样为什么就能优化呢？枚举i，枚举j，再做子集并卷积似乎还是$O(n^32^n)$的，但是注意到我们可以把$\sum_{S}\sigma_{S,j}$，$\sum_{|S|=j}g_S{W_S}^p$的FWT预先处理出来，对每个j，点值对应乘起来之后先不要FWT回去，而是对所有的j，把算出来的点值加起来，最后在FWT回去，这样卷起来那一步就是$O(2^n)$的。</p>
+
+<p>可是说到底为什么这样会快呢？可能是因为我们直接从$\sigma$的递推式上面入手，而不是直接僵硬地使用子集卷积，所以挖掘到了更多的性质。</p>
+
+<p>成功1A+成为loj上AC此题的第二个人+成为目前loj上代码最短的提交。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#define ele int
+#define ll long long
+using namespace std;
+#define maxs (1&lt;&lt;21)
+#define maxn 25
+#define W 11
+#define MOD 998244353
+ele n,m,p,_cnt[1&lt;&lt;W],_log[maxs],w[maxn],pp[maxs],ipp[maxs],g[maxn],f[maxn][maxs],h[maxn][maxs],t1[maxs];
+bool flag[maxs],cc[maxs];
+inline ele getv(ele x,ele i){
+	return (x&gt;&gt;i)&amp;1;
+}
+inline ele setv(ele&amp;x,ele i,ele k){
+	x=x&amp;~(1&lt;&lt;i);
+	x=x|(k&lt;&lt;i);
+	return x;
+}
+inline ele pw(ele a,ele x){
+	ele ans=1,tmp=a%MOD;
+	for (; x; x&gt;&gt;=1,tmp=(ll)tmp*tmp%MOD)
+		if (x&amp;1) ans=(ll)ans*tmp%MOD;
+	return ans;
+}
+inline ele getcnt(ele x){
+	ele ans=0;
+	while (x){
+		ans+=_cnt[x&amp;((1&lt;&lt;W)-1)];
+		x&gt;&gt;=W;
+	}
+	return ans;
+}
+void dfs(ele i,ele&amp;s){
+	setv(s,i,0);
+	ele tmp=g[i]&amp;s;
+	for (int j=tmp&amp;(-tmp); tmp; tmp-=j,j=tmp&amp;(-tmp)){
+		ele k=_log[j];
+		if (getv(s,k)) dfs(k,s);
+	}
+}
+inline void FWT(ele K,ele n,ele *a,ele *y){
+	static ele f[maxs];
+	f[0]=0; y[0]=a[0];
+	for (int i=1; i&lt;n; ++i){
+		f[i]=f[i&gt;&gt;1]&gt;&gt;1;
+		if (i&amp;1) f[i]+=n&gt;&gt;1;
+		y[i]=a[f[i]];
+	}
+	for (int p=1; p&lt;n; p&lt;&lt;=1)
+		for (int i=0; i&lt;n; i+=(p&lt;&lt;1))
+			for (int j=i; j&lt;i+p; ++j)
+				(y[j+p]+=(~K)?y[j]:(MOD-y[j]))%=MOD;
+}
+int main(){
+	scanf(&quot;%d%d%d&quot;,&amp;n,&amp;m,&amp;p);
+	_cnt[0]=0;
+	for (int i=1; i&lt;(1&lt;&lt;W); ++i) _cnt[i]=_cnt[i&gt;&gt;1]+(i&amp;1);
+	_log[1]=0;
+	for (int i=2; i&lt;(1&lt;&lt;n); ++i) _log[i]=_log[i&gt;&gt;1]+1;
+	memset(g,0,sizeof(g));
+	for (int i=0; i&lt;m; ++i){
+		ele x,y;
+		scanf(&quot;%d%d&quot;,&amp;x,&amp;y); --x,--y;
+		setv(g[x],y,1); setv(g[y],x,1);
+	}
+	for (int i=0; i&lt;n; ++i) scanf(&quot;%d&quot;,w+i);
+	pp[0]=0;
+	for (int i=1; i&lt;(1&lt;&lt;n); ++i){
+		ele j=i&amp;(-i);
+		pp[i]=(pp[i-j]+w[_log[j]])%MOD;
+		ipp[i]=pw(pp[i],MOD-2);
+	}
+	flag[0]=false; cc[0]=true;
+	for (int i=1; i&lt;(1&lt;&lt;n); ++i){
+		ele tmp=i,cnt=0;
+		for (int j=tmp&amp;(-tmp); tmp; tmp-=j,j=tmp&amp;(-tmp)){
+			ele k=_log[j];
+			if (getcnt(g[k]&amp;i)&amp;1) ++cnt;
+		}
+		flag[i]=(cnt&gt;0);
+		ele s=i;
+		dfs(_log[i&amp;(-i)],s);
+		cc[i]=!s;
+	}
+	memset(h,0,sizeof(h));
+	for (int i=0; i&lt;=n; ++i)
+		for (int s=0; s&lt;(1&lt;&lt;n); ++s)
+			if (getcnt(s)==i &amp;&amp; (flag[s] || !cc[s])) h[i][s]+=pw(pp[s],p);
+	for (int i=0; i&lt;=n; ++i){
+		FWT(1,1&lt;&lt;n,h[i],t1);
+		memcpy(h[i],t1,sizeof(t1));
+	}
+	memset(f,0,sizeof(f)); memset(t1,0,sizeof(t1));
+	t1[0]=1; FWT(1,1&lt;&lt;n,t1,f[0]);
+	ele ans=0;
+	for (int i=1; i&lt;=n; ++i){
+		for (int j=0; j&lt;=i; ++j)
+			for (int s=0; s&lt;(1&lt;&lt;n); ++s)
+				(f[i][s]+=(ll)f[j][s]*h[i-j][s]%MOD)%=MOD;
+		FWT(-1,1&lt;&lt;n,f[i],t1);
+		for (int i=0; i&lt;(1&lt;&lt;n); ++i) t1[i]=(ll)t1[i]*pw(ipp[i],p)%MOD;
+		(ans+=t1[(1&lt;&lt;n)-1])%=MOD;
+		FWT(1,1&lt;&lt;n,t1,f[i]);
+	}
+	printf(&quot;%d\n&quot;,ans);
+	return 0;
+}
+</code></pre>
+
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2018 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+        </section>
+
+        <script src="http://blog.eleele.cf/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.cf/js/main.js"></script>
+<script src="http://blog.eleele.cf/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

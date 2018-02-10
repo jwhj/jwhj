@@ -102,6 +102,15 @@
     </item>
     
     <item>
+      <title>Fwt</title>
+      <link>http://blog.eleele.cf/tags/fwt/</link>
+      <pubDate>Sat, 10 Feb 2018 14:20:12 +0000</pubDate>
+      
+      <guid>http://blog.eleele.cf/tags/fwt/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Git</title>
       <link>http://blog.eleele.cf/tags/git/</link>
       <pubDate>Sat, 13 Aug 2016 10:02:43 +0000</pubDate>
@@ -176,7 +185,7 @@
     <item>
       <title>Loj</title>
       <link>http://blog.eleele.cf/tags/loj/</link>
-      <pubDate>Sun, 31 Dec 2017 13:36:49 +0000</pubDate>
+      <pubDate>Sat, 10 Feb 2018 14:20:12 +0000</pubDate>
       
       <guid>http://blog.eleele.cf/tags/loj/</guid>
       <description></description>
@@ -714,6 +723,15 @@
     </item>
     
     <item>
+      <title>状压</title>
+      <link>http://blog.eleele.cf/tags/%E7%8A%B6%E5%8E%8B/</link>
+      <pubDate>Sat, 10 Feb 2018 14:20:12 +0000</pubDate>
+      
+      <guid>http://blog.eleele.cf/tags/%E7%8A%B6%E5%8E%8B/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>状态压缩</title>
       <link>http://blog.eleele.cf/tags/%E7%8A%B6%E6%80%81%E5%8E%8B%E7%BC%A9/</link>
       <pubDate>Thu, 17 Aug 2017 10:02:43 +0000</pubDate>
@@ -849,9 +867,18 @@
     </item>
     
     <item>
+      <title>集合幂级数</title>
+      <link>http://blog.eleele.cf/tags/%E9%9B%86%E5%90%88%E5%B9%82%E7%BA%A7%E6%95%B0/</link>
+      <pubDate>Sat, 10 Feb 2018 14:20:12 +0000</pubDate>
+      
+      <guid>http://blog.eleele.cf/tags/%E9%9B%86%E5%90%88%E5%B9%82%E7%BA%A7%E6%95%B0/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>题解</title>
       <link>http://blog.eleele.cf/tags/%E9%A2%98%E8%A7%A3/</link>
-      <pubDate>Sat, 20 Jan 2018 14:27:24 +0000</pubDate>
+      <pubDate>Sat, 10 Feb 2018 14:20:12 +0000</pubDate>
       
       <guid>http://blog.eleele.cf/tags/%E9%A2%98%E8%A7%A3/</guid>
       <description></description>
