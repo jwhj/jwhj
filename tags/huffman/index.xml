@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Huffman on 蒟蒻的博客</title>
-    <link>http://blog.eleele.cf/tags/huffman/</link>
+    <link>http://blog.eleele.tk/tags/huffman/</link>
     <description>Recent content in Huffman on 蒟蒻的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 29 May 2016 10:02:43 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.eleele.cf/tags/huffman/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://blog.eleele.tk/tags/huffman/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>bzoj4198题解</title>
-      <link>http://blog.eleele.cf/post/bzoj4198/</link>
+      <link>http://blog.eleele.tk/post/bzoj4198/</link>
       <pubDate>Sun, 29 May 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.cf/post/bzoj4198/</guid>
+      <guid>http://blog.eleele.tk/post/bzoj4198/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     

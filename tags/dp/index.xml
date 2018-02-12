@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Dp on 蒟蒻的博客</title>
-    <link>http://blog.eleele.cf/tags/dp/</link>
+    <link>http://blog.eleele.tk/tags/dp/</link>
     <description>Recent content in Dp on 蒟蒻的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 20 Jan 2018 14:27:24 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.eleele.cf/tags/dp/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://blog.eleele.tk/tags/dp/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>jzoj5523题解</title>
-      <link>http://blog.eleele.cf/post/jz5523/</link>
+      <link>http://blog.eleele.tk/post/jz5523/</link>
       <pubDate>Sat, 20 Jan 2018 14:27:24 +0000</pubDate>
       
-      <guid>http://blog.eleele.cf/post/jz5523/</guid>
+      <guid>http://blog.eleele.tk/post/jz5523/</guid>
       <description>看AC人数来看应该是全场最简单的一道题，可是我就这道题没做出来……sbwhj……
 首先注意到在加号后面加括号是毫无意义的，所以我们可以钦定括号只能加在减号后面。此时括号的作用就是把里面除了第一个数以外的所有数的贡献取负，那我们又可以得到两层以上的括号嵌套总能改成不超过两层的括号嵌套。
 让f[i][0/1/2]表示考虑前i个数，式子最后有0/1/2个右括号的时候的最大值。转移的时候，按运算符分两种情况讨论：
@@ -26,10 +26,10 @@
     
     <item>
       <title>雅礼集训2018-1</title>
-      <link>http://blog.eleele.cf/post/yali2018-1/</link>
+      <link>http://blog.eleele.tk/post/yali2018-1/</link>
       <pubDate>Mon, 15 Jan 2018 12:59:35 +0000</pubDate>
       
-      <guid>http://blog.eleele.cf/post/yali2018-1/</guid>
+      <guid>http://blog.eleele.tk/post/yali2018-1/</guid>
       <description>D1 上午讲题，下午练习赛T1和T3都是我见过的题。T1考虑prufer编码随意dp一下，T2是个博弈大讨论，注意不要漏情况，T3是个玄妙的dp。
 我那台机的键盘真是让人无比不爽，退格键得要准确地敲中正中间才能按下去，而且其实敲中了还是比较费劲，有的时候甚至要两根手指发力。
 D2 考得挺不满意的……看了一遍题之后马上觉得T3很可做就去BB，但实际上我并不擅长这种博弈大讨论。T1是一个结论题，我推结论的时候用到了去年WC的时候jc（？）讲的一个结论，可是一开始记错结论了，还好后来想起正确的结论然后成功AC。T2是我做过的一个题目的模型的加强版，可惜我掌握得还不够熟练所以没想出来，可能也有一部分原因是做题顺序不对导致T3浪费太多时间。
@@ -69,10 +69,10 @@ D14 传说中最难的一天？emmmmm……</description>
     
     <item>
       <title>jzoj5415题解</title>
-      <link>http://blog.eleele.cf/post/jzoj5415/</link>
+      <link>http://blog.eleele.tk/post/jzoj5415/</link>
       <pubDate>Mon, 23 Oct 2017 13:57:08 +0000</pubDate>
       
-      <guid>http://blog.eleele.cf/post/jzoj5415/</guid>
+      <guid>http://blog.eleele.tk/post/jzoj5415/</guid>
       <description>首先注意到，对于c一样且i%c一样的车站，它们能转移到的车站集合是一样的。考虑这些车站，它们对后面的车站的贡献都可以写成直线v[i]/ci+f[i]的形式。在后面转移的时候，其实就是要求在某一个横坐标的位置所有直线的最低点，此时有一个很自然的想法就是维护一个上凸壳。
 这个凸壳乍一看很不好维护，但是仔细想一想会发现，每次新加进来一条直线的时候，这条直线在i处的高度肯定不比凸壳上任意一条直线要高（否则就可以用比当前直线低的直线来更新f[i])。那么，如果这条新加进来的直线的斜率小于等于凸壳上某条直线的斜率，凸壳上那条直线就没有用了，可以直接去掉。我觉得这道题最妙的就是这个性质，以前遇到类似的题没想出来，这回做的时候还是没想出来……
 利用这个性质，就可以保证直线的斜率单调递增，从而用单调栈来维护上凸壳。
@@ -84,226 +84,226 @@ D14 传说中最难的一天？emmmmm……</description>
     
     <item>
       <title>bzoj1060题解</title>
-      <link>http://blog.eleele.cf/post/bzoj1060/</link>
+      <link>http://blog.eleele.tk/post/bzoj1060/</link>
       <pubDate>Mon, 28 Aug 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.cf/post/bzoj1060/</guid>
+      <guid>http://blog.eleele.tk/post/bzoj1060/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1090题解</title>
-      <link>http://blog.eleele.cf/post/bzoj1090/</link>
+      <link>http://blog.eleele.tk/post/bzoj1090/</link>
       <pubDate>Mon, 28 Aug 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.cf/post/bzoj1090/</guid>
+      <guid>http://blog.eleele.tk/post/bzoj1090/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1076题解</title>
-      <link>http://blog.eleele.cf/post/bzoj1076/</link>
+      <link>http://blog.eleele.tk/post/bzoj1076/</link>
       <pubDate>Thu, 17 Aug 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.cf/post/bzoj1076/</guid>
+      <guid>http://blog.eleele.tk/post/bzoj1076/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1044题解</title>
-      <link>http://blog.eleele.cf/post/bzoj1044/</link>
+      <link>http://blog.eleele.tk/post/bzoj1044/</link>
       <pubDate>Sat, 12 Aug 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.cf/post/bzoj1044/</guid>
+      <guid>http://blog.eleele.tk/post/bzoj1044/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1057题解</title>
-      <link>http://blog.eleele.cf/post/bzoj1057/</link>
+      <link>http://blog.eleele.tk/post/bzoj1057/</link>
       <pubDate>Thu, 10 Aug 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.cf/post/bzoj1057/</guid>
+      <guid>http://blog.eleele.tk/post/bzoj1057/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1040题解</title>
-      <link>http://blog.eleele.cf/post/bzoj1040/</link>
+      <link>http://blog.eleele.tk/post/bzoj1040/</link>
       <pubDate>Tue, 01 Aug 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.cf/post/bzoj1040/</guid>
+      <guid>http://blog.eleele.tk/post/bzoj1040/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1177题解</title>
-      <link>http://blog.eleele.cf/post/bzoj1177/</link>
+      <link>http://blog.eleele.tk/post/bzoj1177/</link>
       <pubDate>Sun, 30 Jul 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.cf/post/bzoj1177/</guid>
+      <guid>http://blog.eleele.tk/post/bzoj1177/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1149题解</title>
-      <link>http://blog.eleele.cf/post/bzoj1149/</link>
+      <link>http://blog.eleele.tk/post/bzoj1149/</link>
       <pubDate>Wed, 12 Jul 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.cf/post/bzoj1149/</guid>
+      <guid>http://blog.eleele.tk/post/bzoj1149/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1025题解</title>
-      <link>http://blog.eleele.cf/post/bzoj1025/</link>
+      <link>http://blog.eleele.tk/post/bzoj1025/</link>
       <pubDate>Fri, 26 May 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.cf/post/bzoj1025/</guid>
+      <guid>http://blog.eleele.tk/post/bzoj1025/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1023&amp;4316题解</title>
-      <link>http://blog.eleele.cf/post/bzoj10234316/</link>
+      <link>http://blog.eleele.tk/post/bzoj10234316/</link>
       <pubDate>Wed, 24 May 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.cf/post/bzoj10234316/</guid>
+      <guid>http://blog.eleele.tk/post/bzoj10234316/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1021题解</title>
-      <link>http://blog.eleele.cf/post/bzoj1021/</link>
+      <link>http://blog.eleele.tk/post/bzoj1021/</link>
       <pubDate>Fri, 19 May 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.cf/post/bzoj1021/</guid>
+      <guid>http://blog.eleele.tk/post/bzoj1021/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1019题解</title>
-      <link>http://blog.eleele.cf/post/bzoj1019/</link>
+      <link>http://blog.eleele.tk/post/bzoj1019/</link>
       <pubDate>Tue, 16 May 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.cf/post/bzoj1019/</guid>
+      <guid>http://blog.eleele.tk/post/bzoj1019/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1017题解</title>
-      <link>http://blog.eleele.cf/post/bzoj1017/</link>
+      <link>http://blog.eleele.tk/post/bzoj1017/</link>
       <pubDate>Fri, 12 May 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.cf/post/bzoj1017/</guid>
+      <guid>http://blog.eleele.tk/post/bzoj1017/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj3675题解</title>
-      <link>http://blog.eleele.cf/post/bzoj3675/</link>
+      <link>http://blog.eleele.tk/post/bzoj3675/</link>
       <pubDate>Wed, 15 Mar 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.cf/post/bzoj3675/</guid>
+      <guid>http://blog.eleele.tk/post/bzoj3675/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>hdu6017题解</title>
-      <link>http://blog.eleele.cf/post/hdu6017/</link>
+      <link>http://blog.eleele.tk/post/hdu6017/</link>
       <pubDate>Sat, 25 Feb 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.cf/post/hdu6017/</guid>
+      <guid>http://blog.eleele.tk/post/hdu6017/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj2958题解</title>
-      <link>http://blog.eleele.cf/post/bzoj2958/</link>
+      <link>http://blog.eleele.tk/post/bzoj2958/</link>
       <pubDate>Thu, 23 Feb 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.cf/post/bzoj2958/</guid>
+      <guid>http://blog.eleele.tk/post/bzoj2958/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1009题解</title>
-      <link>http://blog.eleele.cf/post/bzoj1009/</link>
+      <link>http://blog.eleele.tk/post/bzoj1009/</link>
       <pubDate>Sun, 18 Dec 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.cf/post/bzoj1009/</guid>
+      <guid>http://blog.eleele.tk/post/bzoj1009/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1003题解</title>
-      <link>http://blog.eleele.cf/post/bzoj1003/</link>
+      <link>http://blog.eleele.tk/post/bzoj1003/</link>
       <pubDate>Wed, 14 Dec 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.cf/post/bzoj1003/</guid>
+      <guid>http://blog.eleele.tk/post/bzoj1003/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1010题解</title>
-      <link>http://blog.eleele.cf/post/bzoj1010/</link>
+      <link>http://blog.eleele.tk/post/bzoj1010/</link>
       <pubDate>Tue, 13 Dec 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.cf/post/bzoj1010/</guid>
+      <guid>http://blog.eleele.tk/post/bzoj1010/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj3209题解</title>
-      <link>http://blog.eleele.cf/post/bzoj3209/</link>
+      <link>http://blog.eleele.tk/post/bzoj3209/</link>
       <pubDate>Sat, 22 Oct 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.cf/post/bzoj3209/</guid>
+      <guid>http://blog.eleele.tk/post/bzoj3209/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj2423题解</title>
-      <link>http://blog.eleele.cf/post/bzoj2423/</link>
+      <link>http://blog.eleele.tk/post/bzoj2423/</link>
       <pubDate>Fri, 09 Sep 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.cf/post/bzoj2423/</guid>
+      <guid>http://blog.eleele.tk/post/bzoj2423/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj3329题解</title>
-      <link>http://blog.eleele.cf/post/bzoj3329/</link>
+      <link>http://blog.eleele.tk/post/bzoj3329/</link>
       <pubDate>Sat, 27 Aug 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.cf/post/bzoj3329/</guid>
+      <guid>http://blog.eleele.tk/post/bzoj3329/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1087题解</title>
-      <link>http://blog.eleele.cf/post/bzoj1087/</link>
+      <link>http://blog.eleele.tk/post/bzoj1087/</link>
       <pubDate>Wed, 29 Jun 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.cf/post/bzoj1087/</guid>
+      <guid>http://blog.eleele.tk/post/bzoj1087/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj2431题解</title>
-      <link>http://blog.eleele.cf/post/bzoj2431/</link>
+      <link>http://blog.eleele.tk/post/bzoj2431/</link>
       <pubDate>Mon, 20 Jun 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.cf/post/bzoj2431/</guid>
+      <guid>http://blog.eleele.tk/post/bzoj2431/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1260题解</title>
-      <link>http://blog.eleele.cf/post/bzoj1260/</link>
+      <link>http://blog.eleele.tk/post/bzoj1260/</link>
       <pubDate>Sun, 08 May 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.cf/post/bzoj1260/</guid>
+      <guid>http://blog.eleele.tk/post/bzoj1260/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     

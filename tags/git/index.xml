@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Git on 蒟蒻的博客</title>
-    <link>http://blog.eleele.cf/tags/git/</link>
+    <link>http://blog.eleele.tk/tags/git/</link>
     <description>Recent content in Git on 蒟蒻的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 13 Aug 2016 10:02:43 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.eleele.cf/tags/git/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://blog.eleele.tk/tags/git/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>git使用总结</title>
-      <link>http://blog.eleele.cf/post/git/</link>
+      <link>http://blog.eleele.tk/post/git/</link>
       <pubDate>Sat, 13 Aug 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.cf/post/git/</guid>
+      <guid>http://blog.eleele.tk/post/git/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     

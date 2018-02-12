@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>状压 on 蒟蒻的博客</title>
-    <link>http://blog.eleele.cf/tags/%E7%8A%B6%E5%8E%8B/</link>
+    <link>http://blog.eleele.tk/tags/%E7%8A%B6%E5%8E%8B/</link>
     <description>Recent content in 状压 on 蒟蒻的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 10 Feb 2018 14:20:12 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.eleele.cf/tags/%E7%8A%B6%E5%8E%8B/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://blog.eleele.tk/tags/%E7%8A%B6%E5%8E%8B/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>loj2340(wc2018t2)题解</title>
-      <link>http://blog.eleele.cf/post/loj2340/</link>
+      <link>http://blog.eleele.tk/post/loj2340/</link>
       <pubDate>Sat, 10 Feb 2018 14:20:12 +0000</pubDate>
       
-      <guid>http://blog.eleele.cf/post/loj2340/</guid>
+      <guid>http://blog.eleele.tk/post/loj2340/</guid>
       <description>我会子集并卷积，我会子集对称差卷积，可惜我没认真看vfk论文所以我不会子集卷积，结果考场上我就没想出来，只打了50分……
 前置技能：子集卷积。不会的可以看一看2015国家集训队论文集里面vfk的那篇。
 首先题面写得非常sb，你可以理解为不存在欧拉回路或者不联通的时候州是合法的。
