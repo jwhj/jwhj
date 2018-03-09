@@ -6,10 +6,40 @@
     <description>Recent content in 题解 on 蒟蒻的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 10 Feb 2018 14:20:12 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 09 Mar 2018 12:47:23 +0000</lastBuildDate>
     
 	<atom:link href="http://blog.eleele.tk/tags/%E9%A2%98%E8%A7%A3/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>CF936B题解</title>
+      <link>http://blog.eleele.tk/post/cf936b/</link>
+      <pubDate>Fri, 09 Mar 2018 12:47:23 +0000</pubDate>
+      
+      <guid>http://blog.eleele.tk/post/cf936b/</guid>
+      <description>如果图中不存在环，那么直接dfs就可以了。
+现在图中有环，我的第一想法是缩点，但是怎么也想不出来……
+事实上走环并非是毫无意义的，走一个奇环，路径长的奇偶性改变；走一个偶环，虽然奇偶性不改变，但如果赢不了的话可以一直在上面走。
+仔细观察可以发现，重复经过一个点也不是毫无意义的，如果两次经过的时候走过路径的长度奇偶性不同，那两次都是有意义的。
+于是可以想到拆点，每个点$s$拆成$s_0$和$s_1$，对于每条边$(s,t)$，变成两条边$(s_0,t_1)$和$(s_1,t_0)$，那么具体走到哪个点上就已经代表了路径长的奇偶性。从$s_0$开始dfs，不经过已经经过的点，如果能走到一个出度为0的$x_1$上，那就能赢，如果遇到一个环，那么至少可以平局。
+一开始WA了好久，以后要注意有向图的vis和instack是不一样的，判断有没有发现一个环的时候要用instack来判断。
+代码：
+#include &amp;lt;cstdio&amp;gt; #include &amp;lt;cstring&amp;gt; #include &amp;lt;algorithm&amp;gt; #define ele int using namespace std; #define maxn 200010 #define maxm 400010 struct edge{ ele v; edge *nxt; }ep[maxm],*ecnt; ele n,m,s,ans,tmp,prv[maxn]; bool vis[maxn],instack[maxn]; edge *h[maxn]; inline void addedge(ele u,ele v){ edge *p=ecnt++; p-&amp;gt;v=v; p-&amp;gt;nxt=h[u]; h[u]=p; } void dfs(ele i){ vis[i]=true; instack[i]=true; if (!h[i] &amp;amp;&amp;amp; (i&amp;amp;1)){ ans=min(ans,0); tmp=i; } for (edge *j=h[i]; j; j=j-&amp;gt;nxt) if (!vis[j-&amp;gt;v]) prv[j-&amp;gt;v]=i,dfs(j-&amp;gt;v); else if (instack[j-&amp;gt;v]) ans=min(ans,1); instack[i]=false; } void dfs1(ele i){ if (!</description>
+    </item>
+    
+    <item>
+      <title>bzoj3462题解</title>
+      <link>http://blog.eleele.tk/post/bzoj3462/</link>
+      <pubDate>Fri, 09 Mar 2018 12:35:41 +0000</pubDate>
+      
+      <guid>http://blog.eleele.tk/post/bzoj3462/</guid>
+      <description>这道题的做法挺妙的。
+首先把S分解，如果有平方因子，答案显然是0，否则假设$S=p_1p_2\cdots p_k$，那么易知$k\le 7$。
+这个时候注意到n非常大，直接用背包来做很不现实。但是$p_1,p_2\cdots p_k$的最大公约数很小，因而可以把$p_i$取的次数表示成$x_i\frac{S}{p_i}+y_i(0\le y_i&amp;lt;\frac{S}{p_i})$的形式，那么$x_i$每增加1，总和增加$S$，因而$n\mod{S}$的部分只能用$y_i$来凑。
+$y_i$的总和不会超过$kS$，这部分可以枚举总和$n\mod{S}+tS(0\le t&amp;lt;k)$，然后用背包来求，$x_i$的部分可以用插板法直接计算。
+代码：
+#include &amp;lt;cstdio&amp;gt; #include &amp;lt;cstring&amp;gt; #include &amp;lt;algorithm&amp;gt; #define ele long long using namespace std; #define maxs 2000010 #define maxk 7 #define MOD 1000000007 ele s,q,k,a[maxk],f[maxs*maxk],fac[maxk],ifac[maxk]; inline ele pw(ele a,ele x){ ele ans=1,tmp=a%MOD; for (; x; x&amp;gt;&amp;gt;=1,tmp=tmp*tmp%MOD) if (x&amp;amp;1) ans=ans*tmp%MOD; return ans; } inline ele C(ele n,ele m){ ele ans=1; for (int i=0; i&amp;lt;m; ++i) ans=ans*((n-i)%MOD)%MOD; return ans*ifac[m]%MOD; } int main(){ fac[0]=1; for (int i=1; i&amp;lt;maxk; ++i) fac[i]=fac[i-1]*i%MOD; ifac[maxk-1]=pw(fac[maxk-1],MOD-2); for (int i=maxk-2; ~i; --i) ifac[i]=ifac[i+1]*(i+1)%MOD; scanf(&amp;quot;%lld%lld&amp;quot;,&amp;amp;s,&amp;amp;q); ele tmp=s; k=0; for (int i=2; i*i&amp;lt;=s; ++i) if (tmp%i==0){ if ((tmp/i)%i==0){ for (int j=0; j&amp;lt;q; ++j) puts(&amp;quot;0&amp;quot;); return 0; } tmp/=i; a[k++]=i; } if (tmp&amp;gt;1) a[k++]=tmp; memset(f,0,sizeof(f)); f[0]=1; for (int i=0; i&amp;lt;k; ++i){ for (int j=a[i]; j&amp;lt;s*k; ++j) (f[j]+=f[j-a[i]])%=MOD; for (int j=s*k-1; j&amp;gt;=s; --j) (f[j]+=MOD-f[j-s])%=MOD; } while (q--){ ele n; scanf(&amp;quot;%lld&amp;quot;,&amp;amp;n); for (int i=0; i&amp;lt;k; ++i) n-=a[i]; if (n&amp;lt;0) puts(&amp;quot;0&amp;quot;); else{ ele ans=0; for (int t=0; t&amp;lt;k &amp;amp;&amp;amp; n%s+t*s&amp;lt;=n; ++t){ ele t1=(n-n%s-t*s)/s; (ans+=C(t1+k-1,k-1)*f[n%s+t*s]%MOD)%=MOD; } printf(&amp;quot;%lld\n&amp;quot;,ans); } } return 0; }  </description>
+    </item>
     
     <item>
       <title>loj2340(wc2018t2)题解</title>

@@ -1,0 +1,189 @@
+<script type="text/x-mathjax-config;">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" id=""></script>
+
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.37" />
+		<title>CF936B题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.tk/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.tk/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.tk/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.tk/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.tk/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.tk/post'>Archive</a>
+	<a href='http://blog.eleele.tk/tags'>Tags</a>
+	<a href='http://blog.eleele.tk/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.tk/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        CF936B题解
+                    </h1>
+                    <h2 class="headline">
+                    Mar 9, 2018 12:47
+                    · 136 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.tk/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.tk/tags/codeforces">codeforces</a>
+                          
+                              <a href="http://blog.eleele.tk/tags/%E6%8B%86%E7%82%B9">拆点</a>
+                          
+                              <a href="http://blog.eleele.tk/tags/%E5%9B%BE%E8%AE%BA">图论</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>如果图中不存在环，那么直接dfs就可以了。</p>
+
+<p>现在图中有环，我的第一想法是缩点，但是怎么也想不出来……</p>
+
+<p>事实上走环并非是毫无意义的，走一个奇环，路径长的奇偶性改变；走一个偶环，虽然奇偶性不改变，但如果赢不了的话可以一直在上面走。</p>
+
+<p>仔细观察可以发现，重复经过一个点也不是毫无意义的，如果两次经过的时候走过路径的长度奇偶性不同，那两次都是有意义的。</p>
+
+<p>于是可以想到拆点，每个点$s$拆成$s_0$和$s_1$，对于每条边$(s,t)$，变成两条边$(s_0,t_1)$和$(s_1,t_0)$，那么具体走到哪个点上就已经代表了路径长的奇偶性。从$s_0$开始dfs，不经过已经经过的点，如果能走到一个出度为0的$x_1$上，那就能赢，如果遇到一个环，那么至少可以平局。</p>
+
+<p>一开始WA了好久，以后要注意有向图的vis和instack是不一样的，判断有没有发现一个环的时候要用instack来判断。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#define ele int
+using namespace std;
+#define maxn 200010
+#define maxm 400010
+struct edge{
+	ele v;
+	edge *nxt;
+}ep[maxm],*ecnt;
+ele n,m,s,ans,tmp,prv[maxn];
+bool vis[maxn],instack[maxn];
+edge *h[maxn];
+inline void addedge(ele u,ele v){
+	edge *p=ecnt++;
+	p-&gt;v=v; p-&gt;nxt=h[u];
+	h[u]=p;
+}
+void dfs(ele i){
+	vis[i]=true;
+	instack[i]=true;
+	if (!h[i] &amp;&amp; (i&amp;1)){
+		ans=min(ans,0);
+		tmp=i;
+	}
+	for (edge *j=h[i]; j; j=j-&gt;nxt)
+		if (!vis[j-&gt;v])
+			prv[j-&gt;v]=i,dfs(j-&gt;v);
+		else if (instack[j-&gt;v]) ans=min(ans,1);
+	instack[i]=false;
+}
+void dfs1(ele i){
+	if (!~i) return;
+	dfs1(prv[i]);
+	if (~prv[i]) putchar(' ');
+	printf(&quot;%d&quot;,(i&gt;&gt;1)+1);
+}
+int main(){
+	scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+	ecnt=ep; memset(h,0,sizeof(h));
+	for (int i=0; i&lt;n; ++i){
+		ele c;
+		scanf(&quot;%d&quot;,&amp;c);
+		for (int j=0; j&lt;c; ++j){
+			ele x;
+			scanf(&quot;%d&quot;,&amp;x); --x;
+			addedge(i&lt;&lt;1,x&lt;&lt;1|1);
+			addedge(i&lt;&lt;1|1,x&lt;&lt;1);
+		}
+	}
+	scanf(&quot;%d&quot;,&amp;s); --s;
+	memset(vis,0,sizeof(vis));
+	memset(instack,0,sizeof(instack));
+	memset(prv,-1,sizeof(prv));
+	ans=2;
+	dfs(s&lt;&lt;1);
+	if (!ans){
+		puts(&quot;Win&quot;);
+		dfs1(tmp);
+		puts(&quot;&quot;);
+	}
+	else if (ans==1) puts(&quot;Draw&quot;);
+	else puts(&quot;Lose&quot;);
+	return 0;
+}
+</code></pre>
+
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2018 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+        </section>
+
+        <script src="http://blog.eleele.tk/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.tk/js/main.js"></script>
+<script src="http://blog.eleele.tk/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

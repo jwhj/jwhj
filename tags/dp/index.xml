@@ -6,10 +6,24 @@
     <description>Recent content in Dp on 蒟蒻的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 20 Jan 2018 14:27:24 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 09 Mar 2018 12:35:41 +0000</lastBuildDate>
     
 	<atom:link href="http://blog.eleele.tk/tags/dp/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>bzoj3462题解</title>
+      <link>http://blog.eleele.tk/post/bzoj3462/</link>
+      <pubDate>Fri, 09 Mar 2018 12:35:41 +0000</pubDate>
+      
+      <guid>http://blog.eleele.tk/post/bzoj3462/</guid>
+      <description>这道题的做法挺妙的。
+首先把S分解，如果有平方因子，答案显然是0，否则假设$S=p_1p_2\cdots p_k$，那么易知$k\le 7$。
+这个时候注意到n非常大，直接用背包来做很不现实。但是$p_1,p_2\cdots p_k$的最大公约数很小，因而可以把$p_i$取的次数表示成$x_i\frac{S}{p_i}+y_i(0\le y_i&amp;lt;\frac{S}{p_i})$的形式，那么$x_i$每增加1，总和增加$S$，因而$n\mod{S}$的部分只能用$y_i$来凑。
+$y_i$的总和不会超过$kS$，这部分可以枚举总和$n\mod{S}+tS(0\le t&amp;lt;k)$，然后用背包来求，$x_i$的部分可以用插板法直接计算。
+代码：
+#include &amp;lt;cstdio&amp;gt; #include &amp;lt;cstring&amp;gt; #include &amp;lt;algorithm&amp;gt; #define ele long long using namespace std; #define maxs 2000010 #define maxk 7 #define MOD 1000000007 ele s,q,k,a[maxk],f[maxs*maxk],fac[maxk],ifac[maxk]; inline ele pw(ele a,ele x){ ele ans=1,tmp=a%MOD; for (; x; x&amp;gt;&amp;gt;=1,tmp=tmp*tmp%MOD) if (x&amp;amp;1) ans=ans*tmp%MOD; return ans; } inline ele C(ele n,ele m){ ele ans=1; for (int i=0; i&amp;lt;m; ++i) ans=ans*((n-i)%MOD)%MOD; return ans*ifac[m]%MOD; } int main(){ fac[0]=1; for (int i=1; i&amp;lt;maxk; ++i) fac[i]=fac[i-1]*i%MOD; ifac[maxk-1]=pw(fac[maxk-1],MOD-2); for (int i=maxk-2; ~i; --i) ifac[i]=ifac[i+1]*(i+1)%MOD; scanf(&amp;quot;%lld%lld&amp;quot;,&amp;amp;s,&amp;amp;q); ele tmp=s; k=0; for (int i=2; i*i&amp;lt;=s; ++i) if (tmp%i==0){ if ((tmp/i)%i==0){ for (int j=0; j&amp;lt;q; ++j) puts(&amp;quot;0&amp;quot;); return 0; } tmp/=i; a[k++]=i; } if (tmp&amp;gt;1) a[k++]=tmp; memset(f,0,sizeof(f)); f[0]=1; for (int i=0; i&amp;lt;k; ++i){ for (int j=a[i]; j&amp;lt;s*k; ++j) (f[j]+=f[j-a[i]])%=MOD; for (int j=s*k-1; j&amp;gt;=s; --j) (f[j]+=MOD-f[j-s])%=MOD; } while (q--){ ele n; scanf(&amp;quot;%lld&amp;quot;,&amp;amp;n); for (int i=0; i&amp;lt;k; ++i) n-=a[i]; if (n&amp;lt;0) puts(&amp;quot;0&amp;quot;); else{ ele ans=0; for (int t=0; t&amp;lt;k &amp;amp;&amp;amp; n%s+t*s&amp;lt;=n; ++t){ ele t1=(n-n%s-t*s)/s; (ans+=C(t1+k-1,k-1)*f[n%s+t*s]%MOD)%=MOD; } printf(&amp;quot;%lld\n&amp;quot;,ans); } } return 0; }  </description>
+    </item>
     
     <item>
       <title>jzoj5523题解</title>

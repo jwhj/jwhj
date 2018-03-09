@@ -1,0 +1,179 @@
+<script type="text/x-mathjax-config;">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" id=""></script>
+
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="whatever">
+		<meta name="generator" content="Hugo 0.37" />
+		<title>bzoj3462题解 &middot; 蒟蒻的博客</title>
+		<link rel="shortcut icon" href="http://blog.eleele.tk/images/favicon.ico">
+		<link rel="stylesheet" href="http://blog.eleele.tk/css/style.css">
+		<link rel="stylesheet" href="http://blog.eleele.tk/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://blog.eleele.tk/css/monosocialiconsfont.css">
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://blog.eleele.tk/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://blog.eleele.tk/post'>Archive</a>
+	<a href='http://blog.eleele.tk/tags'>Tags</a>
+	<a href='http://blog.eleele.tk/about'>About</a>
+
+	
+
+	
+	
+	<a href='http://blog.eleele.tk/orz'>Orz!</a>
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>
+                        bzoj3462题解
+                    </h1>
+                    <h2 class="headline">
+                    Mar 9, 2018 12:35
+                    · 165 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://blog.eleele.tk/tags/%E9%A2%98%E8%A7%A3">题解</a>
+                          
+                              <a href="http://blog.eleele.tk/tags/bzoj">bzoj</a>
+                          
+                              <a href="http://blog.eleele.tk/tags/dp">DP</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>这道题的做法挺妙的。</p>
+
+<p>首先把S分解，如果有平方因子，答案显然是0，否则假设$S=p_1p_2\cdots p_k$，那么易知$k\le 7$。</p>
+
+<p>这个时候注意到n非常大，直接用背包来做很不现实。但是$p_1,p_2\cdots p_k$的最大公约数很小，因而可以把$p_i$取的次数表示成$x_i\frac{S}{p_i}+y_i(0\le y_i&lt;\frac{S}{p_i})$的形式，那么$x_i$每增加1，总和增加$S$，因而$n\mod{S}$的部分只能用$y_i$来凑。</p>
+
+<p>$y_i$的总和不会超过$kS$，这部分可以枚举总和$n\mod{S}+tS(0\le t&lt;k)$，然后用背包来求，$x_i$的部分可以用插板法直接计算。</p>
+
+<p>代码：</p>
+
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#define ele long long
+using namespace std;
+#define maxs 2000010
+#define maxk 7
+#define MOD 1000000007
+ele s,q,k,a[maxk],f[maxs*maxk],fac[maxk],ifac[maxk];
+inline ele pw(ele a,ele x){
+	ele ans=1,tmp=a%MOD;
+	for (; x; x&gt;&gt;=1,tmp=tmp*tmp%MOD)
+		if (x&amp;1) ans=ans*tmp%MOD;
+	return ans;
+}
+inline ele C(ele n,ele m){
+	ele ans=1;
+	for (int i=0; i&lt;m; ++i) ans=ans*((n-i)%MOD)%MOD;
+	return ans*ifac[m]%MOD;
+}
+int main(){
+	fac[0]=1;
+	for (int i=1; i&lt;maxk; ++i) fac[i]=fac[i-1]*i%MOD;
+	ifac[maxk-1]=pw(fac[maxk-1],MOD-2);
+	for (int i=maxk-2; ~i; --i) ifac[i]=ifac[i+1]*(i+1)%MOD;
+	scanf(&quot;%lld%lld&quot;,&amp;s,&amp;q);
+	ele tmp=s;
+	k=0;
+	for (int i=2; i*i&lt;=s; ++i)
+		if (tmp%i==0){
+			if ((tmp/i)%i==0){
+				for (int j=0; j&lt;q; ++j) puts(&quot;0&quot;);
+				return 0;
+			}
+			tmp/=i;
+			a[k++]=i;
+		}
+	if (tmp&gt;1) a[k++]=tmp;
+	memset(f,0,sizeof(f));
+	f[0]=1;
+	for (int i=0; i&lt;k; ++i){
+		for (int j=a[i]; j&lt;s*k; ++j)
+			(f[j]+=f[j-a[i]])%=MOD;
+		for (int j=s*k-1; j&gt;=s; --j)
+			(f[j]+=MOD-f[j-s])%=MOD;
+	}
+	while (q--){
+		ele n;
+		scanf(&quot;%lld&quot;,&amp;n);
+		for (int i=0; i&lt;k; ++i) n-=a[i];
+		if (n&lt;0) puts(&quot;0&quot;);
+		else{
+			ele ans=0;
+			for (int t=0; t&lt;k &amp;&amp; n%s+t*s&lt;=n; ++t){
+				ele t1=(n-n%s-t*s)/s;
+				(ans+=C(t1+k-1,k-1)*f[n%s+t*s]%MOD)%=MOD;
+			}
+			printf(&quot;%lld\n&quot;,ans);
+		}
+	}
+	return 0;
+}
+</code></pre>
+
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2018 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+        </section>
+
+        <script src="http://blog.eleele.tk/js/jquery-2.2.4.min.js"></script>
+<script src="http://blog.eleele.tk/js/main.js"></script>
+<script src="http://blog.eleele.tk/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>
