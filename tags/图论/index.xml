@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>图论 on 蒟蒻的博客</title>
-    <link>http://blog.eleele.tk/tags/%E5%9B%BE%E8%AE%BA/</link>
+    <link>http://whatever.seraphim.rocks/tags/%E5%9B%BE%E8%AE%BA/</link>
     <description>Recent content in 图论 on 蒟蒻的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 09 Mar 2018 12:47:23 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.eleele.tk/tags/%E5%9B%BE%E8%AE%BA/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://whatever.seraphim.rocks/tags/%E5%9B%BE%E8%AE%BA/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>CF936B题解</title>
-      <link>http://blog.eleele.tk/post/cf936b/</link>
+      <link>http://whatever.seraphim.rocks/post/cf936b/</link>
       <pubDate>Fri, 09 Mar 2018 12:47:23 +0000</pubDate>
       
-      <guid>http://blog.eleele.tk/post/cf936b/</guid>
+      <guid>http://whatever.seraphim.rocks/post/cf936b/</guid>
       <description>如果图中不存在环，那么直接dfs就可以了。
 现在图中有环，我的第一想法是缩点，但是怎么也想不出来……
 事实上走环并非是毫无意义的，走一个奇环，路径长的奇偶性改变；走一个偶环，虽然奇偶性不改变，但如果赢不了的话可以一直在上面走。
@@ -29,46 +29,46 @@
     
     <item>
       <title>bzoj1064题解</title>
-      <link>http://blog.eleele.tk/post/bzoj1064/</link>
+      <link>http://whatever.seraphim.rocks/post/bzoj1064/</link>
       <pubDate>Sun, 27 Aug 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.tk/post/bzoj1064/</guid>
+      <guid>http://whatever.seraphim.rocks/post/bzoj1064/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1006题解</title>
-      <link>http://blog.eleele.tk/post/bzoj1006/</link>
+      <link>http://whatever.seraphim.rocks/post/bzoj1006/</link>
       <pubDate>Sat, 05 Aug 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.tk/post/bzoj1006/</guid>
+      <guid>http://whatever.seraphim.rocks/post/bzoj1006/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj3732题解</title>
-      <link>http://blog.eleele.tk/post/bzoj3732/</link>
+      <link>http://whatever.seraphim.rocks/post/bzoj3732/</link>
       <pubDate>Sat, 24 Dec 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.tk/post/bzoj3732/</guid>
+      <guid>http://whatever.seraphim.rocks/post/bzoj3732/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1016题解</title>
-      <link>http://blog.eleele.tk/post/bzoj1016/</link>
+      <link>http://whatever.seraphim.rocks/post/bzoj1016/</link>
       <pubDate>Sat, 17 Dec 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.tk/post/bzoj1016/</guid>
+      <guid>http://whatever.seraphim.rocks/post/bzoj1016/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj2763题解</title>
-      <link>http://blog.eleele.tk/post/bzoj2763/</link>
+      <link>http://whatever.seraphim.rocks/post/bzoj2763/</link>
       <pubDate>Thu, 03 Nov 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.tk/post/bzoj2763/</guid>
+      <guid>http://whatever.seraphim.rocks/post/bzoj2763/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     

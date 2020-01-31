@@ -2,39 +2,39 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>线性基 on 蒟蒻的博客</title>
-    <link>http://blog.eleele.tk/tags/%E7%BA%BF%E6%80%A7%E5%9F%BA/</link>
+    <link>http://whatever.seraphim.rocks/tags/%E7%BA%BF%E6%80%A7%E5%9F%BA/</link>
     <description>Recent content in 线性基 on 蒟蒻的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 07 Jun 2017 10:02:43 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.eleele.tk/tags/%E7%BA%BF%E6%80%A7%E5%9F%BA/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://whatever.seraphim.rocks/tags/%E7%BA%BF%E6%80%A7%E5%9F%BA/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>bzoj2844题解</title>
-      <link>http://blog.eleele.tk/post/bzoj2844/</link>
+      <link>http://whatever.seraphim.rocks/post/bzoj2844/</link>
       <pubDate>Wed, 07 Jun 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.tk/post/bzoj2844/</guid>
+      <guid>http://whatever.seraphim.rocks/post/bzoj2844/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj2115题解</title>
-      <link>http://blog.eleele.tk/post/bzoj2115/</link>
+      <link>http://whatever.seraphim.rocks/post/bzoj2115/</link>
       <pubDate>Tue, 30 May 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.tk/post/bzoj2115/</guid>
+      <guid>http://whatever.seraphim.rocks/post/bzoj2115/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>hdu3949题解</title>
-      <link>http://blog.eleele.tk/post/hdu3949/</link>
+      <link>http://whatever.seraphim.rocks/post/hdu3949/</link>
       <pubDate>Sat, 27 May 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.tk/post/hdu3949/</guid>
+      <guid>http://whatever.seraphim.rocks/post/hdu3949/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     

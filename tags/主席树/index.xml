@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>主席树 on 蒟蒻的博客</title>
-    <link>http://blog.eleele.tk/tags/%E4%B8%BB%E5%B8%AD%E6%A0%91/</link>
+    <link>http://whatever.seraphim.rocks/tags/%E4%B8%BB%E5%B8%AD%E6%A0%91/</link>
     <description>Recent content in 主席树 on 蒟蒻的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 26 Aug 2016 10:02:43 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.eleele.tk/tags/%E4%B8%BB%E5%B8%AD%E6%A0%91/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://whatever.seraphim.rocks/tags/%E4%B8%BB%E5%B8%AD%E6%A0%91/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>bzoj2653题解</title>
-      <link>http://blog.eleele.tk/post/bzoj2653/</link>
+      <link>http://whatever.seraphim.rocks/post/bzoj2653/</link>
       <pubDate>Fri, 26 Aug 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.tk/post/bzoj2653/</guid>
+      <guid>http://whatever.seraphim.rocks/post/bzoj2653/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj3673&amp;3674题解</title>
-      <link>http://blog.eleele.tk/post/bzoj36733674/</link>
+      <link>http://whatever.seraphim.rocks/post/bzoj36733674/</link>
       <pubDate>Sat, 13 Aug 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.tk/post/bzoj36733674/</guid>
+      <guid>http://whatever.seraphim.rocks/post/bzoj36733674/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     

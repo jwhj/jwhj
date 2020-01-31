@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Uva on 蒟蒻的博客</title>
-    <link>http://blog.eleele.tk/tags/uva/</link>
+    <link>http://whatever.seraphim.rocks/tags/uva/</link>
     <description>Recent content in Uva on 蒟蒻的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 02 Dec 2017 14:34:17 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.eleele.tk/tags/uva/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://whatever.seraphim.rocks/tags/uva/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>hdu5958&amp;uva7622题解</title>
-      <link>http://blog.eleele.tk/post/hdu5958uva7622/</link>
+      <link>http://whatever.seraphim.rocks/post/hdu5958uva7622/</link>
       <pubDate>Sat, 02 Dec 2017 14:34:17 +0000</pubDate>
       
-      <guid>http://blog.eleele.tk/post/hdu5958uva7622/</guid>
+      <guid>http://whatever.seraphim.rocks/post/hdu5958uva7622/</guid>
       <description>让$c_{hk\mod p}=r(h,k)$，把下标对mod p的原根取个对数/指数就可以转化为卷积的形式。
 一开始以为这道题要倍长其中一个多项式，后来发现其实不用，这样可以省掉一半的常数。
 FFT真的是细节多，到处都要注意清零。

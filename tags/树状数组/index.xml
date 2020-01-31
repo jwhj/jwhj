@@ -2,39 +2,39 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>树状数组 on 蒟蒻的博客</title>
-    <link>http://blog.eleele.tk/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/</link>
+    <link>http://whatever.seraphim.rocks/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/</link>
     <description>Recent content in 树状数组 on 蒟蒻的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 27 Jan 2017 10:02:43 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.eleele.tk/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://whatever.seraphim.rocks/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>hdu5869题解</title>
-      <link>http://blog.eleele.tk/post/hdu5869/</link>
+      <link>http://whatever.seraphim.rocks/post/hdu5869/</link>
       <pubDate>Fri, 27 Jan 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.tk/post/hdu5869/</guid>
+      <guid>http://whatever.seraphim.rocks/post/hdu5869/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj3744题解</title>
-      <link>http://blog.eleele.tk/post/bzoj3744/</link>
+      <link>http://whatever.seraphim.rocks/post/bzoj3744/</link>
       <pubDate>Thu, 01 Dec 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.tk/post/bzoj3744/</guid>
+      <guid>http://whatever.seraphim.rocks/post/bzoj3744/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1452题解</title>
-      <link>http://blog.eleele.tk/post/bzoj1452/</link>
+      <link>http://whatever.seraphim.rocks/post/bzoj1452/</link>
       <pubDate>Tue, 15 Nov 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.tk/post/bzoj1452/</guid>
+      <guid>http://whatever.seraphim.rocks/post/bzoj1452/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     

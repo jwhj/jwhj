@@ -2,57 +2,57 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>贪心 on 蒟蒻的博客</title>
-    <link>http://blog.eleele.tk/tags/%E8%B4%AA%E5%BF%83/</link>
+    <link>http://whatever.seraphim.rocks/tags/%E8%B4%AA%E5%BF%83/</link>
     <description>Recent content in 贪心 on 蒟蒻的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 11 Sep 2017 10:02:43 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.eleele.tk/tags/%E8%B4%AA%E5%BF%83/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://whatever.seraphim.rocks/tags/%E8%B4%AA%E5%BF%83/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>bzoj1082题解</title>
-      <link>http://blog.eleele.tk/post/bzoj1082/</link>
+      <link>http://whatever.seraphim.rocks/post/bzoj1082/</link>
       <pubDate>Mon, 11 Sep 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.tk/post/bzoj1082/</guid>
+      <guid>http://whatever.seraphim.rocks/post/bzoj1082/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1034题解</title>
-      <link>http://blog.eleele.tk/post/bzoj1034/</link>
+      <link>http://whatever.seraphim.rocks/post/bzoj1034/</link>
       <pubDate>Sun, 06 Aug 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.tk/post/bzoj1034/</guid>
+      <guid>http://whatever.seraphim.rocks/post/bzoj1034/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>CF725D题解</title>
-      <link>http://blog.eleele.tk/post/cf725d/</link>
+      <link>http://whatever.seraphim.rocks/post/cf725d/</link>
       <pubDate>Sun, 23 Oct 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.tk/post/cf725d/</guid>
+      <guid>http://whatever.seraphim.rocks/post/cf725d/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj2809题解</title>
-      <link>http://blog.eleele.tk/post/bzoj2809/</link>
+      <link>http://whatever.seraphim.rocks/post/bzoj2809/</link>
       <pubDate>Sat, 28 May 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.tk/post/bzoj2809/</guid>
+      <guid>http://whatever.seraphim.rocks/post/bzoj2809/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1150题解</title>
-      <link>http://blog.eleele.tk/post/bzoj1150/</link>
+      <link>http://whatever.seraphim.rocks/post/bzoj1150/</link>
       <pubDate>Fri, 06 May 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.tk/post/bzoj1150/</guid>
+      <guid>http://whatever.seraphim.rocks/post/bzoj1150/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     

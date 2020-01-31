@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Noip on 蒟蒻的博客</title>
-    <link>http://blog.eleele.tk/tags/noip/</link>
+    <link>http://whatever.seraphim.rocks/tags/noip/</link>
     <description>Recent content in Noip on 蒟蒻的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 24 Oct 2017 13:53:30 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.eleele.tk/tags/noip/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://whatever.seraphim.rocks/tags/noip/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>纪中模拟赛10-24总结</title>
-      <link>http://blog.eleele.tk/post/jz10-24/</link>
+      <link>http://whatever.seraphim.rocks/post/jz10-24/</link>
       <pubDate>Tue, 24 Oct 2017 13:53:30 +0000</pubDate>
       
-      <guid>http://blog.eleele.tk/post/jz10-24/</guid>
+      <guid>http://whatever.seraphim.rocks/post/jz10-24/</guid>
       <description>开考的时候先看了一眼T1，发现题面似乎有点问题，于是跳到T2。
 看T2的时候，马上想到拓扑序列计数，然而并不会做，还忽略了每个点出度不超过1这个条件。
 于是我打了一下T2的暴力，回去看T1，发现题面已经更正了，就打了暴力和正解放在一遍拍着。接着我回去想T2，卡了很久没想出来，最后看到之前忽略了的那个条件，然后……就秒掉了。
@@ -32,10 +32,10 @@ T3滚粗主要还是因为太慌没想清楚？中午吃饭的时候随便想想
     
     <item>
       <title>2017国庆雅礼集训总结</title>
-      <link>http://blog.eleele.tk/post/yali2017/</link>
+      <link>http://whatever.seraphim.rocks/post/yali2017/</link>
       <pubDate>Sun, 22 Oct 2017 02:23:28 +0000</pubDate>
       
-      <guid>http://blog.eleele.tk/post/yali2017/</guid>
+      <guid>http://whatever.seraphim.rocks/post/yali2017/</guid>
       <description>外省的dalao都好强啊……长跪不起啊……
 湖南的菜好辣啊……只能靠外卖度日啊……
 应该会断断续续地写完……吧？
@@ -50,10 +50,10 @@ f[i][j]表示a只考虑0~i，b只考虑0~j，且b[j]必须选的最长长度。
     
     <item>
       <title>noip2016题解</title>
-      <link>http://blog.eleele.tk/post/noip2016/</link>
+      <link>http://whatever.seraphim.rocks/post/noip2016/</link>
       <pubDate>Mon, 21 Nov 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.tk/post/noip2016/</guid>
+      <guid>http://whatever.seraphim.rocks/post/noip2016/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     

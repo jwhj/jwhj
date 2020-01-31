@@ -2,39 +2,39 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Spfa on 蒟蒻的博客</title>
-    <link>http://blog.eleele.tk/tags/spfa/</link>
+    <link>http://whatever.seraphim.rocks/tags/spfa/</link>
     <description>Recent content in Spfa on 蒟蒻的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 14 Dec 2016 10:02:43 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.eleele.tk/tags/spfa/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://whatever.seraphim.rocks/tags/spfa/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>bzoj1003题解</title>
-      <link>http://blog.eleele.tk/post/bzoj1003/</link>
+      <link>http://whatever.seraphim.rocks/post/bzoj1003/</link>
       <pubDate>Wed, 14 Dec 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.tk/post/bzoj1003/</guid>
+      <guid>http://whatever.seraphim.rocks/post/bzoj1003/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>luogu1979题解</title>
-      <link>http://blog.eleele.tk/post/luogu1979/</link>
+      <link>http://whatever.seraphim.rocks/post/luogu1979/</link>
       <pubDate>Sun, 13 Nov 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.tk/post/luogu1979/</guid>
+      <guid>http://whatever.seraphim.rocks/post/luogu1979/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1295题解</title>
-      <link>http://blog.eleele.tk/post/bzoj1295/</link>
+      <link>http://whatever.seraphim.rocks/post/bzoj1295/</link>
       <pubDate>Sat, 17 Sep 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.tk/post/bzoj1295/</guid>
+      <guid>http://whatever.seraphim.rocks/post/bzoj1295/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     

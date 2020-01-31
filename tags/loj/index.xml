@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Loj on 蒟蒻的博客</title>
-    <link>http://blog.eleele.tk/tags/loj/</link>
+    <link>http://whatever.seraphim.rocks/tags/loj/</link>
     <description>Recent content in Loj on 蒟蒻的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 10 Feb 2018 14:20:12 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.eleele.tk/tags/loj/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://whatever.seraphim.rocks/tags/loj/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>loj2340(wc2018t2)题解</title>
-      <link>http://blog.eleele.tk/post/loj2340/</link>
+      <link>http://whatever.seraphim.rocks/post/loj2340/</link>
       <pubDate>Sat, 10 Feb 2018 14:20:12 +0000</pubDate>
       
-      <guid>http://blog.eleele.tk/post/loj2340/</guid>
+      <guid>http://whatever.seraphim.rocks/post/loj2340/</guid>
       <description>我会子集并卷积，我会子集对称差卷积，可惜我没认真看vfk论文所以我不会子集卷积，结果考场上我就没想出来，只打了50分……
 前置技能：子集卷积。不会的可以看一看2015国家集训队论文集里面vfk的那篇。
 首先题面写得非常sb，你可以理解为不存在欧拉回路或者不联通的时候州是合法的。
@@ -37,10 +37,10 @@ vfk的论文里面把新增的未知数z的多项式作为了x的系数，现在
     
     <item>
       <title>loj122题解</title>
-      <link>http://blog.eleele.tk/post/loj122/</link>
+      <link>http://whatever.seraphim.rocks/post/loj122/</link>
       <pubDate>Sun, 31 Dec 2017 13:36:49 +0000</pubDate>
       
-      <guid>http://blog.eleele.tk/post/loj122/</guid>
+      <guid>http://whatever.seraphim.rocks/post/loj122/</guid>
       <description>写+调了7h+，终于成为AC此题的第四个人+此题目前最短代码+此题目前最慢代码……
 去CA的博客上翻WC2015 xyz的课件来看吧……虽然看懂了但是完全不想写题解……太复杂了……
 代码：

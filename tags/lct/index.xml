@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Lct on 蒟蒻的博客</title>
-    <link>http://blog.eleele.tk/tags/lct/</link>
+    <link>http://whatever.seraphim.rocks/tags/lct/</link>
     <description>Recent content in Lct on 蒟蒻的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 31 Dec 2017 13:36:49 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.eleele.tk/tags/lct/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://whatever.seraphim.rocks/tags/lct/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>loj122题解</title>
-      <link>http://blog.eleele.tk/post/loj122/</link>
+      <link>http://whatever.seraphim.rocks/post/loj122/</link>
       <pubDate>Sun, 31 Dec 2017 13:36:49 +0000</pubDate>
       
-      <guid>http://blog.eleele.tk/post/loj122/</guid>
+      <guid>http://whatever.seraphim.rocks/post/loj122/</guid>
       <description>写+调了7h+，终于成为AC此题的第四个人+此题目前最短代码+此题目前最慢代码……
 去CA的博客上翻WC2015 xyz的课件来看吧……虽然看懂了但是完全不想写题解……太复杂了……
 代码：
@@ -25,10 +25,10 @@
     
     <item>
       <title>jzoj3766&amp;&amp;bzoj4530题解</title>
-      <link>http://blog.eleele.tk/post/jzoj3766bzoj4530/</link>
+      <link>http://whatever.seraphim.rocks/post/jzoj3766bzoj4530/</link>
       <pubDate>Sun, 31 Dec 2017 13:25:39 +0000</pubDate>
       
-      <guid>http://blog.eleele.tk/post/jzoj3766bzoj4530/</guid>
+      <guid>http://whatever.seraphim.rocks/post/jzoj3766bzoj4530/</guid>
       <description>有各种离线的做法，不过我感觉用lct在线做比较优雅。
 这道题其实就是要求出子树大小，如果用lct来做的话，其实不需要考虑子树信息的维护，只需要能够维护整棵树的信息，查询的时候cut一下就好了。
 lct上存在x-&amp;gt;f为y，但y的左右儿子均不为x的情况，这个时候，我们称x为y的虚儿子。考虑对于每个splay的节点，额外维护一个域vir表示它的所有虚儿子的信息和，那就可以求出整棵树的信息了。而这个vir只会在access和link的时候被修改。

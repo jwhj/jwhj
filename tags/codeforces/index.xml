@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Codeforces on 蒟蒻的博客</title>
-    <link>http://blog.eleele.tk/tags/codeforces/</link>
+    <link>http://whatever.seraphim.rocks/tags/codeforces/</link>
     <description>Recent content in Codeforces on 蒟蒻的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 09 Mar 2018 12:47:23 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.eleele.tk/tags/codeforces/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://whatever.seraphim.rocks/tags/codeforces/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>CF936B题解</title>
-      <link>http://blog.eleele.tk/post/cf936b/</link>
+      <link>http://whatever.seraphim.rocks/post/cf936b/</link>
       <pubDate>Fri, 09 Mar 2018 12:47:23 +0000</pubDate>
       
-      <guid>http://blog.eleele.tk/post/cf936b/</guid>
+      <guid>http://whatever.seraphim.rocks/post/cf936b/</guid>
       <description>如果图中不存在环，那么直接dfs就可以了。
 现在图中有环，我的第一想法是缩点，但是怎么也想不出来……
 事实上走环并非是毫无意义的，走一个奇环，路径长的奇偶性改变；走一个偶环，虽然奇偶性不改变，但如果赢不了的话可以一直在上面走。
@@ -29,19 +29,19 @@
     
     <item>
       <title>CF725D题解</title>
-      <link>http://blog.eleele.tk/post/cf725d/</link>
+      <link>http://whatever.seraphim.rocks/post/cf725d/</link>
       <pubDate>Sun, 23 Oct 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.tk/post/cf725d/</guid>
+      <guid>http://whatever.seraphim.rocks/post/cf725d/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>CF718C题解</title>
-      <link>http://blog.eleele.tk/post/cf718c/</link>
+      <link>http://whatever.seraphim.rocks/post/cf718c/</link>
       <pubDate>Sat, 24 Sep 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.tk/post/cf718c/</guid>
+      <guid>http://whatever.seraphim.rocks/post/cf718c/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     

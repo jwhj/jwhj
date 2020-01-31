@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Jzoj on 蒟蒻的博客</title>
-    <link>http://blog.eleele.tk/tags/jzoj/</link>
+    <link>http://whatever.seraphim.rocks/tags/jzoj/</link>
     <description>Recent content in Jzoj on 蒟蒻的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 20 Jan 2018 14:27:24 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.eleele.tk/tags/jzoj/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://whatever.seraphim.rocks/tags/jzoj/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>jzoj5523题解</title>
-      <link>http://blog.eleele.tk/post/jz5523/</link>
+      <link>http://whatever.seraphim.rocks/post/jz5523/</link>
       <pubDate>Sat, 20 Jan 2018 14:27:24 +0000</pubDate>
       
-      <guid>http://blog.eleele.tk/post/jz5523/</guid>
+      <guid>http://whatever.seraphim.rocks/post/jz5523/</guid>
       <description>看AC人数来看应该是全场最简单的一道题，可是我就这道题没做出来……sbwhj……
 首先注意到在加号后面加括号是毫无意义的，所以我们可以钦定括号只能加在减号后面。此时括号的作用就是把里面除了第一个数以外的所有数的贡献取负，那我们又可以得到两层以上的括号嵌套总能改成不超过两层的括号嵌套。
 让f[i][0/1/2]表示考虑前i个数，式子最后有0/1/2个右括号的时候的最大值。转移的时候，按运算符分两种情况讨论：
@@ -26,10 +26,10 @@
     
     <item>
       <title>jzoj5260题解</title>
-      <link>http://blog.eleele.tk/post/jz5260/</link>
+      <link>http://whatever.seraphim.rocks/post/jz5260/</link>
       <pubDate>Tue, 09 Jan 2018 14:41:56 +0000</pubDate>
       
-      <guid>http://blog.eleele.tk/post/jz5260/</guid>
+      <guid>http://whatever.seraphim.rocks/post/jz5260/</guid>
       <description>首先不管强制在线，不管数据范围，只考虑设计一个亚二次的算法，显然可以用莫队+值域线段树在$O(n\sqrt{n}\log n)$的时间内解决。但是这个做法会爆0+卡爆机房的奔腾cpu电脑……
 注意到在莫队算法中，因端点改变对值域线段树造成的修改有$O(n\sqrt{n})$次，但是对值域线段树的询问只有$O(n)$次，所以可以考虑牺牲询问来加速修改。
 考虑对值域也分块，维护每个块里面出现次数&amp;lt;=w的数的总出现次数，以及每个数具体的出现次数，就可以做到$O(n\sqrt{n})$。
@@ -41,10 +41,10 @@
     
     <item>
       <title>jzoj3766&amp;&amp;bzoj4530题解</title>
-      <link>http://blog.eleele.tk/post/jzoj3766bzoj4530/</link>
+      <link>http://whatever.seraphim.rocks/post/jzoj3766bzoj4530/</link>
       <pubDate>Sun, 31 Dec 2017 13:25:39 +0000</pubDate>
       
-      <guid>http://blog.eleele.tk/post/jzoj3766bzoj4530/</guid>
+      <guid>http://whatever.seraphim.rocks/post/jzoj3766bzoj4530/</guid>
       <description>有各种离线的做法，不过我感觉用lct在线做比较优雅。
 这道题其实就是要求出子树大小，如果用lct来做的话，其实不需要考虑子树信息的维护，只需要能够维护整棵树的信息，查询的时候cut一下就好了。
 lct上存在x-&amp;gt;f为y，但y的左右儿子均不为x的情况，这个时候，我们称x为y的虚儿子。考虑对于每个splay的节点，额外维护一个域vir表示它的所有虚儿子的信息和，那就可以求出整棵树的信息了。而这个vir只会在access和link的时候被修改。
@@ -55,10 +55,10 @@ lct上存在x-&amp;gt;f为y，但y的左右儿子均不为x的情况，这个时
     
     <item>
       <title>纪中noip2017模拟赛总结</title>
-      <link>http://blog.eleele.tk/post/jznoip2017/</link>
+      <link>http://whatever.seraphim.rocks/post/jznoip2017/</link>
       <pubDate>Mon, 30 Oct 2017 12:57:04 +0000</pubDate>
       
-      <guid>http://blog.eleele.tk/post/jznoip2017/</guid>
+      <guid>http://whatever.seraphim.rocks/post/jznoip2017/</guid>
       <description>没什么状态写……慢慢完善吧……
 10-24 在前面
 10-25 雅礼原题
@@ -78,10 +78,10 @@ T3的差分是一个非常妙的思路。</description>
     
     <item>
       <title>jzoj5407题解</title>
-      <link>http://blog.eleele.tk/post/jz5407/</link>
+      <link>http://whatever.seraphim.rocks/post/jz5407/</link>
       <pubDate>Thu, 26 Oct 2017 00:20:03 +0000</pubDate>
       
-      <guid>http://blog.eleele.tk/post/jz5407/</guid>
+      <guid>http://whatever.seraphim.rocks/post/jz5407/</guid>
       <description>我博弈论好废啊……
 归纳证明A，B都不为0的时候，答案是A-B-2.
 首先，后手总能不断消耗先手的水晶，直到对方只剩一个，从而达到答案。
@@ -93,10 +93,10 @@ T3的差分是一个非常妙的思路。</description>
     
     <item>
       <title>纪中模拟赛10-24总结</title>
-      <link>http://blog.eleele.tk/post/jz10-24/</link>
+      <link>http://whatever.seraphim.rocks/post/jz10-24/</link>
       <pubDate>Tue, 24 Oct 2017 13:53:30 +0000</pubDate>
       
-      <guid>http://blog.eleele.tk/post/jz10-24/</guid>
+      <guid>http://whatever.seraphim.rocks/post/jz10-24/</guid>
       <description>开考的时候先看了一眼T1，发现题面似乎有点问题，于是跳到T2。
 看T2的时候，马上想到拓扑序列计数，然而并不会做，还忽略了每个点出度不超过1这个条件。
 于是我打了一下T2的暴力，回去看T1，发现题面已经更正了，就打了暴力和正解放在一遍拍着。接着我回去想T2，卡了很久没想出来，最后看到之前忽略了的那个条件，然后……就秒掉了。
@@ -112,10 +112,10 @@ T3滚粗主要还是因为太慌没想清楚？中午吃饭的时候随便想想
     
     <item>
       <title>jzoj5415题解</title>
-      <link>http://blog.eleele.tk/post/jzoj5415/</link>
+      <link>http://whatever.seraphim.rocks/post/jzoj5415/</link>
       <pubDate>Mon, 23 Oct 2017 13:57:08 +0000</pubDate>
       
-      <guid>http://blog.eleele.tk/post/jzoj5415/</guid>
+      <guid>http://whatever.seraphim.rocks/post/jzoj5415/</guid>
       <description>首先注意到，对于c一样且i%c一样的车站，它们能转移到的车站集合是一样的。考虑这些车站，它们对后面的车站的贡献都可以写成直线v[i]/ci+f[i]的形式。在后面转移的时候，其实就是要求在某一个横坐标的位置所有直线的最低点，此时有一个很自然的想法就是维护一个上凸壳。
 这个凸壳乍一看很不好维护，但是仔细想一想会发现，每次新加进来一条直线的时候，这条直线在i处的高度肯定不比凸壳上任意一条直线要高（否则就可以用比当前直线低的直线来更新f[i])。那么，如果这条新加进来的直线的斜率小于等于凸壳上某条直线的斜率，凸壳上那条直线就没有用了，可以直接去掉。我觉得这道题最妙的就是这个性质，以前遇到类似的题没想出来，这回做的时候还是没想出来……
 利用这个性质，就可以保证直线的斜率单调递增，从而用单调栈来维护上凸壳。

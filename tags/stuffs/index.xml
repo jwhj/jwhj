@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Stuffs on 蒟蒻的博客</title>
-    <link>http://blog.eleele.tk/tags/stuffs/</link>
+    <link>http://whatever.seraphim.rocks/tags/stuffs/</link>
     <description>Recent content in Stuffs on 蒟蒻的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 15 Jan 2018 12:59:35 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.eleele.tk/tags/stuffs/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://whatever.seraphim.rocks/tags/stuffs/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>雅礼集训2018-1</title>
-      <link>http://blog.eleele.tk/post/yali2018-1/</link>
+      <link>http://whatever.seraphim.rocks/post/yali2018-1/</link>
       <pubDate>Mon, 15 Jan 2018 12:59:35 +0000</pubDate>
       
-      <guid>http://blog.eleele.tk/post/yali2018-1/</guid>
+      <guid>http://whatever.seraphim.rocks/post/yali2018-1/</guid>
       <description>D1 上午讲题，下午练习赛T1和T3都是我见过的题。T1考虑prufer编码随意dp一下，T2是个博弈大讨论，注意不要漏情况，T3是个玄妙的dp。
 我那台机的键盘真是让人无比不爽，退格键得要准确地敲中正中间才能按下去，而且其实敲中了还是比较费劲，有的时候甚至要两根手指发力。
 D2 考得挺不满意的……看了一遍题之后马上觉得T3很可做就去BB，但实际上我并不擅长这种博弈大讨论。T1是一个结论题，我推结论的时候用到了去年WC的时候jc（？）讲的一个结论，可是一开始记错结论了，还好后来想起正确的结论然后成功AC。T2是我做过的一个题目的模型的加强版，可惜我掌握得还不够熟练所以没想出来，可能也有一部分原因是做题顺序不对导致T3浪费太多时间。
@@ -56,10 +56,10 @@ D14 传说中最难的一天？emmmmm……</description>
     
     <item>
       <title>纪中noip2017模拟赛总结</title>
-      <link>http://blog.eleele.tk/post/jznoip2017/</link>
+      <link>http://whatever.seraphim.rocks/post/jznoip2017/</link>
       <pubDate>Mon, 30 Oct 2017 12:57:04 +0000</pubDate>
       
-      <guid>http://blog.eleele.tk/post/jznoip2017/</guid>
+      <guid>http://whatever.seraphim.rocks/post/jznoip2017/</guid>
       <description>没什么状态写……慢慢完善吧……
 10-24 在前面
 10-25 雅礼原题
@@ -79,10 +79,10 @@ T3的差分是一个非常妙的思路。</description>
     
     <item>
       <title>2017国庆雅礼集训总结</title>
-      <link>http://blog.eleele.tk/post/yali2017/</link>
+      <link>http://whatever.seraphim.rocks/post/yali2017/</link>
       <pubDate>Sun, 22 Oct 2017 02:23:28 +0000</pubDate>
       
-      <guid>http://blog.eleele.tk/post/yali2017/</guid>
+      <guid>http://whatever.seraphim.rocks/post/yali2017/</guid>
       <description>外省的dalao都好强啊……长跪不起啊……
 湖南的菜好辣啊……只能靠外卖度日啊……
 应该会断断续续地写完……吧？
@@ -97,28 +97,28 @@ f[i][j]表示a只考虑0~i，b只考虑0~j，且b[j]必须选的最长长度。
     
     <item>
       <title>WC2017&amp;GDKOI2017酱油记</title>
-      <link>http://blog.eleele.tk/post/wc2017gdkoi2017/</link>
+      <link>http://whatever.seraphim.rocks/post/wc2017gdkoi2017/</link>
       <pubDate>Wed, 22 Feb 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.tk/post/wc2017gdkoi2017/</guid>
+      <guid>http://whatever.seraphim.rocks/post/wc2017gdkoi2017/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>git使用总结</title>
-      <link>http://blog.eleele.tk/post/git/</link>
+      <link>http://whatever.seraphim.rocks/post/git/</link>
       <pubDate>Sat, 13 Aug 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.tk/post/git/</guid>
+      <guid>http://whatever.seraphim.rocks/post/git/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>About me</title>
-      <link>http://blog.eleele.tk/about/</link>
+      <link>http://whatever.seraphim.rocks/about/</link>
       <pubDate>Sat, 28 May 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.tk/about/</guid>
+      <guid>http://whatever.seraphim.rocks/about/</guid>
       <description>GD的沙茶OIER
 常用ID：jwhj,iamplm,plmoknijbuhv26,eleele
 不过用这几个ID的人未必是我……
@@ -127,10 +127,10 @@ f[i][j]表示a只考虑0~i，b只考虑0~j，且b[j]必须选的最长长度。
     
     <item>
       <title>Orz!</title>
-      <link>http://blog.eleele.tk/orz/</link>
+      <link>http://whatever.seraphim.rocks/orz/</link>
       <pubDate>Sat, 28 May 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.tk/orz/</guid>
+      <guid>http://whatever.seraphim.rocks/orz/</guid>
       <description>orz pyx
 orz yjq
 orz dwj
@@ -141,10 +141,10 @@ orz oceaneye</description>
     
     <item>
       <title>Just A Test</title>
-      <link>http://blog.eleele.tk/post/test/</link>
+      <link>http://whatever.seraphim.rocks/post/test/</link>
       <pubDate>Fri, 01 Jan 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.tk/post/test/</guid>
+      <guid>http://whatever.seraphim.rocks/post/test/</guid>
       <description>MathJax.Hub.Config({tex2jax: {inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]]}}); $$E=mc^2$$
 Test code:
 print(&#39;Hello, world!&#39;)  </description>

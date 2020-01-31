@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>状态压缩 on 蒟蒻的博客</title>
-    <link>http://blog.eleele.tk/tags/%E7%8A%B6%E6%80%81%E5%8E%8B%E7%BC%A9/</link>
+    <link>http://whatever.seraphim.rocks/tags/%E7%8A%B6%E6%80%81%E5%8E%8B%E7%BC%A9/</link>
     <description>Recent content in 状态压缩 on 蒟蒻的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 17 Aug 2017 10:02:43 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.eleele.tk/tags/%E7%8A%B6%E6%80%81%E5%8E%8B%E7%BC%A9/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://whatever.seraphim.rocks/tags/%E7%8A%B6%E6%80%81%E5%8E%8B%E7%BC%A9/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>bzoj1076题解</title>
-      <link>http://blog.eleele.tk/post/bzoj1076/</link>
+      <link>http://whatever.seraphim.rocks/post/bzoj1076/</link>
       <pubDate>Thu, 17 Aug 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.tk/post/bzoj1076/</guid>
+      <guid>http://whatever.seraphim.rocks/post/bzoj1076/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>bzoj1087题解</title>
-      <link>http://blog.eleele.tk/post/bzoj1087/</link>
+      <link>http://whatever.seraphim.rocks/post/bzoj1087/</link>
       <pubDate>Wed, 29 Jun 2016 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.tk/post/bzoj1087/</guid>
+      <guid>http://whatever.seraphim.rocks/post/bzoj1087/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     

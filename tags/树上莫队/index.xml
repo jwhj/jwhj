@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>树上莫队 on 蒟蒻的博客</title>
-    <link>http://blog.eleele.tk/tags/%E6%A0%91%E4%B8%8A%E8%8E%AB%E9%98%9F/</link>
+    <link>http://whatever.seraphim.rocks/tags/%E6%A0%91%E4%B8%8A%E8%8E%AB%E9%98%9F/</link>
     <description>Recent content in 树上莫队 on 蒟蒻的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 05 May 2017 10:02:43 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.eleele.tk/tags/%E6%A0%91%E4%B8%8A%E8%8E%AB%E9%98%9F/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://whatever.seraphim.rocks/tags/%E6%A0%91%E4%B8%8A%E8%8E%AB%E9%98%9F/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>bzoj2589&amp;&amp;spojcot2题解</title>
-      <link>http://blog.eleele.tk/post/spojcot2/</link>
+      <link>http://whatever.seraphim.rocks/post/spojcot2/</link>
       <pubDate>Fri, 05 May 2017 10:02:43 +0000</pubDate>
       
-      <guid>http://blog.eleele.tk/post/spojcot2/</guid>
+      <guid>http://whatever.seraphim.rocks/post/spojcot2/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
